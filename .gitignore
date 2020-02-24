@@ -140,3 +140,7 @@ parser.hpp
 
 ## FLEX IGNORE RULES
 scanner.cpp
+
+## OUTPUT FILE IGNORE RULES
+librtypesparser
+rtypesparser
