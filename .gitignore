@@ -130,3 +130,13 @@ dkms.conf
 
 # CMake
 CMakeLists.txt
+
+## BISON IGNORE RULES
+parser.gv
+parser.xml
+parser.cpp
+location.hh
+parser.hpp
+
+## FLEX IGNORE RULES
+scanner.cpp
