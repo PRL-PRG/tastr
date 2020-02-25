@@ -137,6 +137,7 @@ parser.xml
 parser.cpp
 location.hh
 parser.hpp
+parser.output
 
 ## FLEX IGNORE RULES
 scanner.cpp
