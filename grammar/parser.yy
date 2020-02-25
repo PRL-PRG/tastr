@@ -7,7 +7,8 @@
 %define parse.assert
 
 %code requires {
-  # include <string>
+  #include <memory>
+  #include "rtypes.h"
   class RTypesParser;
 }
 
@@ -20,10 +21,11 @@
 %define parse.error verbose
 
 %code {
-# include "RTypesParser.h"
+#include "RTypesParser.h"
+
 }
 
-%define api.token.prefix {TOK_}
+%define api.token.prefix {TOKEN_}
 
 %token END  0        "end of file";
 %token <std::string> OR            "|";
@@ -46,72 +48,131 @@
 %token <std::string> RAW;
 %token <std::string> LIST;
 %token <std::string> STRUCT;
-%nterm <int> scalartype
-%nterm <int> vectortype
-%nterm <int> typeseq
-%nterm <int> namedtypeseq
-%nterm <int> functiontype
-%nterm <int> grouptype
-%nterm <int> nonuniontype
-%nterm <int> listtype
-%nterm <int> structtype
-%nterm <int> type
+%nterm <ScalarRType*>          scalartype
+%nterm <VectorRType*>          vectortype
+%nterm <NoNaRType*>            nonavectortype
+%nterm <RTypeSequence*>        typeseq
+%nterm <RTypeNamedSequence*>   namedtypeseq
+%nterm <FunctionRType*>        functiontype
+%nterm <GroupRType*>           grouptype
+%nterm <RType*>                nonuniontype
+%nterm <ListRType*>            listtype
+%nterm <StructRType*>          structtype
+%nterm <RType*>                type
 
 %right ARROW
 %nonassoc COMMA COLON EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
 %left OR
 
+/* %printer { yyo << $$.get(); } <std::unique_ptr<RType>>; */
 %printer { yyo << $$; } <*>;
 
 %%
 %start type;
 
-scalartype:
-  INTEGER     { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
-| DOUBLE      { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
-| COMPLEX     { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
-| CHARACTER   { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
-| LOGICAL     { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
-| RAW         { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
+scalartype:         INTEGER                                 {
+                                                                $$ = new IntegerRType();
+                                                            }
+          |         DOUBLE                                  {
+                                                                $$ = new DoubleRType();
+                                                            }
+          |         COMPLEX                                 {
+                                                                $$ = new ComplexRType();
+                                                            }
+          |         CHARACTER                               {
+                                                                $$ = new CharacterRType();
+                                                            }
+          |         LOGICAL                                 {
+                                                                $$ = new LogicalRType();
+                                                            }
+          |         RAW                                     {
+                                                                $$ = new RawRType();
+                                                            }
+          ;
 
-vectortype:
-  scalartype LBRACKET RBRACKET     { $$ = 0; std::cout << "PARSER: " <<  $1 << "[" << "]" << std::endl; }
-| EXCLAMATION scalartype LBRACKET RBRACKET  { $$ = 0; std::cout << "PARSER: " <<  "!" << $1 << "[" << "]" << std::endl; }
+vectortype:         scalartype "[" "]"                      {
+                                                                std::unique_ptr<ScalarRType> scalar_type($1);
+                                                                $$ = new VectorRType(std::move(scalar_type));
+                                                            }
+          ;
 
-listtype: LIST LANGLEBRACKET typeseq RANGLEBRACKET { $$ = 0; std::cout << "PARSER: "  << $1 << "<" << ">" << std::endl; }
+nonavectortype:     "!" vectortype                          {
+                                                                std::unique_ptr<VectorRType> vector_type($2);
+                                                                $$ = new NoNaRType(std::move(vector_type));
+                                                            }
+              ;
 
-typeseq:
-  type                { $$ = 0; std::cout << "PARSER: "  << $1 << std::endl; }
-| typeseq COMMA type    { $$ = 0; std::cout << "PARSER: "  << $1 << std::endl; }
+listtype:           LIST "<" typeseq ">"                    {
+                                                                std::unique_ptr<RTypeSequence> type_sequence($3);
+                                                                $$ = new ListRType(std::move(type_sequence));
+                                                            }
+        ;
 
-structtype: STRUCT LANGLEBRACKET namedtypeseq RANGLEBRACKET { $$ = 0; std::cout << "PARSER: " << $1 << "<" << ">" << std::endl; }
+typeseq:                                                    {
+                                                                $$ = new RTypeSequence();
+                                                            }
+       |            type                                    {
+                                                                std::unique_ptr<RType> type($1);
+                                                                $$ = new RTypeSequence(std::move(type));
+                                                            }
+       |            typeseq "," type                        {
+                                                                std::unique_ptr<RType> type($3);
+                                                                $1 -> push_back(std::move(type));
+                                                            }
+       ;
 
-namedtypeseq:
-  IDENTIFIER COLON type                    { $$ = 0; std::cout << "PARSER: "  << $1 << $2 << $3 << std::endl; }
-| namedtypeseq COMMA IDENTIFIER COLON type { $$ = 0; std::cout << "PARSER: " << $1 << $2 << $3 << std::endl; }
+structtype:         STRUCT "<" namedtypeseq ">"             {
+                                                                std::unique_ptr<RTypeNamedSequence> types($3);
+                                                                $$ = new StructRType(std::move(types));
+                                                            }
+          ;
 
-functiontype:
-    LANGLEBRACKET typeseq RANGLEBRACKET ARROW type   { $$ = 0; std::cout << "PARSER: " << $4 << std::endl; }
+namedtypeseq:       IDENTIFIER ":" type                     {
+                                                                std::unique_ptr<RType> type($3);
+                                                                $$ = new RTypeNamedSequence($1, std::move(type));
+                                                            }
+            |       namedtypeseq "," IDENTIFIER ":" type    {
+                                                                std::unique_ptr<RType> type($5);
+                                                                $$ = $1; $$ -> push_back($3, std::move(type));
+                                                            }
+            ;
 
-grouptype: LPAREN type RPAREN                  { $$ = 0; std::cout << "PARSER: " << "(" << ")" <<  std::endl; }
+functiontype:       "<" typeseq ">" "=>" type               {
+                                                                std::unique_ptr<RTypeSequence> parameter_types($2);
+                                                                std::unique_ptr<RType> return_type($5);
+                                                                $$ = new FunctionRType(std::move(parameter_types), std::move(return_type));
+                                                            }
+            ;
 
-nonuniontype:
-   scalartype   { $$ = 0; }
-|  vectortype   { $$ = 0; }
-|  functiontype   { $$ = 0; }
-|  structtype   { $$ = 0; }
-|  listtype   { $$ = 0; }
-|  grouptype   { $$ = 0; }
+grouptype:          "(" type ")"                            {
+                                                                std::unique_ptr<RType> type($2);
+                                                                $$ = new GroupRType(std::move(type));
+                                                            }
+         ;
 
-type:
-  %empty          { $$ = 0; }
- | nonuniontype   { $$ = 0; }
- | type OR nonuniontype { $$ = 0; }
+nonuniontype:       scalartype                              {   $$ = $1; }
+            |       vectortype                              {   $$ = $1; }
+            |       nonavectortype                          {   $$ = $1; }
+            |       functiontype                            {   $$ = $1; }
+            |       structtype                              {   $$ = $1; }
+            |       listtype                                {   $$ = $1; }
+            |       grouptype                               {   $$ = $1; }
+            ;
+
+type:               nonuniontype                            {   $$ = $1; }
+    |               type "|" nonuniontype                   {
+                                                                std::unique_ptr<RType> left_type($1);
+                                                                std::unique_ptr<RType> right_type($3);
+                                                                $$ = new UnionRType(std::move(left_type), std::move(right_type));
+                                                            }
+    ;
+
+
+/*%empty                { $$ = ; } */
 
 %%
 
 void
-yy::parser::error (const location_type& l, const std::string& m)
-{
+yy::parser::error (const location_type& l, const std::string& m) {
   std::cerr << l << ": " << m << '\n';
 }
