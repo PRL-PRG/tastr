@@ -24,44 +24,90 @@
 }
 
 %define api.token.prefix {TOK_}
-%token
-  END  0  "end of file"
-  ASSIGN  ":="
-  MINUS   "-"
-  PLUS    "+"
-  STAR    "*"
-  SLASH   "/"
-  LPAREN  "("
-  RPAREN  ")"
-;
 
-%token <std::string> IDENTIFIER "identifier"
-%token <int> NUMBER "number"
-%nterm <int> exp
+%token END  0        "end of file";
+%token <std::string> OR            "|";
+%token <std::string> EXCLAMATION   "!";
+%token <std::string> ARROW         "=>";
+%token <std::string> COMMA         ",";
+%token <std::string> COLON         ":";
+%token <std::string> LPAREN        "(";
+%token <std::string> RPAREN        ")";
+%token <std::string> LBRACKET      "[";
+%token <std::string> RBRACKET      "]";
+%token <std::string> LANGLEBRACKET "<";
+%token <std::string> RANGLEBRACKET ">";
+%token <std::string> IDENTIFIER;
+%token <std::string> INTEGER;
+%token <std::string> DOUBLE;
+%token <std::string> COMPLEX;
+%token <std::string> CHARACTER;
+%token <std::string> LOGICAL;
+%token <std::string> RAW;
+%token <std::string> LIST;
+%token <std::string> STRUCT;
+%nterm <int> scalartype
+%nterm <int> vectortype
+%nterm <int> typeseq
+%nterm <int> namedtypeseq
+%nterm <int> functiontype
+%nterm <int> grouptype
+%nterm <int> nonuniontype
+%nterm <int> listtype
+%nterm <int> structtype
+%nterm <int> type
+
+%right ARROW
+%nonassoc COMMA COLON EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
+%left OR
 
 %printer { yyo << $$; } <*>;
 
 %%
-%start unit;
-unit: assignments exp  { rtypesparser.set_result($2); };
+%start type;
 
-assignments:
-  %empty                 {}
-| assignments assignment {};
+scalartype:
+  INTEGER     { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
+| DOUBLE      { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
+| COMPLEX     { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
+| CHARACTER   { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
+| LOGICAL     { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
+| RAW         { $$ = 0; std::cout << "PARSER: " << $1 << std::endl; }
 
-assignment:
-  "identifier" ":=" exp { rtypesparser.set_variable($1, $3); };
+vectortype:
+  scalartype LBRACKET RBRACKET     { $$ = 0; std::cout << "PARSER: " <<  $1 << "[" << "]" << std::endl; }
+| EXCLAMATION scalartype LBRACKET RBRACKET  { $$ = 0; std::cout << "PARSER: " <<  "!" << $1 << "[" << "]" << std::endl; }
 
-%left "+" "-";
-%left "*" "/";
-exp:
-  "number"
-| "identifier"  { $$ = rtypesparser.get_variable($1); }
-| exp "+" exp   { $$ = $1 + $3; }
-| exp "-" exp   { $$ = $1 - $3; }
-| exp "*" exp   { $$ = $1 * $3; }
-| exp "/" exp   { $$ = $1 / $3; }
-| "(" exp ")"   { $$ = $2; }
+listtype: LIST LANGLEBRACKET typeseq RANGLEBRACKET { $$ = 0; std::cout << "PARSER: "  << $1 << "<" << ">" << std::endl; }
+
+typeseq:
+  type                { $$ = 0; std::cout << "PARSER: "  << $1 << std::endl; }
+| typeseq COMMA type    { $$ = 0; std::cout << "PARSER: "  << $1 << std::endl; }
+
+structtype: STRUCT LANGLEBRACKET namedtypeseq RANGLEBRACKET { $$ = 0; std::cout << "PARSER: " << $1 << "<" << ">" << std::endl; }
+
+namedtypeseq:
+  IDENTIFIER COLON type                    { $$ = 0; std::cout << "PARSER: "  << $1 << $2 << $3 << std::endl; }
+| namedtypeseq COMMA IDENTIFIER COLON type { $$ = 0; std::cout << "PARSER: " << $1 << $2 << $3 << std::endl; }
+
+functiontype:
+    LANGLEBRACKET typeseq RANGLEBRACKET ARROW type   { $$ = 0; std::cout << "PARSER: " << $4 << std::endl; }
+
+grouptype: LPAREN type RPAREN                  { $$ = 0; std::cout << "PARSER: " << "(" << ")" <<  std::endl; }
+
+nonuniontype:
+   scalartype   { $$ = 0; }
+|  vectortype   { $$ = 0; }
+|  functiontype   { $$ = 0; }
+|  structtype   { $$ = 0; }
+|  listtype   { $$ = 0; }
+|  grouptype   { $$ = 0; }
+
+type:
+  %empty          { $$ = 0; }
+ | nonuniontype   { $$ = 0; }
+ | type OR nonuniontype { $$ = 0; }
+
 %%
 
 void
