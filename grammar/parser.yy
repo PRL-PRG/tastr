@@ -44,6 +44,10 @@ using rtype::ast::node::UnionTypePtr;
 using rtype::ast::node::VectorType;
 using rtype::ast::node::VectorTypePtr;
 using rtype::ast::node::VectorTypeUPtr;
+using rtype::ast::node::TypeDeclaration;
+using rtype::ast::node::TypeDeclarationPtr;
+using rtype::ast::node::TypeDeclarationUPtr;
+
 }
 
 // The parsing context.
@@ -60,19 +64,18 @@ using rtype::ast::node::VectorTypeUPtr;
 
 %define api.token.prefix {TOKEN_}
 
-%token END                          0             "end of file";
+%token EOF                          0             "end of file";
 %token <std::string>                OR            "|";
 %token <std::string>                EXCLAMATION   "!";
 %token <std::string>                ARROW         "=>";
 %token <std::string>                COMMA         ",";
-%token <std::string>                COLON         ":";
 %token <std::string>                LPAREN        "(";
 %token <std::string>                RPAREN        ")";
 %token <std::string>                LBRACKET      "[";
 %token <std::string>                RBRACKET      "]";
 %token <std::string>                LANGLEBRACKET "<";
 %token <std::string>                RANGLEBRACKET ">";
-%token <std::string>                IDENTIFIER;
+%token <std::string>                SEMICOLON     ";";
 %token <std::string>                INTEGER;
 %token <std::string>                DOUBLE;
 %token <std::string>                COMPLEX;
@@ -81,6 +84,9 @@ using rtype::ast::node::VectorTypeUPtr;
 %token <std::string>                RAW;
 %token <std::string>                LIST;
 %token <std::string>                STRUCT;
+%token <std::string>                TYPEDECL;
+%token <std::string>                QUALFUN;
+%token <std::string>                TAG;
 %nterm <ScalarTypePtr>              scalartype
 %nterm <VectorTypePtr>              vectortype
 %nterm <NoNaTypePtr>                nonavectortype
@@ -93,10 +99,11 @@ using rtype::ast::node::VectorTypeUPtr;
 %nterm <ListTypePtr>                listtype
 %nterm <StructTypePtr>              structtype
 %nterm <TypePtr>                    type
+%nterm <TypeDeclarationPtr>         decltype
 
 
 %right ARROW
-%nonassoc COMMA COLON EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
+%nonassoc COMMA EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
 %left OR
 
 %printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <TypePtr>;
@@ -187,7 +194,7 @@ structtype:         STRUCT "<" namedtypeseq ">"             {
           ;
 
 
-namedtype:          IDENTIFIER ":" type                     {
+namedtype:          TAG ":" type                            {
                                                                 std::string name($1);
                                                                 TypeUPtr type($3);
                                                                 $$ = new NamedType(name, std::move(type));
@@ -241,17 +248,26 @@ type:               nonuniontype                            {   $$ = $1; }
                                                             }
     ;
 
-start:              %empty                                  { }
-     |              type                                    {
-                                                                TypeUPtr part_type($1);
-                                                                std::cout << to_string(*part_type.get());
+decltype:           TYPEDECL QUALFUN type ";"               {
+                                                                TypeUPtr type($3);
+                                                                $$ = new TypeDeclaration($2, std::move(type));
+                                                            }
+        ;
+
+decllist:           decltype                                {
+                                                                TypeDeclarationUPtr type_decl($1);
+                                                                std::cout << to_string(*type_decl.get());
                                                                 /*rtypesparser.get_ast().push_back(std::move(part_type));*/
                                                             }
-     |              start ";" type                          {
-                                                                TypeUPtr part_type($3);
-                                                                std::cout << to_string(*part_type.get());
+        |           decllist decltype                       {
+                                                                TypeDeclarationUPtr type_decl($2);
+                                                                std::cout << to_string(*type_decl.get());
                                                                 /*rtypesparser.get_ast().push_back(std::move(part_type));*/
                                                             }
+        ;
+
+start:              EOF                                     { }
+     |              decllist EOF                            { }
      ;
 
 %%

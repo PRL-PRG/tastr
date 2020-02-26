@@ -18,9 +18,11 @@
 #include "ast/node/SequenceType.h"
 #include "ast/node/StructType.h"
 #include "ast/node/Type.h"
+#include "ast/node/TypeDeclaration.h"
 #include "ast/node/UnionType.h"
 #include "ast/node/VectorType.h"
 #include "ast/visitor/TypeVisitor.h"
+//
 
 #include <ostream>
 #include <string>

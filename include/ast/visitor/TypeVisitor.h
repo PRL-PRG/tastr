@@ -55,6 +55,8 @@ class TypeVisitor {
     virtual void visit(const rtype::ast::node::UnionType& type) = 0;
 
     virtual void visit(const rtype::ast::node::VectorType& type) = 0;
+
+    virtual void visit(const rtype::ast::node::TypeDeclaration& type) = 0;
 };
 
 } // namespace rtype::ast::visitor

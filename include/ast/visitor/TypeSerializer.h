@@ -133,6 +133,13 @@ class TypeSerializer: public TypeVisitor {
         os_ << "[]";
     }
 
+    void visit(const rtype::ast::node::TypeDeclaration& type) override {
+        os_ << "type ";
+        os_ << type.get_identifier() << " ";
+        type.get_type().accept(*this);
+        os_ << ";\n";
+    }
+
   private:
     std::ostream& os_;
 };
