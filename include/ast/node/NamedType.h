@@ -8,7 +8,7 @@
 
 namespace rtype::ast::node {
 
-class NamedType: public CompositeType {
+class NamedType final: public CompositeType {
   public:
     explicit NamedType(const std::string& name, std::unique_ptr<Type> type)
         : CompositeType(), name_(name), type_(std::move(type)) {
@@ -17,7 +17,7 @@ class NamedType: public CompositeType {
     ~NamedType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
     const std::string& get_name() const {
         return name_;

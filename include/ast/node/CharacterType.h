@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class CharacterType: public ScalarType {
+class CharacterType final: public ScalarType {
   public:
     CharacterType(): ScalarType() {
     }
@@ -13,7 +13,7 @@ class CharacterType: public ScalarType {
     ~CharacterType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using CharacterTypePtr = CharacterType*;

@@ -6,7 +6,7 @@
 
 namespace rtype::ast::node {
 
-class UnionType: public CompositeType {
+class UnionType final: public CompositeType {
   public:
     UnionType(std::unique_ptr<Type> first_type,
               std::unique_ptr<Type> second_type)
@@ -18,7 +18,7 @@ class UnionType: public CompositeType {
     ~UnionType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
     const rtype::ast::node::Type& get_first_type() const {
         return *first_type_.get();

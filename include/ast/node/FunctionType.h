@@ -6,7 +6,7 @@
 
 namespace rtype::ast::node {
 
-class FunctionType: public CompositeType {
+class FunctionType final: public CompositeType {
   public:
     FunctionType(std::unique_ptr<ParameterType> parameter_types,
                  std::unique_ptr<Type> return_type)
@@ -18,7 +18,7 @@ class FunctionType: public CompositeType {
     ~FunctionType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
     const rtype::ast::node::ParameterType& get_parameter_types() const {
         return *parameter_types_.get();

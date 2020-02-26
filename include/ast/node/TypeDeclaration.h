@@ -8,7 +8,7 @@
 
 namespace rtype::ast::node {
 
-class TypeDeclaration: public Node {
+class TypeDeclaration final: public Node {
   public:
     explicit TypeDeclaration(const std::string& identifer,
                              std::unique_ptr<Type> type)
@@ -18,7 +18,7 @@ class TypeDeclaration: public Node {
     ~TypeDeclaration() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
     const std::string& get_identifier() const {
         return identifer_;

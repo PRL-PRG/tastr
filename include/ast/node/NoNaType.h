@@ -8,7 +8,7 @@
 
 namespace rtype::ast::node {
 
-class NoNaType: public CompositeType {
+class NoNaType final: public CompositeType {
   public:
     NoNaType(std::unique_ptr<VectorType> inner_type)
         : CompositeType(), inner_type_(std::move(inner_type)) {
@@ -17,7 +17,7 @@ class NoNaType: public CompositeType {
     ~NoNaType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
     const rtype::ast::node::VectorType& get_inner_type() const {
         return *inner_type_.get();

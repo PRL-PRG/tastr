@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class DoubleType: public ScalarType {
+class DoubleType final: public ScalarType {
   public:
     DoubleType(): ScalarType() {
     }
@@ -13,7 +13,7 @@ class DoubleType: public ScalarType {
     ~DoubleType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using DoubleTypePtr = DoubleType*;

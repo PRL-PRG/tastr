@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class IntegerType: public ScalarType {
+class IntegerType final: public ScalarType {
   public:
     IntegerType(): ScalarType() {
     }
@@ -13,7 +13,7 @@ class IntegerType: public ScalarType {
     ~IntegerType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using IntegerTypePtr = IntegerType*;

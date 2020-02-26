@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class ParameterType: public SequenceType<Type> {
+class ParameterType final: public SequenceType<Type> {
   public:
     explicit ParameterType(
         std::unique_ptr<std::vector<std::unique_ptr<Type>>> sequence)
@@ -15,7 +15,7 @@ class ParameterType: public SequenceType<Type> {
     ~ParameterType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using ParameterTypePtr = ParameterType*;

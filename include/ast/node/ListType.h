@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class ListType: public SequenceType<Type> {
+class ListType final: public SequenceType<Type> {
   public:
     explicit ListType(
         std::unique_ptr<std::vector<std::unique_ptr<Type>>> sequence)
@@ -15,7 +15,7 @@ class ListType: public SequenceType<Type> {
     ~ListType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using ListTypePtr = ListType*;

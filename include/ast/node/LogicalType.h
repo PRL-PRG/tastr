@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class LogicalType: public ScalarType {
+class LogicalType final: public ScalarType {
   public:
     LogicalType(): ScalarType() {
     }
@@ -13,7 +13,7 @@ class LogicalType: public ScalarType {
     ~LogicalType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using LogicalTypePtr = LogicalType*;

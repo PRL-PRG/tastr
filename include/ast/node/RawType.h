@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class RawType: public ScalarType {
+class RawType final: public ScalarType {
   public:
     RawType(): ScalarType() {
     }
@@ -13,7 +13,7 @@ class RawType: public ScalarType {
     ~RawType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using RawTypePtr = RawType*;

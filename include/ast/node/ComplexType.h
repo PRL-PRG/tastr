@@ -5,7 +5,7 @@
 
 namespace rtype::ast::node {
 
-class ComplexType: public ScalarType {
+class ComplexType final: public ScalarType {
   public:
     ComplexType(): ScalarType() {
     }
@@ -13,7 +13,7 @@ class ComplexType: public ScalarType {
     ~ComplexType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using ComplexTypePtr = ComplexType*;

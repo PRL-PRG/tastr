@@ -6,7 +6,7 @@
 
 namespace rtype::ast::node {
 
-class GroupType: public CompositeType {
+class GroupType final: public CompositeType {
   public:
     explicit GroupType(std::unique_ptr<Type> inner_type)
         : CompositeType(), inner_type_(std::move(inner_type)) {
@@ -15,7 +15,7 @@ class GroupType: public CompositeType {
     ~GroupType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
     const rtype::ast::node::Type& get_inner_type() const {
         return *inner_type_.get();

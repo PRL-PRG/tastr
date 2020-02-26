@@ -6,7 +6,7 @@
 
 namespace rtype::ast::node {
 
-class StructType: public SequenceType<NamedType> {
+class StructType final: public SequenceType<NamedType> {
   public:
     explicit StructType(
         std::unique_ptr<std::vector<std::unique_ptr<NamedType>>> sequence)
@@ -16,7 +16,7 @@ class StructType: public SequenceType<NamedType> {
     ~StructType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 };
 
 using StructTypePtr = StructType*;
