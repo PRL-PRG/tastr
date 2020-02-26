@@ -1,8 +1,8 @@
 #include "ast/node/ListType.h"
 
-#include "ast/visitor/TypeVisitor.h"
+#include "ast/visitor/Visitor.h"
 
 void rtype::ast::node::ListType::accept(
-    rtype::ast::visitor::TypeVisitor& visitor) const {
+    rtype::ast::visitor::Visitor& visitor) const {
     visitor.visit(*this);
 }

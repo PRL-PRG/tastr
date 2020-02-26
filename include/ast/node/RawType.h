@@ -13,7 +13,7 @@ class RawType: public ScalarType {
     ~RawType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using RawTypePtr = RawType*;

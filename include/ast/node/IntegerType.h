@@ -13,7 +13,7 @@ class IntegerType: public ScalarType {
     ~IntegerType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using IntegerTypePtr = IntegerType*;

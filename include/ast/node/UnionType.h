@@ -18,7 +18,7 @@ class UnionType: public CompositeType {
     ~UnionType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 
     const rtype::ast::node::Type& get_first_type() const {
         return *first_type_.get();

@@ -13,7 +13,7 @@ class CompositeType: public Type {
     virtual ~CompositeType() {
     }
 
-    virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
+    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
 };
 
 using CompositeTypePtr = CompositeType*;

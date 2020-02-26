@@ -17,7 +17,7 @@ class NamedType: public CompositeType {
     ~NamedType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 
     const std::string& get_name() const {
         return name_;

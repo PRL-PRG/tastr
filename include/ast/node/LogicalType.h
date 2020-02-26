@@ -13,7 +13,7 @@ class LogicalType: public ScalarType {
     ~LogicalType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using LogicalTypePtr = LogicalType*;

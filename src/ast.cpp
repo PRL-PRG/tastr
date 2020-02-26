@@ -1,16 +1,16 @@
 #include "ast.h"
 
-#include "ast/visitor/TypeSerializer.h"
+#include "ast/visitor/Unparser.h"
 
 #include <sstream>
 
-std::ostream& operator<<(std::ostream& os, const rtype::ast::node::Type& type) {
-    rtype::ast::visitor::TypeSerializer(os).visit(type);
+std::ostream& operator<<(std::ostream& os, const rtype::ast::node::Node& node) {
+    rtype::ast::visitor::Unparser(os).visit(node);
     return os;
 }
 
-std::string to_string(const rtype::ast::node::Type& type) {
+std::string to_string(const rtype::ast::node::Node& node) {
     std::stringstream stream;
-    stream << type;
+    stream << node;
     return stream.str();
 }

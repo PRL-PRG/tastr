@@ -13,7 +13,7 @@ class DoubleType: public ScalarType {
     ~DoubleType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using DoubleTypePtr = DoubleType*;

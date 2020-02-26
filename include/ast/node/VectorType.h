@@ -16,7 +16,7 @@ class VectorType: public CompositeType {
     ~VectorType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 
     const rtype::ast::node::ScalarType& get_scalar_type() const {
         return *scalar_type_.get();

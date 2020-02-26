@@ -13,7 +13,7 @@ class CharacterType: public ScalarType {
     ~CharacterType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using CharacterTypePtr = CharacterType*;

@@ -18,7 +18,7 @@ class FunctionType: public CompositeType {
     ~FunctionType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 
     const rtype::ast::node::ParameterType& get_parameter_types() const {
         return *parameter_types_.get();

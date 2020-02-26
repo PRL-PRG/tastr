@@ -16,7 +16,7 @@ class StructType: public SequenceType<NamedType> {
     ~StructType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using StructTypePtr = StructType*;

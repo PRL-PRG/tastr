@@ -39,7 +39,7 @@ class SequenceType: public CompositeType {
     virtual ~SequenceType() {
     }
 
-    virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
+    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
 
     void push_back(std::unique_ptr<Type> type) {
         sequence_->push_back(std::move(type));

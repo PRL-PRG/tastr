@@ -15,7 +15,7 @@ class GroupType: public CompositeType {
     ~GroupType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 
     const rtype::ast::node::Type& get_inner_type() const {
         return *inner_type_.get();

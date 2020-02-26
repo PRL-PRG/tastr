@@ -15,7 +15,7 @@ class ListType: public SequenceType<Type> {
     ~ListType() {
     }
 
-    void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
+    void accept(rtype::ast::visitor::Visitor& visitor) const override;
 };
 
 using ListTypePtr = ListType*;

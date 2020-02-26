@@ -1,23 +1,19 @@
 #ifndef R_TYPE_AST_NODE_TYPE_H
 #define R_TYPE_AST_NODE_TYPE_H
 
-#include <memory>
-
-namespace rtype::ast::visitor {
-class TypeVisitor;
-}
+#include "ast/node/Node.h"
 
 namespace rtype::ast::node {
 
-class Type {
+class Type: public Node {
   public:
-    Type() {
+    Type(): Node() {
     }
 
     virtual ~Type() {
     }
 
-    virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
+    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
 };
 
 using TypePtr = Type*;

@@ -13,7 +13,7 @@ class ScalarType: public Type {
     virtual ~ScalarType() {
     }
 
-    virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
+    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
 };
 
 using ScalarTypePtr = ScalarType*;
