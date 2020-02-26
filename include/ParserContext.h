@@ -1,5 +1,5 @@
-#ifndef RTYPESPARSER_R_TYPES_PARSER_H
-#define RTYPESPARSER_R_TYPES_PARSER_H
+#ifndef R_TYPES_PARSER_CONTEXT_H
+#define R_TYPES_PARSER_CONTEXT_H
 #include "parser.hpp"
 
 #include <map>
@@ -10,14 +10,14 @@ namespace rtype::ast::node {
 }
 
 /* Give Flex the prototype of yylex we want ... */
-#define YY_DECL yy::parser::symbol_type yylex(RTypesParser& rtypesparser)
+#define YY_DECL yy::parser::symbol_type yylex(ParserContext& parser_context)
 /* ... and declare it for the parser's sake. */
 YY_DECL;
 
 /* Conducting the whole scanning and parsing */
-class RTypesParser {
+class ParserContext {
   public:
-    explicit RTypesParser()
+    explicit ParserContext()
         : trace_parsing_(false), trace_scanning_(false), result_(-1) {
     }
 
@@ -91,4 +91,4 @@ class RTypesParser {
     //rtype::ast::node::TypeSequence ast_;
 };
 
-#endif /* RTYPESPARSER_TYPES_PARSER_H */
+#endif /* R_TYPES_PARSER_CONTEXT_H */

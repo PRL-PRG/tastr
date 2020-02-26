@@ -8,7 +8,7 @@
 
 %code requires {
 #include "ast.h"
-class RTypesParser;
+class ParserContext;
 using rtype::ast::node::CharacterType;
 using rtype::ast::node::ComplexType;
 using rtype::ast::node::DoubleType;
@@ -51,7 +51,7 @@ using rtype::ast::node::TypeDeclarationUPtr;
 }
 
 // The parsing context.
-%param { RTypesParser& rtypesparser }
+%param { ParserContext& parser_context }
 
 %locations
 
@@ -59,7 +59,7 @@ using rtype::ast::node::TypeDeclarationUPtr;
 %define parse.error verbose
 
 %code {
-  #include "RTypesParser.h"
+  #include "ParserContext.h"
 }
 
 %define api.token.prefix {TOKEN_}
@@ -257,12 +257,12 @@ decltype:           TYPEDECL QUALFUN type ";"               {
 decllist:           decltype                                {
                                                                 TypeDeclarationUPtr type_decl($1);
                                                                 std::cout << to_string(*type_decl.get());
-                                                                /*rtypesparser.get_ast().push_back(std::move(part_type));*/
+                                                                /*parser_context.get_ast().push_back(std::move(part_type));*/
                                                             }
         |           decllist decltype                       {
                                                                 TypeDeclarationUPtr type_decl($2);
                                                                 std::cout << to_string(*type_decl.get());
-                                                                /*rtypesparser.get_ast().push_back(std::move(part_type));*/
+                                                                /*parser_context.get_ast().push_back(std::move(part_type));*/
                                                             }
         ;
 

@@ -4,7 +4,7 @@
 # include <cstdlib>
 # include <cstring> // strerror
 # include <string>
-# include "RTypesParser.h"
+# include "ParserContext.h"
 # include "parser.hpp"
 %}
 
@@ -32,8 +32,8 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 %}
 %%
 %{
-  // A handy shortcut to the location held by RTypesParser.
-    yy::location& loc = rtypesparser.get_location();
+  // A handy shortcut to the location held by ParserContext.
+    yy::location& loc = parser_context.get_location();
   // Code run each time yylex is called.
   loc.step ();
 %}
@@ -69,7 +69,7 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 %%
 
 void
-RTypesParser::scan_begin ()
+ParserContext::scan_begin ()
 {
     yy_flex_debug = is_trace_scanning_enabled();
   if (file.empty () || file == "-")
@@ -82,7 +82,7 @@ RTypesParser::scan_begin ()
 }
 
 void
-RTypesParser::scan_end ()
+ParserContext::scan_end ()
 {
   fclose (yyin);
 }

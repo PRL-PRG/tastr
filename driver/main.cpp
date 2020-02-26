@@ -1,17 +1,17 @@
-#include "RTypesParser.h"
+#include "ParserContext.h"
 #include "ast.h"
 
 #include <iostream>
 
 int main(int argc, char* argv[]) {
     int result = 0;
-    RTypesParser parser;
+    ParserContext parser_context;
     for (int i = 1; i < argc; ++i) {
         if (argv[i] == std::string("-p")) {
-            parser.trace_parsing();
+            parser_context.trace_parsing();
         } else if (argv[i] == std::string("-s")) {
-            parser.trace_scanning();
-        } else if (!parser.parse(argv[i])) {
+            parser_context.trace_scanning();
+        } else if (!parser_context.parse(argv[i])) {
             // TODO: fixme
             //rtype::ast::node::Type* ast = parser.get_ast();
             ///////////////////////////////////////
@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
             //     std::cout << "AST: " << *ast; //
             // }                                 //
             ///////////////////////////////////////
-            std::cout << parser.get_result() << '\n';
+            std::cout << parser_context.get_result() << '\n';
         } else {
             result = 1;
         }
