@@ -13,13 +13,15 @@ BUILDDIR := build
 LIBNAME := librtypesparser
 APPNAME := rtypesparser
 
-LIBFLAGS := -O2 -shared -fPIC -g -ggdb3
-APPFLAGS := -O2 -g -ggdb3
+BISONFLAGS := -v
+CXXFLAGS := -O0 -g -ggdb3 -std=c++17
+LIBFLAGS := $(CXXFLAGS) -shared -fPIC
+APPFLAGS := $(CXXFLAGS)
 
 SRCFILES := $(shell find $(SRCDIR) -name *.cpp) $(shell find $(SRCDIR) -name *.c) $(shell find $(SRCDIR) -name *.cc)
 DRIVERFILES := $(shell find $(DRIVERDIR) -name *.cpp) $(shell find $(DRIVERDIR) -name *.c) $(shell find $(DRIVERDIR) -name *.cc)
 
-all: build run
+all: build
 
 build: clean library application
 
