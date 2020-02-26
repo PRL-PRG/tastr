@@ -9,7 +9,7 @@ namespace rtype::ast::visitor {
 
 class TypeSerializer: public TypeVisitor {
   public:
-    TypeSerializer(std::ostream& os): TypeVisitor(), os_(os) {
+    explicit TypeSerializer(std::ostream& os): TypeVisitor(), os_(os) {
     }
 
     ~TypeSerializer() {

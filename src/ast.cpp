@@ -1,9 +1,8 @@
-#include "utilities.h"
+#include "ast.h"
 
 #include "ast/visitor/TypeSerializer.h"
 
 #include <sstream>
-#include <string>
 
 std::ostream& operator<<(std::ostream& os, const rtype::ast::node::Type& type) {
     rtype::ast::visitor::TypeSerializer(os).visit(type);
