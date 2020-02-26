@@ -13,6 +13,7 @@ BUILDDIR := build
 LIBNAME := librtypesparser
 APPNAME := rtypesparser
 
+FLEXFLAGS := -v
 BISONFLAGS := -v
 CXXFLAGS := -O0 -g -ggdb3 -std=c++17
 LIBFLAGS := $(CXXFLAGS) -shared -fPIC
