@@ -26,6 +26,9 @@ class VectorType: public CompositeType {
     std::unique_ptr<ScalarType> scalar_type_;
 };
 
+using VectorTypePtr = VectorType*;
+using VectorTypeUPtr = std::unique_ptr<VectorType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_VECTOR_TYPE_H */

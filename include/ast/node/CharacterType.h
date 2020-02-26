@@ -16,6 +16,9 @@ class CharacterType: public ScalarType {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using CharacterTypePtr = CharacterType*;
+using CharacterTypeUPtr = std::unique_ptr<CharacterType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_CHARACTER_TYPE_H */

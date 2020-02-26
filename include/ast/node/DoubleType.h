@@ -16,6 +16,9 @@ class DoubleType: public ScalarType {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using DoubleTypePtr = DoubleType*;
+using DoubleTypeUPtr = std::unique_ptr<DoubleType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_DOUBLE_TYPE_H */

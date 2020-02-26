@@ -33,6 +33,9 @@ class FunctionType: public CompositeType {
     std::unique_ptr<Type> return_type_;
 };
 
+using FunctionTypePtr = FunctionType*;
+using FunctionTypeUPtr = std::unique_ptr<FunctionType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_FUNCTION_TYPE_H */

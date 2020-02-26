@@ -16,6 +16,8 @@ class ComplexType: public ScalarType {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using ComplexTypePtr = ComplexType*;
+using ComplexTypeUPtr = std::unique_ptr<ComplexType>;
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_COMPLEX_TYPE_H */

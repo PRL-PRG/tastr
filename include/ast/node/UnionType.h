@@ -33,6 +33,9 @@ class UnionType: public CompositeType {
     std::unique_ptr<Type> second_type_;
 };
 
+using UnionTypePtr = UnionType*;
+using UnionTypeUPtr = std::unique_ptr<UnionType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_UNION_TYPE_H */

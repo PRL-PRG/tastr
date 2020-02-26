@@ -1,7 +1,7 @@
 #ifndef R_TYPE_AST_NODE_TYPE_H
 #define R_TYPE_AST_NODE_TYPE_H
 
-#include <ostream>
+#include <memory>
 
 namespace rtype::ast::visitor {
 class TypeVisitor;
@@ -19,6 +19,9 @@ class Type {
 
     virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
 };
+
+using TypePtr = Type*;
+using TypeUPtr = std::unique_ptr<Type>;
 
 } // namespace rtype::ast::node
 

@@ -16,6 +16,9 @@ class RawType: public ScalarType {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using RawTypePtr = RawType*;
+using RawTypeUPtr = std::unique_ptr<RawType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_RAW_TYPE_H */

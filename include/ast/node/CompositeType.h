@@ -16,6 +16,9 @@ class CompositeType: public Type {
     virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
 };
 
+using CompositeTypePtr = CompositeType*;
+using CompositeTypeUPtr = std::unique_ptr<CompositeType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_COMPOSITE_TYPE_H */

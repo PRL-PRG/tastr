@@ -32,6 +32,9 @@ class NamedType: public CompositeType {
     std::unique_ptr<Type> type_;
 };
 
+using NamedTypePtr = NamedType*;
+using NamedTypeUPtr = std::unique_ptr<NamedType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_NAMED_TYPE_H */

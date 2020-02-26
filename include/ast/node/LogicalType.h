@@ -16,6 +16,9 @@ class LogicalType: public ScalarType {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using LogicalTypePtr = LogicalType*;
+using LogicalTypeUPtr = std::unique_ptr<LogicalType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_LOGICAL_TYPE_H */

@@ -18,6 +18,9 @@ class ListType: public SequenceType<Type> {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using ListTypePtr = ListType*;
+using ListTypeUPtr = std::unique_ptr<ListType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_LIST_TYPE_H */

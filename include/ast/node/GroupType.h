@@ -25,6 +25,9 @@ class GroupType: public CompositeType {
     std::unique_ptr<Type> inner_type_;
 };
 
+using GroupTypePtr = GroupType*;
+using GroupTypeUPtr = std::unique_ptr<GroupType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_GROUP_TYPE_H */

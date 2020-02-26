@@ -19,6 +19,9 @@ class StructType: public SequenceType<NamedType> {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using StructTypePtr = StructType*;
+using StructTypeUPtr = std::unique_ptr<StructType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_STRUCT_TYPE_H */

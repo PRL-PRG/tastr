@@ -27,6 +27,9 @@ class NoNaType: public CompositeType {
     std::unique_ptr<rtype::ast::node::VectorType> inner_type_;
 };
 
+using NoNaTypePtr = NoNaType*;
+using NoNaTypeUPtr = std::unique_ptr<NoNaType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_NO_NA_TYPE_H */

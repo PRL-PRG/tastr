@@ -16,6 +16,9 @@ class IntegerType: public ScalarType {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using IntegerTypePtr = IntegerType*;
+using IntegerTypeUPtr = std::unique_ptr<IntegerType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_INTEGER_TYPE_H */

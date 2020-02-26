@@ -9,6 +9,15 @@
 namespace rtype::ast::node {
 
 template <typename T>
+using sequence_t = std::vector<std::unique_ptr<T>>;
+
+template <typename T>
+using sequence_ptr_t = std::vector<std::unique_ptr<T>>*;
+
+template <typename T>
+using sequence_uptr_t = std::unique_ptr<std::vector<std::unique_ptr<T>>>;
+
+template <typename T>
 class SequenceType: public CompositeType {
   public:
     typedef typename std::vector<std::unique_ptr<T>>::iterator iterator;
@@ -79,6 +88,12 @@ class SequenceType: public CompositeType {
   private:
     std::unique_ptr<std::vector<std::unique_ptr<T>>> sequence_;
 };
+
+template <typename T>
+using SequenceTypePtr = SequenceType<T>*;
+
+template <typename T>
+using SequenceTypeUPtr = std::unique_ptr<SequenceType<T>>;
 
 } // namespace rtype::ast::node
 

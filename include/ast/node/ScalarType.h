@@ -16,6 +16,9 @@ class ScalarType: public Type {
     virtual void accept(rtype::ast::visitor::TypeVisitor& visitor) const = 0;
 };
 
+using ScalarTypePtr = ScalarType*;
+using ScalarTypeUPtr = std::unique_ptr<ScalarType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_SCALAR_TYPE_H */

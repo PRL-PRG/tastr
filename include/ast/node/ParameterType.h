@@ -18,6 +18,9 @@ class ParameterType: public SequenceType<Type> {
     void accept(rtype::ast::visitor::TypeVisitor& visitor) const override;
 };
 
+using ParameterTypePtr = ParameterType*;
+using ParameterTypeUPtr = std::unique_ptr<ParameterType>;
+
 } // namespace rtype::ast::node
 
 #endif /* R_TYPE_AST_NODE_PARAMETER_TYPE_H */
