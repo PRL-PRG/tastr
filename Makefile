@@ -38,11 +38,11 @@ clean:
 	rm -rf $(BUILDDIR)
 
 parser: $(GRAMMARDIR)/parser.yy
-	$(BISON) $(BISONFLAGS) --xml --graph=$(GRAMMARDIR)/parser.gv -o $(GRAMMARDIR)/parser.cpp $<
+	$(BISON) $(BISONFLAGS) --xml --graph=$(GRAMMARDIR)/Parser.gv -o $(GRAMMARDIR)/Parser.cpp $<
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)
-	$(MV) $(GRAMMARDIR)/parser.cpp $(SRCDIR)
-	$(MV) $(GRAMMARDIR)/parser.hpp $(GRAMMARDIR)/location.hh $(INCLUDEDIR)
+	$(MV) $(GRAMMARDIR)/Parser.cpp $(SRCDIR)
+	$(MV) $(GRAMMARDIR)/Parser.hpp $(GRAMMARDIR)/location.hh $(INCLUDEDIR)
 
 scanner: $(GRAMMARDIR)/scanner.ll
 	$(FLEX) $(FLEXFLAGS) -o$(GRAMMARDIR)/scanner.cpp $<

@@ -2,6 +2,7 @@
 %require "3.5.2"
 %defines
 
+%define api.parser.class {Parser}
 %define api.token.constructor
 %define api.value.type variant
 %define parse.assert
@@ -273,6 +274,6 @@ start:              EOF                                     { }
 %%
 
 void
-yy::parser::error (const location_type& l, const std::string& m) {
-  std::cerr << l << ": " << m << '\n';
+yy::Parser::error (const location_type& l, const std::string& m) {
+    std::cerr << l << ": " << m << '\n';
 }

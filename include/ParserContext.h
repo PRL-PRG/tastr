@@ -1,6 +1,6 @@
 #ifndef R_TYPES_PARSER_CONTEXT_H
 #define R_TYPES_PARSER_CONTEXT_H
-#include "parser.hpp"
+#include "Parser.hpp"
 
 #include <map>
 #include <string>
@@ -10,7 +10,7 @@ namespace rtype::ast::node {
 }
 
 /* Give Flex the prototype of yylex we want ... */
-#define YY_DECL yy::parser::symbol_type yylex(ParserContext& parser_context)
+#define YY_DECL yy::Parser::symbol_type yylex(ParserContext& parser_context)
 /* ... and declare it for the parser's sake. */
 YY_DECL;
 
@@ -37,7 +37,7 @@ class ParserContext {
         file = filename;
         location_.initialize(&file);
         scan_begin();
-        yy::parser parser(*this);
+        yy::Parser parser(*this);
         parser.set_debug_level(trace_parsing_);
         int result = parser();
         set_result(result);
