@@ -132,12 +132,12 @@ dkms.conf
 CMakeLists.txt
 
 ## BISON IGNORE RULES
-parser.gv
-parser.xml
-parser.cpp
+Parser.gv
+Parser.xml
+Parser.cpp
 location.hh
-parser.hpp
-parser.output
+Parser.hpp
+Parser.output
 
 ## FLEX IGNORE RULES
 scanner.cpp
