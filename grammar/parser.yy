@@ -7,9 +7,27 @@
 %define parse.assert
 
 %code requires {
-  #include <memory>
-  #include "rtypes.h"
+  #include "ast/node/CharacterType.h"
+  #include "ast/node/ComplexType.h"
+  #include "ast/node/CompositeType.h"
+  #include "ast/node/DoubleType.h"
+  #include "ast/node/FunctionType.h"
+  #include "ast/node/GroupType.h"
+  #include "ast/node/IntegerType.h"
+  #include "ast/node/ListType.h"
+  #include "ast/node/LogicalType.h"
+  #include "ast/node/NamedType.h"
+  #include "ast/node/NoNaType.h"
+  #include "ast/node/RawType.h"
+  #include "ast/node/ScalarType.h"
+  #include "ast/node/StructType.h"
+  #include "ast/node/Type.h"
+  #include "ast/node/UnionType.h"
+  #include "ast/node/VectorType.h"
+  #include "ast/node/ParameterType.h"
   class RTypesParser;
+  using namespace rtype::ast::node;
+  #include "utilities.h"
 }
 
 // The parsing context.
@@ -21,13 +39,13 @@
 %define parse.error verbose
 
 %code {
-#include "RTypesParser.h"
-
+  #include "RTypesParser.h"
+  #include "utilities.h"
 }
 
 %define api.token.prefix {TOKEN_}
 
-%token END  0        "end of file";
+%token END           0             "end of file";
 %token <std::string> OR            "|";
 %token <std::string> EXCLAMATION   "!";
 %token <std::string> ARROW         "=>";
@@ -48,105 +66,146 @@
 %token <std::string> RAW;
 %token <std::string> LIST;
 %token <std::string> STRUCT;
-%nterm <ScalarRType*>          scalartype
-%nterm <VectorRType*>          vectortype
-%nterm <NoNaRType*>            nonavectortype
-%nterm <RTypeSequence*>        typeseq
-%nterm <RTypeNamedSequence*>   namedtypeseq
-%nterm <FunctionRType*>        functiontype
-%nterm <GroupRType*>           grouptype
-%nterm <RType*>                nonuniontype
-%nterm <ListRType*>            listtype
-%nterm <StructRType*>          structtype
-%nterm <RType*>                type
+%nterm <ScalarType*>          scalartype
+%nterm <VectorType*>          vectortype
+%nterm <NoNaType*>            nonavectortype
+%nterm <std::vector<std::unique_ptr<Type>>*>         typeseq
+%nterm <NamedType*>    namedtype
+%nterm <std::vector<std::unique_ptr<NamedType>>*>    namedtypeseq
+%nterm <FunctionType*>        functiontype
+%nterm <GroupType*>           grouptype
+%nterm <Type*>                nonuniontype
+%nterm <ListType*>            listtype
+%nterm <StructType*>          structtype
+%nterm <Type*>                type
+
 
 %right ARROW
 %nonassoc COMMA COLON EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
 %left OR
 
-/* %printer { yyo << $$.get(); } <std::unique_ptr<RType>>; */
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <Type*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <VectorType*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <NoNaType*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <FunctionType*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <GroupType*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <ListType*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <StructType*>;
+%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <ScalarType*>;
+
 %printer { yyo << $$; } <*>;
 
+/*
+%destructor { delete $$; } scalartype
+%destructor { delete $$; } vectortype
+%destructor { delete $$; } nonavectortype
+%destructor { delete $$; } typeseq
+%destructor { delete $$; } namedtypeseq
+%destructor { delete $$; } functiontype
+%destructor { delete $$; } grouptype
+%destructor { delete $$; } nonuniontype
+%destructor { delete $$; } listtype
+%destructor { delete $$; } structtype
+%destructor { delete $$; } type
+*/
+
 %%
-%start type;
+%start start;
 
 scalartype:         INTEGER                                 {
-                                                                $$ = new IntegerRType();
+                                                                $$ = new IntegerType();
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleRType();
+                                                                $$ = new DoubleType();
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexRType();
+                                                                $$ = new ComplexType();
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterRType();
+                                                                $$ = new CharacterType();
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalRType();
+                                                                $$ = new LogicalType();
                                                             }
           |         RAW                                     {
-                                                                $$ = new RawRType();
+                                                                $$ = new RawType();
                                                             }
           ;
 
 vectortype:         scalartype "[" "]"                      {
-                                                                std::unique_ptr<ScalarRType> scalar_type($1);
-                                                                $$ = new VectorRType(std::move(scalar_type));
+                                                                std::unique_ptr<ScalarType> scalar_type($1);
+                                                                $$ = new VectorType(std::move(scalar_type));
                                                             }
           ;
 
 nonavectortype:     "!" vectortype                          {
-                                                                std::unique_ptr<VectorRType> vector_type($2);
-                                                                $$ = new NoNaRType(std::move(vector_type));
+                                                                std::unique_ptr<VectorType> vector_type($2);
+                                                                $$ = new NoNaType(std::move(vector_type));
                                                             }
               ;
 
 listtype:           LIST "<" typeseq ">"                    {
-                                                                std::unique_ptr<RTypeSequence> type_sequence($3);
-                                                                $$ = new ListRType(std::move(type_sequence));
+                                                                std::unique_ptr<std::vector<std::unique_ptr<Type>>> sequence($3);
+                                                                $$ = new ListType(std::move(sequence));
                                                             }
         ;
 
-typeseq:                                                    {
-                                                                $$ = new RTypeSequence();
+typeseq:           %empty                                   {
+                                                                $$ = new std::vector<std::unique_ptr<Type>>();
                                                             }
        |            type                                    {
-                                                                std::unique_ptr<RType> type($1);
-                                                                $$ = new RTypeSequence(std::move(type));
+                                                                std::unique_ptr<Type> type($1);
+                                                                $$ = new std::vector<std::unique_ptr<Type>>();
+                                                                $$ -> push_back(std::move(type));
                                                             }
        |            typeseq "," type                        {
-                                                                std::unique_ptr<RType> type($3);
+                                                                std::unique_ptr<Type> type($3);
                                                                 $1 -> push_back(std::move(type));
+                                                                $$ = $1;
                                                             }
        ;
 
 structtype:         STRUCT "<" namedtypeseq ">"             {
-                                                                std::unique_ptr<RTypeNamedSequence> types($3);
-                                                                $$ = new StructRType(std::move(types));
+                                                                std::unique_ptr<std::vector<std::unique_ptr<NamedType>>> sequences($3);
+                                                                $$ = new StructType(std::move(sequences));
                                                             }
           ;
 
-namedtypeseq:       IDENTIFIER ":" type                     {
-                                                                std::unique_ptr<RType> type($3);
-                                                                $$ = new RTypeNamedSequence($1, std::move(type));
+
+namedtype:          IDENTIFIER ":" type                     {
+                                                                std::string name($1);
+                                                                std::unique_ptr<Type> type($3);
+                                                                $$ = new NamedType(name, std::move(type));
                                                             }
-            |       namedtypeseq "," IDENTIFIER ":" type    {
-                                                                std::unique_ptr<RType> type($5);
-                                                                $$ = $1; $$ -> push_back($3, std::move(type));
+         ;
+
+namedtypeseq:       %empty                                  {
+                                                                $$ = new std::vector<std::unique_ptr<NamedType>>();
+                                                            }
+            |      namedtype                                {
+                                                                std::unique_ptr<NamedType> named_type($1);
+                                                                $$ = new std::vector<std::unique_ptr<NamedType>>();
+                                                                $$ -> push_back(std::move(named_type));
+                                                            }
+            |       namedtypeseq "," namedtype              {
+                                                                std::unique_ptr<NamedType> named_type($3);
+                                                                $1 -> push_back(std::move(named_type));
+                                                                $$ = $1;
                                                             }
             ;
 
 functiontype:       "<" typeseq ">" "=>" type               {
-                                                                std::unique_ptr<RTypeSequence> parameter_types($2);
-                                                                std::unique_ptr<RType> return_type($5);
-                                                                $$ = new FunctionRType(std::move(parameter_types), std::move(return_type));
+                                                                std::unique_ptr<std::vector<std::unique_ptr<Type>>> sequence($2);
+                                                                ParameterType *types = new ParameterType(std::move(sequence));
+                                                                std::unique_ptr<ParameterType> parameter_types(types);
+                                                                std::unique_ptr<Type> return_type($5);
+                                                                $$ = new FunctionType(std::move(parameter_types), std::move(return_type));
                                                             }
             ;
 
 grouptype:          "(" type ")"                            {
-                                                                std::unique_ptr<RType> type($2);
-                                                                $$ = new GroupRType(std::move(type));
+                                                                std::unique_ptr<Type> type($2);
+                                                                $$ = new GroupType(std::move(type));
                                                             }
          ;
 
@@ -161,14 +220,23 @@ nonuniontype:       scalartype                              {   $$ = $1; }
 
 type:               nonuniontype                            {   $$ = $1; }
     |               type "|" nonuniontype                   {
-                                                                std::unique_ptr<RType> left_type($1);
-                                                                std::unique_ptr<RType> right_type($3);
-                                                                $$ = new UnionRType(std::move(left_type), std::move(right_type));
+                                                                std::unique_ptr<Type> left_type($1);
+                                                                std::unique_ptr<Type> right_type($3);
+                                                                $$ = new UnionType(std::move(left_type), std::move(right_type));
                                                             }
     ;
 
-
-/*%empty                { $$ = ; } */
+start:              %empty                                  { }
+     |              type                                    {
+                                                                     std::unique_ptr<Type> part_type($1);
+                                                                     std::cout << to_string(*part_type.get());
+                                                                     /*rtypesparser.get_ast().push_back(std::move(part_type));*/
+                                                            }
+     |              start ";" type                          {
+                                                                     std::unique_ptr<Type> part_type($3);
+                                                                     std::cout << to_string(*part_type.get());
+                                                                     /*rtypesparser.get_ast().push_back(std::move(part_type));*/
+                                                            }
 
 %%
 

@@ -5,6 +5,10 @@
 #include <map>
 #include <string>
 
+namespace rtype::ast::node {
+    //class TypeSequence;
+}
+
 /* Give Flex the prototype of yylex we want ... */
 #define YY_DECL yy::parser::symbol_type yylex(RTypesParser& rtypesparser)
 /* ... and declare it for the parser's sake. */
@@ -33,11 +37,11 @@ class RTypesParser {
         file = filename;
         location_.initialize(&file);
         scan_begin();
-        yy::parser parse(*this);
-        parse.set_debug_level(trace_parsing_);
-        int res = parse();
+        yy::parser parser(*this);
+        parser.set_debug_level(trace_parsing_);
+        int result = parser();
         scan_end();
-        return res;
+        return result;
     }
 
     yy::location& get_location() {
@@ -50,15 +54,8 @@ class RTypesParser {
 
     /* Handling the scanner. */
     void scan_begin();
+
     void scan_end();
-
-    int get_variable(const std::string& variable) {
-        return variables_[variable];
-    }
-
-    void set_variable(const std::string& variable, int value) {
-        variables_[variable] = value;
-    }
 
     void set_result(int result) {
         result_ = result;
@@ -67,6 +64,16 @@ class RTypesParser {
     int get_result() {
         return result_;
     }
+
+    /*
+    rtype::ast::node::TypeSequence& get_ast() {
+        return ast_;
+    }
+
+    const rtype::ast::node::TypeSequence& get_ast() const {
+        return ast_;
+    }
+    */
 
   private:
     /* The name of the file being parsed. */
@@ -80,7 +87,7 @@ class RTypesParser {
     /* The token's location used by the scanner. */
     yy::location location_;
 
-    std::map<std::string, int> variables_;
+    //rtype::ast::node::TypeSequence ast_;
 };
 
 #endif /* RTYPESPARSER_TYPES_PARSER_H */

@@ -1,4 +1,5 @@
 #include "RTypesParser.h"
+#include "utilities.h"
 
 #include <iostream>
 
@@ -11,6 +12,13 @@ int main(int argc, char* argv[]) {
         } else if (argv[i] == std::string("-s")) {
             parser.trace_scanning();
         } else if (!parser.parse(argv[i])) {
+            // TODO: fixme
+            //rtype::ast::node::Type* ast = parser.get_ast();
+            ///////////////////////////////////////
+            // if(ast) {                         //
+            //     std::cout << "AST: " << *ast; //
+            // }                                 //
+            ///////////////////////////////////////
             std::cout << parser.get_result() << '\n';
         } else {
             result = 1;
