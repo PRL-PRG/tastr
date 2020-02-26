@@ -25,10 +25,10 @@ class Visitor {
         const rtype::ast::node::SequenceType<rtype::ast::node::Type>& node) = 0;
 
     virtual void
-    visit(const rtype::ast::node::SequenceType<rtype::ast::node::NamedType>&
+    visit(const rtype::ast::node::SequenceType<rtype::ast::node::TaggedType>&
               type) = 0;
 
-    virtual void visit(const rtype::ast::node::NamedType& node) = 0;
+    virtual void visit(const rtype::ast::node::TaggedType& node) = 0;
 
     virtual void visit(const rtype::ast::node::CharacterType& node) = 0;
 

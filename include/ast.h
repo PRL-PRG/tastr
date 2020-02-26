@@ -10,7 +10,7 @@
 #include "ast/node/IntegerType.h"
 #include "ast/node/ListType.h"
 #include "ast/node/LogicalType.h"
-#include "ast/node/NamedType.h"
+#include "ast/node/TaggedType.h"
 #include "ast/node/NoNaType.h"
 #include "ast/node/Node.h"
 #include "ast/node/ParameterType.h"

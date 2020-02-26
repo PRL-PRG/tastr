@@ -36,12 +36,12 @@ class Unparser final: public Visitor {
     }
 
     void visit(
-        const rtype::ast::node::SequenceType<rtype::ast::node::NamedType>& node)
+        const rtype::ast::node::SequenceType<rtype::ast::node::TaggedType>& node)
         override final {
     }
 
-    void visit(const rtype::ast::node::NamedType& node) override final {
-        os_ << node.get_name();
+    void visit(const rtype::ast::node::TaggedType& node) override final {
+        os_ << node.get_tag();
         os_ << ":";
         node.get_type().accept(*this);
     }

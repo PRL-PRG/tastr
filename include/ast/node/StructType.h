@@ -1,15 +1,15 @@
 #ifndef R_TYPE_AST_NODE_STRUCT_TYPE_H
 #define R_TYPE_AST_NODE_STRUCT_TYPE_H
 
-#include "NamedType.h"
 #include "SequenceType.h"
+#include "TaggedType.h"
 
 namespace rtype::ast::node {
 
-class StructType final: public SequenceType<NamedType> {
+class StructType final: public SequenceType<TaggedType> {
   public:
     explicit StructType(
-        std::unique_ptr<std::vector<std::unique_ptr<NamedType>>> sequence)
+        std::unique_ptr<std::vector<std::unique_ptr<TaggedType>>> sequence)
         : SequenceType(std::move(sequence)) {
     }
 

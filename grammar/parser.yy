@@ -20,9 +20,9 @@ using rtype::ast::node::IntegerType;
 using rtype::ast::node::ListType;
 using rtype::ast::node::ListTypePtr;
 using rtype::ast::node::LogicalType;
-using rtype::ast::node::NamedType;
-using rtype::ast::node::NamedTypePtr;
-using rtype::ast::node::NamedTypeUPtr;
+using rtype::ast::node::TaggedType;
+using rtype::ast::node::TaggedTypePtr;
+using rtype::ast::node::TaggedTypeUPtr;
 using rtype::ast::node::NoNaType;
 using rtype::ast::node::NoNaTypePtr;
 using rtype::ast::node::ParameterType;
@@ -91,8 +91,8 @@ using rtype::ast::node::TypeDeclarationUPtr;
 %nterm <VectorTypePtr>              vectortype
 %nterm <NoNaTypePtr>                nonavectortype
 %nterm <sequence_ptr_t<Type>>       typeseq
-%nterm <NamedTypePtr>               namedtype
-%nterm <sequence_ptr_t<NamedType>>  namedtypeseq
+%nterm <TaggedTypePtr>              namedtype
+%nterm <sequence_ptr_t<TaggedType>> namedtypeseq
 %nterm <FunctionTypePtr>            functiontype
 %nterm <GroupTypePtr>               grouptype
 %nterm <TypePtr>                    nonuniontype
@@ -188,7 +188,7 @@ typeseq:           %empty                                   {
        ;
 
 structtype:         STRUCT "<" namedtypeseq ">"             {
-                                                                sequence_uptr_t<NamedType> sequences($3);
+                                                                sequence_uptr_t<TaggedType> sequences($3);
                                                                 $$ = new StructType(std::move(sequences));
                                                             }
           ;
@@ -197,20 +197,20 @@ structtype:         STRUCT "<" namedtypeseq ">"             {
 namedtype:          TAG ":" type                            {
                                                                 std::string name($1);
                                                                 TypeUPtr type($3);
-                                                                $$ = new NamedType(name, std::move(type));
+                                                                $$ = new TaggedType(name, std::move(type));
                                                             }
          ;
 
 namedtypeseq:       %empty                                  {
-                                                                $$ = new sequence_t<NamedType>();
+                                                                $$ = new sequence_t<TaggedType>();
                                                             }
             |      namedtype                                {
-                                                                NamedTypeUPtr named_type($1);
-                                                                $$ = new sequence_t<NamedType>();
+                                                                TaggedTypeUPtr named_type($1);
+                                                                $$ = new sequence_t<TaggedType>();
                                                                 $$ -> push_back(std::move(named_type));
                                                             }
             |       namedtypeseq "," namedtype              {
-                                                                NamedTypeUPtr named_type($3);
+                                                                TaggedTypeUPtr named_type($3);
                                                                 $1 -> push_back(std::move(named_type));
                                                                 $$ = $1;
                                                             }
