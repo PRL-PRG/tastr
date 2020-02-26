@@ -40,6 +40,7 @@ class RTypesParser {
         yy::parser parser(*this);
         parser.set_debug_level(trace_parsing_);
         int result = parser();
+        set_result(result);
         scan_end();
         return result;
     }
