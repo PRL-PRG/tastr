@@ -31,6 +31,10 @@ class SequenceType: public CompositeType {
     typedef typename std::vector<std::unique_ptr<T>>::const_reverse_iterator
         const_reverse_iterator;
 
+    explicit SequenceType()
+        : CompositeType(), sequence_(new std::vector<std::unique_ptr<T>>()) {
+    }
+
     explicit SequenceType(
         std::unique_ptr<std::vector<std::unique_ptr<T>>> sequence)
         : CompositeType(), sequence_(std::move(sequence)) {
@@ -41,8 +45,8 @@ class SequenceType: public CompositeType {
 
     virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
 
-    void push_back(std::unique_ptr<Type> type) {
-        sequence_->push_back(std::move(type));
+    void push_back(std::unique_ptr<T> value) {
+        sequence_->push_back(std::move(value));
     }
 
     size_t size() const {

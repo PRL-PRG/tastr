@@ -134,10 +134,13 @@ CMakeLists.txt
 ## BISON IGNORE RULES
 Parser.gv
 Parser.xml
-Parser.cpp
-location.hh
-Parser.hpp
+Parser.cxx
 Parser.output
+location.hh
+Parser.hxx
+Lexer.hxx
+Lexer.cxx
+
 
 ## FLEX IGNORE RULES
 scanner.cpp

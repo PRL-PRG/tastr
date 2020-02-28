@@ -1,0 +1,78 @@
+/* -*- C++ -*- */
+%option outfile="Lexer.cxx"
+%option header-file="Lexer.hxx"
+%option yyclass="rtype::parser::Lexer"
+%option debug
+%option nodefault
+%option noyywrap
+%option c++
+
+%{
+    #include <string>
+    #include "Lexer.hpp"
+    #include "ParsingContext.h"
+
+    /* Code run each time a pattern is matched. */
+    #define YY_USER_ACTION  yylloc->columns(yyleng);
+
+    #define HANDLE_TOKEN(token_name)                    \
+        yylval->build<std::string>(yytext);             \
+        return rtype::parser::Parser::token::token_name;
+
+%}
+
+INTEGER      integer
+DOUBLE       double
+COMPLEX      complex
+CHARACTER    character
+LOGICAL      logical
+RAW          raw
+LIST         list
+STRUCT       struct
+BLANK        [ \t\r]
+TYPEDECL     type
+PACKAGENAME  [a-zA-Z]+
+IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
+
+%%
+
+%{
+    /* Code run each time yylex is called. */
+    yylloc -> step();
+%}
+
+{BLANK}+                    { yylloc -> step(); }
+\n+                         { yylloc -> lines(yyleng); yylloc -> step(); }
+"|"                         { HANDLE_TOKEN(TOKEN_OR) }
+"!"                         { HANDLE_TOKEN(TOKEN_EXCLAMATION) }
+"=>"                        { HANDLE_TOKEN(TOKEN_ARROW) }
+","                         { HANDLE_TOKEN(TOKEN_COMMA) }
+"("                         { HANDLE_TOKEN(TOKEN_LPAREN) }
+")"                         { HANDLE_TOKEN(TOKEN_RPAREN) }
+"["                         { HANDLE_TOKEN(TOKEN_LBRACKET) }
+"]"                         { HANDLE_TOKEN(TOKEN_RBRACKET) }
+"<"                         { HANDLE_TOKEN(TOKEN_LANGLEBRACKET) }
+">"                         { HANDLE_TOKEN(TOKEN_RANGLEBRACKET) }
+";"                         { HANDLE_TOKEN(TOKEN_SEMICOLON) }
+{INTEGER}                   { HANDLE_TOKEN(TOKEN_INTEGER) }
+{DOUBLE}                    { HANDLE_TOKEN(TOKEN_DOUBLE) }
+{COMPLEX}                   { HANDLE_TOKEN(TOKEN_COMPLEX) }
+{CHARACTER}                 { HANDLE_TOKEN(TOKEN_CHARACTER) }
+{LOGICAL}                   { HANDLE_TOKEN(TOKEN_LOGICAL) }
+{RAW}                       { HANDLE_TOKEN(TOKEN_RAW) }
+{LIST}                      { HANDLE_TOKEN(TOKEN_LIST) }
+{STRUCT}                    { HANDLE_TOKEN(TOKEN_STRUCT) }
+{TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
+{PACKAGENAME}::{IDENTIFIER} { HANDLE_TOKEN(TOKEN_QUALFUN) }
+{IDENTIFIER}                { HANDLE_TOKEN(TOKEN_TAG) }
+.                           {
+                                throw rtype::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));
+                            }
+<<EOF>>                     return rtype::parser::Parser::token::TOKEN_EOF;
+%%
+
+/* REFERENCE: https://coldfix.eu/2015/05/16/bison-c++11/ */
+rtype::parser::Lexer::Lexer(rtype::parser::ParsingContext& context): yyFlexLexer(context.get_input_stream(), std::cout) {
+}
+
+

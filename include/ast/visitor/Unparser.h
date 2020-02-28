@@ -35,9 +35,9 @@ class Unparser final: public Visitor {
                    type) override final {
     }
 
-    void visit(
-        const rtype::ast::node::SequenceType<rtype::ast::node::TaggedType>& node)
-        override final {
+    void
+    visit(const rtype::ast::node::SequenceType<rtype::ast::node::TaggedType>&
+              node) override final {
     }
 
     void visit(const rtype::ast::node::TaggedType& node) override final {
@@ -141,7 +141,19 @@ class Unparser final: public Visitor {
         os_ << "type ";
         os_ << node.get_identifier() << " ";
         node.get_type().accept(*this);
-        os_ << ";\n";
+        os_ << ";";
+    }
+
+    void visit(
+        const rtype::ast::node::TypeDeclarationSequence& node) override final {
+        int show_separator = node.size() - 1;
+        for (auto i = node.cbegin(); i != node.cend(); ++i) {
+            os_ << **i;
+            if (show_separator) {
+                os_ << std::endl;
+            }
+            --show_separator;
+        }
     }
 
   private:

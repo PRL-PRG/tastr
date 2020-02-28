@@ -1,28 +1,31 @@
-#include "ParserContext.h"
 #include "ast.h"
 
 #include <iostream>
+#include <cstring>
 
 int main(int argc, char* argv[]) {
     int result = 0;
-    ParserContext parser_context;
     for (int i = 1; i < argc; ++i) {
         if (argv[i] == std::string("-p")) {
-            parser_context.trace_parsing();
+            // parser_context.trace_parsing();
         } else if (argv[i] == std::string("-s")) {
-            parser_context.trace_scanning();
-        } else if (!parser_context.parse(argv[i])) {
-            // TODO: fixme
-            //rtype::ast::node::Type* ast = parser.get_ast();
-            ///////////////////////////////////////
-            // if(ast) {                         //
-            //     std::cout << "AST: " << *ast; //
-            // }                                 //
-            ///////////////////////////////////////
-            std::cout << parser_context.get_result() << '\n';
+            // parser_context.trace_scanning();
+        } else if (argv[i][0] == '\"') {
+            const char* input = argv[i];
+            int length = strlen(argv[i]);
+            /* remove leading and trailing " character */
+            std::string string(input + 1, length - 2);
+            result = parse_string(string);
+        } else if (std::string(argv[i]) == "-") {
+            result = parse_stdin();
         } else {
-            result = 1;
+            std::filesystem::path filepath(argv[i]);
+            result = parse_file(filepath);
+        }
+        if (result != 0) {
+            return result;
         }
     }
+
     return result;
 }

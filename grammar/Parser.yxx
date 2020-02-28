@@ -1,69 +1,29 @@
-%skeleton "lalr1.cc" /* -*- C++ -*- */
+/* -*- C++ -*- */
+%output  "Parser.cxx"
+%defines "Parser.hxx"
+
+%skeleton "lalr1.cc"
 %require "3.5.2"
-%defines
 
 %define api.parser.class {Parser}
-%define api.token.constructor
-%define api.value.type variant
+%define api.namespace {rtype::parser}
+
+/* assert correct cleanup of semantic value objects */
 %define parse.assert
 
-%code requires {
-#include "ast.h"
-class ParserContext;
-using rtype::ast::node::CharacterType;
-using rtype::ast::node::ComplexType;
-using rtype::ast::node::DoubleType;
-using rtype::ast::node::FunctionType;
-using rtype::ast::node::FunctionTypePtr;
-using rtype::ast::node::GroupType;
-using rtype::ast::node::GroupTypePtr;
-using rtype::ast::node::IntegerType;
-using rtype::ast::node::ListType;
-using rtype::ast::node::ListTypePtr;
-using rtype::ast::node::LogicalType;
-using rtype::ast::node::TaggedType;
-using rtype::ast::node::TaggedTypePtr;
-using rtype::ast::node::TaggedTypeUPtr;
-using rtype::ast::node::NoNaType;
-using rtype::ast::node::NoNaTypePtr;
-using rtype::ast::node::ParameterType;
-using rtype::ast::node::ParameterTypePtr;
-using rtype::ast::node::ParameterTypeUPtr;
-using rtype::ast::node::RawType;
-using rtype::ast::node::ScalarTypePtr;
-using rtype::ast::node::ScalarTypeUPtr;
-using rtype::ast::node::sequence_t;
-using rtype::ast::node::sequence_ptr_t;
-using rtype::ast::node::sequence_uptr_t;
-using rtype::ast::node::StructType;
-using rtype::ast::node::StructTypePtr;
-using rtype::ast::node::Type;
-using rtype::ast::node::TypePtr;
-using rtype::ast::node::TypeUPtr;
-using rtype::ast::node::UnionType;
-using rtype::ast::node::UnionTypePtr;
-using rtype::ast::node::VectorType;
-using rtype::ast::node::VectorTypePtr;
-using rtype::ast::node::VectorTypeUPtr;
-using rtype::ast::node::TypeDeclaration;
-using rtype::ast::node::TypeDeclarationPtr;
-using rtype::ast::node::TypeDeclarationUPtr;
+%define parse.trace
 
-}
+/* increase usefulness of error messages */
+%define parse.error verbose
+%parse-param { rtype::parser::Lexer& lexer} { rtype::parser::ParsingContext& context }
 
-// The parsing context.
-%param { ParserContext& parser_context }
-
+/* call yylex with a location */
 %locations
 
-%define parse.trace
-%define parse.error verbose
-
-%code {
-  #include "ParserContext.h"
-}
-
+%define api.value.type variant
+/* %define api.token.constructor */
 %define api.token.prefix {TOKEN_}
+
 
 %token EOF                          0             "end of file";
 %token <std::string>                OR            "|";
@@ -107,16 +67,20 @@ using rtype::ast::node::TypeDeclarationUPtr;
 %nonassoc COMMA EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
 %left OR
 
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <TypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <VectorTypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <NoNaTypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <FunctionTypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <GroupTypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <ListTypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <StructTypePtr>;
-%printer { /* Type& type = *$$; */ yyo << to_string(*$$); } <ScalarTypePtr>;
 
-%printer { yyo << $$; } <*>;
+%start start;
+
+/*
+%printer { yyo << to_string(*$$); } <TypePtr>;
+%printer { yyo << to_string(*$$); } <VectorTypePtr>;
+%printer { yyo << to_string(*$$); } <NoNaTypePtr>;
+%printer { yyo << to_string(*$$); } <FunctionTypePtr>;
+%printer { yyo << to_string(*$$); } <GroupTypePtr>;
+%printer { yyo << to_string(*$$); } <ListTypePtr>;
+%printer { yyo << to_string(*$$); } <StructTypePtr>;
+%printer { yyo << to_string(*$$); } <ScalarTypePtr>;
+*/
+/*%printer { yyo << $$; } <*>; */
 
 /*
 %destructor { delete $$; } scalartype
@@ -132,8 +96,71 @@ using rtype::ast::node::TypeDeclarationUPtr;
 %destructor { delete $$; } type
 */
 
+
+%initial-action {
+    /* filename for locations here             
+       https://www.gnu.org/software/bison/manual/html_node/Initial-Action-Decl.html */
+    @$.initialize(context.get_input_stream_name());
+}
+
+/* inserted near top of header + source file */
+%code requires {
+    namespace rtype::parser {
+        class Lexer;
+        class ParsingContext;
+    }
+    #include "location.hh"
+    #include "ast.h"
+    using rtype::ast::node::CharacterType;
+    using rtype::ast::node::ComplexType;
+    using rtype::ast::node::DoubleType;
+    using rtype::ast::node::FunctionType;
+    using rtype::ast::node::FunctionTypePtr;
+    using rtype::ast::node::GroupType;
+    using rtype::ast::node::GroupTypePtr;
+    using rtype::ast::node::IntegerType;
+    using rtype::ast::node::ListType;
+    using rtype::ast::node::ListTypePtr;
+    using rtype::ast::node::LogicalType;
+    using rtype::ast::node::TaggedType;
+    using rtype::ast::node::TaggedTypePtr;
+    using rtype::ast::node::TaggedTypeUPtr;
+    using rtype::ast::node::NoNaType;
+    using rtype::ast::node::NoNaTypePtr;
+    using rtype::ast::node::ParameterType;
+    using rtype::ast::node::ParameterTypePtr;
+    using rtype::ast::node::ParameterTypeUPtr;
+    using rtype::ast::node::RawType;
+    using rtype::ast::node::ScalarTypePtr;
+    using rtype::ast::node::ScalarTypeUPtr;
+    using rtype::ast::node::sequence_t;
+    using rtype::ast::node::sequence_ptr_t;
+    using rtype::ast::node::sequence_uptr_t;
+    using rtype::ast::node::StructType;
+    using rtype::ast::node::StructTypePtr;
+    using rtype::ast::node::Type;
+    using rtype::ast::node::TypePtr;
+    using rtype::ast::node::TypeUPtr;
+    using rtype::ast::node::UnionType;
+    using rtype::ast::node::UnionTypePtr;
+    using rtype::ast::node::VectorType;
+    using rtype::ast::node::VectorTypePtr;
+    using rtype::ast::node::VectorTypeUPtr;
+    using rtype::ast::node::TypeDeclaration;
+    using rtype::ast::node::TypeDeclarationPtr;
+    using rtype::ast::node::TypeDeclarationUPtr;
+    using rtype::ast::node::TypeDeclarationSequenceUPtr;
+}
+
+/* inserted near top of source file */
+%code {
+    #include "ParsingContext.h"
+    #include "Lexer.hpp"
+    #undef yylex
+    #define yylex lexer.yylex
+}
+
 %%
-%start start;
 
 scalartype:         INTEGER                                 {
                                                                 $$ = new IntegerType();
@@ -257,13 +284,11 @@ decltype:           TYPEDECL QUALFUN type ";"               {
 
 decllist:           decltype                                {
                                                                 TypeDeclarationUPtr type_decl($1);
-                                                                std::cout << to_string(*type_decl.get());
-                                                                /*parser_context.get_ast().push_back(std::move(part_type));*/
+                                                                context.get_type_declaration_sequence() -> push_back(std::move(type_decl));
                                                             }
         |           decllist decltype                       {
                                                                 TypeDeclarationUPtr type_decl($2);
-                                                                std::cout << to_string(*type_decl.get());
-                                                                /*parser_context.get_ast().push_back(std::move(part_type));*/
+                                                                context.get_type_declaration_sequence() -> push_back(std::move(type_decl));
                                                             }
         ;
 
@@ -273,7 +298,6 @@ start:              EOF                                     { }
 
 %%
 
-void
-yy::Parser::error (const location_type& l, const std::string& m) {
-    std::cerr << l << ": " << m << '\n';
+void rtype::parser::Parser::error(const location_type& location, const std::string& message) {
+   throw syntax_error(location, message);
 }

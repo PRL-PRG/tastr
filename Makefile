@@ -4,12 +4,14 @@ FLEX = flex
 MV := mv
 MKDIR := mkdir
 MKDIRFLAGS := -p
+CD := cd
 
 SRCDIR := src
 INCLUDEDIR := include
 GRAMMARDIR := grammar
 DRIVERDIR := driver
 BUILDDIR := build
+PARSERDIR := parser
 LIBNAME := librtypesparser
 APPNAME := rtypesparser
 
@@ -19,7 +21,7 @@ CXXFLAGS := -O0 -g -ggdb3 -std=c++17
 LIBFLAGS := $(CXXFLAGS) -shared -fPIC
 APPFLAGS := $(CXXFLAGS)
 
-SRCFILES := $(shell find $(SRCDIR) -name *.cpp) $(shell find $(SRCDIR) -name *.c) $(shell find $(SRCDIR) -name *.cc)
+SRCFILES := $(shell find $(SRCDIR) -name *.cpp) $(shell find $(SRCDIR) -name *.c) $(shell find $(SRCDIR) -name *.cc) $(shell find $(SRCDIR) -name *.cxx)
 DRIVERFILES := $(shell find $(DRIVERDIR) -name *.cpp) $(shell find $(DRIVERDIR) -name *.c) $(shell find $(DRIVERDIR) -name *.cc)
 
 all: build
@@ -37,23 +39,25 @@ run: application
 clean:
 	rm -rf $(BUILDDIR)
 
-parser: $(GRAMMARDIR)/parser.yy
-	$(BISON) $(BISONFLAGS) --xml --graph=$(GRAMMARDIR)/Parser.gv -o $(GRAMMARDIR)/Parser.cpp $<
-	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)
-	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)
-	$(MV) $(GRAMMARDIR)/Parser.cpp $(SRCDIR)
-	$(MV) $(GRAMMARDIR)/Parser.hpp $(GRAMMARDIR)/location.hh $(INCLUDEDIR)
+parser: $(GRAMMARDIR)/Parser.yxx
+	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
+	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
+	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
+	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/Parser.cxx
+	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/Parser.hxx
+	$(MV) $(GRAMMARDIR)/location.hh $(INCLUDEDIR)/location.hh
 
-scanner: $(GRAMMARDIR)/scanner.ll
-	$(FLEX) $(FLEXFLAGS) -o$(GRAMMARDIR)/scanner.cpp $<
-	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)
-	$(MV) $(GRAMMARDIR)/scanner.cpp $(SRCDIR)
+lexer: $(GRAMMARDIR)/Lexer.lxx
+	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx
+	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
+	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/Lexer.cxx
+	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/Lexer.hxx
 
-$(BUILDDIR)/librtypesparser: parser scanner
+$(BUILDDIR)/librtypesparser: parser lexer
 	$(MKDIR) $(MKDIRFLAGS) $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) $(LIBFLAGS) -I$(INCLUDEDIR) -o$@ $(SRCFILES)
 
-$(BUILDDIR)/rtypesparser: parser scanner
+$(BUILDDIR)/rtypesparser: parser lexer
 	$(MKDIR) $(MKDIRFLAGS) $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) $(APPFLAGS) -I$(INCLUDEDIR) -o$@ $(SRCFILES) $(DRIVERFILES)
 
@@ -61,7 +65,7 @@ $(BUILDDIR)/rtypesparser: parser scanner
         build \
         all   \
         parser \
-        scanner \
+        lexer \
         library \
         application \
         run
