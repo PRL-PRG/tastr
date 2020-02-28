@@ -302,5 +302,5 @@ start:              EOF                                     { }
 %%
 
 void rtype::parser::Parser::error(const location_type& location, const std::string& message) {
-   throw syntax_error(location, message);
+    std::cout << "Parser Error: " << location << " :: " << message << std::endl;
 }
