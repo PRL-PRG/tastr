@@ -27,7 +27,6 @@ COMPLEX      complex
 CHARACTER    character
 LOGICAL      logical
 RAW          raw
-STRUCT       struct
 BLANK        [ \t\r]
 TYPEDECL     type
 PACKAGENAME  [a-zA-Z]+
@@ -54,6 +53,8 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 "]"                         { HANDLE_TOKEN(TOKEN_RBRACKET) }
 "<"                         { HANDLE_TOKEN(TOKEN_LANGLEBRACKET) }
 ">"                         { HANDLE_TOKEN(TOKEN_RANGLEBRACKET) }
+"{{"                        { HANDLE_TOKEN(TOKEN_DOUBLE_LBRACE) }
+"}}"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RBRACE) }
 ";"                         { HANDLE_TOKEN(TOKEN_SEMICOLON) }
 ":"                         { HANDLE_TOKEN(TOKEN_COLON) }
 {INTEGER}                   { HANDLE_TOKEN(TOKEN_INTEGER) }
@@ -62,7 +63,6 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 {CHARACTER}                 { HANDLE_TOKEN(TOKEN_CHARACTER) }
 {LOGICAL}                   { HANDLE_TOKEN(TOKEN_LOGICAL) }
 {RAW}                       { HANDLE_TOKEN(TOKEN_RAW) }
-{STRUCT}                    { HANDLE_TOKEN(TOKEN_STRUCT) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {PACKAGENAME}::{IDENTIFIER} { HANDLE_TOKEN(TOKEN_QUALFUN) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_TAG) }

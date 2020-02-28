@@ -38,6 +38,8 @@
 %token <std::string>                RBRACKET      "]";
 %token <std::string>                LANGLEBRACKET "<";
 %token <std::string>                RANGLEBRACKET ">";
+%token <std::string>                DOUBLE_LBRACE "{{";
+%token <std::string>                DOUBLE_RBRACE "}}";
 %token <std::string>                SEMICOLON     ";";
 %token <std::string>                COLON         ":";
 %token <std::string>                INTEGER;
@@ -46,7 +48,6 @@
 %token <std::string>                CHARACTER;
 %token <std::string>                LOGICAL;
 %token <std::string>                RAW;
-%token <std::string>                STRUCT;
 %token <std::string>                TYPEDECL;
 %token <std::string>                QUALFUN;
 %token <std::string>                TAG;
@@ -202,7 +203,7 @@ listtype:           "((" typeseq "))"                       {
                                                             }
         ;
 
-typeseq:           %empty                                   {
+typeseq:            %empty                                  {
                                                                 $$ = new sequence_t<Type>();
                                                             }
        |            type                                    {
@@ -217,8 +218,8 @@ typeseq:           %empty                                   {
                                                             }
        ;
 
-structtype:         STRUCT "<" namedtypeseq ">"             {
-                                                                sequence_uptr_t<TaggedType> sequences($3);
+structtype:         "{{" namedtypeseq "}}"                  {
+                                                                sequence_uptr_t<TaggedType> sequences($2);
                                                                 $$ = new StructType(std::move(sequences));
                                                             }
           ;
