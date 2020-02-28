@@ -88,7 +88,7 @@ class Unparser final: public Visitor {
     }
 
     void visit(const rtype::ast::node::ListType& node) override final {
-        os_ << "list<";
+        os_ << "((";
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
             os_ << **i;
@@ -97,7 +97,7 @@ class Unparser final: public Visitor {
             }
             --show_separator;
         }
-        os_ << ">";
+        os_ << "))";
     }
 
     void visit(const rtype::ast::node::LogicalType& node) override final {

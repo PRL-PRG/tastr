@@ -30,7 +30,9 @@
 %token <std::string>                EXCLAMATION   "!";
 %token <std::string>                ARROW         "=>";
 %token <std::string>                COMMA         ",";
+%token <std::string>                DOUBLE_LPAREN "((";
 %token <std::string>                LPAREN        "(";
+%token <std::string>                DOUBLE_RPAREN "))";
 %token <std::string>                RPAREN        ")";
 %token <std::string>                LBRACKET      "[";
 %token <std::string>                RBRACKET      "]";
@@ -44,7 +46,6 @@
 %token <std::string>                CHARACTER;
 %token <std::string>                LOGICAL;
 %token <std::string>                RAW;
-%token <std::string>                LIST;
 %token <std::string>                STRUCT;
 %token <std::string>                TYPEDECL;
 %token <std::string>                QUALFUN;
@@ -195,8 +196,8 @@ nonavectortype:     "!" vectortype                          {
                                                             }
               ;
 
-listtype:           LIST "<" typeseq ">"                    {
-                                                                sequence_uptr_t<Type> sequence($3);
+listtype:           "((" typeseq "))"                       {
+                                                                sequence_uptr_t<Type> sequence($2);
                                                                 $$ = new ListType(std::move(sequence));
                                                             }
         ;

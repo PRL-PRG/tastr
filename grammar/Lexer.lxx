@@ -27,7 +27,6 @@ COMPLEX      complex
 CHARACTER    character
 LOGICAL      logical
 RAW          raw
-LIST         list
 STRUCT       struct
 BLANK        [ \t\r]
 TYPEDECL     type
@@ -47,7 +46,9 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 "!"                         { HANDLE_TOKEN(TOKEN_EXCLAMATION) }
 "=>"                        { HANDLE_TOKEN(TOKEN_ARROW) }
 ","                         { HANDLE_TOKEN(TOKEN_COMMA) }
+"(("                        { HANDLE_TOKEN(TOKEN_DOUBLE_LPAREN) }
 "("                         { HANDLE_TOKEN(TOKEN_LPAREN) }
+"))"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RPAREN) }
 ")"                         { HANDLE_TOKEN(TOKEN_RPAREN) }
 "["                         { HANDLE_TOKEN(TOKEN_LBRACKET) }
 "]"                         { HANDLE_TOKEN(TOKEN_RBRACKET) }
@@ -61,7 +62,6 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 {CHARACTER}                 { HANDLE_TOKEN(TOKEN_CHARACTER) }
 {LOGICAL}                   { HANDLE_TOKEN(TOKEN_LOGICAL) }
 {RAW}                       { HANDLE_TOKEN(TOKEN_RAW) }
-{LIST}                      { HANDLE_TOKEN(TOKEN_LIST) }
 {STRUCT}                    { HANDLE_TOKEN(TOKEN_STRUCT) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {PACKAGENAME}::{IDENTIFIER} { HANDLE_TOKEN(TOKEN_QUALFUN) }
