@@ -37,6 +37,7 @@
 %token <std::string>                LANGLEBRACKET "<";
 %token <std::string>                RANGLEBRACKET ">";
 %token <std::string>                SEMICOLON     ";";
+%token <std::string>                COLON         ":";
 %token <std::string>                INTEGER;
 %token <std::string>                DOUBLE;
 %token <std::string>                COMPLEX;
