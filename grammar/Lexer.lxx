@@ -21,12 +21,12 @@
 
 %}
 
-INTEGER      integer
-DOUBLE       double
-COMPLEX      complex
-CHARACTER    character
-LOGICAL      logical
-RAW          raw
+INTEGER      integer|int|i
+DOUBLE       double|dbl|d
+COMPLEX      complex|clx|x
+CHARACTER    character|chr|s
+LOGICAL      logical|lgl|l
+RAW          raw|r
 BLANK        [ \t\r]
 TYPEDECL     type
 PACKAGENAME  [a-zA-Z]+
