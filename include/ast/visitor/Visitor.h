@@ -44,6 +44,8 @@ class Visitor {
 
     virtual void visit(const rtype::ast::node::LanguageType& node) = 0;
 
+    virtual void visit(const rtype::ast::node::SymbolType& node) = 0;
+
     virtual void visit(const rtype::ast::node::FunctionType& node) = 0;
 
     virtual void visit(const rtype::ast::node::GroupType& node) = 0;
@@ -67,6 +69,7 @@ class Visitor {
     virtual void visit(const rtype::ast::node::TypeDeclaration& node) = 0;
 
     virtual void visit(const rtype::ast::node::TypeDeclarationSequence& node) = 0;
+
 };
 
 } // namespace rtype::ast::visitor

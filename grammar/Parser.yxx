@@ -51,6 +51,7 @@
 %token <std::string>                ENVIRONMENT;
 %token <std::string>                EXPRESSION;
 %token <std::string>                LANGUAGE;
+%token <std::string>                SYMBOL;
 %token <std::string>                TYPEDECL;
 %token <std::string>                QUALFUN;
 %token <std::string>                TAG;
@@ -58,6 +59,7 @@
 %nterm <EnvironmentTypePtr>         environmenttype
 %nterm <ExpressionTypePtr>          expressiontype
 %nterm <LanguageTypePtr>            languagetype
+%nterm <SymbolTypePtr>              symboltype
 %nterm <VectorTypePtr>              vectortype
 %nterm <NoNaTypePtr>                nonavectortype
 %nterm <sequence_ptr_t<Type>>       typeseq
@@ -129,6 +131,8 @@
     using rtype::ast::node::EnvironmentTypePtr;
     using rtype::ast::node::LanguageType;
     using rtype::ast::node::LanguageTypePtr;
+    using rtype::ast::node::SymbolType;
+    using rtype::ast::node::SymbolTypePtr;
     using rtype::ast::node::FunctionType;
     using rtype::ast::node::FunctionTypePtr;
     using rtype::ast::node::GroupType;
@@ -212,6 +216,11 @@ languagetype:       LANGUAGE                                {
                                                             }
             ;
 
+symboltype:         SYMBOL                                  {
+                                                                $$ = new SymbolType();
+                                                            }
+          ;
+
 vectortype:         scalartype "[" "]"                      {
                                                                 ScalarTypeUPtr scalar_type($1);
                                                                 $$ = new VectorType(std::move(scalar_type));
@@ -293,6 +302,7 @@ nonuniontype:       scalartype                              {   $$ = $1; }
             |       environmenttype                         {   $$ = $1; }
             |       expressiontype                          {   $$ = $1; }
             |       languagetype                            {   $$ = $1; }
+            |       symboltype                              {   $$ = $1; }
             |       vectortype                              {   $$ = $1; }
             |       nonavectortype                          {   $$ = $1; }
             |       functiontype                            {   $$ = $1; }
@@ -300,6 +310,7 @@ nonuniontype:       scalartype                              {   $$ = $1; }
             |       listtype                                {   $$ = $1; }
             |       grouptype                               {   $$ = $1; }
             ;
+
 
 type:               nonuniontype                            {   $$ = $1; }
     |               type "|" nonuniontype                   {

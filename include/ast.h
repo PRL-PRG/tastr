@@ -20,6 +20,7 @@
 #include "ast/node/ScalarType.h"
 #include "ast/node/SequenceType.h"
 #include "ast/node/StructType.h"
+#include "ast/node/SymbolType.h"
 #include "ast/node/TaggedType.h"
 #include "ast/node/Type.h"
 #include "ast/node/TypeDeclaration.h"

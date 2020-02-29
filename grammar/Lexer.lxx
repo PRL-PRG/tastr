@@ -30,6 +30,7 @@ RAW          raw|r
 ENVIRONMENT  environment|env|t
 EXPRESSION   expression|exr|e
 LANGUAGE     language|lng|g
+SYMBOL       symbol|sym|y
 BLANK        [ \t\r]
 TYPEDECL     type
 PACKAGENAME  [a-zA-Z]+
