@@ -19,68 +19,67 @@ class Unparser final: public Visitor {
         node.accept(*this);
     }
 
-    void visit(const tastr::ast::Type& node) override final {
+    void visit(const tastr::ast::TypeNode& node) override final {
         node.accept(*this);
     }
 
-    void visit(const tastr::ast::ScalarType& node) override final {
+    void visit(const tastr::ast::ScalarTypeNode& node) override final {
         node.accept(*this);
     }
 
-    void visit(const tastr::ast::CompositeType& node) override final {
+    void visit(const tastr::ast::CompositeTypeNode& node) override final {
         node.accept(*this);
     }
 
-    void visit(const tastr::ast::SequenceType<tastr::ast::Type>&
-                   type) override final {
+    void visit(
+        const tastr::ast::SequenceTypeNode<tastr::ast::TypeNode>& type) override final {
     }
 
-    void
-    visit(const tastr::ast::SequenceType<tastr::ast::TaggedType>&
-              node) override final {
+    void visit(const tastr::ast::SequenceTypeNode<tastr::ast::TaggedTypeNode>& node)
+        override final {
     }
 
-    void visit(const tastr::ast::TaggedType& node) override final {
+    void visit(const tastr::ast::TaggedTypeNode& node) override final {
         node.get_identifier().accept(*this);
         os_ << ":";
         node.get_type().accept(*this);
     }
 
-    void visit(const tastr::ast::CharacterType& node) override final {
+    void visit(const tastr::ast::CharacterTypeNode& node) override final {
         os_ << "character";
     }
 
-    void visit(const tastr::ast::EnvironmentType& node) override final {
+    void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
         os_ << "environment";
     }
 
-    void visit(const tastr::ast::ExpressionType& node) override final {
+    void visit(const tastr::ast::ExpressionTypeNode& node) override final {
         os_ << "expression";
     }
 
-    void visit(const tastr::ast::LanguageType& node) override final {
+    void visit(const tastr::ast::LanguageTypeNode& node) override final {
         os_ << "language";
     }
 
-    void visit(const tastr::ast::SymbolType& node) override final {
+    void visit(const tastr::ast::SymbolTypeNode& node) override final {
         os_ << "symbol";
     }
 
-    void visit(const tastr::ast::ComplexType& node) override final {
+    void visit(const tastr::ast::ComplexTypeNode& node) override final {
         os_ << "complex";
     }
 
-    void visit(const tastr::ast::DoubleType& node) override final {
+    void visit(const tastr::ast::DoubleTypeNode& node) override final {
         os_ << "double";
     }
 
-    void visit(const tastr::ast::FunctionType& node) override final {
+    void visit(const tastr::ast::FunctionTypeNode& node) override final {
         node.get_parameter_types().accept(*this);
         os_ << " => ";
         node.get_return_type().accept(*this);
     }
 
-    void visit(const tastr::ast::ParameterType& node) override final {
+    void visit(const tastr::ast::ParameterTypeNode& node) override final {
         os_ << "<";
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
@@ -93,17 +92,17 @@ class Unparser final: public Visitor {
         os_ << ">";
     }
 
-    void visit(const tastr::ast::GroupType& node) override final {
+    void visit(const tastr::ast::GroupTypeNode& node) override final {
         os_ << "(";
         node.get_inner_type().accept(*this);
         os_ << ")";
     }
 
-    void visit(const tastr::ast::IntegerType& node) override final {
+    void visit(const tastr::ast::IntegerTypeNode& node) override final {
         os_ << "integer";
     }
 
-    void visit(const tastr::ast::ListType& node) override final {
+    void visit(const tastr::ast::ListTypeNode& node) override final {
         os_ << "((";
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
@@ -116,20 +115,20 @@ class Unparser final: public Visitor {
         os_ << "))";
     }
 
-    void visit(const tastr::ast::LogicalType& node) override final {
+    void visit(const tastr::ast::LogicalTypeNode& node) override final {
         os_ << "logical";
     }
 
-    void visit(const tastr::ast::NoNaType& node) override final {
+    void visit(const tastr::ast::NoNaTypeNode& node) override final {
         os_ << "!";
         node.get_inner_type().accept(*this);
     }
 
-    void visit(const tastr::ast::RawType& node) override final {
+    void visit(const tastr::ast::RawTypeNode& node) override final {
         os_ << "raw";
     }
 
-    void visit(const tastr::ast::StructType& node) override final {
+    void visit(const tastr::ast::StructTypeNode& node) override final {
         os_ << "{{";
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
@@ -142,18 +141,18 @@ class Unparser final: public Visitor {
         os_ << "}}";
     }
 
-    void visit(const tastr::ast::UnionType& node) override final {
+    void visit(const tastr::ast::UnionTypeNode& node) override final {
         node.get_first_type().accept(*this);
         os_ << "|";
         node.get_second_type().accept(*this);
     }
 
-    void visit(const tastr::ast::VectorType& node) override final {
+    void visit(const tastr::ast::VectorTypeNode& node) override final {
         node.get_scalar_type().accept(*this);
         os_ << "[]";
     }
 
-    void visit(const tastr::ast::TypeDeclaration& node) override final {
+    void visit(const tastr::ast::TypeDeclarationNode& node) override final {
         os_ << "type ";
         node.get_identifier().accept(*this);
         os_ << " ";
@@ -161,8 +160,8 @@ class Unparser final: public Visitor {
         os_ << ";";
     }
 
-    void visit(
-        const tastr::ast::TypeDeclarationSequence& node) override final {
+    void
+    visit(const tastr::ast::TypeDeclarationSequenceNode& node) override final {
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
             os_ << **i;
@@ -173,11 +172,11 @@ class Unparser final: public Visitor {
         }
     }
 
-    void visit(const tastr::ast::Identifier& node) override final {
+    void visit(const tastr::ast::IdentifierNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::VarargType& node) override final {
+    void visit(const tastr::ast::VarargTypeNode& node) override final {
         os_ << "...";
     }
 

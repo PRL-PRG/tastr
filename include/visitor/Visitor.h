@@ -15,63 +15,63 @@ class Visitor {
 
     virtual void visit(const tastr::ast::Node& node) = 0;
 
-    virtual void visit(const tastr::ast::Type& node) = 0;
+    virtual void visit(const tastr::ast::TypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::ScalarType& node) = 0;
+    virtual void visit(const tastr::ast::ScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::CompositeType& node) = 0;
-
-    virtual void
-    visit(const tastr::ast::SequenceType<tastr::ast::Type>& node) = 0;
+    virtual void visit(const tastr::ast::CompositeTypeNode& node) = 0;
 
     virtual void
-    visit(const tastr::ast::SequenceType<tastr::ast::TaggedType>& type) = 0;
+    visit(const tastr::ast::SequenceTypeNode<tastr::ast::TypeNode>& node) = 0;
 
-    virtual void visit(const tastr::ast::TaggedType& node) = 0;
+    virtual void
+    visit(const tastr::ast::SequenceTypeNode<tastr::ast::TaggedTypeNode>& type) = 0;
 
-    virtual void visit(const tastr::ast::CharacterType& node) = 0;
+    virtual void visit(const tastr::ast::TaggedTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::ComplexType& node) = 0;
+    virtual void visit(const tastr::ast::CharacterTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::DoubleType& node) = 0;
+    virtual void visit(const tastr::ast::ComplexTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::ParameterType& node) = 0;
+    virtual void visit(const tastr::ast::DoubleTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::EnvironmentType& node) = 0;
+    virtual void visit(const tastr::ast::ParameterTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::ExpressionType& node) = 0;
+    virtual void visit(const tastr::ast::EnvironmentTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::LanguageType& node) = 0;
+    virtual void visit(const tastr::ast::ExpressionTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::SymbolType& node) = 0;
+    virtual void visit(const tastr::ast::LanguageTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::Identifier& node) = 0;
+    virtual void visit(const tastr::ast::SymbolTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::FunctionType& node) = 0;
+    virtual void visit(const tastr::ast::IdentifierNode& node) = 0;
 
-    virtual void visit(const tastr::ast::GroupType& node) = 0;
+    virtual void visit(const tastr::ast::FunctionTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::IntegerType& node) = 0;
+    virtual void visit(const tastr::ast::GroupTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::ListType& node) = 0;
+    virtual void visit(const tastr::ast::IntegerTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::LogicalType& node) = 0;
+    virtual void visit(const tastr::ast::ListTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::NoNaType& node) = 0;
+    virtual void visit(const tastr::ast::LogicalTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::RawType& node) = 0;
+    virtual void visit(const tastr::ast::NoNaTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::StructType& node) = 0;
+    virtual void visit(const tastr::ast::RawTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::UnionType& node) = 0;
+    virtual void visit(const tastr::ast::StructTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::VectorType& node) = 0;
+    virtual void visit(const tastr::ast::UnionTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::VarargType& node) = 0;
+    virtual void visit(const tastr::ast::VectorTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::TypeDeclaration& node) = 0;
+    virtual void visit(const tastr::ast::VarargTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::TypeDeclarationSequence& node) = 0;
+    virtual void visit(const tastr::ast::TypeDeclarationNode& node) = 0;
+
+    virtual void visit(const tastr::ast::TypeDeclarationSequenceNode& node) = 0;
 };
 
 } // namespace tastr::visitor

@@ -55,27 +55,27 @@
 %token <std::string>                SYMBOL
 %token <std::string>                TYPEDECL
 %token <std::string>                IDENTIFIER;
-%nterm <ScalarTypePtr>              scalartype
-%nterm <EnvironmentTypePtr>         environmenttype
-%nterm <ExpressionTypePtr>          expressiontype
-%nterm <LanguageTypePtr>            languagetype
-%nterm <SymbolTypePtr>              symboltype
-%nterm <VectorTypePtr>              vectortype
-%nterm <NoNaTypePtr>                nonavectortype
-%nterm <sequence_ptr_t<Type>>       typeseq
-%nterm <TaggedTypePtr>              namedtype
-%nterm <sequence_ptr_t<TaggedType>> namedtypeseq
-%nterm <TypePtr>                    paramtype
-%nterm <sequence_ptr_t<Type>>       paramtypeseq
-%nterm <FunctionTypePtr>            functiontype
-%nterm <GroupTypePtr>               grouptype
-%nterm <TypePtr>                    nonuniontype
-%nterm <ListTypePtr>                listtype
-%nterm <StructTypePtr>              structtype
-%nterm <IdentifierPtr>              funname
-%nterm <IdentifierPtr>              identifier
-%nterm <TypePtr>                    type
-%nterm <TypeDeclarationPtr>         decltype
+%nterm <ScalarTypeNodePtr>              scalartype
+%nterm <EnvironmentTypeNodePtr>         environmenttype
+%nterm <ExpressionTypeNodePtr>          expressiontype
+%nterm <LanguageTypeNodePtr>            languagetype
+%nterm <SymbolTypeNodePtr>              symboltype
+%nterm <VectorTypeNodePtr>              vectortype
+%nterm <NoNaTypeNodePtr>                nonavectortype
+%nterm <sequence_ptr_t<TypeNode>>       typeseq
+%nterm <TaggedTypeNodePtr>              namedtype
+%nterm <sequence_ptr_t<TaggedTypeNode>> namedtypeseq
+%nterm <TypeNodePtr>                    paramtype
+%nterm <sequence_ptr_t<TypeNode>>       paramtypeseq
+%nterm <FunctionTypeNodePtr>            functiontype
+%nterm <GroupTypeNodePtr>               grouptype
+%nterm <TypeNodePtr>                    nonuniontype
+%nterm <ListTypeNodePtr>                listtype
+%nterm <StructTypeNodePtr>              structtype
+%nterm <IdentifierNodePtr>              funname
+%nterm <IdentifierNodePtr>              identifier
+%nterm <TypeNodePtr>                    type
+%nterm <TypeDeclarationNodePtr>         decltype
 
 
 %right ARROW
@@ -86,14 +86,14 @@
 %start start;
 
 /*
-%printer { yyo << to_string(*$$); } <TypePtr>;
-%printer { yyo << to_string(*$$); } <VectorTypePtr>;
-%printer { yyo << to_string(*$$); } <NoNaTypePtr>;
-%printer { yyo << to_string(*$$); } <FunctionTypePtr>;
-%printer { yyo << to_string(*$$); } <GroupTypePtr>;
-%printer { yyo << to_string(*$$); } <ListTypePtr>;
-%printer { yyo << to_string(*$$); } <StructTypePtr>;
-%printer { yyo << to_string(*$$); } <ScalarTypePtr>;
+%printer { yyo << to_string(*$$); } <TypeNodePtr>;
+%printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <FunctionTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <GroupTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <ListTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <StructTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <ScalarTypeNodePtr>;
 */
 /*%printer { yyo << $$; } <*>; */
 
@@ -126,57 +126,57 @@
     }
     #include "location.hh"
     #include "ast.h"
-    using tastr::ast::CharacterType;
-    using tastr::ast::ComplexType;
-    using tastr::ast::DoubleType;
-    using tastr::ast::ExpressionType;
-    using tastr::ast::ExpressionTypePtr;
-    using tastr::ast::EnvironmentType;
-    using tastr::ast::EnvironmentTypePtr;
-    using tastr::ast::LanguageType;
-    using tastr::ast::LanguageTypePtr;
-    using tastr::ast::SymbolType;
-    using tastr::ast::SymbolTypePtr;
-    using tastr::ast::FunctionType;
-    using tastr::ast::FunctionTypePtr;
-    using tastr::ast::GroupType;
-    using tastr::ast::GroupTypePtr;
-    using tastr::ast::IntegerType;
-    using tastr::ast::ListType;
-    using tastr::ast::ListTypePtr;
-    using tastr::ast::LogicalType;
-    using tastr::ast::TaggedType;
-    using tastr::ast::TaggedTypePtr;
-    using tastr::ast::TaggedTypeUPtr;
-    using tastr::ast::NoNaType;
-    using tastr::ast::NoNaTypePtr;
-    using tastr::ast::ParameterType;
-    using tastr::ast::ParameterTypePtr;
-    using tastr::ast::ParameterTypeUPtr;
-    using tastr::ast::RawType;
-    using tastr::ast::ScalarTypePtr;
-    using tastr::ast::ScalarTypeUPtr;
+    using tastr::ast::CharacterTypeNode;
+    using tastr::ast::ComplexTypeNode;
+    using tastr::ast::DoubleTypeNode;
+    using tastr::ast::ExpressionTypeNode;
+    using tastr::ast::ExpressionTypeNodePtr;
+    using tastr::ast::EnvironmentTypeNode;
+    using tastr::ast::EnvironmentTypeNodePtr;
+    using tastr::ast::LanguageTypeNode;
+    using tastr::ast::LanguageTypeNodePtr;
+    using tastr::ast::SymbolTypeNode;
+    using tastr::ast::SymbolTypeNodePtr;
+    using tastr::ast::FunctionTypeNode;
+    using tastr::ast::FunctionTypeNodePtr;
+    using tastr::ast::GroupTypeNode;
+    using tastr::ast::GroupTypeNodePtr;
+    using tastr::ast::IntegerTypeNode;
+    using tastr::ast::ListTypeNode;
+    using tastr::ast::ListTypeNodePtr;
+    using tastr::ast::LogicalTypeNode;
+    using tastr::ast::TaggedTypeNode;
+    using tastr::ast::TaggedTypeNodePtr;
+    using tastr::ast::TaggedTypeNodeUPtr;
+    using tastr::ast::NoNaTypeNode;
+    using tastr::ast::NoNaTypeNodePtr;
+    using tastr::ast::ParameterTypeNode;
+    using tastr::ast::ParameterTypeNodePtr;
+    using tastr::ast::ParameterTypeNodeUPtr;
+    using tastr::ast::RawTypeNode;
+    using tastr::ast::ScalarTypeNodePtr;
+    using tastr::ast::ScalarTypeNodeUPtr;
     using tastr::ast::sequence_t;
     using tastr::ast::sequence_ptr_t;
     using tastr::ast::sequence_uptr_t;
-    using tastr::ast::StructType;
-    using tastr::ast::StructTypePtr;
-    using tastr::ast::Type;
-    using tastr::ast::TypePtr;
-    using tastr::ast::TypeUPtr;
-    using tastr::ast::UnionType;
-    using tastr::ast::UnionTypePtr;
-    using tastr::ast::VectorType;
-    using tastr::ast::VectorTypePtr;
-    using tastr::ast::VectorTypeUPtr;
-    using tastr::ast::TypeDeclaration;
-    using tastr::ast::TypeDeclarationPtr;
-    using tastr::ast::TypeDeclarationUPtr;
-    using tastr::ast::TypeDeclarationSequenceUPtr;
-    using tastr::ast::Identifier;
-    using tastr::ast::IdentifierPtr;
-    using tastr::ast::IdentifierUPtr;
-    using tastr::ast::VarargType;
+    using tastr::ast::StructTypeNode;
+    using tastr::ast::StructTypeNodePtr;
+    using tastr::ast::TypeNode;
+    using tastr::ast::TypeNodePtr;
+    using tastr::ast::TypeNodeUPtr;
+    using tastr::ast::UnionTypeNode;
+    using tastr::ast::UnionTypeNodePtr;
+    using tastr::ast::VectorTypeNode;
+    using tastr::ast::VectorTypeNodePtr;
+    using tastr::ast::VectorTypeNodeUPtr;
+    using tastr::ast::TypeDeclarationNode;
+    using tastr::ast::TypeDeclarationNodePtr;
+    using tastr::ast::TypeDeclarationNodeUPtr;
+    using tastr::ast::TypeDeclarationSequenceNodeUPtr;
+    using tastr::ast::IdentifierNode;
+    using tastr::ast::IdentifierNodePtr;
+    using tastr::ast::IdentifierNodeUPtr;
+    using tastr::ast::VarargTypeNode;
 }
 
 /* inserted near top of source file */
@@ -190,117 +190,117 @@
 %%
 
 scalartype:         INTEGER                                 {
-                                                                $$ = new IntegerType();
+                                                                $$ = new IntegerTypeNode();
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleType();
+                                                                $$ = new DoubleTypeNode();
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexType();
+                                                                $$ = new ComplexTypeNode();
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterType();
+                                                                $$ = new CharacterTypeNode();
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalType();
+                                                                $$ = new LogicalTypeNode();
                                                             }
           |         RAW                                     {
-                                                                $$ = new RawType();
+                                                                $$ = new RawTypeNode();
                                                             }
           ;
 
 environmenttype:    ENVIRONMENT                             {
-                                                                $$ = new EnvironmentType();
+                                                                $$ = new EnvironmentTypeNode();
                                                             }
                ;
 
 expressiontype:     EXPRESSION                              {
-                                                                $$ = new ExpressionType();
+                                                                $$ = new ExpressionTypeNode();
                                                             }
               ;
 
 languagetype:       LANGUAGE                                {
-                                                                $$ = new LanguageType();
+                                                                $$ = new LanguageTypeNode();
                                                             }
             ;
 
 symboltype:         SYMBOL                                  {
-                                                                $$ = new SymbolType();
+                                                                $$ = new SymbolTypeNode();
                                                             }
           ;
 
 vectortype:         scalartype "[" "]"                      {
-                                                                ScalarTypeUPtr scalar_type($1);
-                                                                $$ = new VectorType(std::move(scalar_type));
+                                                                ScalarTypeNodeUPtr scalar_type($1);
+                                                                $$ = new VectorTypeNode(std::move(scalar_type));
                                                             }
           ;
 
 nonavectortype:     "!" vectortype                          {
-                                                                VectorTypeUPtr vector_type($2);
-                                                                $$ = new NoNaType(std::move(vector_type));
+                                                                VectorTypeNodeUPtr vector_type($2);
+                                                                $$ = new NoNaTypeNode(std::move(vector_type));
                                                             }
               ;
 
 listtype:           "((" typeseq "))"                       {
-                                                                sequence_uptr_t<Type> sequence($2);
-                                                                $$ = new ListType(std::move(sequence));
+                                                                sequence_uptr_t<TypeNode> sequence($2);
+                                                                $$ = new ListTypeNode(std::move(sequence));
                                                             }
         ;
 
 typeseq:            %empty                                  {
-                                                                $$ = new sequence_t<Type>();
+                                                                $$ = new sequence_t<TypeNode>();
                                                             }
        |            type                                    {
-                                                                TypeUPtr type($1);
-                                                                $$ = new sequence_t<Type>();
+                                                                TypeNodeUPtr type($1);
+                                                                $$ = new sequence_t<TypeNode>();
                                                                 $$ -> push_back(std::move(type));
                                                             }
        |            typeseq "," type                        {
-                                                                TypeUPtr type($3);
+                                                                TypeNodeUPtr type($3);
                                                                 $1 -> push_back(std::move(type));
                                                                 $$ = $1;
                                                             }
        ;
 
 structtype:         "{{" namedtypeseq "}}"                  {
-                                                                sequence_uptr_t<TaggedType> sequences($2);
-                                                                $$ = new StructType(std::move(sequences));
+                                                                sequence_uptr_t<TaggedTypeNode> sequences($2);
+                                                                $$ = new StructTypeNode(std::move(sequences));
                                                             }
           ;
 
 
-identifier:         INTEGER                                 { $$ = new Identifier($1); }
-          |         DOUBLE                                  { $$ = new Identifier($1); }
-          |         COMPLEX                                 { $$ = new Identifier($1); }
-          |         CHARACTER                               { $$ = new Identifier($1); }
-          |         LOGICAL                                 { $$ = new Identifier($1); }
-          |         RAW                                     { $$ = new Identifier($1); }
-          |         ENVIRONMENT                             { $$ = new Identifier($1); }
-          |         EXPRESSION                              { $$ = new Identifier($1); }
-          |         LANGUAGE                                { $$ = new Identifier($1); }
-          |         SYMBOL                                  { $$ = new Identifier($1); }
-          |         TYPEDECL                                { $$ = new Identifier($1); }
-          |         VARARG                                  { $$ = new Identifier($1); }
-          |         IDENTIFIER                              { $$ = new Identifier($1); }
+identifier:         INTEGER                                 { $$ = new IdentifierNode($1); }
+          |         DOUBLE                                  { $$ = new IdentifierNode($1); }
+          |         COMPLEX                                 { $$ = new IdentifierNode($1); }
+          |         CHARACTER                               { $$ = new IdentifierNode($1); }
+          |         LOGICAL                                 { $$ = new IdentifierNode($1); }
+          |         RAW                                     { $$ = new IdentifierNode($1); }
+          |         ENVIRONMENT                             { $$ = new IdentifierNode($1); }
+          |         EXPRESSION                              { $$ = new IdentifierNode($1); }
+          |         LANGUAGE                                { $$ = new IdentifierNode($1); }
+          |         SYMBOL                                  { $$ = new IdentifierNode($1); }
+          |         TYPEDECL                                { $$ = new IdentifierNode($1); }
+          |         VARARG                                  { $$ = new IdentifierNode($1); }
+          |         IDENTIFIER                              { $$ = new IdentifierNode($1); }
           ;
 
 namedtype:          identifier ":" type                     {
-                                                                IdentifierUPtr ident($1);
-                                                                TypeUPtr type($3);
-                                                                $$ = new TaggedType(std::move(ident), std::move(type));
+                                                                IdentifierNodeUPtr ident($1);
+                                                                TypeNodeUPtr type($3);
+                                                                $$ = new TaggedTypeNode(std::move(ident), std::move(type));
                                                             }
          ;
 
 namedtypeseq:       %empty                                  {
-                                                                $$ = new sequence_t<TaggedType>();
+                                                                $$ = new sequence_t<TaggedTypeNode>();
                                                             }
             |       namedtype                               {
-                                                                TaggedTypeUPtr named_type($1);
-                                                                $$ = new sequence_t<TaggedType>();
+                                                                TaggedTypeNodeUPtr named_type($1);
+                                                                $$ = new sequence_t<TaggedTypeNode>();
                                                                 $$ -> push_back(std::move(named_type));
                                                             }
             |       namedtypeseq "," namedtype              {
-                                                                TaggedTypeUPtr named_type($3);
+                                                                TaggedTypeNodeUPtr named_type($3);
                                                                 $1 -> push_back(std::move(named_type));
                                                                 $$ = $1;
                                                             }
@@ -308,35 +308,35 @@ namedtypeseq:       %empty                                  {
 
 
 paramtype:          type                                    {   $$ = $1;               }
-         |          "..."                                   {   $$ = new VarargType(); }
+         |          "..."                                   {   $$ = new VarargTypeNode(); }
          ;
 
 paramtypeseq:       %empty                                  {
-                                                                $$ = new sequence_t<Type>();
+                                                                $$ = new sequence_t<TypeNode>();
                                                             }
             |       paramtype                               {
-                                                                TypeUPtr type($1);
-                                                                $$ = new sequence_t<Type>();
+                                                                TypeNodeUPtr type($1);
+                                                                $$ = new sequence_t<TypeNode>();
                                                                 $$ -> push_back(std::move(type));
                                                             }
             |       paramtypeseq "," paramtype              {
-                                                                TypeUPtr type($3);
+                                                                TypeNodeUPtr type($3);
                                                                 $1 -> push_back(std::move(type));
                                                                 $$ = $1;
                                                             }
             ;
 
 functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                sequence_uptr_t<Type> sequence($2);
-                                                                ParameterTypePtr types = new ParameterType(std::move(sequence));
-                                                                ParameterTypeUPtr parameter_types(types);
-                                                                TypeUPtr return_type($5);
-                                                                $$ = new FunctionType(std::move(parameter_types), std::move(return_type));
+                                                                sequence_uptr_t<TypeNode> sequence($2);
+                                                                ParameterTypeNodePtr types = new ParameterTypeNode(std::move(sequence));
+                                                                ParameterTypeNodeUPtr parameter_types(types);
+                                                                TypeNodeUPtr return_type($5);
+                                                                $$ = new FunctionTypeNode(std::move(parameter_types), std::move(return_type));
                                                             }
 
 grouptype:          "(" type ")"                            {
-                                                                TypeUPtr type($2);
-                                                                $$ = new GroupType(std::move(type));
+                                                                TypeNodeUPtr type($2);
+                                                                $$ = new GroupTypeNode(std::move(type));
                                                             }
          ;
 
@@ -356,41 +356,41 @@ nonuniontype:       scalartype                              {   $$ = $1; }
 
 type:               nonuniontype                            {   $$ = $1; }
     |               type "|" nonuniontype                   {
-                                                                TypeUPtr left_type($1);
-                                                                TypeUPtr right_type($3);
-                                                                $$ = new UnionType(std::move(left_type), std::move(right_type));
+                                                                TypeNodeUPtr left_type($1);
+                                                                TypeNodeUPtr right_type($3);
+                                                                $$ = new UnionTypeNode(std::move(left_type), std::move(right_type));
                                                             }
     ;
 
 
-funname:            INTEGER                                 { $$ = new Identifier($1); }
-       |            DOUBLE                                  { $$ = new Identifier($1); }
-       |            COMPLEX                                 { $$ = new Identifier($1); }
-       |            CHARACTER                               { $$ = new Identifier($1); }
-       |            LOGICAL                                 { $$ = new Identifier($1); }
-       |            RAW                                     { $$ = new Identifier($1); }
-       |            ENVIRONMENT                             { $$ = new Identifier($1); }
-       |            EXPRESSION                              { $$ = new Identifier($1); }
-       |            LANGUAGE                                { $$ = new Identifier($1); }
-       |            SYMBOL                                  { $$ = new Identifier($1); }
-       |            TYPEDECL                                { $$ = new Identifier($1); }
-       |            IDENTIFIER                              { $$ = new Identifier($1); }
+funname:            INTEGER                                 { $$ = new IdentifierNode($1); }
+       |            DOUBLE                                  { $$ = new IdentifierNode($1); }
+       |            COMPLEX                                 { $$ = new IdentifierNode($1); }
+       |            CHARACTER                               { $$ = new IdentifierNode($1); }
+       |            LOGICAL                                 { $$ = new IdentifierNode($1); }
+       |            RAW                                     { $$ = new IdentifierNode($1); }
+       |            ENVIRONMENT                             { $$ = new IdentifierNode($1); }
+       |            EXPRESSION                              { $$ = new IdentifierNode($1); }
+       |            LANGUAGE                                { $$ = new IdentifierNode($1); }
+       |            SYMBOL                                  { $$ = new IdentifierNode($1); }
+       |            TYPEDECL                                { $$ = new IdentifierNode($1); }
+       |            IDENTIFIER                              { $$ = new IdentifierNode($1); }
        ;
 
 
 decltype:           TYPEDECL funname type ";"               {
-                                                                IdentifierUPtr identifier($2);
-                                                                TypeUPtr type($3);
-                                                                $$ = new TypeDeclaration(std::move(identifier), std::move(type));
+                                                                IdentifierNodeUPtr identifier($2);
+                                                                TypeNodeUPtr type($3);
+                                                                $$ = new TypeDeclarationNode(std::move(identifier), std::move(type));
                                                             }
         ;
 
 decllist:           decltype                                {
-                                                                TypeDeclarationUPtr type_decl($1);
+                                                                TypeDeclarationNodeUPtr type_decl($1);
                                                                 context.get_type_declaration_sequence() -> push_back(std::move(type_decl));
                                                             }
         |           decllist decltype                       {
-                                                                TypeDeclarationUPtr type_decl($2);
+                                                                TypeDeclarationNodeUPtr type_decl($2);
                                                                 context.get_type_declaration_sequence() -> push_back(std::move(type_decl));
                                                             }
         ;
