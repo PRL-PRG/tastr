@@ -5,6 +5,7 @@
 #include "ast/node/ComplexType.h"
 #include "ast/node/CompositeType.h"
 #include "ast/node/DoubleType.h"
+#include "ast/node/EnvironmentType.h"
 #include "ast/node/FunctionType.h"
 #include "ast/node/GroupType.h"
 #include "ast/node/IntegerType.h"

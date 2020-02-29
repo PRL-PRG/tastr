@@ -38,6 +38,8 @@ class Visitor {
 
     virtual void visit(const rtype::ast::node::ParameterType& node) = 0;
 
+    virtual void visit(const rtype::ast::node::EnvironmentType& node) = 0;
+
     virtual void visit(const rtype::ast::node::FunctionType& node) = 0;
 
     virtual void visit(const rtype::ast::node::GroupType& node) = 0;
