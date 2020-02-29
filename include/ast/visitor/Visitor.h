@@ -42,6 +42,8 @@ class Visitor {
 
     virtual void visit(const rtype::ast::node::ExpressionType& node) = 0;
 
+    virtual void visit(const rtype::ast::node::LanguageType& node) = 0;
+
     virtual void visit(const rtype::ast::node::FunctionType& node) = 0;
 
     virtual void visit(const rtype::ast::node::GroupType& node) = 0;
