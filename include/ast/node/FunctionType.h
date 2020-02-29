@@ -1,10 +1,10 @@
-#ifndef R_TYPE_AST_NODE_FUNCTION_TYPE_H
-#define R_TYPE_AST_NODE_FUNCTION_TYPE_H
+#ifndef TASTR_AST_NODE_FUNCTION_TYPE_H
+#define TASTR_AST_NODE_FUNCTION_TYPE_H
 
 #include "CompositeType.h"
 #include "ParameterType.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class FunctionType final: public CompositeType {
   public:
@@ -18,13 +18,13 @@ class FunctionType final: public CompositeType {
     ~FunctionType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 
-    const rtype::ast::node::ParameterType& get_parameter_types() const {
+    const tastr::ast::node::ParameterType& get_parameter_types() const {
         return *parameter_types_.get();
     }
 
-    const rtype::ast::node::Type& get_return_type() const {
+    const tastr::ast::node::Type& get_return_type() const {
         return *return_type_.get();
     }
 
@@ -36,6 +36,6 @@ class FunctionType final: public CompositeType {
 using FunctionTypePtr = FunctionType*;
 using FunctionTypeUPtr = std::unique_ptr<FunctionType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_FUNCTION_TYPE_H */
+#endif /* TASTR_AST_NODE_FUNCTION_TYPE_H */

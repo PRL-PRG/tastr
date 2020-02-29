@@ -1,11 +1,11 @@
-#ifndef R_TYPE_AST_NODE_IDENTIFIER_H
-#define R_TYPE_AST_NODE_IDENTIFIER_H
+#ifndef TASTR_AST_NODE_IDENTIFIER_H
+#define TASTR_AST_NODE_IDENTIFIER_H
 
 #include "ast/node/Node.h"
 
 #include <iostream>
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class Identifier final: public Node {
   public:
@@ -15,7 +15,7 @@ class Identifier final: public Node {
     ~Identifier() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 
     const std::string& get_name() const {
         return name_;
@@ -28,6 +28,6 @@ class Identifier final: public Node {
 using IdentifierPtr = Identifier*;
 using IdentifierUPtr = std::unique_ptr<Identifier>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_IDENTIFIER_H */
+#endif /* TASTR_AST_NODE_IDENTIFIER_H */

@@ -1,9 +1,9 @@
-#ifndef R_TYPE_AST_NODE_PARAMETER_TYPE_H
-#define R_TYPE_AST_NODE_PARAMETER_TYPE_H
+#ifndef TASTR_AST_NODE_PARAMETER_TYPE_H
+#define TASTR_AST_NODE_PARAMETER_TYPE_H
 
 #include "SequenceType.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class ParameterType final: public SequenceType<Type> {
   public:
@@ -15,12 +15,12 @@ class ParameterType final: public SequenceType<Type> {
     ~ParameterType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 };
 
 using ParameterTypePtr = ParameterType*;
 using ParameterTypeUPtr = std::unique_ptr<ParameterType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_PARAMETER_TYPE_H */
+#endif /* TASTR_AST_NODE_PARAMETER_TYPE_H */

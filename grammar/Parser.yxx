@@ -6,7 +6,7 @@
 %require "3.5.2"
 
 %define api.parser.class {Parser}
-%define api.namespace {rtype::parser}
+%define api.namespace {tastr::parser}
 
 /* assert correct cleanup of semantic value objects */
 %define parse.assert
@@ -15,7 +15,7 @@
 
 /* increase usefulness of error messages */
 %define parse.error verbose
-%parse-param { rtype::parser::Lexer& lexer} { rtype::parser::ParsingContext& context }
+%parse-param { tastr::parser::Lexer& lexer} { tastr::parser::ParsingContext& context }
 
 /* call yylex with a location */
 %locations
@@ -120,63 +120,63 @@
 
 /* inserted near top of header + source file */
 %code requires {
-    namespace rtype::parser {
+    namespace tastr::parser {
         class Lexer;
         class ParsingContext;
     }
     #include "location.hh"
     #include "ast.h"
-    using rtype::ast::node::CharacterType;
-    using rtype::ast::node::ComplexType;
-    using rtype::ast::node::DoubleType;
-    using rtype::ast::node::ExpressionType;
-    using rtype::ast::node::ExpressionTypePtr;
-    using rtype::ast::node::EnvironmentType;
-    using rtype::ast::node::EnvironmentTypePtr;
-    using rtype::ast::node::LanguageType;
-    using rtype::ast::node::LanguageTypePtr;
-    using rtype::ast::node::SymbolType;
-    using rtype::ast::node::SymbolTypePtr;
-    using rtype::ast::node::FunctionType;
-    using rtype::ast::node::FunctionTypePtr;
-    using rtype::ast::node::GroupType;
-    using rtype::ast::node::GroupTypePtr;
-    using rtype::ast::node::IntegerType;
-    using rtype::ast::node::ListType;
-    using rtype::ast::node::ListTypePtr;
-    using rtype::ast::node::LogicalType;
-    using rtype::ast::node::TaggedType;
-    using rtype::ast::node::TaggedTypePtr;
-    using rtype::ast::node::TaggedTypeUPtr;
-    using rtype::ast::node::NoNaType;
-    using rtype::ast::node::NoNaTypePtr;
-    using rtype::ast::node::ParameterType;
-    using rtype::ast::node::ParameterTypePtr;
-    using rtype::ast::node::ParameterTypeUPtr;
-    using rtype::ast::node::RawType;
-    using rtype::ast::node::ScalarTypePtr;
-    using rtype::ast::node::ScalarTypeUPtr;
-    using rtype::ast::node::sequence_t;
-    using rtype::ast::node::sequence_ptr_t;
-    using rtype::ast::node::sequence_uptr_t;
-    using rtype::ast::node::StructType;
-    using rtype::ast::node::StructTypePtr;
-    using rtype::ast::node::Type;
-    using rtype::ast::node::TypePtr;
-    using rtype::ast::node::TypeUPtr;
-    using rtype::ast::node::UnionType;
-    using rtype::ast::node::UnionTypePtr;
-    using rtype::ast::node::VectorType;
-    using rtype::ast::node::VectorTypePtr;
-    using rtype::ast::node::VectorTypeUPtr;
-    using rtype::ast::node::TypeDeclaration;
-    using rtype::ast::node::TypeDeclarationPtr;
-    using rtype::ast::node::TypeDeclarationUPtr;
-    using rtype::ast::node::TypeDeclarationSequenceUPtr;
-    using rtype::ast::node::Identifier;
-    using rtype::ast::node::IdentifierPtr;
-    using rtype::ast::node::IdentifierUPtr;
-    using rtype::ast::node::VarargType;
+    using tastr::ast::node::CharacterType;
+    using tastr::ast::node::ComplexType;
+    using tastr::ast::node::DoubleType;
+    using tastr::ast::node::ExpressionType;
+    using tastr::ast::node::ExpressionTypePtr;
+    using tastr::ast::node::EnvironmentType;
+    using tastr::ast::node::EnvironmentTypePtr;
+    using tastr::ast::node::LanguageType;
+    using tastr::ast::node::LanguageTypePtr;
+    using tastr::ast::node::SymbolType;
+    using tastr::ast::node::SymbolTypePtr;
+    using tastr::ast::node::FunctionType;
+    using tastr::ast::node::FunctionTypePtr;
+    using tastr::ast::node::GroupType;
+    using tastr::ast::node::GroupTypePtr;
+    using tastr::ast::node::IntegerType;
+    using tastr::ast::node::ListType;
+    using tastr::ast::node::ListTypePtr;
+    using tastr::ast::node::LogicalType;
+    using tastr::ast::node::TaggedType;
+    using tastr::ast::node::TaggedTypePtr;
+    using tastr::ast::node::TaggedTypeUPtr;
+    using tastr::ast::node::NoNaType;
+    using tastr::ast::node::NoNaTypePtr;
+    using tastr::ast::node::ParameterType;
+    using tastr::ast::node::ParameterTypePtr;
+    using tastr::ast::node::ParameterTypeUPtr;
+    using tastr::ast::node::RawType;
+    using tastr::ast::node::ScalarTypePtr;
+    using tastr::ast::node::ScalarTypeUPtr;
+    using tastr::ast::node::sequence_t;
+    using tastr::ast::node::sequence_ptr_t;
+    using tastr::ast::node::sequence_uptr_t;
+    using tastr::ast::node::StructType;
+    using tastr::ast::node::StructTypePtr;
+    using tastr::ast::node::Type;
+    using tastr::ast::node::TypePtr;
+    using tastr::ast::node::TypeUPtr;
+    using tastr::ast::node::UnionType;
+    using tastr::ast::node::UnionTypePtr;
+    using tastr::ast::node::VectorType;
+    using tastr::ast::node::VectorTypePtr;
+    using tastr::ast::node::VectorTypeUPtr;
+    using tastr::ast::node::TypeDeclaration;
+    using tastr::ast::node::TypeDeclarationPtr;
+    using tastr::ast::node::TypeDeclarationUPtr;
+    using tastr::ast::node::TypeDeclarationSequenceUPtr;
+    using tastr::ast::node::Identifier;
+    using tastr::ast::node::IdentifierPtr;
+    using tastr::ast::node::IdentifierUPtr;
+    using tastr::ast::node::VarargType;
 }
 
 /* inserted near top of source file */
@@ -401,6 +401,6 @@ start:              EOF                                     { }
 
 %%
 
-void rtype::parser::Parser::error(const location_type& location, const std::string& message) {
+void tastr::parser::Parser::error(const location_type& location, const std::string& message) {
     std::cout << "Parser Error: " << location << " :: " << message << std::endl;
 }

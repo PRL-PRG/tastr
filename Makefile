@@ -12,8 +12,10 @@ GRAMMARDIR := grammar
 DRIVERDIR := driver
 BUILDDIR := build
 PARSERDIR := parser
-LIBNAME := librtypesparser
-APPNAME := rtypesparser
+PROJECTNAME := tastr
+APPNAME := $(PROJECTNAME)
+LIBNAME := lib$(PROJECTNAME)
+
 
 FLEXFLAGS := -v
 BISONFLAGS := -v
@@ -53,13 +55,13 @@ lexer: $(GRAMMARDIR)/Lexer.lxx
 	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/Lexer.cxx
 	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/Lexer.hxx
 
-$(BUILDDIR)/librtypesparser: parser lexer
+$(BUILDDIR)/$(LIBNAME): parser lexer
 	$(MKDIR) $(MKDIRFLAGS) $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) $(LIBFLAGS) -I$(INCLUDEDIR) -o$@ $(SRCFILES)
+	$(CXX) $(LIBFLAGS) -I$(INCLUDEDIR) -o$@ $(SRCFILES)
 
-$(BUILDDIR)/rtypesparser: parser lexer
+$(BUILDDIR)/$(APPNAME): parser lexer
 	$(MKDIR) $(MKDIRFLAGS) $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) $(APPFLAGS) -I$(INCLUDEDIR) -o$@ $(SRCFILES) $(DRIVERFILES)
+	$(CXX) $(APPFLAGS) -I$(INCLUDEDIR) -o$@ $(SRCFILES) $(DRIVERFILES)
 
 .PHONY: clean \
         build \

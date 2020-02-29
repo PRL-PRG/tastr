@@ -1,11 +1,11 @@
-#ifndef R_TYPE_AST_NODE_VECTOR_TYPE_H
-#define R_TYPE_AST_NODE_VECTOR_TYPE_H
+#ifndef TASTR_AST_NODE_VECTOR_TYPE_H
+#define TASTR_AST_NODE_VECTOR_TYPE_H
 
 #include "CompositeType.h"
 #include "ScalarType.h"
 #include <memory>
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class VectorType: public CompositeType {
   public:
@@ -16,9 +16,9 @@ class VectorType: public CompositeType {
     ~VectorType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override;
 
-    const rtype::ast::node::ScalarType& get_scalar_type() const {
+    const tastr::ast::node::ScalarType& get_scalar_type() const {
         return *scalar_type_.get();
     }
 
@@ -29,6 +29,6 @@ class VectorType: public CompositeType {
 using VectorTypePtr = VectorType*;
 using VectorTypeUPtr = std::unique_ptr<VectorType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_VECTOR_TYPE_H */
+#endif /* TASTR_AST_NODE_VECTOR_TYPE_H */

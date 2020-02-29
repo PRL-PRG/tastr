@@ -1,9 +1,9 @@
-#ifndef R_TYPE_AST_NODE_RAW_TYPE_H
-#define R_TYPE_AST_NODE_RAW_TYPE_H
+#ifndef TASTR_AST_NODE_RAW_TYPE_H
+#define TASTR_AST_NODE_RAW_TYPE_H
 
 #include "ScalarType.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class RawType final: public ScalarType {
   public:
@@ -13,12 +13,12 @@ class RawType final: public ScalarType {
     ~RawType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 };
 
 using RawTypePtr = RawType*;
 using RawTypeUPtr = std::unique_ptr<RawType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_RAW_TYPE_H */
+#endif /* TASTR_AST_NODE_RAW_TYPE_H */

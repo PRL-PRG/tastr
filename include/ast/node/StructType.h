@@ -1,10 +1,10 @@
-#ifndef R_TYPE_AST_NODE_STRUCT_TYPE_H
-#define R_TYPE_AST_NODE_STRUCT_TYPE_H
+#ifndef TASTR_AST_NODE_STRUCT_TYPE_H
+#define TASTR_AST_NODE_STRUCT_TYPE_H
 
 #include "SequenceType.h"
 #include "TaggedType.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class StructType final: public SequenceType<TaggedType> {
   public:
@@ -16,12 +16,12 @@ class StructType final: public SequenceType<TaggedType> {
     ~StructType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 };
 
 using StructTypePtr = StructType*;
 using StructTypeUPtr = std::unique_ptr<StructType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_STRUCT_TYPE_H */
+#endif /* TASTR_AST_NODE_STRUCT_TYPE_H */

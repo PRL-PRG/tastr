@@ -8,21 +8,21 @@
 #include <fstream>
 #include <sstream>
 
-std::ostream& operator<<(std::ostream& os, const rtype::ast::node::Node& node) {
-    rtype::ast::visitor::Unparser(os).visit(node);
+std::ostream& operator<<(std::ostream& os, const tastr::ast::node::Node& node) {
+    tastr::ast::visitor::Unparser(os).visit(node);
     return os;
 }
 
-std::string to_string(const rtype::ast::node::Node& node) {
+std::string to_string(const tastr::ast::node::Node& node) {
     std::stringstream stream;
     stream << node;
     return stream.str();
 }
 
 int parse_(std::istream& input_stream, std::string& input_stream_name) {
-    rtype::parser::ParsingContext context(input_stream, input_stream_name);
-    rtype::parser::Lexer lexer(context);
-    rtype::parser::Parser parser(lexer, context);
+    tastr::parser::ParsingContext context(input_stream, input_stream_name);
+    tastr::parser::Lexer lexer(context);
+    tastr::parser::Parser parser(lexer, context);
     int result = parser.parse();
     std::cout << *context.get_type_declaration_sequence().get();
     return result;

@@ -1,11 +1,11 @@
-#ifndef R_TYPE_AST_NODE_VARARG_TYPE_H
-#define R_TYPE_AST_NODE_VARARG_TYPE_H
+#ifndef TASTR_AST_NODE_VARARG_TYPE_H
+#define TASTR_AST_NODE_VARARG_TYPE_H
 
 #include "ast/node/Type.h"
 
 #include <iostream>
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class VarargType final: public Type {
   public:
@@ -15,12 +15,12 @@ class VarargType final: public Type {
     ~VarargType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 };
 
 using VarargTypePtr = VarargType*;
 using VarargTypeUPtr = std::unique_ptr<VarargType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_VARARG_TYPE_H */
+#endif /* TASTR_AST_NODE_VARARG_TYPE_H */

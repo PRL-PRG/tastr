@@ -1,5 +1,5 @@
-#ifndef R_TYPE_AST_H
-#define R_TYPE_AST_H
+#ifndef TASTR_AST_H
+#define TASTR_AST_H
 
 #include "ast/node/CharacterType.h"
 #include "ast/node/ComplexType.h"
@@ -35,9 +35,9 @@
 #include <ostream>
 #include <string>
 
-std::ostream& operator<<(std::ostream& os, const rtype::ast::node::Node& node);
+std::ostream& operator<<(std::ostream& os, const tastr::ast::node::Node& node);
 
-std::string to_string(const rtype::ast::node::Node& node);
+std::string to_string(const tastr::ast::node::Node& node);
 
 int parse_stdin();
 
@@ -45,4 +45,4 @@ int parse_string(const std::string& string);
 
 int parse_file(const std::filesystem::path& filepath);
 
-#endif /* R_TYPE_AST_H */
+#endif /* TASTR_AST_H */

@@ -1,12 +1,12 @@
-#ifndef R_TYPES_PARSING_CONTEXT_H
-#define R_TYPES_PARSING_CONTEXT_H
+#ifndef TASTR_PARSING_CONTEXT_H
+#define TASTR_PARSING_CONTEXT_H
 
 #include "ast/node/TypeDeclarationSequence.h"
 
 #include <iostream>
 #include <string>
 
-namespace rtype::parser {
+namespace tastr::parser {
 
 class ParsingContext {
   public:
@@ -14,7 +14,7 @@ class ParsingContext {
                             std::string& input_stream_name)
         : input_stream_(input_stream)
         , input_stream_name_(input_stream_name)
-        , sequence_(new rtype::ast::node::TypeDeclarationSequence()) {
+        , sequence_(new tastr::ast::node::TypeDeclarationSequence()) {
     }
 
     ~ParsingContext() {
@@ -28,7 +28,7 @@ class ParsingContext {
         return &input_stream_name_;
     }
 
-    rtype::ast::node::TypeDeclarationSequenceUPtr&
+    tastr::ast::node::TypeDeclarationSequenceUPtr&
     get_type_declaration_sequence() {
         return sequence_;
     }
@@ -36,9 +36,9 @@ class ParsingContext {
   private:
     std::istream& input_stream_;
     std::string& input_stream_name_;
-    rtype::ast::node::TypeDeclarationSequenceUPtr sequence_;
+    tastr::ast::node::TypeDeclarationSequenceUPtr sequence_;
 };
 
-} // namespace rtype::parser
+} // namespace tastr::parser
 
-#endif /* R_TYPES_PARSING_CONTEXT_H */
+#endif /* TASTR_PARSING_CONTEXT_H */

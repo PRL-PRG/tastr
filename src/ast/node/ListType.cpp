@@ -2,7 +2,7 @@
 
 #include "ast/visitor/Visitor.h"
 
-void rtype::ast::node::ListType::accept(
-    rtype::ast::visitor::Visitor& visitor) const {
+void tastr::ast::node::ListType::accept(
+    tastr::ast::visitor::Visitor& visitor) const {
     visitor.visit(*this);
 }

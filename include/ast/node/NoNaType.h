@@ -1,12 +1,12 @@
-#ifndef R_TYPE_AST_NODE_NO_NA_TYPE_H
-#define R_TYPE_AST_NODE_NO_NA_TYPE_H
+#ifndef TASTR_AST_NODE_NO_NA_TYPE_H
+#define TASTR_AST_NODE_NO_NA_TYPE_H
 
 #include "CompositeType.h"
 #include "VectorType.h"
 
 #include <memory>
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class NoNaType final: public CompositeType {
   public:
@@ -17,19 +17,19 @@ class NoNaType final: public CompositeType {
     ~NoNaType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 
-    const rtype::ast::node::VectorType& get_inner_type() const {
+    const tastr::ast::node::VectorType& get_inner_type() const {
         return *inner_type_.get();
     }
 
   private:
-    std::unique_ptr<rtype::ast::node::VectorType> inner_type_;
+    std::unique_ptr<tastr::ast::node::VectorType> inner_type_;
 };
 
 using NoNaTypePtr = NoNaType*;
 using NoNaTypeUPtr = std::unique_ptr<NoNaType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_NO_NA_TYPE_H */
+#endif /* TASTR_AST_NODE_NO_NA_TYPE_H */

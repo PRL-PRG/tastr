@@ -1,5 +1,5 @@
-#ifndef R_TYPE_AST_NODE_TYPE_DECLARATION_H
-#define R_TYPE_AST_NODE_TYPE_DECLARATION_H
+#ifndef TASTR_AST_NODE_TYPE_DECLARATION_H
+#define TASTR_AST_NODE_TYPE_DECLARATION_H
 
 #include "ast/node/Identifier.h"
 #include "ast/node/Type.h"
@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class TypeDeclaration final: public Node {
   public:
@@ -19,13 +19,13 @@ class TypeDeclaration final: public Node {
     ~TypeDeclaration() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 
-    const rtype::ast::node::Identifier& get_identifier() const {
+    const tastr::ast::node::Identifier& get_identifier() const {
         return *identifier_.get();
     }
 
-    const rtype::ast::node::Type& get_type() const {
+    const tastr::ast::node::Type& get_type() const {
         return *type_.get();
     }
 
@@ -37,6 +37,6 @@ class TypeDeclaration final: public Node {
 using TypeDeclarationPtr = TypeDeclaration*;
 using TypeDeclarationUPtr = std::unique_ptr<TypeDeclaration>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_TYPE_DECLARATION_H */
+#endif /* TASTR_AST_NODE_TYPE_DECLARATION_H */

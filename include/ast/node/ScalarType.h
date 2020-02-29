@@ -1,9 +1,9 @@
-#ifndef R_TYPE_AST_NODE_SCALAR_TYPE_H
-#define R_TYPE_AST_NODE_SCALAR_TYPE_H
+#ifndef TASTR_AST_NODE_SCALAR_TYPE_H
+#define TASTR_AST_NODE_SCALAR_TYPE_H
 
 #include "Type.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class ScalarType: public Type {
   public:
@@ -13,12 +13,12 @@ class ScalarType: public Type {
     virtual ~ScalarType() {
     }
 
-    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
+    virtual void accept(tastr::ast::visitor::Visitor& visitor) const = 0;
 };
 
 using ScalarTypePtr = ScalarType*;
 using ScalarTypeUPtr = std::unique_ptr<ScalarType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_SCALAR_TYPE_H */
+#endif /* TASTR_AST_NODE_SCALAR_TYPE_H */

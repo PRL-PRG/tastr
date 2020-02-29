@@ -1,10 +1,10 @@
-#ifndef R_TYPE_AST_NODE_TYPE_DECLARATION_SEQUENCE_H
-#define R_TYPE_AST_NODE_TYPE_DECLARATION_SEQUENCE_H
+#ifndef TASTR_AST_NODE_TYPE_DECLARATION_SEQUENCE_H
+#define TASTR_AST_NODE_TYPE_DECLARATION_SEQUENCE_H
 
 #include "SequenceType.h"
 #include "TypeDeclaration.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class TypeDeclarationSequence final: public SequenceType<TypeDeclaration> {
   public:
@@ -20,12 +20,12 @@ class TypeDeclarationSequence final: public SequenceType<TypeDeclaration> {
     ~TypeDeclarationSequence() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 };
 
 using TypeDeclarationSequencePtr = TypeDeclarationSequence*;
 using TypeDeclarationSequenceUPtr = std::unique_ptr<TypeDeclarationSequence>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_TYPE_DECLARATION_SEQUENCE_H */
+#endif /* TASTR_AST_NODE_TYPE_DECLARATION_SEQUENCE_H */

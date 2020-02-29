@@ -1,9 +1,9 @@
-#ifndef R_TYPE_AST_NODE_COMPOSITE_TYPE_H
-#define R_TYPE_AST_NODE_COMPOSITE_TYPE_H
+#ifndef TASTR_AST_NODE_COMPOSITE_TYPE_H
+#define TASTR_AST_NODE_COMPOSITE_TYPE_H
 
 #include "Type.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class CompositeType: public Type {
   public:
@@ -13,12 +13,12 @@ class CompositeType: public Type {
     virtual ~CompositeType() {
     }
 
-    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
+    virtual void accept(tastr::ast::visitor::Visitor& visitor) const = 0;
 };
 
 using CompositeTypePtr = CompositeType*;
 using CompositeTypeUPtr = std::unique_ptr<CompositeType>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_COMPOSITE_TYPE_H */
+#endif /* TASTR_AST_NODE_COMPOSITE_TYPE_H */

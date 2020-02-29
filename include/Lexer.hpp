@@ -1,5 +1,5 @@
-#ifndef RTYPESPARSER_LEXER_HPP
-#define RTYPESPARSER_LEXER_HPP
+#ifndef TASTR_LEXER_HPP
+#define TASTR_LEXER_HPP
 
 #include "Parser.hxx"
 #include "ParsingContext.h"
@@ -12,22 +12,22 @@
 /* Tell flex which function to define */
 #undef YY_DECL
 #define YY_DECL                                       \
-    int rtype::parser::Lexer::yylex(                  \
-        rtype::parser::Parser::semantic_type* yylval, \
-        rtype::parser::Parser::location_type* yylloc)
+    int tastr::parser::Lexer::yylex(                  \
+        tastr::parser::Parser::semantic_type* yylval, \
+        tastr::parser::Parser::location_type* yylloc)
 
 
 
-namespace rtype::parser {
+namespace tastr::parser {
 
 class Lexer: public yyFlexLexer {
   public:
-    explicit Lexer(rtype::parser::ParsingContext& context);
+    explicit Lexer(tastr::parser::ParsingContext& context);
 
-    virtual int yylex(rtype::parser::Parser::semantic_type* yylval,
-                      rtype::parser::Parser::location_type* yylloc);
+    virtual int yylex(tastr::parser::Parser::semantic_type* yylval,
+                      tastr::parser::Parser::location_type* yylloc);
 };
 
-} // namespace rtype::parser
+} // namespace tastr::parser
 
-#endif /* RTYPESPARSER_LEXER_HPP */
+#endif /* TASTR_LEXER_HPP */

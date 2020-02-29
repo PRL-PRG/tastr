@@ -1,9 +1,9 @@
-#ifndef R_TYPE_AST_NODE_COMPLEX_TYPE_H
-#define R_TYPE_AST_NODE_COMPLEX_TYPE_H
+#ifndef TASTR_AST_NODE_COMPLEX_TYPE_H
+#define TASTR_AST_NODE_COMPLEX_TYPE_H
 
 #include "ScalarType.h"
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class ComplexType final: public ScalarType {
   public:
@@ -13,11 +13,11 @@ class ComplexType final: public ScalarType {
     ~ComplexType() {
     }
 
-    void accept(rtype::ast::visitor::Visitor& visitor) const override final;
+    void accept(tastr::ast::visitor::Visitor& visitor) const override final;
 };
 
 using ComplexTypePtr = ComplexType*;
 using ComplexTypeUPtr = std::unique_ptr<ComplexType>;
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_COMPLEX_TYPE_H */
+#endif /* TASTR_AST_NODE_COMPLEX_TYPE_H */

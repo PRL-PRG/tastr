@@ -1,12 +1,12 @@
-#ifndef R_TYPE_AST_NODE_SEQUENCE_TYPE_H
-#define R_TYPE_AST_NODE_SEQUENCE_TYPE_H
+#ifndef TASTR_AST_NODE_SEQUENCE_TYPE_H
+#define TASTR_AST_NODE_SEQUENCE_TYPE_H
 
 #include "CompositeType.h"
 
 #include <memory>
 #include <vector>
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 template <typename T>
 using sequence_t = std::vector<std::unique_ptr<T>>;
@@ -43,7 +43,7 @@ class SequenceType: public CompositeType {
     virtual ~SequenceType() {
     }
 
-    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
+    virtual void accept(tastr::ast::visitor::Visitor& visitor) const = 0;
 
     void push_back(std::unique_ptr<T> value) {
         sequence_->push_back(std::move(value));
@@ -99,6 +99,6 @@ using SequenceTypePtr = SequenceType<T>*;
 template <typename T>
 using SequenceTypeUPtr = std::unique_ptr<SequenceType<T>>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_TYPE_SEQUENCE_H */
+#endif /* TASTR_AST_NODE_TYPE_SEQUENCE_H */

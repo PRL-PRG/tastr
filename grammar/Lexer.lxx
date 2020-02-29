@@ -1,7 +1,7 @@
 /* -*- C++ -*- */
 %option outfile="Lexer.cxx"
 %option header-file="Lexer.hxx"
-%option yyclass="rtype::parser::Lexer"
+%option yyclass="tastr::parser::Lexer"
 %option debug
 %option nodefault
 %option noyywrap
@@ -17,7 +17,7 @@
 
     #define HANDLE_TOKEN(token_name)                    \
         yylval->build<std::string>(yytext);             \
-        return rtype::parser::Parser::token::token_name;
+        return tastr::parser::Parser::token::token_name;
 
 %}
 
@@ -76,13 +76,13 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {
                                 std::cout << "Lexer Error: " << *yylloc << " :: " << "invalid character: '" << yytext << "'" << std::endl;
-                                throw rtype::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));
+                                throw tastr::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));
                             }
-<<EOF>>                     return rtype::parser::Parser::token::TOKEN_EOF;
+<<EOF>>                     return tastr::parser::Parser::token::TOKEN_EOF;
 %%
 
 /* REFERENCE: https://coldfix.eu/2015/05/16/bison-c++11/ */
-rtype::parser::Lexer::Lexer(rtype::parser::ParsingContext& context): yyFlexLexer(context.get_input_stream(), std::cout) {
+tastr::parser::Lexer::Lexer(tastr::parser::ParsingContext& context): yyFlexLexer(context.get_input_stream(), std::cout) {
 }
 
 

@@ -1,13 +1,13 @@
-#ifndef R_TYPE_AST_NODE_NODE_H
-#define R_TYPE_AST_NODE_NODE_H
+#ifndef TASTR_AST_NODE_NODE_H
+#define TASTR_AST_NODE_NODE_H
 
 #include <memory>
 
-namespace rtype::ast::visitor {
+namespace tastr::ast::visitor {
 class Visitor;
 }
 
-namespace rtype::ast::node {
+namespace tastr::ast::node {
 
 class Node {
   public:
@@ -17,12 +17,12 @@ class Node {
     virtual ~Node() {
     }
 
-    virtual void accept(rtype::ast::visitor::Visitor& visitor) const = 0;
+    virtual void accept(tastr::ast::visitor::Visitor& visitor) const = 0;
 };
 
 using NodePtr = Node*;
 using NodeUPtr = std::unique_ptr<Node>;
 
-} // namespace rtype::ast::node
+} // namespace tastr::ast::node
 
-#endif /* R_TYPE_AST_NODE_TYPE_H */
+#endif /* TASTR_AST_NODE_TYPE_H */
