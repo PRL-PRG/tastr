@@ -28,6 +28,7 @@ CHARACTER    character|chr|s
 LOGICAL      logical|lgl|l
 RAW          raw|r
 ENVIRONMENT  environment|env|t
+EXPRESSION   expression|exr|e
 BLANK        [ \t\r]
 TYPEDECL     type
 PACKAGENAME  [a-zA-Z]+
@@ -65,6 +66,7 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 {LOGICAL}                   { HANDLE_TOKEN(TOKEN_LOGICAL) }
 {RAW}                       { HANDLE_TOKEN(TOKEN_RAW) }
 {ENVIRONMENT}               { HANDLE_TOKEN(TOKEN_ENVIRONMENT) }
+{EXPRESSION}                { HANDLE_TOKEN(TOKEN_EXPRESSION) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {PACKAGENAME}::{IDENTIFIER} { HANDLE_TOKEN(TOKEN_QUALFUN) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_TAG) }

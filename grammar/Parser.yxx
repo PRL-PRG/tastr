@@ -49,11 +49,13 @@
 %token <std::string>                LOGICAL;
 %token <std::string>                RAW;
 %token <std::string>                ENVIRONMENT;
+%token <std::string>                EXPRESSION;
 %token <std::string>                TYPEDECL;
 %token <std::string>                QUALFUN;
 %token <std::string>                TAG;
 %nterm <ScalarTypePtr>              scalartype
 %nterm <EnvironmentTypePtr>         environmenttype
+%nterm <ExpressionTypePtr>          expressiontype
 %nterm <VectorTypePtr>              vectortype
 %nterm <NoNaTypePtr>                nonavectortype
 %nterm <sequence_ptr_t<Type>>       typeseq
@@ -119,6 +121,8 @@
     using rtype::ast::node::CharacterType;
     using rtype::ast::node::ComplexType;
     using rtype::ast::node::DoubleType;
+    using rtype::ast::node::ExpressionType;
+    using rtype::ast::node::ExpressionTypePtr;
     using rtype::ast::node::EnvironmentType;
     using rtype::ast::node::EnvironmentTypePtr;
     using rtype::ast::node::FunctionType;
@@ -193,6 +197,11 @@ environmenttype:    ENVIRONMENT                             {
                                                                 $$ = new EnvironmentType();
                                                             }
                ;
+
+expressiontype:     EXPRESSION                              {
+                                                                $$ = new ExpressionType();
+                                                            }
+              ;
 
 vectortype:         scalartype "[" "]"                      {
                                                                 ScalarTypeUPtr scalar_type($1);
@@ -273,6 +282,7 @@ grouptype:          "(" type ")"                            {
 
 nonuniontype:       scalartype                              {   $$ = $1; }
             |       environmenttype                         {   $$ = $1; }
+            |       expressiontype                          {   $$ = $1; }
             |       vectortype                              {   $$ = $1; }
             |       nonavectortype                          {   $$ = $1; }
             |       functiontype                            {   $$ = $1; }

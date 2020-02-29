@@ -54,6 +54,10 @@ class Unparser final: public Visitor {
         os_ << "environment";
     }
 
+    void visit(const rtype::ast::node::ExpressionType& node) override final {
+        os_ << "expression";
+    }
+
     void visit(const rtype::ast::node::ComplexType& node) override final {
         os_ << "complex";
     }
