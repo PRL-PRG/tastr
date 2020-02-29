@@ -177,6 +177,10 @@ class Unparser final: public Visitor {
         os_ << node.get_name();
     }
 
+    void visit(const rtype::ast::node::VarargType& node) override final {
+        os_ << "...";
+    }
+
   private:
     std::ostream& os_;
 };

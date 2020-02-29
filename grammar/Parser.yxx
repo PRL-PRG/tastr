@@ -65,6 +65,8 @@
 %nterm <sequence_ptr_t<Type>>       typeseq
 %nterm <TaggedTypePtr>              namedtype
 %nterm <sequence_ptr_t<TaggedType>> namedtypeseq
+%nterm <TypePtr>                    paramtype
+%nterm <sequence_ptr_t<Type>>       paramtypeseq
 %nterm <FunctionTypePtr>            functiontype
 %nterm <GroupTypePtr>               grouptype
 %nterm <TypePtr>                    nonuniontype
@@ -174,6 +176,7 @@
     using rtype::ast::node::Identifier;
     using rtype::ast::node::IdentifierPtr;
     using rtype::ast::node::IdentifierUPtr;
+    using rtype::ast::node::VarargType;
 }
 
 /* inserted near top of source file */
@@ -303,7 +306,27 @@ namedtypeseq:       %empty                                  {
                                                             }
             ;
 
-functiontype:       "<" typeseq ">" "=>" type               {
+
+paramtype:          type                                    {   $$ = $1;               }
+         |          "..."                                   {   $$ = new VarargType(); }
+         ;
+
+paramtypeseq:       %empty                                  {
+                                                                $$ = new sequence_t<Type>();
+                                                            }
+            |       paramtype                               {
+                                                                TypeUPtr type($1);
+                                                                $$ = new sequence_t<Type>();
+                                                                $$ -> push_back(std::move(type));
+                                                            }
+            |       paramtypeseq "," paramtype              {
+                                                                TypeUPtr type($3);
+                                                                $1 -> push_back(std::move(type));
+                                                                $$ = $1;
+                                                            }
+            ;
+
+functiontype:       "<" paramtypeseq ">" "=>" type          {
                                                                 sequence_uptr_t<Type> sequence($2);
                                                                 ParameterTypePtr types = new ParameterType(std::move(sequence));
                                                                 ParameterTypeUPtr parameter_types(types);

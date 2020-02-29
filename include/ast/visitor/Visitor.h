@@ -68,6 +68,8 @@ class Visitor {
 
     virtual void visit(const rtype::ast::node::VectorType& node) = 0;
 
+    virtual void visit(const rtype::ast::node::VarargType& node) = 0;
+
     virtual void visit(const rtype::ast::node::TypeDeclaration& node) = 0;
 
     virtual void visit(const rtype::ast::node::TypeDeclarationSequence& node) = 0;

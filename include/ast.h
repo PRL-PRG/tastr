@@ -27,6 +27,7 @@
 #include "ast/node/TypeDeclaration.h"
 #include "ast/node/TypeDeclarationSequence.h"
 #include "ast/node/UnionType.h"
+#include "ast/node/VarargType.h"
 #include "ast/node/VectorType.h"
 #include "ast/visitor/Visitor.h"
 
