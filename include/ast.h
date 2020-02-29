@@ -1,43 +1,43 @@
 #ifndef TASTR_AST_H
 #define TASTR_AST_H
 
-#include "ast/node/CharacterType.h"
-#include "ast/node/ComplexType.h"
-#include "ast/node/CompositeType.h"
-#include "ast/node/DoubleType.h"
-#include "ast/node/EnvironmentType.h"
-#include "ast/node/ExpressionType.h"
-#include "ast/node/FunctionType.h"
-#include "ast/node/GroupType.h"
-#include "ast/node/Identifier.h"
-#include "ast/node/IntegerType.h"
-#include "ast/node/LanguageType.h"
-#include "ast/node/ListType.h"
-#include "ast/node/LogicalType.h"
-#include "ast/node/NoNaType.h"
-#include "ast/node/Node.h"
-#include "ast/node/ParameterType.h"
-#include "ast/node/RawType.h"
-#include "ast/node/ScalarType.h"
-#include "ast/node/SequenceType.h"
-#include "ast/node/StructType.h"
-#include "ast/node/SymbolType.h"
-#include "ast/node/TaggedType.h"
-#include "ast/node/Type.h"
-#include "ast/node/TypeDeclaration.h"
-#include "ast/node/TypeDeclarationSequence.h"
-#include "ast/node/UnionType.h"
-#include "ast/node/VarargType.h"
-#include "ast/node/VectorType.h"
-#include "ast/visitor/Visitor.h"
+#include "ast/CharacterType.h"
+#include "ast/ComplexType.h"
+#include "ast/CompositeType.h"
+#include "ast/DoubleType.h"
+#include "ast/EnvironmentType.h"
+#include "ast/ExpressionType.h"
+#include "ast/FunctionType.h"
+#include "ast/GroupType.h"
+#include "ast/Identifier.h"
+#include "ast/IntegerType.h"
+#include "ast/LanguageType.h"
+#include "ast/ListType.h"
+#include "ast/LogicalType.h"
+#include "ast/NoNaType.h"
+#include "ast/Node.h"
+#include "ast/ParameterType.h"
+#include "ast/RawType.h"
+#include "ast/ScalarType.h"
+#include "ast/SequenceType.h"
+#include "ast/StructType.h"
+#include "ast/SymbolType.h"
+#include "ast/TaggedType.h"
+#include "ast/Type.h"
+#include "ast/TypeDeclaration.h"
+#include "ast/TypeDeclarationSequence.h"
+#include "ast/UnionType.h"
+#include "ast/VarargType.h"
+#include "ast/VectorType.h"
+#include "visitor/Visitor.h"
 
 #include <filesystem>
 #include <ostream>
 #include <string>
 
-std::ostream& operator<<(std::ostream& os, const tastr::ast::node::Node& node);
+std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node);
 
-std::string to_string(const tastr::ast::node::Node& node);
+std::string to_string(const tastr::ast::Node& node);
 
 int parse_stdin();
 

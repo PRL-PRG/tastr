@@ -3,17 +3,17 @@
 #include "Lexer.hpp"
 #include "Parser.hxx"
 #include "ParsingContext.h"
-#include "ast/visitor/Unparser.h"
+#include "visitor/Unparser.h"
 
 #include <fstream>
 #include <sstream>
 
-std::ostream& operator<<(std::ostream& os, const tastr::ast::node::Node& node) {
-    tastr::ast::visitor::Unparser(os).visit(node);
+std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node) {
+    tastr::visitor::Unparser(os).visit(node);
     return os;
 }
 
-std::string to_string(const tastr::ast::node::Node& node) {
+std::string to_string(const tastr::ast::Node& node) {
     std::stringstream stream;
     stream << node;
     return stream.str();
