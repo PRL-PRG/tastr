@@ -42,19 +42,19 @@
 %token <std::string>                DOUBLE_RBRACE "}}";
 %token <std::string>                SEMICOLON     ";";
 %token <std::string>                COLON         ":";
-%token <std::string>                INTEGER;
-%token <std::string>                DOUBLE;
-%token <std::string>                COMPLEX;
-%token <std::string>                CHARACTER;
-%token <std::string>                LOGICAL;
-%token <std::string>                RAW;
-%token <std::string>                ENVIRONMENT;
-%token <std::string>                EXPRESSION;
-%token <std::string>                LANGUAGE;
-%token <std::string>                SYMBOL;
-%token <std::string>                TYPEDECL;
-%token <std::string>                QUALFUN;
-%token <std::string>                TAG;
+%token <std::string>                VARARG        "...";
+%token <std::string>                INTEGER
+%token <std::string>                DOUBLE
+%token <std::string>                COMPLEX
+%token <std::string>                CHARACTER
+%token <std::string>                LOGICAL
+%token <std::string>                RAW
+%token <std::string>                ENVIRONMENT
+%token <std::string>                EXPRESSION
+%token <std::string>                LANGUAGE
+%token <std::string>                SYMBOL
+%token <std::string>                TYPEDECL
+%token <std::string>                IDENTIFIER;
 %nterm <ScalarTypePtr>              scalartype
 %nterm <EnvironmentTypePtr>         environmenttype
 %nterm <ExpressionTypePtr>          expressiontype
@@ -70,6 +70,8 @@
 %nterm <TypePtr>                    nonuniontype
 %nterm <ListTypePtr>                listtype
 %nterm <StructTypePtr>              structtype
+%nterm <IdentifierPtr>              funname
+%nterm <IdentifierPtr>              identifier
 %nterm <TypePtr>                    type
 %nterm <TypeDeclarationPtr>         decltype
 
@@ -169,6 +171,9 @@
     using rtype::ast::node::TypeDeclarationPtr;
     using rtype::ast::node::TypeDeclarationUPtr;
     using rtype::ast::node::TypeDeclarationSequenceUPtr;
+    using rtype::ast::node::Identifier;
+    using rtype::ast::node::IdentifierPtr;
+    using rtype::ast::node::IdentifierUPtr;
 }
 
 /* inserted near top of source file */
@@ -261,17 +266,32 @@ structtype:         "{{" namedtypeseq "}}"                  {
           ;
 
 
-namedtype:          TAG ":" type                            {
-                                                                std::string name($1);
+identifier:         INTEGER                                 { $$ = new Identifier($1); }
+          |         DOUBLE                                  { $$ = new Identifier($1); }
+          |         COMPLEX                                 { $$ = new Identifier($1); }
+          |         CHARACTER                               { $$ = new Identifier($1); }
+          |         LOGICAL                                 { $$ = new Identifier($1); }
+          |         RAW                                     { $$ = new Identifier($1); }
+          |         ENVIRONMENT                             { $$ = new Identifier($1); }
+          |         EXPRESSION                              { $$ = new Identifier($1); }
+          |         LANGUAGE                                { $$ = new Identifier($1); }
+          |         SYMBOL                                  { $$ = new Identifier($1); }
+          |         TYPEDECL                                { $$ = new Identifier($1); }
+          |         VARARG                                  { $$ = new Identifier($1); }
+          |         IDENTIFIER                              { $$ = new Identifier($1); }
+          ;
+
+namedtype:          identifier ":" type                     {
+                                                                IdentifierUPtr ident($1);
                                                                 TypeUPtr type($3);
-                                                                $$ = new TaggedType(name, std::move(type));
+                                                                $$ = new TaggedType(std::move(ident), std::move(type));
                                                             }
          ;
 
 namedtypeseq:       %empty                                  {
                                                                 $$ = new sequence_t<TaggedType>();
                                                             }
-            |      namedtype                                {
+            |       namedtype                               {
                                                                 TaggedTypeUPtr named_type($1);
                                                                 $$ = new sequence_t<TaggedType>();
                                                                 $$ -> push_back(std::move(named_type));
@@ -290,7 +310,6 @@ functiontype:       "<" typeseq ">" "=>" type               {
                                                                 TypeUPtr return_type($5);
                                                                 $$ = new FunctionType(std::move(parameter_types), std::move(return_type));
                                                             }
-            ;
 
 grouptype:          "(" type ")"                            {
                                                                 TypeUPtr type($2);
@@ -320,9 +339,26 @@ type:               nonuniontype                            {   $$ = $1; }
                                                             }
     ;
 
-decltype:           TYPEDECL QUALFUN type ";"               {
+
+funname:            INTEGER                                 { $$ = new Identifier($1); }
+       |            DOUBLE                                  { $$ = new Identifier($1); }
+       |            COMPLEX                                 { $$ = new Identifier($1); }
+       |            CHARACTER                               { $$ = new Identifier($1); }
+       |            LOGICAL                                 { $$ = new Identifier($1); }
+       |            RAW                                     { $$ = new Identifier($1); }
+       |            ENVIRONMENT                             { $$ = new Identifier($1); }
+       |            EXPRESSION                              { $$ = new Identifier($1); }
+       |            LANGUAGE                                { $$ = new Identifier($1); }
+       |            SYMBOL                                  { $$ = new Identifier($1); }
+       |            TYPEDECL                                { $$ = new Identifier($1); }
+       |            IDENTIFIER                              { $$ = new Identifier($1); }
+       ;
+
+
+decltype:           TYPEDECL funname type ";"               {
+                                                                IdentifierUPtr identifier($2);
                                                                 TypeUPtr type($3);
-                                                                $$ = new TypeDeclaration($2, std::move(type));
+                                                                $$ = new TypeDeclaration(std::move(identifier), std::move(type));
                                                             }
         ;
 

@@ -9,6 +9,7 @@
 #include "ast/node/ExpressionType.h"
 #include "ast/node/FunctionType.h"
 #include "ast/node/GroupType.h"
+#include "ast/node/Identifier.h"
 #include "ast/node/IntegerType.h"
 #include "ast/node/LanguageType.h"
 #include "ast/node/ListType.h"

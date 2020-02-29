@@ -41,7 +41,7 @@ class Unparser final: public Visitor {
     }
 
     void visit(const rtype::ast::node::TaggedType& node) override final {
-        os_ << node.get_tag();
+        node.get_identifier().accept(*this);
         os_ << ":";
         node.get_type().accept(*this);
     }
@@ -155,7 +155,8 @@ class Unparser final: public Visitor {
 
     void visit(const rtype::ast::node::TypeDeclaration& node) override final {
         os_ << "type ";
-        os_ << node.get_identifier() << " ";
+        node.get_identifier().accept(*this);
+        os_ << " ";
         node.get_type().accept(*this);
         os_ << ";";
     }
@@ -170,6 +171,10 @@ class Unparser final: public Visitor {
             }
             --show_separator;
         }
+    }
+
+    void visit(const rtype::ast::node::Identifier& node) override final {
+        os_ << node.get_name();
     }
 
   private:

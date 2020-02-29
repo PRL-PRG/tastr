@@ -1,6 +1,7 @@
 #ifndef R_TYPE_AST_NODE_TYPE_DECLARATION_H
 #define R_TYPE_AST_NODE_TYPE_DECLARATION_H
 
+#include "ast/node/Identifier.h"
 #include "ast/node/Type.h"
 
 #include <memory>
@@ -10,9 +11,9 @@ namespace rtype::ast::node {
 
 class TypeDeclaration final: public Node {
   public:
-    explicit TypeDeclaration(const std::string& identifer,
+    explicit TypeDeclaration(std::unique_ptr<Identifier> identifier,
                              std::unique_ptr<Type> type)
-        : Node(), identifer_(identifer), type_(std::move(type)) {
+        : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
     }
 
     ~TypeDeclaration() {
@@ -20,8 +21,8 @@ class TypeDeclaration final: public Node {
 
     void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
-    const std::string& get_identifier() const {
-        return identifer_;
+    const rtype::ast::node::Identifier& get_identifier() const {
+        return *identifier_.get();
     }
 
     const rtype::ast::node::Type& get_type() const {
@@ -29,7 +30,7 @@ class TypeDeclaration final: public Node {
     }
 
   private:
-    std::string identifer_;
+    std::unique_ptr<Identifier> identifier_;
     std::unique_ptr<Type> type_;
 };
 

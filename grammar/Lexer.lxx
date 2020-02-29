@@ -31,9 +31,9 @@ ENVIRONMENT  environment|env|t
 EXPRESSION   expression|exr|e
 LANGUAGE     language|lng|g
 SYMBOL       symbol|sym|y
-BLANK        [ \t\r]
 TYPEDECL     type
-PACKAGENAME  [a-zA-Z]+
+BLANK        [ \t\r]
+VARARG       \.\.\.
 IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 
 %%
@@ -61,6 +61,7 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 "}}"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RBRACE) }
 ";"                         { HANDLE_TOKEN(TOKEN_SEMICOLON) }
 ":"                         { HANDLE_TOKEN(TOKEN_COLON) }
+"..."                       { HANDLE_TOKEN(TOKEN_VARARG) }
 {INTEGER}                   { HANDLE_TOKEN(TOKEN_INTEGER) }
 {DOUBLE}                    { HANDLE_TOKEN(TOKEN_DOUBLE) }
 {COMPLEX}                   { HANDLE_TOKEN(TOKEN_COMPLEX) }
@@ -72,8 +73,7 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 {LANGUAGE}                  { HANDLE_TOKEN(TOKEN_LANGUAGE) }
 {SYMBOL}                    { HANDLE_TOKEN(TOKEN_SYMBOL) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
-{PACKAGENAME}::{IDENTIFIER} { HANDLE_TOKEN(TOKEN_QUALFUN) }
-{IDENTIFIER}                { HANDLE_TOKEN(TOKEN_TAG) }
+{IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {
                                 std::cout << "Lexer Error: " << *yylloc << " :: " << "invalid character: '" << yytext << "'" << std::endl;
                                 throw rtype::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));

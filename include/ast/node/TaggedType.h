@@ -1,6 +1,7 @@
 #ifndef R_TYPE_AST_NODE_TAGGED_TYPE_H
 #define R_TYPE_AST_NODE_TAGGED_TYPE_H
 
+#include "ast/node/Identifier.h"
 #include "ast/node/Node.h"
 #include "ast/node/Type.h"
 
@@ -11,8 +12,9 @@ namespace rtype::ast::node {
 
 class TaggedType final: public Node {
   public:
-    explicit TaggedType(const std::string& tag, std::unique_ptr<Type> type)
-        : Node(), tag_(tag), type_(std::move(type)) {
+    explicit TaggedType(std::unique_ptr<Identifier> identifier,
+                        std::unique_ptr<Type> type)
+        : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
     }
 
     ~TaggedType() {
@@ -20,8 +22,8 @@ class TaggedType final: public Node {
 
     void accept(rtype::ast::visitor::Visitor& visitor) const override final;
 
-    const std::string& get_tag() const {
-        return tag_;
+    const rtype::ast::node::Identifier& get_identifier() const {
+        return *identifier_.get();
     }
 
     const rtype::ast::node::Type& get_type() const {
@@ -29,7 +31,7 @@ class TaggedType final: public Node {
     }
 
   private:
-    std::string tag_;
+    std::unique_ptr<Identifier> identifier_;
     std::unique_ptr<Type> type_;
 };
 
