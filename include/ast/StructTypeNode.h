@@ -3,23 +3,23 @@
 
 #include "TypeNode.h"
 #include "Sequence.h"
-#include "TaggedTypeNode.h"
+#include "TagTypePairNode.h"
 
 namespace tastr::ast {
 
 class StructTypeNode final
     : public TypeNode
-    , public TaggedTypeNodeSequence {
+    , public TagTypePairNodeSequence {
   public:
-    explicit StructTypeNode(TaggedTypeNodeSequence sequence)
-        : TypeNode(), TaggedTypeNodeSequence(std::move(sequence)) {
+    explicit StructTypeNode(TagTypePairNodeSequence sequence)
+        : TypeNode(), TagTypePairNodeSequence(std::move(sequence)) {
     }
 
     ~StructTypeNode() {
     }
 
     StructTypeNode(const StructTypeNode& node)
-        : TypeNode(node), TaggedTypeNodeSequence(node) {
+        : TypeNode(node), TagTypePairNodeSequence(node) {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

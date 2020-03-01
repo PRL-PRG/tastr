@@ -19,7 +19,7 @@
 #include "ast/ScalarTypeNode.h"
 #include "ast/StructTypeNode.h"
 #include "ast/SymbolTypeNode.h"
-#include "ast/TaggedTypeNode.h"
+#include "ast/TagTypePairNode.h"
 #include "ast/TypeDeclarationNode.h"
 #include "ast/TypeDeclarationSequenceNode.h"
 #include "ast/TypeNode.h"

@@ -63,8 +63,8 @@
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
 %nterm <TypeNodeSequencePtr>            typeseq
-%nterm <TaggedTypeNodePtr>              namedtype
-%nterm <TaggedTypeNodeSequencePtr>      namedtypeseq
+%nterm <TagTypePairNodePtr>             namedtype
+%nterm <TagTypePairNodeSequencePtr>     namedtypeseq
 %nterm <TypeNodePtr>                    paramtype
 %nterm <TypeNodeSequencePtr>            paramtypeseq
 %nterm <FunctionTypeNodePtr>            functiontype
@@ -145,9 +145,9 @@
     using tastr::ast::ListTypeNode;
     using tastr::ast::ListTypeNodePtr;
     using tastr::ast::LogicalScalarTypeNode;
-    using tastr::ast::TaggedTypeNode;
-    using tastr::ast::TaggedTypeNodePtr;
-    using tastr::ast::TaggedTypeNodeUPtr;
+    using tastr::ast::TagTypePairNode;
+    using tastr::ast::TagTypePairNodePtr;
+    using tastr::ast::TagTypePairNodeUPtr;
     using tastr::ast::NoNaTypeNode;
     using tastr::ast::NoNaTypeNodePtr;
     using tastr::ast::RawScalarTypeNode;
@@ -177,8 +177,8 @@
     using tastr::ast::TypeNodeSequence;
     using tastr::ast::TypeNodeSequencePtr;
     using tastr::ast::TypeNodeSequenceUPtr;
-    using tastr::ast::TaggedTypeNodeSequence;
-    using tastr::ast::TaggedTypeNodeSequencePtr;
+    using tastr::ast::TagTypePairNodeSequence;
+    using tastr::ast::TagTypePairNodeSequencePtr;
 }
 
 /* inserted near top of source file */
@@ -287,20 +287,20 @@ identifier:         INTEGER                                 { $$ = new Identifie
 namedtype:          identifier ":" type                     {
                                                                 IdentifierNodeUPtr ident($1);
                                                                 TypeNodeUPtr type($3);
-                                                                $$ = new TaggedTypeNode(std::move(ident), std::move(type));
+                                                                $$ = new TagTypePairNode(std::move(ident), std::move(type));
                                                             }
          ;
 
 namedtypeseq:       %empty                                  {
-                                                                $$ = new TaggedTypeNodeSequence();
+                                                                $$ = new TagTypePairNodeSequence();
                                                             }
             |       namedtype                               {
-                                                                TaggedTypeNodeUPtr named_type($1);
-                                                                $$ = new TaggedTypeNodeSequence();
+                                                                TagTypePairNodeUPtr named_type($1);
+                                                                $$ = new TagTypePairNodeSequence();
                                                                 $$ -> push_back(std::move(named_type));
                                                             }
             |       namedtypeseq "," namedtype              {
-                                                                TaggedTypeNodeUPtr named_type($3);
+                                                                TagTypePairNodeUPtr named_type($3);
                                                                 $1 -> push_back(std::move(named_type));
                                                                 $$ = $1;
                                                             }

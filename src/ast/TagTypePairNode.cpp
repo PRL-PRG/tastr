@@ -1,7 +1,7 @@
-#include "ast/TaggedTypeNode.h"
+#include "ast/TagTypePairNode.h"
 #include "visitor/Visitor.h"
 
-void tastr::ast::TaggedTypeNode::accept(
+void tastr::ast::TagTypePairNode::accept(
     tastr::visitor::Visitor& visitor) const {
     visitor.visit(*this);
 }

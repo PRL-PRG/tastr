@@ -10,25 +10,25 @@
 
 namespace tastr::ast {
 
-class TaggedTypeNode final: public Node {
+class TagTypePairNode final: public Node {
   public:
-    explicit TaggedTypeNode(std::unique_ptr<IdentifierNode> identifier,
-                            std::unique_ptr<TypeNode> type)
+    explicit TagTypePairNode(std::unique_ptr<IdentifierNode> identifier,
+                             std::unique_ptr<TypeNode> type)
         : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
     }
 
-    TaggedTypeNode(const TaggedTypeNode& node)
+    TagTypePairNode(const TagTypePairNode& node)
         : identifier_(node.get_identifier().clone())
         , type_(node.get_type().clone()) {
     }
 
-    ~TaggedTypeNode() {
+    ~TagTypePairNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
 
-    std::unique_ptr<TaggedTypeNode> clone() const {
-        return std::unique_ptr<TaggedTypeNode>(this->clone_impl());
+    std::unique_ptr<TagTypePairNode> clone() const {
+        return std::unique_ptr<TagTypePairNode>(this->clone_impl());
     }
 
     const tastr::ast::IdentifierNode& get_identifier() const {
@@ -39,21 +39,21 @@ class TaggedTypeNode final: public Node {
         return *type_.get();
     }
 
-    bool is_tagged_type_node() const override final {
+    bool is_tag_type_pair_node() const override final {
         return true;
     }
 
   private:
-    virtual TaggedTypeNode* clone_impl() const override final {
-        return new TaggedTypeNode(*this);
+    virtual TagTypePairNode* clone_impl() const override final {
+        return new TagTypePairNode(*this);
     }
 
     std::unique_ptr<IdentifierNode> identifier_;
     std::unique_ptr<TypeNode> type_;
 };
 
-using TaggedTypeNodePtr = TaggedTypeNode*;
-using TaggedTypeNodeUPtr = std::unique_ptr<TaggedTypeNode>;
+using TagTypePairNodePtr = TagTypePairNode*;
+using TagTypePairNodeUPtr = std::unique_ptr<TagTypePairNode>;
 
 } // namespace tastr::ast
 

@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_SEQUENCE_TYPE_H
 #define TASTR_AST_SEQUENCE_TYPE_H
 
-#include "TaggedTypeNode.h"
+#include "TagTypePairNode.h"
 #include "TypeNode.h"
 
 #include <memory>
@@ -115,9 +115,9 @@ using TypeNodeSequence = Sequence<TypeNode>;
 using TypeNodeSequencePtr = TypeNodeSequence*;
 using TypeNodeSequenceUPtr = std::unique_ptr<TypeNodeSequence>;
 
-using TaggedTypeNodeSequence = Sequence<TaggedTypeNode>;
-using TaggedTypeNodeSequencePtr = TaggedTypeNodeSequence*;
-using TaggedTypeNodeSequenceUPtr = std::unique_ptr<TaggedTypeNodeSequence>;
+using TagTypePairNodeSequence = Sequence<TagTypePairNode>;
+using TagTypePairNodeSequencePtr = TagTypePairNodeSequence*;
+using TagTypePairNodeSequenceUPtr = std::unique_ptr<TagTypePairNodeSequence>;
 
 } // namespace tastr::ast
 

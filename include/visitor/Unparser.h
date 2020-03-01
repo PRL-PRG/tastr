@@ -27,7 +27,7 @@ class Unparser final: public Visitor {
         node.accept(*this);
     }
 
-    void visit(const tastr::ast::TaggedTypeNode& node) override final {
+    void visit(const tastr::ast::TagTypePairNode& node) override final {
         node.get_identifier().accept(*this);
         os_ << ":";
         node.get_type().accept(*this);
