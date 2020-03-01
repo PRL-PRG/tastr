@@ -126,9 +126,9 @@
     }
     #include "location.hh"
     #include "ast.h"
-    using tastr::ast::CharacterTypeNode;
-    using tastr::ast::ComplexTypeNode;
-    using tastr::ast::DoubleTypeNode;
+    using tastr::ast::CharacterScalarTypeNode;
+    using tastr::ast::ComplexScalarTypeNode;
+    using tastr::ast::DoubleScalarTypeNode;
     using tastr::ast::ExpressionTypeNode;
     using tastr::ast::ExpressionTypeNodePtr;
     using tastr::ast::EnvironmentTypeNode;
@@ -141,16 +141,16 @@
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
     using tastr::ast::GroupTypeNodePtr;
-    using tastr::ast::IntegerTypeNode;
+    using tastr::ast::IntegerScalarTypeNode;
     using tastr::ast::ListTypeNode;
     using tastr::ast::ListTypeNodePtr;
-    using tastr::ast::LogicalTypeNode;
+    using tastr::ast::LogicalScalarTypeNode;
     using tastr::ast::TaggedTypeNode;
     using tastr::ast::TaggedTypeNodePtr;
     using tastr::ast::TaggedTypeNodeUPtr;
     using tastr::ast::NoNaTypeNode;
     using tastr::ast::NoNaTypeNodePtr;
-    using tastr::ast::RawTypeNode;
+    using tastr::ast::RawScalarTypeNode;
     using tastr::ast::ScalarTypeNodePtr;
     using tastr::ast::ScalarTypeNodeUPtr;
     using tastr::ast::sequence_t;
@@ -192,22 +192,22 @@
 %%
 
 scalartype:         INTEGER                                 {
-                                                                $$ = new IntegerTypeNode();
+                                                                $$ = new IntegerScalarTypeNode();
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleTypeNode();
+                                                                $$ = new DoubleScalarTypeNode();
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexTypeNode();
+                                                                $$ = new ComplexScalarTypeNode();
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterTypeNode();
+                                                                $$ = new CharacterScalarTypeNode();
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalTypeNode();
+                                                                $$ = new LogicalScalarTypeNode();
                                                             }
           |         RAW                                     {
-                                                                $$ = new RawTypeNode();
+                                                                $$ = new RawScalarTypeNode();
                                                             }
           ;
 

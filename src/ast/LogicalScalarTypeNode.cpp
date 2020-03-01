@@ -1,8 +1,8 @@
-#include "ast/LogicalTypeNode.h"
+#include "ast/LogicalScalarTypeNode.h"
 
 #include "visitor/Visitor.h"
 
-void tastr::ast::LogicalTypeNode::accept(
+void tastr::ast::LogicalScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {
     visitor.visit(*this);
 }

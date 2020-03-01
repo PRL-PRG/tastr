@@ -1,8 +1,8 @@
-#include "ast/IntegerTypeNode.h"
+#include "ast/RawScalarTypeNode.h"
 
 #include "visitor/Visitor.h"
 
-void tastr::ast::IntegerTypeNode::accept(
+void tastr::ast::RawScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {
     visitor.visit(*this);
 }

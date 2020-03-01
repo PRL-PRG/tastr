@@ -37,7 +37,7 @@ class Unparser final: public Visitor {
         node.get_type().accept(*this);
     }
 
-    void visit(const tastr::ast::CharacterTypeNode& node) override final {
+    void visit(const tastr::ast::CharacterScalarTypeNode& node) override final {
         os_ << "character";
     }
 
@@ -57,11 +57,11 @@ class Unparser final: public Visitor {
         os_ << "symbol";
     }
 
-    void visit(const tastr::ast::ComplexTypeNode& node) override final {
+    void visit(const tastr::ast::ComplexScalarTypeNode& node) override final {
         os_ << "complex";
     }
 
-    void visit(const tastr::ast::DoubleTypeNode& node) override final {
+    void visit(const tastr::ast::DoubleScalarTypeNode& node) override final {
         os_ << "double";
     }
 
@@ -91,7 +91,7 @@ class Unparser final: public Visitor {
         os_ << ")";
     }
 
-    void visit(const tastr::ast::IntegerTypeNode& node) override final {
+    void visit(const tastr::ast::IntegerScalarTypeNode& node) override final {
         os_ << "integer";
     }
 
@@ -108,7 +108,7 @@ class Unparser final: public Visitor {
         os_ << "))";
     }
 
-    void visit(const tastr::ast::LogicalTypeNode& node) override final {
+    void visit(const tastr::ast::LogicalScalarTypeNode& node) override final {
         os_ << "logical";
     }
 
@@ -117,7 +117,7 @@ class Unparser final: public Visitor {
         node.get_inner_type().accept(*this);
     }
 
-    void visit(const tastr::ast::RawTypeNode& node) override final {
+    void visit(const tastr::ast::RawScalarTypeNode& node) override final {
         os_ << "raw";
     }
 
