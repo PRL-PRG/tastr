@@ -1,25 +1,25 @@
 #ifndef TASTR_AST_STRUCT_TYPE_H
 #define TASTR_AST_STRUCT_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 #include "Sequence.h"
 #include "TaggedTypeNode.h"
 
 namespace tastr::ast {
 
 class StructTypeNode final
-    : public CompositeTypeNode
+    : public TypeNode
     , public TaggedTypeNodeSequence {
   public:
     explicit StructTypeNode(TaggedTypeNodeSequence sequence)
-        : CompositeTypeNode(), TaggedTypeNodeSequence(std::move(sequence)) {
+        : TypeNode(), TaggedTypeNodeSequence(std::move(sequence)) {
     }
 
     ~StructTypeNode() {
     }
 
     StructTypeNode(const StructTypeNode& node)
-        : CompositeTypeNode(node), TaggedTypeNodeSequence(node) {
+        : TypeNode(node), TaggedTypeNodeSequence(node) {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

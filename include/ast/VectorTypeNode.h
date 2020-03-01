@@ -1,24 +1,24 @@
 #ifndef TASTR_AST_VECTOR_TYPE_H
 #define TASTR_AST_VECTOR_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 #include "ScalarTypeNode.h"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class VectorTypeNode: public CompositeTypeNode {
+class VectorTypeNode: public TypeNode {
   public:
     VectorTypeNode(std::unique_ptr<ScalarTypeNode> scalar_type)
-        : CompositeTypeNode(), scalar_type_(std::move(scalar_type)) {
+        : TypeNode(), scalar_type_(std::move(scalar_type)) {
     }
 
     ~VectorTypeNode() {
     }
 
     VectorTypeNode(const VectorTypeNode& node)
-        : CompositeTypeNode(node)
+        : TypeNode(node)
         , scalar_type_(node.get_scalar_type().clone()) {
     }
 

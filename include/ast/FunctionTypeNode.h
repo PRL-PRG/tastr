@@ -1,16 +1,16 @@
 #ifndef TASTR_AST_FUNCTION_TYPE_H
 #define TASTR_AST_FUNCTION_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 #include "Sequence.h"
 
 namespace tastr::ast {
 
-class FunctionTypeNode final: public CompositeTypeNode {
+class FunctionTypeNode final: public TypeNode {
   public:
     FunctionTypeNode(TypeNodeSequenceUPtr parameter_types,
                      std::unique_ptr<TypeNode> return_type)
-        : CompositeTypeNode()
+        : TypeNode()
         , parameter_types_(std::move(parameter_types))
         , return_type_(std::move(return_type)) {
     }
@@ -19,7 +19,7 @@ class FunctionTypeNode final: public CompositeTypeNode {
     }
 
     FunctionTypeNode(const FunctionTypeNode& node)
-        : CompositeTypeNode(node)
+        : TypeNode(node)
         , parameter_types_(node.get_parameter_types().clone())
         , return_type_(node.get_return_type().clone()) {
     }

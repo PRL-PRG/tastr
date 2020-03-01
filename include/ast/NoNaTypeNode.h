@@ -1,24 +1,24 @@
 #ifndef TASTR_AST_NO_NA_TYPE_H
 #define TASTR_AST_NO_NA_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 #include "VectorTypeNode.h"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class NoNaTypeNode final: public CompositeTypeNode {
+class NoNaTypeNode final: public TypeNode {
   public:
     NoNaTypeNode(std::unique_ptr<VectorTypeNode> inner_type)
-        : CompositeTypeNode(), inner_type_(std::move(inner_type)) {
+        : TypeNode(), inner_type_(std::move(inner_type)) {
     }
 
     ~NoNaTypeNode() {
     }
 
     NoNaTypeNode(const NoNaTypeNode& node)
-        : CompositeTypeNode(node), inner_type_(node.get_inner_type().clone()) {
+        : TypeNode(node), inner_type_(node.get_inner_type().clone()) {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

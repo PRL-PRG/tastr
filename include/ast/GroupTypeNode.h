@@ -1,23 +1,23 @@
 #ifndef TASTR_AST_GROUP_TYPE_H
 #define TASTR_AST_GROUP_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class GroupTypeNode final: public CompositeTypeNode {
+class GroupTypeNode final: public TypeNode {
   public:
     explicit GroupTypeNode(std::unique_ptr<TypeNode> inner_type)
-        : CompositeTypeNode(), inner_type_(std::move(inner_type)) {
+        : TypeNode(), inner_type_(std::move(inner_type)) {
     }
 
     ~GroupTypeNode() {
     }
 
     GroupTypeNode(const GroupTypeNode& node)
-        : CompositeTypeNode(node), inner_type_(node.get_inner_type().clone()) {
+        : TypeNode(node), inner_type_(node.get_inner_type().clone()) {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

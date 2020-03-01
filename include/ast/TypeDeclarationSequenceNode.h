@@ -1,22 +1,22 @@
 #ifndef TASTR_AST_TYPE_DECLARATION_SEQUENCE_H
 #define TASTR_AST_TYPE_DECLARATION_SEQUENCE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 #include "Sequence.h"
 #include "TypeDeclarationNode.h"
 
 namespace tastr::ast {
 // TODO: fix base class to Node
 class TypeDeclarationSequenceNode final
-    : public CompositeTypeNode
+    : public TypeNode
     , public Sequence<TypeDeclarationNode> {
   public:
     explicit TypeDeclarationSequenceNode()
-        : CompositeTypeNode(), Sequence<TypeDeclarationNode>() {
+        : TypeNode(), Sequence<TypeDeclarationNode>() {
     }
 
     TypeDeclarationSequenceNode(const TypeDeclarationSequenceNode& node)
-        : CompositeTypeNode(node), Sequence<TypeDeclarationNode>(node) {
+        : TypeNode(node), Sequence<TypeDeclarationNode>(node) {
     }
 
     ~TypeDeclarationSequenceNode() {

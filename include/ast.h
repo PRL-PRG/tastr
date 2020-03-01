@@ -3,7 +3,6 @@
 
 #include "ast/CharacterScalarTypeNode.h"
 #include "ast/ComplexScalarTypeNode.h"
-#include "ast/CompositeTypeNode.h"
 #include "ast/DoubleScalarTypeNode.h"
 #include "ast/EnvironmentTypeNode.h"
 #include "ast/ExpressionTypeNode.h"
@@ -21,9 +20,9 @@
 #include "ast/StructTypeNode.h"
 #include "ast/SymbolTypeNode.h"
 #include "ast/TaggedTypeNode.h"
-#include "ast/TypeNode.h"
 #include "ast/TypeDeclarationNode.h"
 #include "ast/TypeDeclarationSequenceNode.h"
+#include "ast/TypeNode.h"
 #include "ast/UnionTypeNode.h"
 #include "ast/VarargTypeNode.h"
 #include "ast/VectorTypeNode.h"

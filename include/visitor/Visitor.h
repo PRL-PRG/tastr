@@ -19,8 +19,6 @@ class Visitor {
 
     virtual void visit(const tastr::ast::ScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::CompositeTypeNode& node) = 0;
-
     virtual void visit(const tastr::ast::TaggedTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::CharacterScalarTypeNode& node) = 0;

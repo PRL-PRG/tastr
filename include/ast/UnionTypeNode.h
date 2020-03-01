@@ -1,23 +1,23 @@
 #ifndef TASTR_AST_UNION_TYPE_H
 #define TASTR_AST_UNION_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TypeNode.h"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class UnionTypeNode final: public CompositeTypeNode {
+class UnionTypeNode final: public TypeNode {
   public:
     UnionTypeNode(std::unique_ptr<TypeNode> first_type,
                   std::unique_ptr<TypeNode> second_type)
-        : CompositeTypeNode()
+        : TypeNode()
         , first_type_(std::move(first_type))
         , second_type_(std::move(second_type)) {
     }
 
     UnionTypeNode(const UnionTypeNode& node)
-        : CompositeTypeNode(node)
+        : TypeNode(node)
         , first_type_(node.get_first_type().clone())
         , second_type_(node.get_second_type().clone()) {
     }
