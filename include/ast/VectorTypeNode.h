@@ -3,6 +3,7 @@
 
 #include "CompositeTypeNode.h"
 #include "ScalarTypeNode.h"
+
 #include <memory>
 
 namespace tastr::ast {
@@ -16,13 +17,26 @@ class VectorTypeNode: public CompositeTypeNode {
     ~VectorTypeNode() {
     }
 
+    VectorTypeNode(const VectorTypeNode& node)
+        : CompositeTypeNode(node)
+        , scalar_type_(node.get_scalar_type().clone()) {
+    }
+
     void accept(tastr::visitor::Visitor& visitor) const override;
+
+    std::unique_ptr<VectorTypeNode> clone() const {
+        return std::unique_ptr<VectorTypeNode>(this->clone_impl());
+    }
 
     const tastr::ast::ScalarTypeNode& get_scalar_type() const {
         return *scalar_type_.get();
     }
 
   private:
+    virtual VectorTypeNode* clone_impl() const override final {
+        return new VectorTypeNode(*this);
+    }
+
     std::unique_ptr<ScalarTypeNode> scalar_type_;
 };
 

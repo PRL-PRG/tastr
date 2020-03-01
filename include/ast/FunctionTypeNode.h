@@ -18,7 +18,17 @@ class FunctionTypeNode final: public CompositeTypeNode {
     ~FunctionTypeNode() {
     }
 
+    FunctionTypeNode(const FunctionTypeNode& node)
+        : CompositeTypeNode(node)
+        , parameter_types_(node.get_parameter_types().clone())
+        , return_type_(node.get_return_type().clone()) {
+    }
+
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<FunctionTypeNode> clone() const {
+        return std::unique_ptr<FunctionTypeNode>(this->clone_impl());
+    }
 
     const tastr::ast::Sequence<TypeNode>& get_parameter_types() const {
         return *parameter_types_.get();
@@ -29,6 +39,10 @@ class FunctionTypeNode final: public CompositeTypeNode {
     }
 
   private:
+    virtual FunctionTypeNode* clone_impl() const override final {
+        return new FunctionTypeNode(*this);
+    };
+
     TypeNodeSequenceUPtr parameter_types_;
     std::unique_ptr<TypeNode> return_type_;
 };

@@ -10,10 +10,22 @@ class ExpressionTypeNode final: public TypeNode {
     ExpressionTypeNode(): TypeNode() {
     }
 
+    ExpressionTypeNode(const ExpressionTypeNode& node): TypeNode(node) {
+    }
+
     ~ExpressionTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<ExpressionTypeNode> clone() const {
+        return std::unique_ptr<ExpressionTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual ExpressionTypeNode* clone_impl() const override final {
+        return new ExpressionTypeNode(*this);
+    };
 };
 
 using ExpressionTypeNodePtr = ExpressionTypeNode*;

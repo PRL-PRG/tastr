@@ -10,10 +10,20 @@ class CompositeTypeNode: public TypeNode {
     CompositeTypeNode(): TypeNode() {
     }
 
+    CompositeTypeNode(const CompositeTypeNode& node): TypeNode(node) {
+    }
+
     virtual ~CompositeTypeNode() {
     }
 
     virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+
+    std::unique_ptr<CompositeTypeNode> clone() const {
+        return std::unique_ptr<CompositeTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual CompositeTypeNode* clone_impl() const = 0;
 };
 
 using CompositeTypeNodePtr = CompositeTypeNode*;

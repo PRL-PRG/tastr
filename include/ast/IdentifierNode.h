@@ -12,7 +12,14 @@ class IdentifierNode final: public Node {
     explicit IdentifierNode(const std::string& name): Node(), name_(name) {
     }
 
+    IdentifierNode(const IdentifierNode& node): Node(node) {
+    }
+
     ~IdentifierNode() {
+    }
+
+    std::unique_ptr<IdentifierNode> clone() const {
+        return std::unique_ptr<IdentifierNode>(this->clone_impl());
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
@@ -22,6 +29,10 @@ class IdentifierNode final: public Node {
     }
 
   private:
+    virtual IdentifierNode* clone_impl() const override final {
+        return new IdentifierNode(*this);
+    };
+
     std::string name_;
 };
 

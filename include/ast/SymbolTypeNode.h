@@ -10,10 +10,22 @@ class SymbolTypeNode final: public TypeNode {
     SymbolTypeNode(): TypeNode() {
     }
 
+    SymbolTypeNode(const SymbolTypeNode& node): TypeNode(node) {
+    }
+
     ~SymbolTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<SymbolTypeNode> clone() const {
+        return std::unique_ptr<SymbolTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual SymbolTypeNode* clone_impl() const override final {
+        return new SymbolTypeNode(*this);
+    }
 };
 
 using SymbolTypeNodePtr = SymbolTypeNode*;

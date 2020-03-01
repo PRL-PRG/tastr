@@ -17,13 +17,25 @@ class NoNaTypeNode final: public CompositeTypeNode {
     ~NoNaTypeNode() {
     }
 
+    NoNaTypeNode(const NoNaTypeNode& node)
+        : CompositeTypeNode(node), inner_type_(node.get_inner_type().clone()) {
+    }
+
     void accept(tastr::visitor::Visitor& visitor) const override final;
 
     const tastr::ast::VectorTypeNode& get_inner_type() const {
         return *inner_type_.get();
     }
 
+    std::unique_ptr<NoNaTypeNode> clone() const {
+        return std::unique_ptr<NoNaTypeNode>(this->clone_impl());
+    }
+
   private:
+    virtual NoNaTypeNode* clone_impl() const override final {
+        return new NoNaTypeNode(*this);
+    };
+
     std::unique_ptr<tastr::ast::VectorTypeNode> inner_type_;
 };
 

@@ -5,6 +5,7 @@
 #include "TypeNode.h"
 
 #include <memory>
+#include <type_traits>
 #include <vector>
 
 namespace tastr::ast {
@@ -18,7 +19,7 @@ using sequence_ptr_t = std::vector<std::unique_ptr<T>>*;
 template <typename T>
 using sequence_uptr_t = std::unique_ptr<std::vector<std::unique_ptr<T>>>;
 
-template <typename T>
+template <typename T, typename = std::enable_if_t<std::is_base_of_v<Node, T>>>
 class Sequence {
   public:
     typedef typename sequence_t<T>::iterator iterator;
@@ -37,11 +38,14 @@ class Sequence {
         : sequence_(std::move(sequence)) {
     }
 
-    Sequence(Sequence<T>&& sequence) = default;
+    Sequence(Sequence<T>&& sequence): sequence_(std::move(sequence.sequence_)) {
+    }
 
-    /*{
-        sequenuce_ = std::move(sequence.sequence_);
-        }*/
+    Sequence(const Sequence<T>& sequence) {
+        for (auto node = sequence.cbegin(); node != sequence.cend(); ++node) {
+            sequence_->push_back((**node).clone());
+        }
+    };
 
     ~Sequence() = default;
 
@@ -89,7 +93,15 @@ class Sequence {
         return sequence_->crend();
     }
 
+    std::unique_ptr<Sequence<T>> clone() const {
+        return std::unique_ptr<Sequence<T>>(this->clone_impl());
+    }
+
   private:
+    virtual Sequence<T>* clone_impl() const {
+        return new Sequence<T>(*this);
+    }
+
     std::unique_ptr<std::vector<std::unique_ptr<T>>> sequence_;
 };
 

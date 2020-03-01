@@ -2,6 +2,7 @@
 #define TASTR_AST_GROUP_TYPE_H
 
 #include "CompositeTypeNode.h"
+
 #include <memory>
 
 namespace tastr::ast {
@@ -15,13 +16,25 @@ class GroupTypeNode final: public CompositeTypeNode {
     ~GroupTypeNode() {
     }
 
+    GroupTypeNode(const GroupTypeNode& node)
+        : CompositeTypeNode(node), inner_type_(node.get_inner_type().clone()) {
+    }
+
     void accept(tastr::visitor::Visitor& visitor) const override final;
 
     const tastr::ast::TypeNode& get_inner_type() const {
         return *inner_type_.get();
     }
 
+    std::unique_ptr<GroupTypeNode> clone() const {
+        return std::unique_ptr<GroupTypeNode>(this->clone_impl());
+    }
+
   private:
+    virtual GroupTypeNode* clone_impl() const override final {
+        return new GroupTypeNode(*this);
+    };
+
     std::unique_ptr<TypeNode> inner_type_;
 };
 

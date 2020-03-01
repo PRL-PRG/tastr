@@ -10,10 +10,20 @@ class TypeNode: public Node {
     TypeNode(): Node() {
     }
 
+    TypeNode(const TypeNode& node): Node(node) {
+    }
+
     virtual ~TypeNode() {
     }
 
     virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+
+    std::unique_ptr<TypeNode> clone() const {
+        return std::unique_ptr<TypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual TypeNode* clone_impl() const = 0;
 };
 
 using TypeNodePtr = TypeNode*;

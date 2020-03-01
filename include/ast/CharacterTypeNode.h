@@ -10,10 +10,22 @@ class CharacterTypeNode final: public ScalarTypeNode {
     CharacterTypeNode(): ScalarTypeNode() {
     }
 
+    CharacterTypeNode(const CharacterTypeNode& node): ScalarTypeNode(node) {
+    }
+
     ~CharacterTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<CharacterTypeNode> clone() const {
+        return std::unique_ptr<CharacterTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual CharacterTypeNode* clone_impl() const override final {
+        return new CharacterTypeNode(*this);
+    };
 };
 
 using CharacterTypeNodePtr = CharacterTypeNode*;

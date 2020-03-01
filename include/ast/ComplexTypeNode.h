@@ -10,10 +10,22 @@ class ComplexTypeNode final: public ScalarTypeNode {
     ComplexTypeNode(): ScalarTypeNode() {
     }
 
+    ComplexTypeNode(const ComplexTypeNode& node): ScalarTypeNode(node) {
+    }
+
     ~ComplexTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<ComplexTypeNode> clone() const {
+        return std::unique_ptr<ComplexTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual ComplexTypeNode* clone_impl() const override final {
+        return new ComplexTypeNode(*this);
+    };
 };
 
 using ComplexTypeNodePtr = ComplexTypeNode*;

@@ -12,12 +12,26 @@ class ListTypeNode final
   public:
     explicit ListTypeNode(TypeNodeSequence sequence)
         : CompositeTypeNode(), TypeNodeSequence(std::move(sequence)) {
+        // TODO: should I call the move constructor above?
     }
 
     ~ListTypeNode() {
     }
 
+    ListTypeNode(const ListTypeNode& node)
+        : CompositeTypeNode(node), TypeNodeSequence(node) {
+    }
+
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<ListTypeNode> clone() const {
+        return std::unique_ptr<ListTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual ListTypeNode* clone_impl() const override final {
+        return new ListTypeNode(*this);
+    };
 };
 
 using ListTypeNodePtr = ListTypeNode*;

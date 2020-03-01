@@ -12,14 +12,24 @@ namespace tastr::ast {
 class TypeDeclarationNode final: public Node {
   public:
     explicit TypeDeclarationNode(std::unique_ptr<IdentifierNode> identifier,
-                             std::unique_ptr<TypeNode> type)
+                                 std::unique_ptr<TypeNode> type)
         : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
+    }
+
+    TypeDeclarationNode(const TypeDeclarationNode& node)
+        : Node(node)
+        , identifier_(node.get_identifier().clone())
+        , type_(node.get_type().clone()) {
     }
 
     ~TypeDeclarationNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<TypeDeclarationNode> clone() const {
+        return std::unique_ptr<TypeDeclarationNode>(this->clone_impl());
+    }
 
     const tastr::ast::IdentifierNode& get_identifier() const {
         return *identifier_.get();
@@ -30,6 +40,10 @@ class TypeDeclarationNode final: public Node {
     }
 
   private:
+    virtual TypeDeclarationNode* clone_impl() const override final {
+        return new TypeDeclarationNode(*this);
+    }
+
     std::unique_ptr<IdentifierNode> identifier_;
     std::unique_ptr<TypeNode> type_;
 };

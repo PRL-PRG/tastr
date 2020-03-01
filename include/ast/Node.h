@@ -14,10 +14,20 @@ class Node {
     Node() {
     }
 
+    Node(const Node& node) {
+    }
+
     virtual ~Node() {
     }
 
     virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+
+    std::unique_ptr<Node> clone() const {
+        return std::unique_ptr<Node>(this->clone_impl());
+    }
+
+  private:
+    virtual Node* clone_impl() const = 0;
 };
 
 using NodePtr = Node*;
@@ -25,4 +35,4 @@ using NodeUPtr = std::unique_ptr<Node>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TYPE_H */
+#endif /* TASTR_AST_NODE_H */

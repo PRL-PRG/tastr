@@ -10,10 +10,20 @@ class ScalarTypeNode: public TypeNode {
     ScalarTypeNode(): TypeNode() {
     }
 
+    ScalarTypeNode(const ScalarTypeNode& node): TypeNode(node) {
+    }
+
     virtual ~ScalarTypeNode() {
     }
 
     virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+
+    std::unique_ptr<ScalarTypeNode> clone() const {
+        return std::unique_ptr<ScalarTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual ScalarTypeNode* clone_impl() const = 0;
 };
 
 using ScalarTypeNodePtr = ScalarTypeNode*;

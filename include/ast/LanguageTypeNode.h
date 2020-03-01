@@ -10,10 +10,22 @@ class LanguageTypeNode final: public TypeNode {
     LanguageTypeNode(): TypeNode() {
     }
 
+    LanguageTypeNode(const LanguageTypeNode& node): TypeNode(node) {
+    }
+
     ~LanguageTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<LanguageTypeNode> clone() const {
+        return std::unique_ptr<LanguageTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual LanguageTypeNode* clone_impl() const override final {
+        return new LanguageTypeNode(*this);
+    };
 };
 
 using LanguageTypeNodePtr = LanguageTypeNode*;

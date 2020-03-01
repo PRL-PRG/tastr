@@ -10,10 +10,22 @@ class EnvironmentTypeNode final: public TypeNode {
     EnvironmentTypeNode(): TypeNode() {
     }
 
+    EnvironmentTypeNode(const EnvironmentTypeNode& node): TypeNode(node) {
+    }
+
     ~EnvironmentTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<EnvironmentTypeNode> clone() const {
+        return std::unique_ptr<EnvironmentTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual EnvironmentTypeNode* clone_impl() const override final {
+        return new EnvironmentTypeNode(*this);
+    };
 };
 
 using EnvironmentTypeNodePtr = EnvironmentTypeNode*;

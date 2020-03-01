@@ -10,10 +10,22 @@ class LogicalTypeNode final: public ScalarTypeNode {
     LogicalTypeNode(): ScalarTypeNode() {
     }
 
+    LogicalTypeNode(const LogicalTypeNode& node): ScalarTypeNode(node) {
+    }
+
     ~LogicalTypeNode() {
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
+
+    std::unique_ptr<LogicalTypeNode> clone() const {
+        return std::unique_ptr<LogicalTypeNode>(this->clone_impl());
+    }
+
+  private:
+    virtual LogicalTypeNode* clone_impl() const override final {
+        return new LogicalTypeNode(*this);
+    };
 };
 
 using LogicalTypeNodePtr = LogicalTypeNode*;
