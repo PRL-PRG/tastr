@@ -193,58 +193,71 @@
 
 scalartype:         INTEGER                                 {
                                                                 $$ = new IntegerScalarTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           |         DOUBLE                                  {
                                                                 $$ = new DoubleScalarTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           |         COMPLEX                                 {
                                                                 $$ = new ComplexScalarTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           |         CHARACTER                               {
                                                                 $$ = new CharacterScalarTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           |         LOGICAL                                 {
                                                                 $$ = new LogicalScalarTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           |         RAW                                     {
                                                                 $$ = new RawScalarTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           ;
 
 environmenttype:    ENVIRONMENT                             {
                                                                 $$ = new EnvironmentTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
                ;
 
 expressiontype:     EXPRESSION                              {
                                                                 $$ = new ExpressionTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
               ;
 
 languagetype:       LANGUAGE                                {
                                                                 $$ = new LanguageTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
             ;
 
 symboltype:         SYMBOL                                  {
                                                                 $$ = new SymbolTypeNode();
+                                                                $$ -> set_location(@1);
                                                             }
           ;
 
 vectortype:         scalartype "[" "]"                      {
                                                                 ScalarTypeNodeUPtr scalar_type($1);
                                                                 $$ = new VectorTypeNode(std::move(scalar_type));
+                                                                $$ -> set_location(@$);
                                                             }
           ;
 
 nonavectortype:     "!" vectortype                          {
                                                                 VectorTypeNodeUPtr vector_type($2);
                                                                 $$ = new NoNaTypeNode(std::move(vector_type));
+                                                                $$ -> set_location(@$);
                                                             }
               ;
 
 listtype:           "((" typeseq "))"                       {
                                                                 $$ = new ListTypeNode(std::move(*$2));
+                                                                $$ -> set_location(@$);
                                                             }
         ;
 
@@ -265,29 +278,70 @@ typeseq:            %empty                                  {
 
 structtype:         "{{" namedtypeseq "}}"                  {
                                                                 $$ = new StructTypeNode(std::move(*$2));
+                                                                $$ -> set_location(@$);
                                                             }
           ;
 
 
-identifier:         INTEGER                                 { $$ = new IdentifierNode($1); }
-          |         DOUBLE                                  { $$ = new IdentifierNode($1); }
-          |         COMPLEX                                 { $$ = new IdentifierNode($1); }
-          |         CHARACTER                               { $$ = new IdentifierNode($1); }
-          |         LOGICAL                                 { $$ = new IdentifierNode($1); }
-          |         RAW                                     { $$ = new IdentifierNode($1); }
-          |         ENVIRONMENT                             { $$ = new IdentifierNode($1); }
-          |         EXPRESSION                              { $$ = new IdentifierNode($1); }
-          |         LANGUAGE                                { $$ = new IdentifierNode($1); }
-          |         SYMBOL                                  { $$ = new IdentifierNode($1); }
-          |         TYPEDECL                                { $$ = new IdentifierNode($1); }
-          |         VARARG                                  { $$ = new IdentifierNode($1); }
-          |         IDENTIFIER                              { $$ = new IdentifierNode($1); }
+identifier:         INTEGER                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         DOUBLE                                  {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         COMPLEX                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         CHARACTER                               {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         LOGICAL                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         RAW                                     {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         ENVIRONMENT                             {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         EXPRESSION                              {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         LANGUAGE                                {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         SYMBOL                                  {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         TYPEDECL                                {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         VARARG                                  {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+          |         IDENTIFIER                              {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
           ;
 
 namedtype:          identifier ":" type                     {
                                                                 IdentifierNodeUPtr ident($1);
                                                                 TypeNodeUPtr type($3);
                                                                 $$ = new TagTypePairNode(std::move(ident), std::move(type));
+                                                                $$ -> set_location(@$);
                                                             }
          ;
 
@@ -307,8 +361,14 @@ namedtypeseq:       %empty                                  {
             ;
 
 
-paramtype:          type                                    {   $$ = $1;               }
-         |          "..."                                   {   $$ = new VarargTypeNode(); }
+paramtype:          type                                    {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@1);
+                                                            }
+         |          "..."                                   {
+                                                                $$ = new VarargTypeNode();
+                                                                $$ -> set_location(@1);
+                                                            }
          ;
 
 paramtypeseq:       %empty                                  {
@@ -330,49 +390,124 @@ functiontype:       "<" paramtypeseq ">" "=>" type          {
                                                                 TypeNodeSequenceUPtr parameter_types($2);
                                                                 TypeNodeUPtr return_type($5);
                                                                 $$ = new FunctionTypeNode(std::move(parameter_types), std::move(return_type));
+                                                                $$ -> set_location(@$);
                                                             }
 
 grouptype:          "(" type ")"                            {
                                                                 TypeNodeUPtr type($2);
                                                                 $$ = new GroupTypeNode(std::move(type));
+                                                                $$ -> set_location(@$);
                                                             }
          ;
 
-nonuniontype:       scalartype                              {   $$ = $1; }
-            |       environmenttype                         {   $$ = $1; }
-            |       expressiontype                          {   $$ = $1; }
-            |       languagetype                            {   $$ = $1; }
-            |       symboltype                              {   $$ = $1; }
-            |       vectortype                              {   $$ = $1; }
-            |       nonavectortype                          {   $$ = $1; }
-            |       functiontype                            {   $$ = $1; }
-            |       structtype                              {   $$ = $1; }
-            |       listtype                                {   $$ = $1; }
-            |       grouptype                               {   $$ = $1; }
+nonuniontype:       scalartype                              {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       environmenttype                         {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       expressiontype                          {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       languagetype                            {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       symboltype                              {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       vectortype                              {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       nonavectortype                          {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       functiontype                            {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       structtype                              {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       listtype                                {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       grouptype                               {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
             ;
 
 
-type:               nonuniontype                            {   $$ = $1; }
+type:               nonuniontype                            {
+                                                                $$ = $1;
+                                                                $$ -> set_location(@$);
+                                                            }
     |               type "|" nonuniontype                   {
                                                                 TypeNodeUPtr left_type($1);
                                                                 TypeNodeUPtr right_type($3);
                                                                 $$ = new UnionTypeNode(std::move(left_type), std::move(right_type));
+                                                                $$ -> set_location(@$);
                                                             }
     ;
 
 
-funname:            INTEGER                                 { $$ = new IdentifierNode($1); }
-       |            DOUBLE                                  { $$ = new IdentifierNode($1); }
-       |            COMPLEX                                 { $$ = new IdentifierNode($1); }
-       |            CHARACTER                               { $$ = new IdentifierNode($1); }
-       |            LOGICAL                                 { $$ = new IdentifierNode($1); }
-       |            RAW                                     { $$ = new IdentifierNode($1); }
-       |            ENVIRONMENT                             { $$ = new IdentifierNode($1); }
-       |            EXPRESSION                              { $$ = new IdentifierNode($1); }
-       |            LANGUAGE                                { $$ = new IdentifierNode($1); }
-       |            SYMBOL                                  { $$ = new IdentifierNode($1); }
-       |            TYPEDECL                                { $$ = new IdentifierNode($1); }
-       |            IDENTIFIER                              { $$ = new IdentifierNode($1); }
+funname:            INTEGER                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            DOUBLE                                  {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            COMPLEX                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            CHARACTER                               {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            LOGICAL                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            RAW                                     {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            ENVIRONMENT                             {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            EXPRESSION                              {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            LANGUAGE                                {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            SYMBOL                                  {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            TYPEDECL                                {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       |            IDENTIFIER                              {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
        ;
 
 
@@ -380,6 +515,7 @@ decltype:           TYPEDECL funname type ";"               {
                                                                 IdentifierNodeUPtr identifier($2);
                                                                 TypeNodeUPtr type($3);
                                                                 $$ = new TypeDeclarationNode(std::move(identifier), std::move(type));
+                                                                $$ -> set_location(@$);
                                                             }
         ;
 

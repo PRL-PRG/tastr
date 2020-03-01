@@ -1,6 +1,8 @@
 #ifndef TASTR_AST_NODE_H
 #define TASTR_AST_NODE_H
 
+#include "location.hh"
+
 #include <memory>
 
 namespace tastr::visitor {
@@ -14,7 +16,7 @@ class Node {
     Node() {
     }
 
-    Node(const Node& node) {
+    Node(const Node& node): location_(node.get_location()) {
     }
 
     virtual ~Node() {
@@ -122,8 +124,22 @@ class Node {
         return false;
     }
 
+    void set_location(const tastr::parser::location& location) {
+        location_ = location;
+    }
+
+    const tastr::parser::location& get_location() const {
+        return location_;
+    }
+
+    tastr::parser::location& get_location() {
+        return location_;
+    }
+
   private:
     virtual Node* clone_impl() const = 0;
+
+    tastr::parser::location location_;
 }; // namespace tastr::ast
 
 using NodePtr = Node*;
