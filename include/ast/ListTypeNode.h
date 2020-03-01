@@ -1,15 +1,17 @@
 #ifndef TASTR_AST_LIST_TYPE_H
 #define TASTR_AST_LIST_TYPE_H
 
-#include "SequenceTypeNode.h"
+#include "CompositeTypeNode.h"
+#include "Sequence.h"
 
 namespace tastr::ast {
 
-class ListTypeNode final: public SequenceTypeNode<TypeNode> {
+class ListTypeNode final
+    : public CompositeTypeNode
+    , public TypeNodeSequence {
   public:
-    explicit ListTypeNode(
-        std::unique_ptr<std::vector<std::unique_ptr<TypeNode>>> sequence)
-        : SequenceTypeNode(std::move(sequence)) {
+    explicit ListTypeNode(TypeNodeSequence sequence)
+        : CompositeTypeNode(), TypeNodeSequence(std::move(sequence)) {
     }
 
     ~ListTypeNode() {

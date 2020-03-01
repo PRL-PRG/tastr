@@ -21,12 +21,6 @@ class Visitor {
 
     virtual void visit(const tastr::ast::CompositeTypeNode& node) = 0;
 
-    virtual void
-    visit(const tastr::ast::SequenceTypeNode<tastr::ast::TypeNode>& node) = 0;
-
-    virtual void
-    visit(const tastr::ast::SequenceTypeNode<tastr::ast::TaggedTypeNode>& type) = 0;
-
     virtual void visit(const tastr::ast::TaggedTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::CharacterTypeNode& node) = 0;
@@ -34,8 +28,6 @@ class Visitor {
     virtual void visit(const tastr::ast::ComplexTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::DoubleTypeNode& node) = 0;
-
-    virtual void visit(const tastr::ast::ParameterTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::EnvironmentTypeNode& node) = 0;
 

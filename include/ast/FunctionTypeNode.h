@@ -2,14 +2,14 @@
 #define TASTR_AST_FUNCTION_TYPE_H
 
 #include "CompositeTypeNode.h"
-#include "ParameterTypeNode.h"
+#include "Sequence.h"
 
 namespace tastr::ast {
 
 class FunctionTypeNode final: public CompositeTypeNode {
   public:
-    FunctionTypeNode(std::unique_ptr<ParameterTypeNode> parameter_types,
-                 std::unique_ptr<TypeNode> return_type)
+    FunctionTypeNode(TypeNodeSequenceUPtr parameter_types,
+                     std::unique_ptr<TypeNode> return_type)
         : CompositeTypeNode()
         , parameter_types_(std::move(parameter_types))
         , return_type_(std::move(return_type)) {
@@ -20,7 +20,7 @@ class FunctionTypeNode final: public CompositeTypeNode {
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
 
-    const tastr::ast::ParameterTypeNode& get_parameter_types() const {
+    const tastr::ast::Sequence<TypeNode>& get_parameter_types() const {
         return *parameter_types_.get();
     }
 
@@ -29,7 +29,7 @@ class FunctionTypeNode final: public CompositeTypeNode {
     }
 
   private:
-    std::unique_ptr<ParameterTypeNode> parameter_types_;
+    TypeNodeSequenceUPtr parameter_types_;
     std::unique_ptr<TypeNode> return_type_;
 };
 

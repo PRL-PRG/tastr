@@ -1,7 +1,8 @@
 #ifndef TASTR_AST_SEQUENCE_TYPE_H
 #define TASTR_AST_SEQUENCE_TYPE_H
 
-#include "CompositeTypeNode.h"
+#include "TaggedTypeNode.h"
+#include "TypeNode.h"
 
 #include <memory>
 #include <vector>
@@ -18,33 +19,31 @@ template <typename T>
 using sequence_uptr_t = std::unique_ptr<std::vector<std::unique_ptr<T>>>;
 
 template <typename T>
-class SequenceTypeNode: public CompositeTypeNode {
+class Sequence {
   public:
-    typedef typename std::vector<std::unique_ptr<T>>::iterator iterator;
+    typedef typename sequence_t<T>::iterator iterator;
 
-    typedef typename std::vector<std::unique_ptr<T>>::reverse_iterator
-        reverse_iterator;
+    typedef typename sequence_t<T>::reverse_iterator reverse_iterator;
+
+    typedef typename sequence_t<T>::const_iterator const_iterator;
 
     typedef
-        typename std::vector<std::unique_ptr<T>>::const_iterator const_iterator;
+        typename sequence_t<T>::const_reverse_iterator const_reverse_iterator;
 
-    typedef typename std::vector<std::unique_ptr<T>>::const_reverse_iterator
-        const_reverse_iterator;
-
-    explicit SequenceTypeNode()
-        : CompositeTypeNode()
-        , sequence_(new std::vector<std::unique_ptr<T>>()) {
+    explicit Sequence(): sequence_(new sequence_t<T>()) {
     }
 
-    explicit SequenceTypeNode(
-        std::unique_ptr<std::vector<std::unique_ptr<T>>> sequence)
-        : CompositeTypeNode(), sequence_(std::move(sequence)) {
+    explicit Sequence(sequence_uptr_t<T> sequence)
+        : sequence_(std::move(sequence)) {
     }
 
-    virtual ~SequenceTypeNode() {
-    }
+    Sequence(Sequence<T>&& sequence) = default;
 
-    virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+    /*{
+        sequenuce_ = std::move(sequence.sequence_);
+        }*/
+
+    ~Sequence() = default;
 
     void push_back(std::unique_ptr<T> value) {
         sequence_->push_back(std::move(value));
@@ -95,10 +94,18 @@ class SequenceTypeNode: public CompositeTypeNode {
 };
 
 template <typename T>
-using SequenceTypeNodePtr = SequenceTypeNode<T>*;
+using SequencePtr = Sequence<T>*;
 
 template <typename T>
-using SequenceTypeNodeUPtr = std::unique_ptr<SequenceTypeNode<T>>;
+using SequenceUPtr = std::unique_ptr<Sequence<T>>;
+
+using TypeNodeSequence = Sequence<TypeNode>;
+using TypeNodeSequencePtr = TypeNodeSequence*;
+using TypeNodeSequenceUPtr = std::unique_ptr<TypeNodeSequence>;
+
+using TaggedTypeNodeSequence = Sequence<TaggedTypeNode>;
+using TaggedTypeNodeSequencePtr = TaggedTypeNodeSequence*;
+using TaggedTypeNodeSequenceUPtr = std::unique_ptr<TaggedTypeNodeSequence>;
 
 } // namespace tastr::ast
 

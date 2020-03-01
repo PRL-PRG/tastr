@@ -62,11 +62,11 @@
 %nterm <SymbolTypeNodePtr>              symboltype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
-%nterm <sequence_ptr_t<TypeNode>>       typeseq
+%nterm <TypeNodeSequencePtr>            typeseq
 %nterm <TaggedTypeNodePtr>              namedtype
-%nterm <sequence_ptr_t<TaggedTypeNode>> namedtypeseq
+%nterm <TaggedTypeNodeSequencePtr>      namedtypeseq
 %nterm <TypeNodePtr>                    paramtype
-%nterm <sequence_ptr_t<TypeNode>>       paramtypeseq
+%nterm <TypeNodeSequencePtr>            paramtypeseq
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
@@ -150,9 +150,6 @@
     using tastr::ast::TaggedTypeNodeUPtr;
     using tastr::ast::NoNaTypeNode;
     using tastr::ast::NoNaTypeNodePtr;
-    using tastr::ast::ParameterTypeNode;
-    using tastr::ast::ParameterTypeNodePtr;
-    using tastr::ast::ParameterTypeNodeUPtr;
     using tastr::ast::RawTypeNode;
     using tastr::ast::ScalarTypeNodePtr;
     using tastr::ast::ScalarTypeNodeUPtr;
@@ -177,6 +174,11 @@
     using tastr::ast::IdentifierNodePtr;
     using tastr::ast::IdentifierNodeUPtr;
     using tastr::ast::VarargTypeNode;
+    using tastr::ast::TypeNodeSequence;
+    using tastr::ast::TypeNodeSequencePtr;
+    using tastr::ast::TypeNodeSequenceUPtr;
+    using tastr::ast::TaggedTypeNodeSequence;
+    using tastr::ast::TaggedTypeNodeSequencePtr;
 }
 
 /* inserted near top of source file */
@@ -242,17 +244,16 @@ nonavectortype:     "!" vectortype                          {
               ;
 
 listtype:           "((" typeseq "))"                       {
-                                                                sequence_uptr_t<TypeNode> sequence($2);
-                                                                $$ = new ListTypeNode(std::move(sequence));
+                                                                $$ = new ListTypeNode(std::move(*$2));
                                                             }
         ;
 
 typeseq:            %empty                                  {
-                                                                $$ = new sequence_t<TypeNode>();
+                                                                $$ = new TypeNodeSequence();
                                                             }
        |            type                                    {
                                                                 TypeNodeUPtr type($1);
-                                                                $$ = new sequence_t<TypeNode>();
+                                                                $$ = new TypeNodeSequence();
                                                                 $$ -> push_back(std::move(type));
                                                             }
        |            typeseq "," type                        {
@@ -263,8 +264,7 @@ typeseq:            %empty                                  {
        ;
 
 structtype:         "{{" namedtypeseq "}}"                  {
-                                                                sequence_uptr_t<TaggedTypeNode> sequences($2);
-                                                                $$ = new StructTypeNode(std::move(sequences));
+                                                                $$ = new StructTypeNode(std::move(*$2));
                                                             }
           ;
 
@@ -292,11 +292,11 @@ namedtype:          identifier ":" type                     {
          ;
 
 namedtypeseq:       %empty                                  {
-                                                                $$ = new sequence_t<TaggedTypeNode>();
+                                                                $$ = new TaggedTypeNodeSequence();
                                                             }
             |       namedtype                               {
                                                                 TaggedTypeNodeUPtr named_type($1);
-                                                                $$ = new sequence_t<TaggedTypeNode>();
+                                                                $$ = new TaggedTypeNodeSequence();
                                                                 $$ -> push_back(std::move(named_type));
                                                             }
             |       namedtypeseq "," namedtype              {
@@ -312,11 +312,11 @@ paramtype:          type                                    {   $$ = $1;        
          ;
 
 paramtypeseq:       %empty                                  {
-                                                                $$ = new sequence_t<TypeNode>();
+                                                                $$ = new TypeNodeSequence();
                                                             }
             |       paramtype                               {
                                                                 TypeNodeUPtr type($1);
-                                                                $$ = new sequence_t<TypeNode>();
+                                                                $$ = new TypeNodeSequence();
                                                                 $$ -> push_back(std::move(type));
                                                             }
             |       paramtypeseq "," paramtype              {
@@ -327,9 +327,7 @@ paramtypeseq:       %empty                                  {
             ;
 
 functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                sequence_uptr_t<TypeNode> sequence($2);
-                                                                ParameterTypeNodePtr types = new ParameterTypeNode(std::move(sequence));
-                                                                ParameterTypeNodeUPtr parameter_types(types);
+                                                                TypeNodeSequenceUPtr parameter_types($2);
                                                                 TypeNodeUPtr return_type($5);
                                                                 $$ = new FunctionTypeNode(std::move(parameter_types), std::move(return_type));
                                                             }

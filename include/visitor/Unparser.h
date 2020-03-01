@@ -31,14 +31,6 @@ class Unparser final: public Visitor {
         node.accept(*this);
     }
 
-    void visit(
-        const tastr::ast::SequenceTypeNode<tastr::ast::TypeNode>& type) override final {
-    }
-
-    void visit(const tastr::ast::SequenceTypeNode<tastr::ast::TaggedTypeNode>& node)
-        override final {
-    }
-
     void visit(const tastr::ast::TaggedTypeNode& node) override final {
         node.get_identifier().accept(*this);
         os_ << ":";
@@ -74,15 +66,13 @@ class Unparser final: public Visitor {
     }
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
-        node.get_parameter_types().accept(*this);
-        os_ << " => ";
-        node.get_return_type().accept(*this);
-    }
+        const tastr::ast::Sequence<TypeNode>& parameter_types =
+            node.get_parameter_types();
 
-    void visit(const tastr::ast::ParameterTypeNode& node) override final {
         os_ << "<";
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
+        int show_separator = parameter_types.size() - 1;
+        for (auto i = parameter_types.cbegin(); i != parameter_types.cend();
+             ++i) {
             os_ << **i;
             if (show_separator) {
                 os_ << ", ";
@@ -90,6 +80,9 @@ class Unparser final: public Visitor {
             --show_separator;
         }
         os_ << ">";
+
+        os_ << " => ";
+        node.get_return_type().accept(*this);
     }
 
     void visit(const tastr::ast::GroupTypeNode& node) override final {
