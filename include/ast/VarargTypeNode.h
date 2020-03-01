@@ -24,6 +24,10 @@ class VarargTypeNode final: public TypeNode {
         return std::unique_ptr<VarargTypeNode>(this->clone_impl());
     }
 
+    bool is_vararg_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual VarargTypeNode* clone_impl() const override final {
         return new VarargTypeNode(*this);

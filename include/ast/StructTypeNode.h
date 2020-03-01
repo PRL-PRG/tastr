@@ -28,6 +28,10 @@ class StructTypeNode final
         return std::unique_ptr<StructTypeNode>(this->clone_impl());
     }
 
+    bool is_struct_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual StructTypeNode* clone_impl() const override final {
         return new StructTypeNode(*this);

@@ -39,6 +39,10 @@ class UnionTypeNode final: public CompositeTypeNode {
         return *second_type_.get();
     }
 
+    bool is_union_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual UnionTypeNode* clone_impl() const override final {
         return new UnionTypeNode(*this);

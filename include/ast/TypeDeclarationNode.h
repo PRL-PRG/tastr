@@ -39,6 +39,10 @@ class TypeDeclarationNode final: public Node {
         return *type_.get();
     }
 
+    bool is_type_declaration_node() const override final {
+        return true;
+    }
+
   private:
     virtual TypeDeclarationNode* clone_impl() const override final {
         return new TypeDeclarationNode(*this);

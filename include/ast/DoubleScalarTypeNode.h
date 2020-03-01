@@ -23,6 +23,10 @@ class DoubleScalarTypeNode final: public ScalarTypeNode {
         return std::unique_ptr<DoubleScalarTypeNode>(this->clone_impl());
     }
 
+    bool is_double_scalar_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual DoubleScalarTypeNode* clone_impl() const override final {
         return new DoubleScalarTypeNode(*this);

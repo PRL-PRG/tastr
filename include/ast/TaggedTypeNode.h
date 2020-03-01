@@ -39,6 +39,10 @@ class TaggedTypeNode final: public Node {
         return *type_.get();
     }
 
+    bool is_tagged_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual TaggedTypeNode* clone_impl() const override final {
         return new TaggedTypeNode(*this);

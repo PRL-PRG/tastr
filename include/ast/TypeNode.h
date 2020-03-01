@@ -22,6 +22,10 @@ class TypeNode: public Node {
         return std::unique_ptr<TypeNode>(this->clone_impl());
     }
 
+    bool is_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual TypeNode* clone_impl() const = 0;
 };

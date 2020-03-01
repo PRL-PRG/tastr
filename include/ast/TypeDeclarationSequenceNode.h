@@ -28,6 +28,10 @@ class TypeDeclarationSequenceNode final
         return std::unique_ptr<TypeDeclarationSequenceNode>(this->clone_impl());
     }
 
+    bool is_type_declaration_sequence_node() const override final {
+        return true;
+    }
+
   private:
     virtual TypeDeclarationSequenceNode* clone_impl() const override final {
         return new TypeDeclarationSequenceNode(*this);

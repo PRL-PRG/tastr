@@ -22,6 +22,10 @@ class RawScalarTypeNode final: public ScalarTypeNode {
         return std::unique_ptr<RawScalarTypeNode>(this->clone_impl());
     }
 
+    bool is_raw_scalar_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual RawScalarTypeNode* clone_impl() const override final {
         return new RawScalarTypeNode(*this);

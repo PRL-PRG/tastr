@@ -28,6 +28,10 @@ class IdentifierNode final: public Node {
         return name_;
     }
 
+    bool is_identifier_node() const override final {
+        return true;
+    }
+
   private:
     virtual IdentifierNode* clone_impl() const override final {
         return new IdentifierNode(*this);

@@ -23,6 +23,10 @@ class LogicalScalarTypeNode final: public ScalarTypeNode {
         return std::unique_ptr<LogicalScalarTypeNode>(this->clone_impl());
     }
 
+    bool is_logical_scalar_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual LogicalScalarTypeNode* clone_impl() const override final {
         return new LogicalScalarTypeNode(*this);

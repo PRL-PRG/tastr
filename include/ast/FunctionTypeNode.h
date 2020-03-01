@@ -38,6 +38,10 @@ class FunctionTypeNode final: public CompositeTypeNode {
         return *return_type_.get();
     }
 
+    bool is_function_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual FunctionTypeNode* clone_impl() const override final {
         return new FunctionTypeNode(*this);

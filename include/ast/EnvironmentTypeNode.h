@@ -22,6 +22,10 @@ class EnvironmentTypeNode final: public TypeNode {
         return std::unique_ptr<EnvironmentTypeNode>(this->clone_impl());
     }
 
+    bool is_environment_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual EnvironmentTypeNode* clone_impl() const override final {
         return new EnvironmentTypeNode(*this);

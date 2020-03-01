@@ -30,6 +30,10 @@ class GroupTypeNode final: public CompositeTypeNode {
         return std::unique_ptr<GroupTypeNode>(this->clone_impl());
     }
 
+    bool is_group_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual GroupTypeNode* clone_impl() const override final {
         return new GroupTypeNode(*this);

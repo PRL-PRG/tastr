@@ -28,6 +28,10 @@ class ListTypeNode final
         return std::unique_ptr<ListTypeNode>(this->clone_impl());
     }
 
+    bool is_list_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual ListTypeNode* clone_impl() const override final {
         return new ListTypeNode(*this);

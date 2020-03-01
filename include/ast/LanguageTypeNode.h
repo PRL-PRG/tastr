@@ -22,6 +22,10 @@ class LanguageTypeNode final: public TypeNode {
         return std::unique_ptr<LanguageTypeNode>(this->clone_impl());
     }
 
+    bool is_language_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual LanguageTypeNode* clone_impl() const override final {
         return new LanguageTypeNode(*this);

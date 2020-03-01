@@ -22,6 +22,10 @@ class ExpressionTypeNode final: public TypeNode {
         return std::unique_ptr<ExpressionTypeNode>(this->clone_impl());
     }
 
+    bool is_expression_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual ExpressionTypeNode* clone_impl() const override final {
         return new ExpressionTypeNode(*this);

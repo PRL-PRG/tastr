@@ -22,6 +22,10 @@ class SymbolTypeNode final: public TypeNode {
         return std::unique_ptr<SymbolTypeNode>(this->clone_impl());
     }
 
+    bool is_symbol_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual SymbolTypeNode* clone_impl() const override final {
         return new SymbolTypeNode(*this);

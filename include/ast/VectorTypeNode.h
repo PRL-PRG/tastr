@@ -32,6 +32,10 @@ class VectorTypeNode: public CompositeTypeNode {
         return *scalar_type_.get();
     }
 
+    bool is_vector_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual VectorTypeNode* clone_impl() const override final {
         return new VectorTypeNode(*this);

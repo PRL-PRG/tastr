@@ -31,6 +31,10 @@ class NoNaTypeNode final: public CompositeTypeNode {
         return std::unique_ptr<NoNaTypeNode>(this->clone_impl());
     }
 
+    bool is_no_na_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual NoNaTypeNode* clone_impl() const override final {
         return new NoNaTypeNode(*this);

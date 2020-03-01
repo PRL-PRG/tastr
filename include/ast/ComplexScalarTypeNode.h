@@ -23,6 +23,10 @@ class ComplexScalarTypeNode final: public ScalarTypeNode {
         return std::unique_ptr<ComplexScalarTypeNode>(this->clone_impl());
     }
 
+    bool is_complex_scalar_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual ComplexScalarTypeNode* clone_impl() const override final {
         return new ComplexScalarTypeNode(*this);

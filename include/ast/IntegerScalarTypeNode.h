@@ -23,6 +23,10 @@ class IntegerScalarTypeNode final: public ScalarTypeNode {
         return std::unique_ptr<IntegerScalarTypeNode>(this->clone_impl());
     }
 
+    bool is_integer_scalar_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual IntegerScalarTypeNode* clone_impl() const override final {
         return new IntegerScalarTypeNode(*this);

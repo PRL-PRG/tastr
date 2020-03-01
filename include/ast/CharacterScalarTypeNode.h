@@ -23,6 +23,10 @@ class CharacterScalarTypeNode final: public ScalarTypeNode {
         return std::unique_ptr<CharacterScalarTypeNode>(this->clone_impl());
     }
 
+    bool is_character_scalar_type_node() const override final {
+        return true;
+    }
+
   private:
     virtual CharacterScalarTypeNode* clone_impl() const override final {
         return new CharacterScalarTypeNode(*this);
