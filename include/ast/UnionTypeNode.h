@@ -16,13 +16,35 @@ class UnionTypeNode final: public TypeNode {
         , second_type_(std::move(second_type)) {
     }
 
+    ~UnionTypeNode() = default;
+
     UnionTypeNode(const UnionTypeNode& node)
         : TypeNode(node)
-        , first_type_(node.get_first_type().clone())
-        , second_type_(node.get_second_type().clone()) {
+        , first_type_(node.first_type_->clone())
+        , second_type_(node.second_type_->clone()) {
     }
 
-    ~UnionTypeNode() {
+    UnionTypeNode(UnionTypeNode&& node)
+        : TypeNode(std::move(node))
+        , first_type_(std::move(node.first_type_))
+        , second_type_(std::move(node.second_type_)) {
+    }
+
+    UnionTypeNode& operator=(const UnionTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        first_type_ = node.first_type_->clone();
+        second_type_ = node.second_type_->clone();
+        return *this;
+    }
+
+    UnionTypeNode& operator=(UnionTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        first_type_ = std::move(node.first_type_);
+        second_type_ = std::move(node.second_type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

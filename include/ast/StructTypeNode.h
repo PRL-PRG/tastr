@@ -1,23 +1,41 @@
 #ifndef TASTR_AST_STRUCT_TYPE_H
 #define TASTR_AST_STRUCT_TYPE_H
 
-#include "TagTypePairNodeSequenceNode.h"
 #include "TagTypePairNode.h"
+#include "TagTypePairNodeSequenceNode.h"
 #include "TypeNode.h"
 
 namespace tastr::ast {
 
 class StructTypeNode final: public TypeNode {
   public:
-    explicit StructTypeNode(TagTypePairNodeSequenceNodeUPtr sequence)
-        : TypeNode(), sequence_(std::move(sequence)) {
+    explicit StructTypeNode(TagTypePairNodeSequenceNodeUPtr element_types)
+        : TypeNode(), element_types_(std::move(element_types)) {
     }
 
-    ~StructTypeNode() {
-    }
+    ~StructTypeNode() = default;
 
     StructTypeNode(const StructTypeNode& node)
-        : TypeNode(node), sequence_(node.get_element_types().clone()) {
+        : TypeNode(node), element_types_(node.element_types_->clone()) {
+    }
+
+    StructTypeNode(StructTypeNode&& node)
+        : TypeNode(std::move(node)), element_types_(std::move(node.element_types_)) {
+    }
+
+    StructTypeNode& operator=(const StructTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        element_types_ = node.element_types_->clone();
+        return *this;
+    }
+
+    StructTypeNode& operator=(StructTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        element_types_ = std::move(node.element_types_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
@@ -31,7 +49,7 @@ class StructTypeNode final: public TypeNode {
     }
 
     TagTypePairNodeSequenceNode& get_element_types() const {
-        return *sequence_.get();
+        return *element_types_.get();
     }
 
   private:
@@ -39,7 +57,7 @@ class StructTypeNode final: public TypeNode {
         return new StructTypeNode(*this);
     }
 
-    TagTypePairNodeSequenceNodeUPtr sequence_;
+    TagTypePairNodeSequenceNodeUPtr element_types_;
 };
 
 using StructTypeNodePtr = StructTypeNode*;

@@ -1,8 +1,8 @@
 #ifndef TASTR_AST_FUNCTION_TYPE_H
 #define TASTR_AST_FUNCTION_TYPE_H
 
-#include "TypeNodeSequenceNode.h"
 #include "TypeNode.h"
+#include "TypeNodeSequenceNode.h"
 
 namespace tastr::ast {
 
@@ -15,13 +15,35 @@ class FunctionTypeNode final: public TypeNode {
         , return_type_(std::move(return_type)) {
     }
 
-    ~FunctionTypeNode() {
-    }
+    ~FunctionTypeNode() = default;
 
     FunctionTypeNode(const FunctionTypeNode& node)
         : TypeNode(node)
-        , parameter_types_(node.get_parameter_types().clone())
-        , return_type_(node.get_return_type().clone()) {
+        , parameter_types_(node.parameter_types_->clone())
+        , return_type_(node.return_type_->clone()) {
+    }
+
+    FunctionTypeNode(FunctionTypeNode&& node)
+        : TypeNode(std::move(node))
+        , parameter_types_(std::move(node.parameter_types_))
+        , return_type_(std::move(node.return_type_)) {
+    }
+
+    FunctionTypeNode& operator=(const FunctionTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        parameter_types_ = node.parameter_types_->clone();
+        return_type_ = node.return_type_->clone();
+        return *this;
+    }
+
+    FunctionTypeNode& operator=(FunctionTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        parameter_types_ = std::move(node.parameter_types_);
+        return_type_ = std::move(node.return_type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

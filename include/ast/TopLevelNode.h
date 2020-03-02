@@ -20,11 +20,33 @@ class TopLevelNode final: public Node {
         : name_(name), sequence_(std::move(sequence)) {
     }
 
+    ~TopLevelNode() = default;
+
     TopLevelNode(const TopLevelNode& node)
-        : Node(node), sequence_(node.get_type_declarations().clone()) {
+        : Node(node), name_(node.name_), sequence_(node.sequence_->clone()) {
     }
 
-    ~TopLevelNode() {
+    TopLevelNode(TopLevelNode&& node)
+        : Node(std::move(node))
+        , name_(std::move(node.name_))
+        , sequence_(std::move(node.sequence_)) {
+    }
+
+    TopLevelNode& operator=(const TopLevelNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        Node::operator=(node);
+        name_ = node.name_;
+        sequence_ = node.sequence_->clone();
+        return *this;
+    }
+
+    TopLevelNode& operator=(TopLevelNode&& node) {
+        Node::operator=(std::move(node));
+        name_ = std::move(node.name_);
+        sequence_ = std::move(node.sequence_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

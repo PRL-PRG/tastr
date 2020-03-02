@@ -10,11 +10,27 @@ class CharacterScalarTypeNode final: public ScalarTypeNode {
     CharacterScalarTypeNode(): ScalarTypeNode() {
     }
 
+    ~CharacterScalarTypeNode() = default;
+
     CharacterScalarTypeNode(const CharacterScalarTypeNode& node)
         : ScalarTypeNode(node) {
     }
 
-    ~CharacterScalarTypeNode() {
+    CharacterScalarTypeNode(CharacterScalarTypeNode&& node)
+        : ScalarTypeNode(std::move(node)) {
+    }
+
+    CharacterScalarTypeNode& operator=(const CharacterScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        ScalarTypeNode::operator=(node);
+        return *this;
+    }
+
+    CharacterScalarTypeNode& operator=(CharacterScalarTypeNode&& node) {
+        ScalarTypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

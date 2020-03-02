@@ -18,11 +18,33 @@ class TypeDeclarationNode final: public Node {
 
     TypeDeclarationNode(const TypeDeclarationNode& node)
         : Node(node)
-        , identifier_(node.get_identifier().clone())
-        , type_(node.get_type().clone()) {
+        , identifier_(node.identifier_->clone())
+        , type_(node.type_->clone()) {
     }
 
-    ~TypeDeclarationNode() {
+    ~TypeDeclarationNode() = default;
+
+    TypeDeclarationNode(TypeDeclarationNode&& node)
+        : Node(std::move(node))
+        , identifier_(std::move(node.identifier_))
+        , type_(std::move(node.type_)) {
+    }
+
+    TypeDeclarationNode& operator=(const TypeDeclarationNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        Node::operator=(node);
+        identifier_ = node.identifier_->clone();
+        type_ = node.type_->clone();
+        return *this;
+    }
+
+    TypeDeclarationNode& operator=(TypeDeclarationNode&& node) {
+        Node::operator=(std::move(node));
+        identifier_ = std::move(node.identifier_);
+        type_ = std::move(node.type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

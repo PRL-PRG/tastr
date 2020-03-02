@@ -10,11 +10,27 @@ class IntegerScalarTypeNode final: public ScalarTypeNode {
     IntegerScalarTypeNode(): ScalarTypeNode() {
     }
 
+    ~IntegerScalarTypeNode() = default;
+
     IntegerScalarTypeNode(const IntegerScalarTypeNode& node)
         : ScalarTypeNode(node) {
     }
 
-    ~IntegerScalarTypeNode() {
+    IntegerScalarTypeNode(const IntegerScalarTypeNode&& node)
+        : ScalarTypeNode(std::move(node)) {
+    }
+
+    IntegerScalarTypeNode& operator=(const IntegerScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        ScalarTypeNode::operator=(node);
+        return *this;
+    }
+
+    IntegerScalarTypeNode& operator=(IntegerScalarTypeNode&& node) {
+        ScalarTypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

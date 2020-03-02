@@ -16,7 +16,23 @@ class Node {
     Node() {
     }
 
-    Node(const Node& node): location_(node.get_location()) {
+    Node(const Node& node): location_(node.location_) {
+    }
+
+    Node(Node&& node): location_(std::move(node.location_)) {
+    }
+
+    Node& operator=(const Node& node) {
+        if (&node == this) {
+            return *this;
+        }
+        location_ = node.location_;
+        return *this;
+    }
+
+    Node& operator=(Node&& node) {
+        location_ = std::move(node.location_);
+        return *this;
     }
 
     virtual ~Node() {

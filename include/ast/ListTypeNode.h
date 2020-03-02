@@ -1,22 +1,41 @@
 #ifndef TASTR_AST_LIST_TYPE_H
 #define TASTR_AST_LIST_TYPE_H
 
-#include "TypeNodeSequenceNode.h"
 #include "TypeNode.h"
+#include "TypeNodeSequenceNode.h"
 
 namespace tastr::ast {
 
 class ListTypeNode final: public TypeNode {
   public:
-    explicit ListTypeNode(TypeNodeSequenceNodeUPtr sequence)
-        : TypeNode(), sequence_(std::move(sequence)) {
+    explicit ListTypeNode(TypeNodeSequenceNodeUPtr element_types)
+        : TypeNode(), element_types_(std::move(element_types)) {
     }
 
-    ~ListTypeNode() {
-    }
+    ~ListTypeNode() = default;
 
     ListTypeNode(const ListTypeNode& node)
-        : TypeNode(node), sequence_(node.get_element_types().clone()) {
+        : TypeNode(node), element_types_(node.element_types_->clone()) {
+    }
+
+    ListTypeNode(ListTypeNode&& node)
+        : TypeNode(std::move(node))
+        , element_types_(std::move(node.element_types_)) {
+    }
+
+    ListTypeNode& operator=(const ListTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        element_types_ = node.element_types_->clone();
+        return *this;
+    }
+
+    ListTypeNode& operator=(ListTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        element_types_ = std::move(node.element_types_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
@@ -30,7 +49,7 @@ class ListTypeNode final: public TypeNode {
     }
 
     TypeNodeSequenceNode& get_element_types() const {
-        return *sequence_.get();
+        return *element_types_.get();
     }
 
   private:
@@ -38,7 +57,7 @@ class ListTypeNode final: public TypeNode {
         return new ListTypeNode(*this);
     };
 
-    TypeNodeSequenceNodeUPtr sequence_;
+    TypeNodeSequenceNodeUPtr element_types_;
 };
 
 using ListTypeNodePtr = ListTypeNode*;

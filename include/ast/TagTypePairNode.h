@@ -17,12 +17,33 @@ class TagTypePairNode final: public Node {
         : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
     }
 
+    ~TagTypePairNode() = default;
+
     TagTypePairNode(const TagTypePairNode& node)
-        : identifier_(node.get_identifier().clone())
-        , type_(node.get_type().clone()) {
+        : identifier_(node.identifier_->clone()), type_(node.type_->clone()) {
     }
 
-    ~TagTypePairNode() {
+    TagTypePairNode(TagTypePairNode&& node)
+        : Node(std::move(node))
+        , identifier_(std::move(node.identifier_))
+        , type_(std::move(node.type_)) {
+    }
+
+    TagTypePairNode& operator=(const TagTypePairNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        Node::operator=(node);
+        identifier_ = node.identifier_->clone();
+        type_ = node.type_->clone();
+        return *this;
+    }
+
+    TagTypePairNode& operator=(TagTypePairNode&& node) {
+        Node::operator=(std::move(node));
+        identifier_ = std::move(node.identifier_);
+        type_ = std::move(node.type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

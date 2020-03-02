@@ -13,11 +13,29 @@ class TypeNodeSequenceNode final
     TypeNodeSequenceNode(): Node(), Sequence<TypeNode>() {
     }
 
+    ~TypeNodeSequenceNode() = default;
+
     TypeNodeSequenceNode(const TypeNodeSequenceNode& node)
         : Node(node), Sequence<TypeNode>(node) {
     }
 
-    ~TypeNodeSequenceNode() {
+    TypeNodeSequenceNode(TypeNodeSequenceNode&& node)
+        : Node(std::move(node)), Sequence<TypeNode>(std::move(node)) {
+    }
+
+    TypeNodeSequenceNode& operator=(const TypeNodeSequenceNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        Node::operator=(node);
+        Sequence<TypeNode>::operator=(node);
+        return *this;
+    }
+
+    TypeNodeSequenceNode& operator=(TypeNodeSequenceNode&& node) {
+        Node::operator=(std::move(node));
+        Sequence<TypeNode>::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

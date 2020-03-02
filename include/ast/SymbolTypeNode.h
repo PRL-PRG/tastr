@@ -10,10 +10,25 @@ class SymbolTypeNode final: public TypeNode {
     SymbolTypeNode(): TypeNode() {
     }
 
+    ~SymbolTypeNode() = default;
+
     SymbolTypeNode(const SymbolTypeNode& node): TypeNode(node) {
     }
 
-    ~SymbolTypeNode() {
+    SymbolTypeNode(SymbolTypeNode&& node): TypeNode(std::move(node)) {
+    }
+
+    SymbolTypeNode& operator=(const SymbolTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        return *this;
+    }
+
+    SymbolTypeNode& operator=(SymbolTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

@@ -31,9 +31,7 @@ class Sequence {
     Sequence() {
     }
 
-    Sequence(Sequence<T>&& sequence)
-        : sequence_(std::move(sequence.sequence_)) {
-    }
+    ~Sequence() = default;
 
     Sequence(const Sequence<T>& sequence) {
         for (auto node = sequence.cbegin(); node != sequence.cend(); ++node) {
@@ -41,7 +39,23 @@ class Sequence {
         }
     }
 
-    ~Sequence() = default;
+    Sequence(Sequence<T>&& sequence): sequence_(std::move(sequence.sequence_)) {
+    }
+
+    Sequence& operator=(const Sequence& sequence) {
+        if (&sequence == this) {
+            return *this;
+        }
+        for (auto node = sequence.cbegin(); node != sequence.cend(); ++node) {
+            sequence_.push_back((**node).clone());
+        }
+        return *this;
+    }
+
+    Sequence& operator=(Sequence&& sequence) {
+        sequence_ = std::move(sequence.sequence_);
+        return *this;
+    }
 
     void accept(tastr::visitor::Visitor& visitor) const;
 

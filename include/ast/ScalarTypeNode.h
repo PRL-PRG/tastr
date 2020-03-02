@@ -10,10 +10,26 @@ class ScalarTypeNode: public TypeNode {
     ScalarTypeNode(): TypeNode() {
     }
 
+    virtual ~ScalarTypeNode() {
+    }
+
     ScalarTypeNode(const ScalarTypeNode& node): TypeNode(node) {
     }
 
-    virtual ~ScalarTypeNode() {
+    ScalarTypeNode(ScalarTypeNode&& node): TypeNode(std::move(node)) {
+    }
+
+    ScalarTypeNode& operator=(const ScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        return *this;
+    }
+
+    ScalarTypeNode& operator=(ScalarTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        return *this;
     }
 
     virtual void accept(tastr::visitor::Visitor& visitor) const = 0;

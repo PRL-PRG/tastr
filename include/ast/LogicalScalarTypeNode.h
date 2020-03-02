@@ -10,11 +10,27 @@ class LogicalScalarTypeNode final: public ScalarTypeNode {
     LogicalScalarTypeNode(): ScalarTypeNode() {
     }
 
+    ~LogicalScalarTypeNode() = default;
+
     LogicalScalarTypeNode(const LogicalScalarTypeNode& node)
         : ScalarTypeNode(node) {
     }
 
-    ~LogicalScalarTypeNode() {
+    LogicalScalarTypeNode(LogicalScalarTypeNode&& node)
+        : ScalarTypeNode(std::move(node)) {
+    }
+
+    LogicalScalarTypeNode& operator=(const LogicalScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        ScalarTypeNode::operator=(node);
+        return *this;
+    }
+
+    LogicalScalarTypeNode& operator=(LogicalScalarTypeNode&& node) {
+        ScalarTypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

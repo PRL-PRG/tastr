@@ -10,11 +10,27 @@ class DoubleScalarTypeNode final: public ScalarTypeNode {
     DoubleScalarTypeNode(): ScalarTypeNode() {
     }
 
+    ~DoubleScalarTypeNode() = default;
+
     DoubleScalarTypeNode(const DoubleScalarTypeNode& node)
         : ScalarTypeNode(node) {
     }
 
-    ~DoubleScalarTypeNode() {
+    DoubleScalarTypeNode(DoubleScalarTypeNode&& node)
+        : ScalarTypeNode(std::move(node)) {
+    }
+
+    DoubleScalarTypeNode& operator=(const DoubleScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        ScalarTypeNode::operator=(node);
+        return *this;
+    }
+
+    DoubleScalarTypeNode& operator=(DoubleScalarTypeNode&& node) {
+        ScalarTypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

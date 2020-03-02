@@ -10,10 +10,25 @@ class ExpressionTypeNode final: public TypeNode {
     ExpressionTypeNode(): TypeNode() {
     }
 
+    ~ExpressionTypeNode() = default;
+
     ExpressionTypeNode(const ExpressionTypeNode& node): TypeNode(node) {
     }
 
-    ~ExpressionTypeNode() {
+    ExpressionTypeNode(ExpressionTypeNode&& node): TypeNode(std::move(node)) {
+    }
+
+    ExpressionTypeNode& operator=(const ExpressionTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        return *this;
+    }
+
+    ExpressionTypeNode& operator=(ExpressionTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

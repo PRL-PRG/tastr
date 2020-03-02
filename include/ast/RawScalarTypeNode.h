@@ -10,10 +10,26 @@ class RawScalarTypeNode final: public ScalarTypeNode {
     RawScalarTypeNode(): ScalarTypeNode() {
     }
 
+    ~RawScalarTypeNode() = default;
+
     RawScalarTypeNode(const RawScalarTypeNode& node): ScalarTypeNode(node) {
     }
 
-    ~RawScalarTypeNode() {
+    RawScalarTypeNode(RawScalarTypeNode&& node)
+        : ScalarTypeNode(std::move(node)) {
+    }
+
+    RawScalarTypeNode& operator=(const RawScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        ScalarTypeNode::operator=(node);
+        return *this;
+    }
+
+    RawScalarTypeNode& operator=(RawScalarTypeNode&& node) {
+        ScalarTypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

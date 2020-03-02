@@ -13,11 +13,27 @@ class TagTypePairNodeSequenceNode final
     TagTypePairNodeSequenceNode(): Node(), Sequence<TagTypePairNode>() {
     }
 
+    ~TagTypePairNodeSequenceNode() = default;
+
     TagTypePairNodeSequenceNode(const TagTypePairNodeSequenceNode& node)
         : Node(node), Sequence<TagTypePairNode>(node) {
     }
 
-    ~TagTypePairNodeSequenceNode() {
+    TagTypePairNodeSequenceNode(TagTypePairNodeSequenceNode&& node)
+        : Node(std::move(node)), Sequence<TagTypePairNode>(std::move(node)) {
+    }
+
+    TagTypePairNodeSequenceNode&
+    operator=(const TagTypePairNodeSequenceNode& node) {
+        Node::operator=(node);
+        Sequence<TagTypePairNode>::operator=(node);
+        return *this;
+    }
+
+    TagTypePairNodeSequenceNode& operator=(TagTypePairNodeSequenceNode&& node) {
+        Node::operator=(std::move(node));
+        Sequence<TagTypePairNode>::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

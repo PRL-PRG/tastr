@@ -10,10 +10,25 @@ class LanguageTypeNode final: public TypeNode {
     LanguageTypeNode(): TypeNode() {
     }
 
+    ~LanguageTypeNode() = default;
+
     LanguageTypeNode(const LanguageTypeNode& node): TypeNode(node) {
     }
 
-    ~LanguageTypeNode() {
+    LanguageTypeNode(LanguageTypeNode&& node): TypeNode(std::move(node)) {
+    }
+
+    LanguageTypeNode& operator=(const LanguageTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        return *this;
+    }
+
+    LanguageTypeNode& operator=(LanguageTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

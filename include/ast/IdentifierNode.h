@@ -12,10 +12,28 @@ class IdentifierNode final: public Node {
     explicit IdentifierNode(const std::string& name): Node(), name_(name) {
     }
 
-    IdentifierNode(const IdentifierNode& node): Node(node) {
+    ~IdentifierNode() = default;
+
+    IdentifierNode(const IdentifierNode& node): Node(node), name_(node.name_) {
     }
 
-    ~IdentifierNode() {
+    IdentifierNode(IdentifierNode&& node)
+        : Node(std::move(node)), name_(std::move(node.name_)) {
+    }
+
+    IdentifierNode& operator=(const IdentifierNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        Node::operator=(node);
+        name_ = node.name_;
+        return *this;
+    }
+
+    IdentifierNode& operator=(IdentifierNode&& node) {
+        Node::operator=(std::move(node));
+        name_ = std::move(node.name_);
+        return *this;
     }
 
     std::unique_ptr<IdentifierNode> clone() const {

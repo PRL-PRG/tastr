@@ -13,11 +13,29 @@ class GroupTypeNode final: public TypeNode {
         : TypeNode(), inner_type_(std::move(inner_type)) {
     }
 
-    ~GroupTypeNode() {
-    }
+    ~GroupTypeNode() = default;
 
     GroupTypeNode(const GroupTypeNode& node)
-        : TypeNode(node), inner_type_(node.get_inner_type().clone()) {
+        : TypeNode(node), inner_type_(node.inner_type_->clone()) {
+    }
+
+    GroupTypeNode(GroupTypeNode&& node)
+        : TypeNode(std::move(node)), inner_type_(std::move(node.inner_type_)) {
+    }
+
+    GroupTypeNode& operator=(const GroupTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        inner_type_ = node.inner_type_->clone();
+        return *this;
+    }
+
+    GroupTypeNode& operator=(GroupTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        inner_type_ = std::move(node.inner_type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

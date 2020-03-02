@@ -10,10 +10,25 @@ class TypeNode: public Node {
     TypeNode(): Node() {
     }
 
+    virtual ~TypeNode() = default;
+
     TypeNode(const TypeNode& node): Node(node) {
     }
 
-    virtual ~TypeNode() {
+    TypeNode(TypeNode&& node): Node(std::move(node)) {
+    }
+
+    TypeNode& operator=(const TypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        Node::operator=(node);
+        return *this;
+    }
+
+    TypeNode& operator=(TypeNode&& node) {
+        Node::operator=(std::move(node));
+        return *this;
     }
 
     virtual void accept(tastr::visitor::Visitor& visitor) const = 0;

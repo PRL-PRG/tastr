@@ -14,11 +14,29 @@ class NoNaTypeNode final: public TypeNode {
         : TypeNode(), inner_type_(std::move(inner_type)) {
     }
 
-    ~NoNaTypeNode() {
-    }
+    ~NoNaTypeNode() = default;
 
     NoNaTypeNode(const NoNaTypeNode& node)
-        : TypeNode(node), inner_type_(node.get_inner_type().clone()) {
+        : TypeNode(node), inner_type_(node.inner_type_->clone()) {
+    }
+
+    NoNaTypeNode(NoNaTypeNode&& node)
+        : TypeNode(std::move(node)), inner_type_(std::move(node.inner_type_)) {
+    }
+
+    NoNaTypeNode& operator=(const NoNaTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        inner_type_ = node.inner_type_->clone();
+        return *this;
+    }
+
+    NoNaTypeNode& operator=(NoNaTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        inner_type_ = std::move(node.inner_type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

@@ -10,10 +10,25 @@ class EnvironmentTypeNode final: public TypeNode {
     EnvironmentTypeNode(): TypeNode() {
     }
 
+    ~EnvironmentTypeNode() = default;
+
     EnvironmentTypeNode(const EnvironmentTypeNode& node): TypeNode(node) {
     }
 
-    ~EnvironmentTypeNode() {
+    EnvironmentTypeNode(EnvironmentTypeNode&& node): TypeNode(std::move(node)) {
+    }
+
+    EnvironmentTypeNode& operator=(const EnvironmentTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        return *this;
+    }
+
+    EnvironmentTypeNode& operator=(EnvironmentTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

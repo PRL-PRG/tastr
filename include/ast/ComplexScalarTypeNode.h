@@ -10,11 +10,27 @@ class ComplexScalarTypeNode final: public ScalarTypeNode {
     ComplexScalarTypeNode(): ScalarTypeNode() {
     }
 
+    ~ComplexScalarTypeNode() = default;
+
     ComplexScalarTypeNode(const ComplexScalarTypeNode& node)
         : ScalarTypeNode(node) {
     }
 
-    ~ComplexScalarTypeNode() {
+    ComplexScalarTypeNode(ComplexScalarTypeNode&& node)
+        : ScalarTypeNode(std::move(node)) {
+    }
+
+    ComplexScalarTypeNode& operator=(const ComplexScalarTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        ScalarTypeNode::operator=(node);
+        return *this;
+    }
+
+    ComplexScalarTypeNode& operator=(ComplexScalarTypeNode&& node) {
+        ScalarTypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;

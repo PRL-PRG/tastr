@@ -1,8 +1,8 @@
 #ifndef TASTR_AST_VECTOR_TYPE_H
 #define TASTR_AST_VECTOR_TYPE_H
 
-#include "TypeNode.h"
 #include "ScalarTypeNode.h"
+#include "TypeNode.h"
 
 #include <memory>
 
@@ -14,12 +14,30 @@ class VectorTypeNode: public TypeNode {
         : TypeNode(), scalar_type_(std::move(scalar_type)) {
     }
 
-    ~VectorTypeNode() {
-    }
+    ~VectorTypeNode() = default;
 
     VectorTypeNode(const VectorTypeNode& node)
-        : TypeNode(node)
-        , scalar_type_(node.get_scalar_type().clone()) {
+        : TypeNode(node), scalar_type_(node.scalar_type_->clone()) {
+    }
+
+    VectorTypeNode(VectorTypeNode&& node)
+        : TypeNode(std::move(node))
+        , scalar_type_(std::move(node.scalar_type_)) {
+    }
+
+    VectorTypeNode& operator=(const VectorTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        scalar_type_ = node.scalar_type_->clone();
+        return *this;
+    }
+
+    VectorTypeNode& operator=(VectorTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        scalar_type_ = std::move(node.scalar_type_);
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override;

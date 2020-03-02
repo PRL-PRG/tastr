@@ -12,10 +12,25 @@ class VarargTypeNode final: public TypeNode {
     explicit VarargTypeNode(): TypeNode() {
     }
 
+    ~VarargTypeNode() = default;
+
     VarargTypeNode(const VarargTypeNode& node): TypeNode(node) {
     }
 
-    ~VarargTypeNode() {
+    VarargTypeNode(VarargTypeNode&& node): TypeNode(std::move(node)) {
+    }
+
+    VarargTypeNode& operator=(const VarargTypeNode& node) {
+        if (&node == this) {
+            return *this;
+        }
+        TypeNode::operator=(node);
+        return *this;
+    }
+
+    VarargTypeNode& operator=(VarargTypeNode&& node) {
+        TypeNode::operator=(std::move(node));
+        return *this;
     }
 
     void accept(tastr::visitor::Visitor& visitor) const override final;
