@@ -62,11 +62,11 @@
 %nterm <SymbolTypeNodePtr>              symboltype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
-%nterm <TypeNodeSequencePtr>            typeseq
+%nterm <TypeNodeSequenceNodePtr>        typeseq
 %nterm <TagTypePairNodePtr>             namedtype
-%nterm <TagTypePairNodeSequencePtr>     namedtypeseq
+%nterm <TagTypePairNodeSequenceNodePtr> namedtypeseq
 %nterm <TypeNodePtr>                    paramtype
-%nterm <TypeNodeSequencePtr>            paramtypeseq
+%nterm <TypeNodeSequenceNodePtr>        paramtypeseq
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
@@ -114,8 +114,13 @@
 
 %initial-action {
     /* filename for locations here             
-       https://www.gnu.org/software/bison/manual/html_node/Initial-Action-Decl.html */
-    @$.initialize(context.get_input_stream_name());
+       https://www.gnu.org/software/bison/manual/html_node/Initial-Action-Decl.html
+       location stores pointer to a string allocated elsewhere and does not delete it.
+       it has been disabled for now since TopLevelNode stores the filename anyways and
+       properly deallocates it.
+    */
+
+    /* @$.initialize(context.get_input_stream_name()); */
 }
 
 /* inserted near top of header + source file */
@@ -153,9 +158,6 @@
     using tastr::ast::RawScalarTypeNode;
     using tastr::ast::ScalarTypeNodePtr;
     using tastr::ast::ScalarTypeNodeUPtr;
-    using tastr::ast::sequence_t;
-    using tastr::ast::sequence_ptr_t;
-    using tastr::ast::sequence_uptr_t;
     using tastr::ast::StructTypeNode;
     using tastr::ast::StructTypeNodePtr;
     using tastr::ast::TypeNode;
@@ -169,16 +171,16 @@
     using tastr::ast::TypeDeclarationNode;
     using tastr::ast::TypeDeclarationNodePtr;
     using tastr::ast::TypeDeclarationNodeUPtr;
-    using tastr::ast::TypeDeclarationSequenceNodeUPtr;
+    using tastr::ast::TopLevelNodeUPtr;
     using tastr::ast::IdentifierNode;
     using tastr::ast::IdentifierNodePtr;
     using tastr::ast::IdentifierNodeUPtr;
     using tastr::ast::VarargTypeNode;
-    using tastr::ast::TypeNodeSequence;
-    using tastr::ast::TypeNodeSequencePtr;
-    using tastr::ast::TypeNodeSequenceUPtr;
-    using tastr::ast::TagTypePairNodeSequence;
-    using tastr::ast::TagTypePairNodeSequencePtr;
+    using tastr::ast::TypeNodeSequenceNode;
+    using tastr::ast::TypeNodeSequenceNodePtr;
+    using tastr::ast::TypeNodeSequenceNodeUPtr;
+    using tastr::ast::TagTypePairNodeSequenceNode;
+    using tastr::ast::TagTypePairNodeSequenceNodePtr;
 }
 
 /* inserted near top of source file */
@@ -242,42 +244,42 @@ symboltype:         SYMBOL                                  {
           ;
 
 vectortype:         scalartype "[" "]"                      {
-                                                                ScalarTypeNodeUPtr scalar_type($1);
-                                                                $$ = new VectorTypeNode(std::move(scalar_type));
+                                                                $$ = new VectorTypeNode(std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
           ;
 
 nonavectortype:     "!" vectortype                          {
-                                                                VectorTypeNodeUPtr vector_type($2);
-                                                                $$ = new NoNaTypeNode(std::move(vector_type));
+                                                                $$ = new NoNaTypeNode(std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
               ;
 
 listtype:           "((" typeseq "))"                       {
-                                                                $$ = new ListTypeNode(std::move(*$2));
+                                                                $$ = new ListTypeNode(std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
 
 typeseq:            %empty                                  {
-                                                                $$ = new TypeNodeSequence();
+                                                                $$ = new TypeNodeSequenceNode();
+                                                                //$$ -> set_location(@$);
                                                             }
        |            type                                    {
-                                                                TypeNodeUPtr type($1);
-                                                                $$ = new TypeNodeSequence();
-                                                                $$ -> push_back(std::move(type));
+                                                                $$ = new TypeNodeSequenceNode();
+                                                                $$ -> push_back(std::move(wrap(std::move($1))));
+                                                                //$$ -> set_location(@$);
                                                             }
        |            typeseq "," type                        {
-                                                                TypeNodeUPtr type($3);
-                                                                $1 -> push_back(std::move(type));
                                                                 $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> push_back(std::move(wrap(std::move($3))));
+                                                                //$$ -> set_location(@$);
                                                             }
        ;
 
 structtype:         "{{" namedtypeseq "}}"                  {
-                                                                $$ = new StructTypeNode(std::move(*$2));
+                                                                $$ = new StructTypeNode(std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
           ;
@@ -338,25 +340,26 @@ identifier:         INTEGER                                 {
           ;
 
 namedtype:          identifier ":" type                     {
-                                                                IdentifierNodeUPtr ident($1);
-                                                                TypeNodeUPtr type($3);
-                                                                $$ = new TagTypePairNode(std::move(ident), std::move(type));
+                                                                $$ = new TagTypePairNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
 namedtypeseq:       %empty                                  {
-                                                                $$ = new TagTypePairNodeSequence();
+                                                                $$ = new TagTypePairNodeSequenceNode();
+                                                                //$$ -> set_location(@$);
                                                             }
             |       namedtype                               {
                                                                 TagTypePairNodeUPtr named_type($1);
-                                                                $$ = new TagTypePairNodeSequence();
+                                                                $$ = new TagTypePairNodeSequenceNode();
                                                                 $$ -> push_back(std::move(named_type));
+                                                                //$$ -> set_location(@1);
                                                             }
             |       namedtypeseq "," namedtype              {
                                                                 TagTypePairNodeUPtr named_type($3);
                                                                 $1 -> push_back(std::move(named_type));
                                                                 $$ = $1;
+                                                                //$$ -> set_location(@$);
                                                             }
             ;
 
@@ -372,24 +375,25 @@ paramtype:          type                                    {
          ;
 
 paramtypeseq:       %empty                                  {
-                                                                $$ = new TypeNodeSequence();
+                                                                $$ = new TypeNodeSequenceNode();
+                                                                //$$ -> set_location(@$);
                                                             }
             |       paramtype                               {
                                                                 TypeNodeUPtr type($1);
-                                                                $$ = new TypeNodeSequence();
+                                                                $$ = new TypeNodeSequenceNode();
                                                                 $$ -> push_back(std::move(type));
+                                                                //$$ -> set_location(@$);
                                                             }
             |       paramtypeseq "," paramtype              {
                                                                 TypeNodeUPtr type($3);
                                                                 $1 -> push_back(std::move(type));
                                                                 $$ = $1;
+                                                                //$$ -> set_location(@$);
                                                             }
             ;
 
 functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                TypeNodeSequenceUPtr parameter_types($2);
-                                                                TypeNodeUPtr return_type($5);
-                                                                $$ = new FunctionTypeNode(std::move(parameter_types), std::move(return_type));
+                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($5))));
                                                                 $$ -> set_location(@$);
                                                             }
 
@@ -521,11 +525,11 @@ decltype:           TYPEDECL funname type ";"               {
 
 decllist:           decltype                                {
                                                                 TypeDeclarationNodeUPtr type_decl($1);
-                                                                context.get_type_declaration_sequence() -> push_back(std::move(type_decl));
+                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(type_decl));
                                                             }
         |           decllist decltype                       {
                                                                 TypeDeclarationNodeUPtr type_decl($2);
-                                                                context.get_type_declaration_sequence() -> push_back(std::move(type_decl));
+                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(type_decl));
                                                             }
         ;
 

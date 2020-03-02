@@ -1,7 +1,7 @@
 #ifndef TASTR_PARSING_CONTEXT_H
 #define TASTR_PARSING_CONTEXT_H
 
-#include "ast/TypeDeclarationSequenceNode.h"
+#include "ast/TopLevelNode.h"
 
 #include <iostream>
 #include <string>
@@ -14,7 +14,7 @@ class ParsingContext {
                             std::string& input_stream_name)
         : input_stream_(input_stream)
         , input_stream_name_(input_stream_name)
-        , sequence_(new tastr::ast::TypeDeclarationSequenceNode()) {
+        , node_(new tastr::ast::TopLevelNode(input_stream_name)) {
     }
 
     ~ParsingContext() {
@@ -28,15 +28,15 @@ class ParsingContext {
         return &input_stream_name_;
     }
 
-    tastr::ast::TypeDeclarationSequenceNodeUPtr&
-    get_type_declaration_sequence() {
-        return sequence_;
+    tastr::ast::TopLevelNodeUPtr&
+    get_top_level_node() {
+        return node_;
     }
 
   private:
     std::istream& input_stream_;
     std::string& input_stream_name_;
-    tastr::ast::TypeDeclarationSequenceNodeUPtr sequence_;
+    tastr::ast::TopLevelNodeUPtr node_;
 };
 
 } // namespace tastr::parser

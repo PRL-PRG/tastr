@@ -61,7 +61,13 @@ class Visitor {
 
     virtual void visit(const tastr::ast::TypeDeclarationNode& node) = 0;
 
-    virtual void visit(const tastr::ast::TypeDeclarationSequenceNode& node) = 0;
+    virtual void visit(const tastr::ast::TypeNodeSequenceNode& node) = 0;
+
+    virtual void visit(const tastr::ast::TagTypePairNodeSequenceNode& node) = 0;
+
+    virtual void visit(const tastr::ast::TypeDeclarationNodeSequenceNode& node) = 0;
+
+    virtual void visit(const tastr::ast::TopLevelNode& node) = 0;
 };
 
 } // namespace tastr::visitor

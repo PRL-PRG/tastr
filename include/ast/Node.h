@@ -104,7 +104,7 @@ class Node {
         return false;
     }
 
-    virtual bool is_type_declaration_sequence_node() const {
+    virtual bool is_top_level_node() const {
         return false;
     }
 
@@ -121,6 +121,18 @@ class Node {
     }
 
     virtual bool is_vector_type_node() const {
+        return false;
+    }
+
+    virtual bool is_type_declaration_node_sequence_node() const {
+        return false;
+    }
+
+    virtual bool is_type_node_sequence_node() const {
+        return false;
+    }
+
+    virtual bool is_tag_type_pair_node_sequence_node() const {
         return false;
     }
 
@@ -144,6 +156,13 @@ class Node {
 
 using NodePtr = Node*;
 using NodeUPtr = std::unique_ptr<Node>;
+
+template <typename T>
+std::unique_ptr<T> wrap(T*&& t) {
+    auto* tmp = t;
+    t = nullptr;
+    return std::unique_ptr<T>(tmp);
+}
 
 } // namespace tastr::ast
 

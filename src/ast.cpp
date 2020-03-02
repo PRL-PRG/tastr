@@ -13,33 +13,34 @@ std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node) {
     return os;
 }
 
+
 std::string to_string(const tastr::ast::Node& node) {
     std::stringstream stream;
     stream << node;
     return stream.str();
 }
 
-int parse_(std::istream& input_stream, std::string& input_stream_name) {
+tastr::ast::TopLevelNodeUPtr parse_(std::istream& input_stream,
+                                    std::string& input_stream_name) {
     tastr::parser::ParsingContext context(input_stream, input_stream_name);
     tastr::parser::Lexer lexer(context);
     tastr::parser::Parser parser(lexer, context);
-    int result = parser.parse();
-    std::cout << *context.get_type_declaration_sequence().get();
-    return result;
+    parser.parse();
+    return std::move(context.get_top_level_node());
 }
 
-int parse_stdin() {
+tastr::ast::TopLevelNodeUPtr parse_stdin() {
     std::string input_stream_name("<stdin>");
     return parse_(std::cin, input_stream_name);
 }
 
-int parse_string(const std::string& string) {
+tastr::ast::TopLevelNodeUPtr parse_string(const std::string& string) {
     std::istringstream input_stream(string);
     std::string input_stream_name("<string>");
     return parse_(input_stream, input_stream_name);
 }
 
-int parse_file(const std::filesystem::path& filepath) {
+tastr::ast::TopLevelNodeUPtr parse_file(const std::filesystem::path& filepath) {
     if (!std::filesystem::exists(filepath)) {
         std::cerr << "Error: path '" << filepath << "' does not exist!";
     }

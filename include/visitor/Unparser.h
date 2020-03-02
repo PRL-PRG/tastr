@@ -62,7 +62,7 @@ class Unparser final: public Visitor {
     }
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
-        const tastr::ast::Sequence<TypeNode>& parameter_types =
+        const tastr::ast::TypeNodeSequenceNode& parameter_types =
             node.get_parameter_types();
 
         os_ << "<";
@@ -93,14 +93,7 @@ class Unparser final: public Visitor {
 
     void visit(const tastr::ast::ListTypeNode& node) override final {
         os_ << "((";
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
-            os_ << **i;
-            if (show_separator) {
-                os_ << ", ";
-            }
-            --show_separator;
-        }
+        node.get_element_types().accept(*this);
         os_ << "))";
     }
 
@@ -119,14 +112,7 @@ class Unparser final: public Visitor {
 
     void visit(const tastr::ast::StructTypeNode& node) override final {
         os_ << "{{";
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
-            os_ << **i;
-            if (show_separator) {
-                os_ << ", ";
-            }
-            --show_separator;
-        }
+        node.get_element_types().accept(*this);
         os_ << "}}";
     }
 
@@ -149,16 +135,8 @@ class Unparser final: public Visitor {
         os_ << ";";
     }
 
-    void
-    visit(const tastr::ast::TypeDeclarationSequenceNode& node) override final {
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
-            os_ << **i;
-            if (show_separator) {
-                os_ << std::endl;
-            }
-            --show_separator;
-        }
+    void visit(const tastr::ast::TopLevelNode& node) override final {
+        node.get_type_declarations().accept(*this);
     }
 
     void visit(const tastr::ast::IdentifierNode& node) override final {
@@ -167,6 +145,41 @@ class Unparser final: public Visitor {
 
     void visit(const tastr::ast::VarargTypeNode& node) override final {
         os_ << "...";
+    }
+
+    void visit(const tastr::ast::TypeNodeSequenceNode& node) override final {
+        int show_separator = node.size() - 1;
+        for (auto i = node.cbegin(); i != node.cend(); ++i) {
+            os_ << **i;
+            if (show_separator) {
+                os_ << ", ";
+            }
+            --show_separator;
+        }
+    }
+
+    void
+    visit(const tastr::ast::TagTypePairNodeSequenceNode& node) override final {
+        int show_separator = node.size() - 1;
+        for (auto i = node.cbegin(); i != node.cend(); ++i) {
+            os_ << **i;
+            if (show_separator) {
+                os_ << ", ";
+            }
+            --show_separator;
+        }
+    }
+
+    void visit(const tastr::ast::TypeDeclarationNodeSequenceNode& node)
+        override final {
+        int show_separator = node.size() - 1;
+        for (auto i = node.cbegin(); i != node.cend(); ++i) {
+            os_ << **i;
+            if (show_separator) {
+                os_ << std::endl;
+            }
+            --show_separator;
+        }
     }
 
   private:

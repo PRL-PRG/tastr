@@ -20,9 +20,12 @@
 #include "ast/StructTypeNode.h"
 #include "ast/SymbolTypeNode.h"
 #include "ast/TagTypePairNode.h"
+#include "ast/TagTypePairNodeSequenceNode.h"
+#include "ast/TopLevelNode.h"
 #include "ast/TypeDeclarationNode.h"
-#include "ast/TypeDeclarationSequenceNode.h"
+#include "ast/TypeDeclarationNodeSequenceNode.h"
 #include "ast/TypeNode.h"
+#include "ast/TypeNodeSequenceNode.h"
 #include "ast/UnionTypeNode.h"
 #include "ast/VarargTypeNode.h"
 #include "ast/VectorTypeNode.h"
@@ -36,10 +39,10 @@ std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node);
 
 std::string to_string(const tastr::ast::Node& node);
 
-int parse_stdin();
+tastr::ast::TopLevelNodeUPtr parse_stdin();
 
-int parse_string(const std::string& string);
+tastr::ast::TopLevelNodeUPtr parse_string(const std::string& string);
 
-int parse_file(const std::filesystem::path& filepath);
+tastr::ast::TopLevelNodeUPtr parse_file(const std::filesystem::path& filepath);
 
 #endif /* TASTR_AST_H */
