@@ -158,3 +158,7 @@ To clean the build artifacts, run:
 - [Move assignment operator and inheritance](https://stackoverflow.com/questions/50854598/inheritence-of-the-move-assignment-operator-in-c)
 - [Move assignment on self](https://stackoverflow.com/questions/9322174/move-assignment-operator-and-if-this-rhs)
 - [C++ `final` keyword](https://smartbear.com/blog/develop/use-c11-inheritance-control-keywords-to-prevent-in/)
+
+## Make and Code Compilation
+- [Compiling a static library in linux](https://stackoverflow.com/questions/2734719/how-to-compile-a-static-library-in-linux)
+- [Compiling C/C++ software](https://gist.github.com/gubatron/32f82053596c24b6bec6)
