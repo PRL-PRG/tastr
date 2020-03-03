@@ -263,18 +263,18 @@ listtype:           "((" typeseq "))"                       {
 
 typeseq:            %empty                                  {
                                                                 $$ = new TypeNodeSequenceNode();
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
        |            type                                    {
                                                                 $$ = new TypeNodeSequenceNode();
                                                                 $$ -> push_back(std::move(wrap(std::move($1))));
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
        |            typeseq "," type                        {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> push_back(std::move(wrap(std::move($3))));
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
        ;
 
@@ -347,19 +347,19 @@ namedtype:          identifier ":" type                     {
 
 namedtypeseq:       %empty                                  {
                                                                 $$ = new TagTypePairNodeSequenceNode();
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
             |       namedtype                               {
                                                                 TagTypePairNodeUPtr named_type($1);
                                                                 $$ = new TagTypePairNodeSequenceNode();
                                                                 $$ -> push_back(std::move(named_type));
-                                                                //$$ -> set_location(@1);
+                                                                $$ -> set_location(@1);
                                                             }
             |       namedtypeseq "," namedtype              {
                                                                 TagTypePairNodeUPtr named_type($3);
                                                                 $1 -> push_back(std::move(named_type));
                                                                 $$ = $1;
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
             ;
 
@@ -376,19 +376,19 @@ paramtype:          type                                    {
 
 paramtypeseq:       %empty                                  {
                                                                 $$ = new TypeNodeSequenceNode();
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
             |       paramtype                               {
                                                                 TypeNodeUPtr type($1);
                                                                 $$ = new TypeNodeSequenceNode();
                                                                 $$ -> push_back(std::move(type));
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
             |       paramtypeseq "," paramtype              {
                                                                 TypeNodeUPtr type($3);
                                                                 $1 -> push_back(std::move(type));
                                                                 $$ = $1;
-                                                                //$$ -> set_location(@$);
+                                                                $$ -> set_location(@$);
                                                             }
             ;
 
