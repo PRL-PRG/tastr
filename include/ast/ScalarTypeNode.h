@@ -36,7 +36,7 @@ class ScalarTypeNode: public TypeNode {
         return *this;
     }
 
-    virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+    virtual void accept(tastr::visitor::Visitor& visitor) const override = 0;
 
     std::unique_ptr<ScalarTypeNode> clone() const {
         return std::unique_ptr<ScalarTypeNode>(this->clone_impl());
@@ -51,7 +51,7 @@ class ScalarTypeNode: public TypeNode {
     }
 
   private:
-    virtual ScalarTypeNode* clone_impl() const = 0;
+    virtual ScalarTypeNode* clone_impl() const override = 0;
 
     std::string identifier_;
 };
