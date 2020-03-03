@@ -1,12 +1,3 @@
-CXX := g++
-BISON := bison
-FLEX := flex
-AR := ar
-MV := mv
-MKDIR := mkdir
-MKDIRFLAGS := -p
-CD := cd
-
 SRCDIR := src
 INCLUDEDIR := include
 GRAMMARDIR := grammar
@@ -21,36 +12,55 @@ OBJNAME := $(PROJECTNAME)
 BINNAME := $(PROJECTNAME)
 LIBNAME := lib$(PROJECTNAME)
 
+CXX := clang++
+BISON := bison
+FLEX := flex
+AR := ar
+MV := mv
+MKDIR := mkdir
+DIRNAME := dirname
+CD := cd
 
+MKDIRFLAGS := -p
 FLEXFLAGS := -v
 BISONFLAGS := -v
 ARFLAGS := rcs
-CXXFLAGS := -O0 -g -ggdb3 -std=c++17
-OBJFLAGS := -c -fPIC $(CXXFLAGS)
-LIBFLAGS := -shared
-BINFLAGS := $(CXXFLAGS)
 
-SRCFILES := $(shell find $(SRCDIR) -name *.cpp) $(shell find $(SRCDIR) -name *.c) $(shell find $(SRCDIR) -name *.cc) $(shell find $(SRCDIR) -name *.cxx)
-INCLUDEILES := $(shell find $(INCLUDEDIR) -name *.hpp) $(shell find $(INCLUDEDIR) -name *.h) $(shell find $(INCLUDEDIR) -name *.hh) $(shell find $(INCLUDEDIR) -name *.hxx)
-DRIVERFILES := $(shell find $(DRIVERDIR) -name *.cpp) $(shell find $(DRIVERDIR) -name *.c) $(shell find $(DRIVERDIR) -name *.cc)
-OBJECTFILES := $(addprefix $(OBJDIR)/,$(notdir $(patsubst %.cpp,%.o,$(patsubst %.cxx,%.o,$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(SRCFILES)))))))
+CXXFLAGS := -O0 -g -ggdb3 -std=c++17 #--analyze -Xanalyzer -analyzer-output=text
+OBJFLAGS := -c -fPIC $(CXXFLAGS)
+LIBFLAGS := -shared -Wl,-soname,$(LIBNAME).so
+BINFLAGS := $(CXXFLAGS)
+BINARGS := -
+
+SRCFILES := $(shell find $(SRCDIR) -name '*.cpp') $(shell find $(SRCDIR) -name '*.c') $(shell find $(SRCDIR) -name '*.cc') $(shell find $(SRCDIR) -name '*.cxx')
+INCLUDEILES := $(shell find $(INCLUDEDIR) -name '*.hpp') $(shell find $(INCLUDEDIR) -name '*.h') $(shell find $(INCLUDEDIR) -name '*.hh') $(shell find $(INCLUDEDIR) -name '*.hxx')
+DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
+OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
 
 all: build
 
-build: clean library application
+build: parser lexer library application
 
-library: $(LIBDIR)/$(LIBNAME).so
+parser: $(SRCDIR)/Parser.cxx $(INCLUDEDIR)/Parser.hxx $(INCLUDEDIR)/location.hh
+
+lexer: $(INCLUDEDIR)/Lexer.hxx $(SRCDIR)/Lexer.cxx
+
+library: static-library shared-library
+
+static-library: $(LIBDIR)/$(LIBNAME).a
+
+shared-library: $(LIBDIR)/$(LIBNAME).so
 
 application: $(BINDIR)/$(BINNAME)
-
-run: application
-	@echo "Write a type. Quit with ctrl-d."
-	./$(BUILDDIR)/$(BINNAME) -s -p -
 
 clean:
 	rm -rf $(BUILDDIR)
 
-parser: $(GRAMMARDIR)/Parser.yxx
+run: application
+	@echo "Write a type declaration. Quit with Ctrl-d."
+	./$(BINDIR)/$(BINNAME) $(BINARGS)
+
+$(SRCDIR)/Parser.cxx $(INCLUDEDIR)/Parser.hxx $(INCLUDEDIR)/location.hh: $(GRAMMARDIR)/Parser.yxx
 	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
@@ -58,37 +68,36 @@ parser: $(GRAMMARDIR)/Parser.yxx
 	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/Parser.hxx
 	$(MV) $(GRAMMARDIR)/location.hh $(INCLUDEDIR)/location.hh
 
-lexer: $(GRAMMARDIR)/Lexer.lxx
+$(INCLUDEDIR)/Lexer.hxx $(SRCDIR)/Lexer.cxx: $(GRAMMARDIR)/Lexer.lxx
 	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/Lexer.cxx
 	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/Lexer.hxx
 
-$(OBJDIR)/$(OBJNAME).o: parser lexer $(SRCFILES) $(INCLUDEFILES)
-	$(MKDIR) $(MKDIRFLAGS) $(OBJDIR)
-	$(CD) $(OBJDIR) && $(CXX) $(OBJFLAGS) -I$(realpath $(INCLUDEDIR)) $(realpath $(SRCFILES))
-	$(CXX) $(LIBFLAGS) -o$@ $(OBJECTFILES)
+$(OBJDIR)/%.o: $(SRCDIR)/% $(INCLUDEFILES)
+	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
+	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -o$@ $<
 
-# https://stackoverflow.com/questions/2734719/how-to-compile-a-static-library-in-linux
-$(LIBDIR)/$(LIBNAME).a: $(OBJDIR)/$(OBJNAME).o
+$(LIBDIR)/$(LIBNAME).a: $(OBJECTFILES)
 	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
-	$(AR) $(ARFLAGS) $@ $<
+	$(AR) $(ARFLAGS) $@ $^
 
-$(LIBDIR)/$(LIBNAME).so: $(LIBDIR)/$(LIBNAME).a
+$(LIBDIR)/$(LIBNAME).so: $(OBJECTFILES)
 	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
-	$(CXX) $(LIBFLAGS) -o $@ $<
+	$(CXX) $(LIBFLAGS) -o $@ $^
 
-$(BINDIR)/$(BINNAME): $(DRIVERFILES) $(OBJECTFILES)
-	$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
-	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $(DRIVERFILES) $(OBJECTFILES)
+$(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
+	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
+	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
 
 
-.PHONY: clean \
-        build \
-        all   \
-        parser \
-        lexer \
-        library \
-        application \
-        test \
+.PHONY: all            \
+        build          \
+        parser         \
+        lexer          \
+        library        \
+        static-library \
+        shared-library \
+        application    \
+        clean          \
         run
