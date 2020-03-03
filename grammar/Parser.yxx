@@ -25,36 +25,36 @@
 %define api.token.prefix {TOKEN_}
 
 
-%token EOF                          0             "end of file";
-%token <std::string>                OR            "|";
-%token <std::string>                EXCLAMATION   "!";
-%token <std::string>                ARROW         "=>";
-%token <std::string>                COMMA         ",";
-%token <std::string>                DOUBLE_LPAREN "((";
-%token <std::string>                LPAREN        "(";
-%token <std::string>                DOUBLE_RPAREN "))";
-%token <std::string>                RPAREN        ")";
-%token <std::string>                LBRACKET      "[";
-%token <std::string>                RBRACKET      "]";
-%token <std::string>                LANGLEBRACKET "<";
-%token <std::string>                RANGLEBRACKET ">";
-%token <std::string>                DOUBLE_LBRACE "{{";
-%token <std::string>                DOUBLE_RBRACE "}}";
-%token <std::string>                SEMICOLON     ";";
-%token <std::string>                COLON         ":";
-%token <std::string>                VARARG        "...";
-%token <std::string>                INTEGER
-%token <std::string>                DOUBLE
-%token <std::string>                COMPLEX
-%token <std::string>                CHARACTER
-%token <std::string>                LOGICAL
-%token <std::string>                RAW
-%token <std::string>                ENVIRONMENT
-%token <std::string>                EXPRESSION
-%token <std::string>                LANGUAGE
-%token <std::string>                SYMBOL
-%token <std::string>                TYPEDECL
-%token <std::string>                IDENTIFIER;
+%token EOF                              0             "end of file";
+%token <std::string>                    OR            "|";
+%token <std::string>                    EXCLAMATION   "!";
+%token <std::string>                    ARROW         "=>";
+%token <std::string>                    COMMA         ",";
+%token <std::string>                    DOUBLE_LPAREN "((";
+%token <std::string>                    LPAREN        "(";
+%token <std::string>                    DOUBLE_RPAREN "))";
+%token <std::string>                    RPAREN        ")";
+%token <std::string>                    LBRACKET      "[";
+%token <std::string>                    RBRACKET      "]";
+%token <std::string>                    LANGLEBRACKET "<";
+%token <std::string>                    RANGLEBRACKET ">";
+%token <std::string>                    DOUBLE_LBRACE "{{";
+%token <std::string>                    DOUBLE_RBRACE "}}";
+%token <std::string>                    SEMICOLON     ";";
+%token <std::string>                    COLON         ":";
+%token <std::string>                    VARARG        "...";
+%token <std::string>                    INTEGER
+%token <std::string>                    DOUBLE
+%token <std::string>                    COMPLEX
+%token <std::string>                    CHARACTER
+%token <std::string>                    LOGICAL
+%token <std::string>                    RAW
+%token <std::string>                    ENVIRONMENT
+%token <std::string>                    EXPRESSION
+%token <std::string>                    LANGUAGE
+%token <std::string>                    SYMBOL
+%token <std::string>                    TYPEDECL
+%token <std::string>                    IDENTIFIER;
 %nterm <ScalarTypeNodePtr>              scalartype
 %nterm <EnvironmentTypeNodePtr>         environmenttype
 %nterm <ExpressionTypeNodePtr>          expressiontype
@@ -85,32 +85,46 @@
 
 %start start;
 
-/*
-%printer { yyo << to_string(*$$); } <TypeNodePtr>;
+%printer { yyo << to_string(*$$); } <ScalarTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <EnvironmentTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <ExpressionTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <LanguageTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <SymbolTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <TypeNodeSequenceNodePtr>;
+%printer { yyo << to_string(*$$); } <TagTypePairNodePtr>;
+%printer { yyo << to_string(*$$); } <TagTypePairNodeSequenceNodePtr>;
 %printer { yyo << to_string(*$$); } <FunctionTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <GroupTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <ListTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <StructTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <ScalarTypeNodePtr>;
-*/
-/*%printer { yyo << $$; } <*>; */
+%printer { yyo << to_string(*$$); } <IdentifierNodePtr>;
+%printer { yyo << to_string(*$$); } <TypeNodePtr>;
+%printer { yyo << to_string(*$$); } <TypeDeclarationNodePtr>;
+%printer { yyo << $$; } <*>;
 
-/*
 %destructor { delete $$; } scalartype
+%destructor { delete $$; } environmenttype
+%destructor { delete $$; } expressiontype
+%destructor { delete $$; } languagetype
+%destructor { delete $$; } symboltype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
+%destructor { delete $$; } namedtype
 %destructor { delete $$; } namedtypeseq
+%destructor { delete $$; } paramtype
+%destructor { delete $$; } paramtypeseq
 %destructor { delete $$; } functiontype
 %destructor { delete $$; } grouptype
 %destructor { delete $$; } nonuniontype
 %destructor { delete $$; } listtype
 %destructor { delete $$; } structtype
+%destructor { delete $$; } funname
+%destructor { delete $$; } identifier
 %destructor { delete $$; } type
-*/
-
+%destructor { delete $$; } decltype
 
 %initial-action {
     /* filename for locations here             
@@ -350,15 +364,14 @@ namedtypeseq:       %empty                                  {
                                                                 $$ -> set_location(@$);
                                                             }
             |       namedtype                               {
-                                                                TagTypePairNodeUPtr named_type($1);
                                                                 $$ = new TagTypePairNodeSequenceNode();
-                                                                $$ -> push_back(std::move(named_type));
+                                                                $$ -> push_back(std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@1);
                                                             }
             |       namedtypeseq "," namedtype              {
-                                                                TagTypePairNodeUPtr named_type($3);
-                                                                $1 -> push_back(std::move(named_type));
                                                                 $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> push_back(std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
             ;
@@ -366,6 +379,7 @@ namedtypeseq:       %empty                                  {
 
 paramtype:          type                                    {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@1);
                                                             }
          |          "..."                                   {
@@ -379,15 +393,14 @@ paramtypeseq:       %empty                                  {
                                                                 $$ -> set_location(@$);
                                                             }
             |       paramtype                               {
-                                                                TypeNodeUPtr type($1);
                                                                 $$ = new TypeNodeSequenceNode();
-                                                                $$ -> push_back(std::move(type));
+                                                                $$ -> push_back(std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
             |       paramtypeseq "," paramtype              {
-                                                                TypeNodeUPtr type($3);
-                                                                $1 -> push_back(std::move(type));
                                                                 $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> push_back(std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
             ;
@@ -398,54 +411,64 @@ functiontype:       "<" paramtypeseq ">" "=>" type          {
                                                             }
 
 grouptype:          "(" type ")"                            {
-                                                                TypeNodeUPtr type($2);
-                                                                $$ = new GroupTypeNode(std::move(type));
+                                                                $$ = new GroupTypeNode(std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
 nonuniontype:       scalartype                              {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       environmenttype                         {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       expressiontype                          {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       languagetype                            {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       symboltype                              {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       vectortype                              {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       nonavectortype                          {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       functiontype                            {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       structtype                              {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       listtype                                {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             |       grouptype                               {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
             ;
@@ -453,12 +476,11 @@ nonuniontype:       scalartype                              {
 
 type:               nonuniontype                            {
                                                                 $$ = $1;
+                                                                $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
     |               type "|" nonuniontype                   {
-                                                                TypeNodeUPtr left_type($1);
-                                                                TypeNodeUPtr right_type($3);
-                                                                $$ = new UnionTypeNode(std::move(left_type), std::move(right_type));
+                                                                $$ = new UnionTypeNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
     ;
@@ -516,25 +538,21 @@ funname:            INTEGER                                 {
 
 
 decltype:           TYPEDECL funname type ";"               {
-                                                                IdentifierNodeUPtr identifier($2);
-                                                                TypeNodeUPtr type($3);
-                                                                $$ = new TypeDeclarationNode(std::move(identifier), std::move(type));
+                                                                $$ = new TypeDeclarationNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
 
 decllist:           decltype                                {
-                                                                TypeDeclarationNodeUPtr type_decl($1);
-                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(type_decl));
+                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(wrap(std::move($1))));
                                                             }
         |           decllist decltype                       {
-                                                                TypeDeclarationNodeUPtr type_decl($2);
-                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(type_decl));
+                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(wrap(std::move($2))));
                                                             }
         ;
 
 start:              EOF                                     { }
-     |              decllist EOF                            { }
+     |              decllist EOF                            { context.get_top_level_node() -> set_location(@$); }
      ;
 
 %%

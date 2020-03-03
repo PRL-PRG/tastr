@@ -4,7 +4,8 @@
 #include "Parser.hxx"
 #include "ParsingContext.h"
 
-/* https://stackoverflow.com/questions/40663527/how-to-inherit-from-yyflexlexer */
+/* https://stackoverflow.com/questions/40663527/how-to-inherit-from-yyflexlexer
+ */
 #if !defined(yyFlexLexerOnce)
 #    include <FlexLexer.h>
 #endif
@@ -16,8 +17,6 @@
         tastr::parser::Parser::semantic_type* yylval, \
         tastr::parser::Parser::location_type* yylloc)
 
-
-
 namespace tastr::parser {
 
 class Lexer: public yyFlexLexer {
@@ -26,6 +25,10 @@ class Lexer: public yyFlexLexer {
 
     virtual int yylex(tastr::parser::Parser::semantic_type* yylval,
                       tastr::parser::Parser::location_type* yylloc);
+
+    void set_debug_level(bool debug) {
+        yy_flex_debug = debug;
+    }
 };
 
 } // namespace tastr::parser
