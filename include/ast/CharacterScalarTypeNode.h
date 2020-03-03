@@ -7,7 +7,8 @@ namespace tastr::ast {
 
 class CharacterScalarTypeNode final: public ScalarTypeNode {
   public:
-    CharacterScalarTypeNode(): ScalarTypeNode() {
+    CharacterScalarTypeNode(const std::string& identifier)
+        : ScalarTypeNode(identifier) {
     }
 
     ~CharacterScalarTypeNode() = default;

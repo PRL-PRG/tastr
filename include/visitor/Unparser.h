@@ -34,31 +34,31 @@ class Unparser final: public Visitor {
     }
 
     void visit(const tastr::ast::CharacterScalarTypeNode& node) override final {
-        os_ << "character";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
-        os_ << "environment";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::ExpressionTypeNode& node) override final {
-        os_ << "expression";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::LanguageTypeNode& node) override final {
-        os_ << "language";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::SymbolTypeNode& node) override final {
-        os_ << "symbol";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::ComplexScalarTypeNode& node) override final {
-        os_ << "complex";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::DoubleScalarTypeNode& node) override final {
-        os_ << "double";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
@@ -88,7 +88,7 @@ class Unparser final: public Visitor {
     }
 
     void visit(const tastr::ast::IntegerScalarTypeNode& node) override final {
-        os_ << "integer";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::ListTypeNode& node) override final {
@@ -98,7 +98,7 @@ class Unparser final: public Visitor {
     }
 
     void visit(const tastr::ast::LogicalScalarTypeNode& node) override final {
-        os_ << "logical";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::NoNaTypeNode& node) override final {
@@ -107,7 +107,7 @@ class Unparser final: public Visitor {
     }
 
     void visit(const tastr::ast::RawScalarTypeNode& node) override final {
-        os_ << "raw";
+        os_ << node.get_identifier();
     }
 
     void visit(const tastr::ast::StructTypeNode& node) override final {

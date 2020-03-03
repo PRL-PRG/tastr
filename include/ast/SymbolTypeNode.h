@@ -7,15 +7,18 @@ namespace tastr::ast {
 
 class SymbolTypeNode final: public TypeNode {
   public:
-    SymbolTypeNode(): TypeNode() {
+    SymbolTypeNode(const std::string& identifier)
+        : TypeNode(), identifier_(identifier) {
     }
 
     ~SymbolTypeNode() = default;
 
-    SymbolTypeNode(const SymbolTypeNode& node): TypeNode(node) {
+    SymbolTypeNode(const SymbolTypeNode& node)
+        : TypeNode(node), identifier_(node.identifier_) {
     }
 
-    SymbolTypeNode(SymbolTypeNode&& node): TypeNode(std::move(node)) {
+    SymbolTypeNode(SymbolTypeNode&& node)
+        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
     }
 
     SymbolTypeNode& operator=(const SymbolTypeNode& node) {
@@ -23,11 +26,13 @@ class SymbolTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        identifier_ = node.identifier_;
         return *this;
     }
 
     SymbolTypeNode& operator=(SymbolTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        identifier_ = std::move(node.identifier_);
         return *this;
     }
 
@@ -41,10 +46,16 @@ class SymbolTypeNode final: public TypeNode {
         return true;
     }
 
+    const std::string& get_identifier() const {
+        return identifier_;
+    }
+
   private:
     virtual SymbolTypeNode* clone_impl() const override final {
         return new SymbolTypeNode(*this);
     }
+
+    std::string identifier_;
 };
 
 using SymbolTypeNodePtr = SymbolTypeNode*;

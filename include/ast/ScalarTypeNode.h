@@ -7,16 +7,19 @@ namespace tastr::ast {
 
 class ScalarTypeNode: public TypeNode {
   public:
-    ScalarTypeNode(): TypeNode() {
+    ScalarTypeNode(const std::string& identifier)
+        : TypeNode(), identifier_(identifier) {
     }
 
     virtual ~ScalarTypeNode() {
     }
 
-    ScalarTypeNode(const ScalarTypeNode& node): TypeNode(node) {
+    ScalarTypeNode(const ScalarTypeNode& node)
+        : TypeNode(node), identifier_(node.identifier_) {
     }
 
-    ScalarTypeNode(ScalarTypeNode&& node): TypeNode(std::move(node)) {
+    ScalarTypeNode(ScalarTypeNode&& node)
+        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
     }
 
     ScalarTypeNode& operator=(const ScalarTypeNode& node) {
@@ -24,11 +27,13 @@ class ScalarTypeNode: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        identifier_ = node.identifier_;
         return *this;
     }
 
     ScalarTypeNode& operator=(ScalarTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        identifier_ = std::move(node.identifier_);
         return *this;
     }
 
@@ -42,8 +47,14 @@ class ScalarTypeNode: public TypeNode {
         return true;
     }
 
+    const std::string& get_identifier() const {
+        return identifier_;
+    }
+
   private:
     virtual ScalarTypeNode* clone_impl() const = 0;
+
+    std::string identifier_;
 };
 
 using ScalarTypeNodePtr = ScalarTypeNode*;

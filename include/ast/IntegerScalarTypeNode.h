@@ -7,7 +7,8 @@ namespace tastr::ast {
 
 class IntegerScalarTypeNode final: public ScalarTypeNode {
   public:
-    IntegerScalarTypeNode(): ScalarTypeNode() {
+    IntegerScalarTypeNode(const std::string& identifier)
+        : ScalarTypeNode(identifier) {
     }
 
     ~IntegerScalarTypeNode() = default;

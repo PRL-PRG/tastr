@@ -194,51 +194,51 @@
 %%
 
 scalartype:         INTEGER                                 {
-                                                                $$ = new IntegerScalarTypeNode();
+                                                                $$ = new IntegerScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleScalarTypeNode();
+                                                                $$ = new DoubleScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexScalarTypeNode();
+                                                                $$ = new ComplexScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterScalarTypeNode();
+                                                                $$ = new CharacterScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalScalarTypeNode();
+                                                                $$ = new LogicalScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         RAW                                     {
-                                                                $$ = new RawScalarTypeNode();
+                                                                $$ = new RawScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           ;
 
 environmenttype:    ENVIRONMENT                             {
-                                                                $$ = new EnvironmentTypeNode();
+                                                                $$ = new EnvironmentTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
                ;
 
 expressiontype:     EXPRESSION                              {
-                                                                $$ = new ExpressionTypeNode();
+                                                                $$ = new ExpressionTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
               ;
 
 languagetype:       LANGUAGE                                {
-                                                                $$ = new LanguageTypeNode();
+                                                                $$ = new LanguageTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
             ;
 
 symboltype:         SYMBOL                                  {
-                                                                $$ = new SymbolTypeNode();
+                                                                $$ = new SymbolTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           ;
