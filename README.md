@@ -87,7 +87,7 @@ To clean the build artifacts, run:
 
 `<tag>`: `<identifier>`
 
- `<function>`: `"<"``<paramseq>``">"` `"=>"` `<type>`
+ `<function>`: `"<"` `<paramseq>` `">"` `"=>"` `<type>`
 
 `<param>`: `<type>` | `"..."`
 
