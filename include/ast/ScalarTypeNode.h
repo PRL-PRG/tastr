@@ -11,8 +11,7 @@ class ScalarTypeNode: public TypeNode {
         : TypeNode(), identifier_(identifier) {
     }
 
-    virtual ~ScalarTypeNode() {
-    }
+    virtual ~ScalarTypeNode() = default;
 
     ScalarTypeNode(const ScalarTypeNode& node)
         : TypeNode(node), identifier_(node.identifier_) {
