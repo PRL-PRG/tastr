@@ -34,6 +34,7 @@
 #include "ast/UnionTypeNode.h"
 #include "ast/VarargTypeNode.h"
 #include "ast/VectorTypeNode.h"
+#include "parser/ParseResult.h"
 #include "visitor/Visitor.h"
 
 #include <filesystem>
@@ -44,15 +45,15 @@ std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node);
 
 std::string to_string(const tastr::ast::Node& node);
 
-tastr::ast::TopLevelNodeUPtr parse_stdin(bool debug_lexer = false,
-                                         bool debug_parser = false);
+tastr::parser::ParseResult parse_stdin(bool debug_lexer = false,
+                                       bool debug_parser = false);
 
-tastr::ast::TopLevelNodeUPtr parse_string(const std::string& string,
-                                          bool debug_lexer = false,
-                                          bool debug_parser = false);
-
-tastr::ast::TopLevelNodeUPtr parse_file(const std::filesystem::path& filepath,
+tastr::parser::ParseResult parse_string(const std::string& string,
                                         bool debug_lexer = false,
                                         bool debug_parser = false);
+
+tastr::parser::ParseResult parse_file(const std::filesystem::path& filepath,
+                                      bool debug_lexer = false,
+                                      bool debug_parser = false);
 
 #endif /* TASTR_AST_H */

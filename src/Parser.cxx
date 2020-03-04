@@ -2715,33 +2715,35 @@ namespace tastr { namespace parser {
   case 72:
 #line 598 "Parser.yxx"
                                                             {
-                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
                                                             }
-#line 2721 "Parser.cxx"
+#line 2722 "Parser.cxx"
     break;
 
   case 73:
-#line 601 "Parser.yxx"
+#line 602 "Parser.yxx"
                                                             {
-                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
                                                             }
-#line 2729 "Parser.cxx"
+#line 2731 "Parser.cxx"
     break;
 
   case 74:
-#line 606 "Parser.yxx"
+#line 608 "Parser.yxx"
                                                             { }
-#line 2735 "Parser.cxx"
+#line 2737 "Parser.cxx"
     break;
 
   case 75:
-#line 607 "Parser.yxx"
-                                                            { context.get_top_level_node() -> set_location(yylhs.location); }
-#line 2741 "Parser.cxx"
+#line 609 "Parser.yxx"
+                                                            {   context.get_parse_result().get_top_level_node() -> set_location(yylhs.location); }
+#line 2743 "Parser.cxx"
     break;
 
 
-#line 2745 "Parser.cxx"
+#line 2747 "Parser.cxx"
 
             default:
               break;
@@ -3167,7 +3169,7 @@ namespace tastr { namespace parser {
      424,   428,   434,   440,   444,   449,   458,   463,   469,   473,
      478,   486,   491,   497,   502,   507,   512,   517,   522,   527,
      532,   537,   542,   547,   552,   557,   562,   567,   572,   580,
-     585,   592,   598,   601,   606,   607
+     585,   592,   598,   602,   608,   609
   };
 
   // Print the state stack on the debug stream.
@@ -3251,11 +3253,11 @@ namespace tastr { namespace parser {
 
 #line 9 "Parser.yxx"
 } } // tastr::parser
-#line 3255 "Parser.cxx"
+#line 3257 "Parser.cxx"
 
-#line 610 "Parser.yxx"
+#line 612 "Parser.yxx"
 
 
 void tastr::parser::Parser::error(const location_type& location, const std::string& message) {
-    std::cout << "Parser Error: " << location << " :: " << message << std::endl;
+    context.get_parse_result().set_error(location, message);
 }

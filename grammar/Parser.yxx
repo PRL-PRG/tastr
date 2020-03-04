@@ -596,19 +596,21 @@ decltype:           TYPEDECL identifier type ";"            {
         ;
 
 decllist:           decltype                                {
-                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(wrap(std::move($1))));
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move($1))));
                                                             }
         |           decllist decltype                       {
-                                                                context.get_top_level_node() -> get_type_declarations().push_back(std::move(wrap(std::move($2))));
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move($2))));
                                                             }
         ;
 
 start:              EOF                                     { }
-     |              decllist EOF                            { context.get_top_level_node() -> set_location(@$); }
+     |              decllist EOF                            {   context.get_parse_result().get_top_level_node() -> set_location(@$); }
      ;
 
 %%
 
 void tastr::parser::Parser::error(const location_type& location, const std::string& message) {
-    std::cout << "Parser Error: " << location << " :: " << message << std::endl;
+    context.get_parse_result().set_error(location, message);
 }
