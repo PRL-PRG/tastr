@@ -14,6 +14,11 @@ To build the project, run:
 
 `$` `make`
 
+This will build the following artifacts:
+- **Static library**: `build/lib/libtastr.a`
+- **Shared library**: `build/lib/libtastr.so`
+- **Executable**:     `build/bin/tastr`
+
 To clean the build artifacts, run:
 
 `$` `make clean`
