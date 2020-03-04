@@ -20,13 +20,15 @@ MV := mv
 MKDIR := mkdir
 DIRNAME := dirname
 CD := cd
+RM := rm
 
+RMFLAGS := -rf
 MKDIRFLAGS := -p
 FLEXFLAGS := -v
 BISONFLAGS := -v
 ARFLAGS := rcs
 
-CXXFLAGS := -O0 -g -ggdb3 -std=c++17
+CXXFLAGS := -O2 -g -ggdb3 -std=c++17
 OBJFLAGS := -c -fPIC $(CXXFLAGS)
 LIBFLAGS := -shared -Wl,-soname,$(LIBNAME).so
 BINFLAGS := $(CXXFLAGS)
@@ -54,7 +56,7 @@ shared-library: $(LIBDIR)/$(LIBNAME).so
 application: $(BINDIR)/$(BINNAME)
 
 clean:
-	rm -rf $(BUILDDIR)
+	$(RM) $(RMFLAGS) $(BUILDDIR)
 
 run: application
 	@echo "Write a type declaration. Quit with Ctrl-d."
