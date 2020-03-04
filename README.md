@@ -60,6 +60,22 @@ To clean the build artifacts, run:
           | `"sym"` 
           | `"y"`
 
+`<externalptr>`: `"externalptr"`
+               | `"ept"`
+               | `"p"`
+
+`<bytecode>`: `"bytecode"`
+            | `"bcd"`
+            | `"b"`
+
+`<pairlist>`: `"pairlist"`
+            | `"plt"`
+
+`<s4>`: `"s4"`
+
+`<any>`: `"any"`
+       | `"*"`
+
 `<scalar>` : `<integer>`
            | `<double>`
            | `<complex>`
@@ -89,7 +105,8 @@ To clean the build artifacts, run:
 
  `<function>`: `"<"` `<paramseq>` `">"` `"=>"` `<type>`
 
-`<param>`: `<type>` | `"..."`
+`<param>`: `<type>`
+         | `"..."`
 
 `<paramseq>`: ` `
             | `<param>`
@@ -100,17 +117,22 @@ To clean the build artifacts, run:
 `<union>`: `<type>` `"|"` `<type>`
 
 `<type>`: `<scalar>`
-      | `<environment>`
-      | `<expression>`
-      | `<language>`
-      | `<symbol>`
-      | `<vector>`
-      | `<nona>`
-      | `<list>`
-      | `<struct>`
-      | `<function>`
-      | `<group>`
-      | `<union>`
+        | `<environment>`
+        | `<expression>`
+        | `<language>`
+        | `<symbol>`
+        | `<externalptr>`
+        | `<bytecode>`
+        | `<pairlist>`
+        | `<s4>`
+        | `<any>`
+        | `<vector>`
+        | `<nona>`
+        | `<list>`
+        | `<struct>`
+        | `<function>`
+        | `<group>`
+        | `<union>`
 
 
 `<decl>`: `"type"` `<identifier>` `<type>` `";"`
