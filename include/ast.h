@@ -6,6 +6,7 @@
 #include "ast/DoubleScalarTypeNode.h"
 #include "ast/EnvironmentTypeNode.h"
 #include "ast/ExpressionTypeNode.h"
+#include "ast/ExternalPointerTypeNode.h"
 #include "ast/FunctionTypeNode.h"
 #include "ast/GroupTypeNode.h"
 #include "ast/IdentifierNode.h"

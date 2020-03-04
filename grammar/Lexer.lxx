@@ -21,20 +21,21 @@
 
 %}
 
-INTEGER      integer|int|i
-DOUBLE       double|dbl|d
-COMPLEX      complex|clx|x
-CHARACTER    character|chr|s
-LOGICAL      logical|lgl|l
-RAW          raw|r
-ENVIRONMENT  environment|env|t
-EXPRESSION   expression|exr|e
-LANGUAGE     language|lng|g
-SYMBOL       symbol|sym|y
-TYPEDECL     type
-BLANK        [ \t\r]
-VARARG       \.\.\.
-IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
+INTEGER             integer|int|i
+DOUBLE              double|dbl|d
+COMPLEX             complex|clx|x
+CHARACTER           character|chr|s
+LOGICAL             logical|lgl|l
+RAW                 raw|r
+ENVIRONMENT         environment|env|t
+EXPRESSION          expression|exr|e
+LANGUAGE            language|lng|g
+SYMBOL              symbol|sym|y
+EXTERNALPOINTER     externalptr|ept|p
+TYPEDECL            type
+BLANK               [ \t\r]
+VARARG              \.\.\.
+IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 
 %%
 
@@ -72,6 +73,7 @@ IDENTIFIER   [a-zA-Z.][a-zA-Z0-9._]*
 {EXPRESSION}                { HANDLE_TOKEN(TOKEN_EXPRESSION) }
 {LANGUAGE}                  { HANDLE_TOKEN(TOKEN_LANGUAGE) }
 {SYMBOL}                    { HANDLE_TOKEN(TOKEN_SYMBOL) }
+{EXTERNALPOINTER}           { HANDLE_TOKEN(TOKEN_EXTERNALPOINTER) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {

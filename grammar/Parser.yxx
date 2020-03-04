@@ -53,6 +53,7 @@
 %token <std::string>                    EXPRESSION
 %token <std::string>                    LANGUAGE
 %token <std::string>                    SYMBOL
+%token <std::string>                    EXTERNALPOINTER
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
 %nterm <ScalarTypeNodePtr>              scalartype
@@ -60,6 +61,7 @@
 %nterm <ExpressionTypeNodePtr>          expressiontype
 %nterm <LanguageTypeNodePtr>            languagetype
 %nterm <SymbolTypeNodePtr>              symboltype
+%nterm <ExternalPointerTypeNodePtr>     externalptrtype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
 %nterm <TypeNodeSequenceNodePtr>        typeseq
@@ -90,6 +92,7 @@
 %printer { yyo << to_string(*$$); } <ExpressionTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <LanguageTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <SymbolTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <ExternalPointerTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <TypeNodeSequenceNodePtr>;
@@ -109,6 +112,7 @@
 %destructor { delete $$; } expressiontype
 %destructor { delete $$; } languagetype
 %destructor { delete $$; } symboltype
+%destructor { delete $$; } externalptrtype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
@@ -127,7 +131,7 @@
 %destructor { delete $$; } decltype
 
 %initial-action {
-    /* filename for locations here             
+    /* filename for locations here
        https://www.gnu.org/software/bison/manual/html_node/Initial-Action-Decl.html
        location stores pointer to a string allocated elsewhere and does not delete it.
        it has been disabled for now since TopLevelNode stores the filename anyways and
@@ -156,6 +160,8 @@
     using tastr::ast::LanguageTypeNodePtr;
     using tastr::ast::SymbolTypeNode;
     using tastr::ast::SymbolTypeNodePtr;
+    using tastr::ast::ExternalPointerTypeNode;
+    using tastr::ast::ExternalPointerTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
@@ -256,6 +262,12 @@ symboltype:         SYMBOL                                  {
                                                                 $$ -> set_location(@1);
                                                             }
           ;
+
+externalptrtype:    EXTERNALPOINTER                         {
+                                                                $$ = new ExternalPointerTypeNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+               ;
 
 vectortype:         scalartype "[" "]"                      {
                                                                 $$ = new VectorTypeNode(std::move(wrap(std::move($1))));
@@ -437,6 +449,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       symboltype                              {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       externalptrtype                         {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
