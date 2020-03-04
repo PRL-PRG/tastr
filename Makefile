@@ -26,14 +26,14 @@ FLEXFLAGS := -v
 BISONFLAGS := -v
 ARFLAGS := rcs
 
-CXXFLAGS := -O0 -g -ggdb3 -std=c++17 #--analyze -Xanalyzer -analyzer-output=text
+CXXFLAGS := -O0 -g -ggdb3 -std=c++17
 OBJFLAGS := -c -fPIC $(CXXFLAGS)
 LIBFLAGS := -shared -Wl,-soname,$(LIBNAME).so
 BINFLAGS := $(CXXFLAGS)
 BINARGS := -
 
 SRCFILES := $(shell find $(SRCDIR) -name '*.cpp') $(shell find $(SRCDIR) -name '*.c') $(shell find $(SRCDIR) -name '*.cc') $(shell find $(SRCDIR) -name '*.cxx')
-INCLUDEILES := $(shell find $(INCLUDEDIR) -name '*.hpp') $(shell find $(INCLUDEDIR) -name '*.h') $(shell find $(INCLUDEDIR) -name '*.hh') $(shell find $(INCLUDEDIR) -name '*.hxx')
+INCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hpp') $(shell find $(INCLUDEDIR) -name '*.h') $(shell find $(INCLUDEDIR) -name '*.hh') $(shell find $(INCLUDEDIR) -name '*.hxx')
 DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
 OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
 
