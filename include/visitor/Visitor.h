@@ -48,6 +48,8 @@ class Visitor {
 
     virtual void visit(const tastr::ast::BytecodeTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::PairlistTypeNode& node) = 0;
+
     virtual void visit(const tastr::ast::FunctionTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::ListTypeNode& node) = 0;

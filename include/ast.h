@@ -17,6 +17,7 @@
 #include "ast/LogicalScalarTypeNode.h"
 #include "ast/NoNaTypeNode.h"
 #include "ast/Node.h"
+#include "ast/PairlistTypeNode.h"
 #include "ast/RawScalarTypeNode.h"
 #include "ast/ScalarTypeNode.h"
 #include "ast/StructTypeNode.h"

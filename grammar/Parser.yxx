@@ -55,6 +55,7 @@
 %token <std::string>                    SYMBOL
 %token <std::string>                    EXTERNALPOINTER
 %token <std::string>                    BYTECODE
+%token <std::string>                    PAIRLIST
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
 %nterm <ScalarTypeNodePtr>              scalartype
@@ -64,6 +65,7 @@
 %nterm <SymbolTypeNodePtr>              symboltype
 %nterm <ExternalPointerTypeNodePtr>     externalptrtype
 %nterm <BytecodeTypeNodePtr>            bytecodetype
+%nterm <PairlistTypeNodePtr>            pairlisttype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
 %nterm <TypeNodeSequenceNodePtr>        typeseq
@@ -96,6 +98,7 @@
 %printer { yyo << to_string(*$$); } <SymbolTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <ExternalPointerTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <BytecodeTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <PairlistTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <TypeNodeSequenceNodePtr>;
@@ -117,6 +120,7 @@
 %destructor { delete $$; } symboltype
 %destructor { delete $$; } externalptrtype
 %destructor { delete $$; } bytecodetype
+%destructor { delete $$; } pairlisttype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
@@ -168,6 +172,8 @@
     using tastr::ast::ExternalPointerTypeNodePtr;
     using tastr::ast::BytecodeTypeNode;
     using tastr::ast::BytecodeTypeNodePtr;
+    using tastr::ast::PairlistTypeNode;
+    using tastr::ast::PairlistTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
@@ -277,6 +283,12 @@ externalptrtype:    EXTERNALPOINTER                         {
 
 bytecodetype:       BYTECODE                                {
                                                                 $$ = new BytecodeTypeNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+            ;
+
+pairlisttype:       PAIRLIST                                {
+                                                                $$ = new PairlistTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
             ;
@@ -471,6 +483,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       bytecodetype                            {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       pairlisttype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
