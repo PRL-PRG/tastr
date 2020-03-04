@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_FUNCTION_TYPE_H
-#define TASTR_AST_FUNCTION_TYPE_H
+#ifndef TASTR_AST_FUNCTION_TYPE_NODE_H
+#define TASTR_AST_FUNCTION_TYPE_NODE_H
 
 #include "TypeNode.h"
 #include "TypeNodeSequenceNode.h"
@@ -78,4 +78,4 @@ using FunctionTypeNodeUPtr = std::unique_ptr<FunctionTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_FUNCTION_TYPE_H */
+#endif /* TASTR_AST_FUNCTION_TYPE_NODE_H */

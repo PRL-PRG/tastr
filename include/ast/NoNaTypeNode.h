@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_NO_NA_TYPE_H
-#define TASTR_AST_NO_NA_TYPE_H
+#ifndef TASTR_AST_NO_NA_TYPE_NODE_H
+#define TASTR_AST_NO_NA_TYPE_NODE_H
 
 #include "TypeNode.h"
 #include "VectorTypeNode.h"
@@ -66,4 +66,4 @@ using NoNaTypeNodeUPtr = std::unique_ptr<NoNaTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_NO_NA_TYPE_H */
+#endif /* TASTR_AST_NO_NA_TYPE_NODE_H */

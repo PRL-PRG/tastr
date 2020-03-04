@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_DOUBLE_TYPE_H
-#define TASTR_AST_DOUBLE_TYPE_H
+#ifndef TASTR_AST_DOUBLE_SCLAR_TYPE_NODE_H
+#define TASTR_AST_DOUBLE_SCLAR_TYPE_NODE_H
 
 #include "ScalarTypeNode.h"
 
@@ -55,4 +55,4 @@ using DoubleScalarTypeNodeUPtr = std::unique_ptr<DoubleScalarTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_DOUBLE_TYPE_H */
+#endif /* TASTR_AST_DOUBLE_SCLAR_TYPE_NODE_H */

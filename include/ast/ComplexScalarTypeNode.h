@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_COMPLEX_TYPE_H
-#define TASTR_AST_COMPLEX_TYPE_H
+#ifndef TASTR_AST_COMPLEX_SCALAR_TYPE_NODE_H
+#define TASTR_AST_COMPLEX_SCALAR_TYPE_NODE_H
 
 #include "ScalarTypeNode.h"
 
@@ -54,4 +54,4 @@ using ComplexScalarTypeNodePtr = ComplexScalarTypeNode*;
 using ComplexScalarTypeNodeUPtr = std::unique_ptr<ComplexScalarTypeNode>;
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_COMPLEX_TYPE_H */
+#endif /* TASTR_AST_COMPLEX_SCALAR_TYPE_NODE_H */

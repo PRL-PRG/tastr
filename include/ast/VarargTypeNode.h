@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_VARARG_TYPE_H
-#define TASTR_AST_VARARG_TYPE_H
+#ifndef TASTR_AST_VARARG_TYPE_NODE_H
+#define TASTR_AST_VARARG_TYPE_NODE_H
 
 #include "ast/TypeNode.h"
 
@@ -54,4 +54,4 @@ using VarargTypeNodeUPtr = std::unique_ptr<VarargTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_VARARG_TYPE_H */
+#endif /* TASTR_AST_VARARG_TYPE_NODE_H */

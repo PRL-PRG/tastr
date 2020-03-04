@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_TYPE_DECLARATION_SEQUENCE_H
-#define TASTR_AST_TYPE_DECLARATION_SEQUENCE_H
+#ifndef TASTR_AST_TOP_LEVEL_NODE_H
+#define TASTR_AST_TOP_LEVEL_NODE_H
 
 #include "Sequence.h"
 #include "TypeDeclarationNodeSequenceNode.h"
@@ -81,4 +81,4 @@ using TopLevelNodeUPtr = std::unique_ptr<TopLevelNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TYPE_DECLARATION_SEQUENCE_H */
+#endif /* TASTR_AST_TOP_LEVEL_NODE_H */

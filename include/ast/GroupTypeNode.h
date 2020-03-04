@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_GROUP_TYPE_H
-#define TASTR_AST_GROUP_TYPE_H
+#ifndef TASTR_AST_GROUP_TYPE_NODE_H
+#define TASTR_AST_GROUP_TYPE_NODE_H
 
 #include "TypeNode.h"
 
@@ -65,4 +65,4 @@ using GroupTypeNodeUPtr = std::unique_ptr<GroupTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_GROUP_TYPE_H */
+#endif /* TASTR_AST_GROUP_TYPE_NODE_H */

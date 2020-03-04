@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_LANGUAGE_TYPE_H
-#define TASTR_AST_LANGUAGE_TYPE_H
+#ifndef TASTR_AST_LANGUAGE_TYPE_NODE_H
+#define TASTR_AST_LANGUAGE_TYPE_NODE_H
 
 #include "TypeNode.h"
 
@@ -63,4 +63,4 @@ using LanguageTypeNodeUPtr = std::unique_ptr<LanguageTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_LANGUAGE_TYPE_H */
+#endif /* TASTR_AST_LANGUAGE_TYPE_NODE_H */

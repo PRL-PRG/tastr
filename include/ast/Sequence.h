@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_SEQUENCE_TYPE_H
-#define TASTR_AST_SEQUENCE_TYPE_H
+#ifndef TASTR_AST_SEQUENCE_H
+#define TASTR_AST_SEQUENCE_H
 
 #include "Node.h"
 #include "TagTypePairNode.h"
@@ -123,4 +123,4 @@ using SequenceNodeUPtr = std::unique_ptr<Sequence<T>>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TYPE_SEQUENCE_H */
+#endif /* TASTR_AST_SEQUENCE_H */

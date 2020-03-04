@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_UNION_TYPE_H
-#define TASTR_AST_UNION_TYPE_H
+#ifndef TASTR_AST_UNION_TYPE_NODE_H
+#define TASTR_AST_UNION_TYPE_NODE_H
 
 #include "TypeNode.h"
 
@@ -79,4 +79,4 @@ using UnionTypeNodeUPtr = std::unique_ptr<UnionTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_UNION_TYPE_H */
+#endif /* TASTR_AST_UNION_TYPE_NODE_H */
