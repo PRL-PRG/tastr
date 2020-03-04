@@ -54,6 +54,7 @@
 %token <std::string>                    LANGUAGE
 %token <std::string>                    SYMBOL
 %token <std::string>                    EXTERNALPOINTER
+%token <std::string>                    BYTECODE
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
 %nterm <ScalarTypeNodePtr>              scalartype
@@ -62,6 +63,7 @@
 %nterm <LanguageTypeNodePtr>            languagetype
 %nterm <SymbolTypeNodePtr>              symboltype
 %nterm <ExternalPointerTypeNodePtr>     externalptrtype
+%nterm <BytecodeTypeNodePtr>            bytecodetype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
 %nterm <TypeNodeSequenceNodePtr>        typeseq
@@ -93,6 +95,7 @@
 %printer { yyo << to_string(*$$); } <LanguageTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <SymbolTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <ExternalPointerTypeNodePtr>;
+%printer { yyo << to_string(*$$); } <BytecodeTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <TypeNodeSequenceNodePtr>;
@@ -113,6 +116,7 @@
 %destructor { delete $$; } languagetype
 %destructor { delete $$; } symboltype
 %destructor { delete $$; } externalptrtype
+%destructor { delete $$; } bytecodetype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
@@ -162,6 +166,8 @@
     using tastr::ast::SymbolTypeNodePtr;
     using tastr::ast::ExternalPointerTypeNode;
     using tastr::ast::ExternalPointerTypeNodePtr;
+    using tastr::ast::BytecodeTypeNode;
+    using tastr::ast::BytecodeTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
@@ -268,6 +274,12 @@ externalptrtype:    EXTERNALPOINTER                         {
                                                                 $$ -> set_location(@1);
                                                             }
                ;
+
+bytecodetype:       BYTECODE                                {
+                                                                $$ = new BytecodeTypeNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+            ;
 
 vectortype:         scalartype "[" "]"                      {
                                                                 $$ = new VectorTypeNode(std::move(wrap(std::move($1))));
@@ -454,6 +466,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       externalptrtype                         {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       bytecodetype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

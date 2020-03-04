@@ -32,6 +32,7 @@ EXPRESSION          expression|exr|e
 LANGUAGE            language|lng|g
 SYMBOL              symbol|sym|y
 EXTERNALPOINTER     externalptr|ept|p
+BYTECODE            bytecode|bcd|b
 TYPEDECL            type
 BLANK               [ \t\r]
 VARARG              \.\.\.
@@ -74,6 +75,7 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 {LANGUAGE}                  { HANDLE_TOKEN(TOKEN_LANGUAGE) }
 {SYMBOL}                    { HANDLE_TOKEN(TOKEN_SYMBOL) }
 {EXTERNALPOINTER}           { HANDLE_TOKEN(TOKEN_EXTERNALPOINTER) }
+{BYTECODE}                  { HANDLE_TOKEN(TOKEN_BYTECODE) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {

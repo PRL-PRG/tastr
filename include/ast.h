@@ -1,6 +1,7 @@
 #ifndef TASTR_AST_H
 #define TASTR_AST_H
 
+#include "ast/BytecodeTypeNode.h"
 #include "ast/CharacterScalarTypeNode.h"
 #include "ast/ComplexScalarTypeNode.h"
 #include "ast/DoubleScalarTypeNode.h"

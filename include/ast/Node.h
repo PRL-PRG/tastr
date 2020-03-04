@@ -112,6 +112,10 @@ class Node {
         return false;
     }
 
+    virtual bool is_bytecode_type_node() const {
+        return false;
+    }
+
     virtual bool is_tag_type_pair_node() const {
         return false;
     }

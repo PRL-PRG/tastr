@@ -85,6 +85,10 @@ class Unparser final: public Visitor {
         os_ << node.get_identifier();
     }
 
+    void visit(const tastr::ast::BytecodeTypeNode& node) override final {
+        os_ << node.get_identifier();
+    }
+
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
         const tastr::ast::TypeNodeSequenceNode& parameter_types =
             node.get_parameter_types();
