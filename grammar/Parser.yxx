@@ -57,6 +57,7 @@
 %token <std::string>                    BYTECODE
 %token <std::string>                    PAIRLIST
 %token <std::string>                    S4
+%token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
 %nterm <ScalarTypeNodePtr>              scalartype
@@ -68,6 +69,7 @@
 %nterm <BytecodeTypeNodePtr>            bytecodetype
 %nterm <PairlistTypeNodePtr>            pairlisttype
 %nterm <S4TypeNodePtr>                  s4type
+%nterm <AnyTypeNodePtr>                 anytype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
 %nterm <TypeNodeSequenceNodePtr>        typeseq
@@ -102,6 +104,7 @@
 %printer { yyo << to_string(*$$); } <BytecodeTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <PairlistTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <S4TypeNodePtr>;
+%printer { yyo << to_string(*$$); } <AnyTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
 %printer { yyo << to_string(*$$); } <TypeNodeSequenceNodePtr>;
@@ -125,6 +128,7 @@
 %destructor { delete $$; } bytecodetype
 %destructor { delete $$; } pairlisttype
 %destructor { delete $$; } s4type
+%destructor { delete $$; } anytype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
@@ -180,6 +184,8 @@
     using tastr::ast::PairlistTypeNodePtr;
     using tastr::ast::S4TypeNode;
     using tastr::ast::S4TypeNodePtr;
+    using tastr::ast::AnyTypeNode;
+    using tastr::ast::AnyTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
@@ -304,6 +310,12 @@ s4type:             S4                                      {
                                                                 $$ -> set_location(@1);
                                                             }
       ;
+
+anytype:            ANY                                     {
+                                                                $$ = new AnyTypeNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+       ;
 
 vectortype:         scalartype "[" "]"                      {
                                                                 $$ = new VectorTypeNode(std::move(wrap(std::move($1))));
@@ -505,6 +517,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       s4type                                  {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       anytype                                 {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
