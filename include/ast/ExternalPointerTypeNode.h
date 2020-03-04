@@ -42,7 +42,7 @@ class ExternalPointerTypeNode final: public TypeNode {
         return std::unique_ptr<ExternalPointerTypeNode>(this->clone_impl());
     }
 
-    bool is_language_type_node() const override final {
+    bool is_external_pointer_type_node() const override final {
         return true;
     }
 

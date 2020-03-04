@@ -112,6 +112,10 @@ class Node {
         return false;
     }
 
+    virtual bool is_external_pointer_type_node() const {
+        return false;
+    }
+
     virtual bool is_any_type_node() const {
         return false;
     }
