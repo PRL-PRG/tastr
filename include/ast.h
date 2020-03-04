@@ -19,6 +19,7 @@
 #include "ast/Node.h"
 #include "ast/PairlistTypeNode.h"
 #include "ast/RawScalarTypeNode.h"
+#include "ast/S4TypeNode.h"
 #include "ast/ScalarTypeNode.h"
 #include "ast/StructTypeNode.h"
 #include "ast/SymbolTypeNode.h"

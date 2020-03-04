@@ -34,6 +34,7 @@ SYMBOL              symbol|sym|y
 EXTERNALPOINTER     externalptr|ept|p
 BYTECODE            bytecode|bcd|b
 PAIRLIST            pairlist|plt
+S4                  s4
 TYPEDECL            type
 BLANK               [ \t\r]
 VARARG              \.\.\.
@@ -78,6 +79,7 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 {EXTERNALPOINTER}           { HANDLE_TOKEN(TOKEN_EXTERNALPOINTER) }
 {BYTECODE}                  { HANDLE_TOKEN(TOKEN_BYTECODE) }
 {PAIRLIST}                  { HANDLE_TOKEN(TOKEN_PAIRLIST) }
+{S4}                        { HANDLE_TOKEN(TOKEN_S4) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {
