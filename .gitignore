@@ -131,20 +131,5 @@ dkms.conf
 # CMake
 CMakeLists.txt
 
-## BISON IGNORE RULES
-Parser.gv
-Parser.xml
-Parser.cxx
-Parser.output
-location.hh
-Parser.hxx
-Lexer.hxx
-Lexer.cxx
-
-
-## FLEX IGNORE RULES
-scanner.cpp
-
-## OUTPUT FILE IGNORE RULES
-librtypesparser
-rtypesparser
+## BUILD ARTIFACTS
+build/
