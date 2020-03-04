@@ -1,5 +1,5 @@
-#include "ast/EnvironmentTypeNode.h"
-#include "visitor/Visitor.h"
+#include "ast/EnvironmentTypeNode.hpp"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::EnvironmentTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

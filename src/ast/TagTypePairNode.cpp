@@ -1,5 +1,5 @@
-#include "ast/TagTypePairNode.h"
-#include "visitor/Visitor.h"
+#include "ast/TagTypePairNode.hpp"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::TagTypePairNode::accept(
     tastr::visitor::Visitor& visitor) const {

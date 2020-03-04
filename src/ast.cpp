@@ -1,9 +1,9 @@
-#include "ast.h"
+#include "ast.hpp"
 
 #include "Lexer.hpp"
 #include "Parser.hxx"
-#include "ParsingContext.h"
-#include "visitor/Unparser.h"
+#include "ParsingContext.hpp"
+#include "visitor/Unparser.hpp"
 
 #include <fstream>
 #include <sstream>

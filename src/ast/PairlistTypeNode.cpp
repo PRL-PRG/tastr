@@ -1,6 +1,6 @@
-#include "ast/PairlistTypeNode.h"
+#include "ast/PairlistTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::PairlistTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

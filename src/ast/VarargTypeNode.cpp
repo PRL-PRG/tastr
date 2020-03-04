@@ -1,6 +1,6 @@
-#include "ast/VarargTypeNode.h"
+#include "ast/VarargTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::VarargTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

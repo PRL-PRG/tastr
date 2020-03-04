@@ -1,6 +1,6 @@
-#include "ast/ComplexScalarTypeNode.h"
+#include "ast/ComplexScalarTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::ComplexScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

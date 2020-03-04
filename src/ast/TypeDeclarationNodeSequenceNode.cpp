@@ -1,6 +1,6 @@
-#include "ast/TypeDeclarationNodeSequenceNode.h"
+#include "ast/TypeDeclarationNodeSequenceNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::TypeDeclarationNodeSequenceNode::accept(
     tastr::visitor::Visitor& visitor) const {

@@ -1,6 +1,6 @@
-#include "ast/StructTypeNode.h"
+#include "ast/StructTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::StructTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

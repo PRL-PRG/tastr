@@ -1,6 +1,6 @@
-#include "ast/VectorTypeNode.h"
+#include "ast/VectorTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::VectorTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

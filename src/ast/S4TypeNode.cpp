@@ -1,6 +1,6 @@
-#include "ast/S4TypeNode.h"
+#include "ast/S4TypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::S4TypeNode::accept(tastr::visitor::Visitor& visitor) const {
     visitor.visit(*this);

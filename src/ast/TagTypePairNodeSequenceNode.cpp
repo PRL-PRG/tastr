@@ -1,6 +1,6 @@
-#include "ast/TagTypePairNodeSequenceNode.h"
+#include "ast/TagTypePairNodeSequenceNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::TagTypePairNodeSequenceNode::accept(
     tastr::visitor::Visitor& visitor) const {

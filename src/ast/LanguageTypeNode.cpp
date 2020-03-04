@@ -1,5 +1,5 @@
-#include "ast/LanguageTypeNode.h"
-#include "visitor/Visitor.h"
+#include "ast/LanguageTypeNode.hpp"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::LanguageTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

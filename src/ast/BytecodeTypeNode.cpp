@@ -1,6 +1,6 @@
-#include "ast/BytecodeTypeNode.h"
+#include "ast/BytecodeTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::BytecodeTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

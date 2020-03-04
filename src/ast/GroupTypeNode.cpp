@@ -1,6 +1,6 @@
-#include "ast/GroupTypeNode.h"
+#include "ast/GroupTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::GroupTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

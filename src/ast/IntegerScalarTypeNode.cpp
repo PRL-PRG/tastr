@@ -1,6 +1,6 @@
-#include "ast/IntegerScalarTypeNode.h"
+#include "ast/IntegerScalarTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::IntegerScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

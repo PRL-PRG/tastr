@@ -1,6 +1,6 @@
-#include "ast/UnionTypeNode.h"
+#include "ast/UnionTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::UnionTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

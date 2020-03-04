@@ -1,6 +1,6 @@
-#include "ast/CharacterScalarTypeNode.h"
+#include "ast/CharacterScalarTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::CharacterScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

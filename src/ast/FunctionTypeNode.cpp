@@ -1,6 +1,6 @@
-#include "ast/FunctionTypeNode.h"
+#include "ast/FunctionTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::FunctionTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

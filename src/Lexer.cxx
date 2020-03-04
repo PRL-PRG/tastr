@@ -578,7 +578,7 @@ static const flex_int16_t yy_rule_linenum[38] =
 #line 11 "Lexer.lxx"
     #include <string>
     #include "Lexer.hpp"
-    #include "ParsingContext.h"
+    #include "ParsingContext.hpp"
 
     /* Code run each time a pattern is matched. */
     #define YY_USER_ACTION  yylloc->columns(yyleng);

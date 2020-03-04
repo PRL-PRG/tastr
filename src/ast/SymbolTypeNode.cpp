@@ -1,5 +1,5 @@
-#include "ast/SymbolTypeNode.h"
-#include "visitor/Visitor.h"
+#include "ast/SymbolTypeNode.hpp"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::SymbolTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

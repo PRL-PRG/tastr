@@ -1,6 +1,6 @@
-#include "ast/RawScalarTypeNode.h"
+#include "ast/RawScalarTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::RawScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

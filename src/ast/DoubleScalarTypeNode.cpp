@@ -1,6 +1,6 @@
-#include "ast/DoubleScalarTypeNode.h"
+#include "ast/DoubleScalarTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::DoubleScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

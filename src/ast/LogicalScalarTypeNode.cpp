@@ -1,6 +1,6 @@
-#include "ast/LogicalScalarTypeNode.h"
+#include "ast/LogicalScalarTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::LogicalScalarTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

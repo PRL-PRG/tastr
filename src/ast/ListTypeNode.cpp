@@ -1,6 +1,6 @@
-#include "ast/ListTypeNode.h"
+#include "ast/ListTypeNode.hpp"
 
-#include "visitor/Visitor.h"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::ListTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {

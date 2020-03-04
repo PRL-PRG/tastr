@@ -1,5 +1,5 @@
-#include "ast/ExpressionTypeNode.h"
-#include "visitor/Visitor.h"
+#include "ast/ExpressionTypeNode.hpp"
+#include "visitor/Visitor.hpp"
 
 void tastr::ast::ExpressionTypeNode::accept(
     tastr::visitor::Visitor& visitor) const {
