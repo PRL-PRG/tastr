@@ -21,6 +21,7 @@ MKDIR := mkdir
 DIRNAME := dirname
 CD := cd
 RM := rm
+CLANGFORMAT := clang-format
 
 RMFLAGS := -rf
 MKDIRFLAGS := -p
@@ -34,8 +35,18 @@ LIBFLAGS := -shared -Wl,-soname,$(LIBNAME).so
 BINFLAGS := $(CXXFLAGS)
 BINARGS := -
 
-SRCFILES := $(shell find $(SRCDIR) -name '*.cpp') $(shell find $(SRCDIR) -name '*.c') $(shell find $(SRCDIR) -name '*.cc') $(shell find $(SRCDIR) -name '*.cxx')
-INCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hpp') $(shell find $(INCLUDEDIR) -name '*.h') $(shell find $(INCLUDEDIR) -name '*.hh') $(shell find $(INCLUDEDIR) -name '*.hxx')
+CPPSRCFILES := $(shell find $(SRCDIR) -name '*.cpp')
+CSRCFILES := $(shell find $(SRCDIR) -name '*.c')
+CCSRCFILES := $(shell find $(SRCDIR) -name '*.cc')
+CXXSRCFILES := $(shell find $(SRCDIR) -name '*.cxx')
+SRCFILES :=  $(CPPSRCFILES) $(CSRCFILES) $(CCSRCFILES) $(CXXSRCFILES)
+
+HPPINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hpp')
+HINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.h')
+HHINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hh')
+HXXINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hxx')
+INCLUDEFILES := $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(HHINCLUDEFILES) $(HXXINCLUDEFILES)
+
 DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
 OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
 
@@ -97,6 +108,8 @@ $(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
 	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
 	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
 
+clang-format:
+	$(CLANGFORMAT) -i $(CPPSRCFILES) $(CSRCFILES) $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(DRIVERFILES)
 
 .PHONY: all            \
         build          \
@@ -107,4 +120,5 @@ $(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
         shared-library \
         application    \
         clean          \
-        run
+        run            \
+        clang-format
