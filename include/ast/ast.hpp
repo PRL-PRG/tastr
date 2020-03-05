@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_H
-#define TASTR_AST_H
+#ifndef TASTR_AST_AST_H
+#define TASTR_AST_AST_H
 
 #include "ast/AnyTypeNode.hpp"
 #include "ast/BytecodeTypeNode.hpp"
@@ -56,4 +56,4 @@ tastr::parser::ParseResult parse_file(const std::filesystem::path& filepath,
                                       bool debug_lexer = false,
                                       bool debug_parser = false);
 
-#endif /* TASTR_AST_H */
+#endif /* TASTR_AST_AST_H */

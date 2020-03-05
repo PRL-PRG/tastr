@@ -1,4 +1,4 @@
-#include "ast.hpp"
+#include "ast/ast.hpp"
 
 #include "parser/Lexer.hpp"
 #include "parser/Parser.hxx"

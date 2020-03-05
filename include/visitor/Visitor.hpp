@@ -1,7 +1,7 @@
 #ifndef TASTR_VISITOR_VISITOR_H
 #define TASTR_VISITOR_VISITOR_H
 
-#include "ast.hpp"
+#include "ast/ast.hpp"
 
 namespace tastr::visitor {
 

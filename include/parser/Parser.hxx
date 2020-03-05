@@ -51,7 +51,7 @@
         class ParsingContext;
     }
     #include "parser/location.hh"
-    #include "ast.hpp"
+    #include "ast/ast.hpp"
     using tastr::ast::CharacterScalarTypeNode;
     using tastr::ast::ComplexScalarTypeNode;
     using tastr::ast::DoubleScalarTypeNode;
