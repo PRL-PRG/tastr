@@ -8,7 +8,7 @@
 
 namespace tastr::ast {
 
-class VectorTypeNode: public TypeNode {
+class VectorTypeNode final: public TypeNode {
   public:
     explicit VectorTypeNode(std::unique_ptr<ScalarTypeNode> scalar_type)
         : TypeNode(), scalar_type_(std::move(scalar_type)) {
