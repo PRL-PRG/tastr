@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_H
-#define TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_H
+#ifndef TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_HPP
+#define TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_HPP
 
 #include "ScalarTypeNode.hpp"
 
@@ -56,4 +56,4 @@ class CharacterScalarTypeNode final: public ScalarTypeNode {
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_H */
+#endif /* TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_HPP */

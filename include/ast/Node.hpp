@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_NODE_H
-#define TASTR_AST_NODE_H
+#ifndef TASTR_AST_NODE_HPP
+#define TASTR_AST_NODE_HPP
 
 #include "parser/location.hh"
 
@@ -202,4 +202,4 @@ std::unique_ptr<T> wrap(T*&& t) {
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_NODE_H */
+#endif /* TASTR_AST_NODE_HPP */

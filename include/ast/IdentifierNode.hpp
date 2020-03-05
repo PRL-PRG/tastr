@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_IDENTIFIER_NODE_H
-#define TASTR_AST_IDENTIFIER_NODE_H
+#ifndef TASTR_AST_IDENTIFIER_NODE_HPP
+#define TASTR_AST_IDENTIFIER_NODE_HPP
 
 #include "ast/Node.hpp"
 
@@ -63,4 +63,4 @@ using IdentifierNodeUPtr = std::unique_ptr<IdentifierNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_IDENTIFIER_NODE_H */
+#endif /* TASTR_AST_IDENTIFIER_NODE_HPP */

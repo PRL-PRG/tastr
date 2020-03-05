@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_LIST_TYPE_NODE_H
-#define TASTR_AST_LIST_TYPE_NODE_H
+#ifndef TASTR_AST_LIST_TYPE_NODE_HPP
+#define TASTR_AST_LIST_TYPE_NODE_HPP
 
 #include "TypeNode.hpp"
 #include "TypeNodeSequenceNode.hpp"
@@ -65,4 +65,4 @@ using ListTypeNodeUPtr = std::unique_ptr<ListTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_LIST_TYPE_NODE_H */
+#endif /* TASTR_AST_LIST_TYPE_NODE_HPP */

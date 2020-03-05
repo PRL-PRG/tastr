@@ -1,5 +1,5 @@
-#ifndef TASTR_VISITOR_VISITOR_H
-#define TASTR_VISITOR_VISITOR_H
+#ifndef TASTR_VISITOR_VISITOR_HPP
+#define TASTR_VISITOR_VISITOR_HPP
 
 #include "ast/ast.hpp"
 
@@ -82,4 +82,4 @@ class Visitor {
 
 } // namespace tastr::visitor
 
-#endif /* TASTR_VISITOR_VISITOR_H */
+#endif /* TASTR_VISITOR_VISITOR_HPP */

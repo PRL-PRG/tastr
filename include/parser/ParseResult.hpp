@@ -1,5 +1,5 @@
-#ifndef TASTR_PARSER_PARSE_RESULT_H
-#define TASTR_PARSER_PARSE_RESULT_H
+#ifndef TASTR_PARSER_PARSE_RESULT_HPP
+#define TASTR_PARSER_PARSE_RESULT_HPP
 
 #include "ast/TopLevelNode.hpp"
 #include "parser/location.hh"
@@ -70,4 +70,4 @@ class ParseResult {
 
 } // namespace tastr::parser
 
-#endif /* TASTR_PARSER_PARSE_RESULT_H */
+#endif /* TASTR_PARSER_PARSE_RESULT_HPP */

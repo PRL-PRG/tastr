@@ -1,5 +1,5 @@
-#ifndef TASTR_PARSING_CONTEXT_H
-#define TASTR_PARSING_CONTEXT_H
+#ifndef TASTR_PARSER_PARSING_CONTEXT_HPP
+#define TASTR_PARSER_PARSING_CONTEXT_HPP
 
 #include "parser/ParseResult.hpp"
 
@@ -34,4 +34,4 @@ class ParsingContext {
 
 } // namespace tastr::parser
 
-#endif /* TASTR_PARSING_CONTEXT_H */
+#endif /* TASTR_PARSER_PARSING_CONTEXT_HPP */

@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_STRUCT_TYPE_NODE_H
-#define TASTR_AST_STRUCT_TYPE_NODE_H
+#ifndef TASTR_AST_STRUCT_TYPE_NODE_HPP
+#define TASTR_AST_STRUCT_TYPE_NODE_HPP
 
 #include "TagTypePairNode.hpp"
 #include "TagTypePairNodeSequenceNode.hpp"
@@ -65,4 +65,4 @@ using StructTypeNodeUPtr = std::unique_ptr<StructTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_STRUCT_TYPE_NODE_H */
+#endif /* TASTR_AST_STRUCT_TYPE_NODE_HPP */

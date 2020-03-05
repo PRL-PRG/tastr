@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_VECTOR_TYPE_NODE_H
-#define TASTR_AST_VECTOR_TYPE_NODE_H
+#ifndef TASTR_AST_VECTOR_TYPE_NODE_HPP
+#define TASTR_AST_VECTOR_TYPE_NODE_HPP
 
 #include "ScalarTypeNode.hpp"
 #include "TypeNode.hpp"
@@ -67,4 +67,4 @@ using VectorTypeNodeUPtr = std::unique_ptr<VectorTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_VECTOR_TYPE_NODE_H */
+#endif /* TASTR_AST_VECTOR_TYPE_NODE_HPP */

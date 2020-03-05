@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_INTEGER_SCALAR_TYPE_NODE_H
-#define TASTR_AST_INTEGER_SCALAR_TYPE_NODE_H
+#ifndef TASTR_AST_INTEGER_SCALAR_TYPE_NODE_HPP
+#define TASTR_AST_INTEGER_SCALAR_TYPE_NODE_HPP
 
 #include "ScalarTypeNode.hpp"
 
@@ -55,4 +55,4 @@ using IntegerScalarTypeNodeUPtr = std::unique_ptr<IntegerScalarTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_INTEGER_SCALAR_TYPE_NODE_H */
+#endif /* TASTR_AST_INTEGER_SCALAR_TYPE_NODE_HPP */

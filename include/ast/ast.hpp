@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_AST_H
-#define TASTR_AST_AST_H
+#ifndef TASTR_AST_AST_HPP
+#define TASTR_AST_AST_HPP
 
 #include "ast/AnyTypeNode.hpp"
 #include "ast/BytecodeTypeNode.hpp"
@@ -35,4 +35,4 @@
 #include "ast/VarargTypeNode.hpp"
 #include "ast/VectorTypeNode.hpp"
 
-#endif /* TASTR_AST_AST_H */
+#endif /* TASTR_AST_AST_HPP */

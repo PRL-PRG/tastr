@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_TYPE_DECLARATION_NODE_H
-#define TASTR_AST_TYPE_DECLARATION_NODE_H
+#ifndef TASTR_AST_TYPE_DECLARATION_NODE_HPP
+#define TASTR_AST_TYPE_DECLARATION_NODE_HPP
 
 #include "ast/IdentifierNode.hpp"
 #include "ast/TypeNode.hpp"
@@ -79,4 +79,4 @@ using TypeDeclarationNodeUPtr = std::unique_ptr<TypeDeclarationNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TYPE_DECLARATION_NODE_H */
+#endif /* TASTR_AST_TYPE_DECLARATION_NODE_HPP */

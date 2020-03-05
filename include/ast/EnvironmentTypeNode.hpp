@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_ENVIRONMENT_TYPE_NODE_H
-#define TASTR_AST_ENVIRONMENT_TYPE_NODE_H
+#ifndef TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
+#define TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 
 #include "TypeNode.hpp"
 
@@ -63,4 +63,4 @@ using EnvironmentTypeNodeUPtr = std::unique_ptr<EnvironmentTypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_ENVIRONMENT_TYPE_NODE_H */
+#endif /* TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP */

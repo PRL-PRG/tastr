@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_TYPE_NODE_H
-#define TASTR_AST_TYPE_NODE_H
+#ifndef TASTR_AST_TYPE_NODE_HPP
+#define TASTR_AST_TYPE_NODE_HPP
 
 #include "ast/Node.hpp"
 
@@ -50,4 +50,4 @@ using TypeNodeUPtr = std::unique_ptr<TypeNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TYPE_NODE_H */
+#endif /* TASTR_AST_TYPE_NODE_HPP */

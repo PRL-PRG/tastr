@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_TAG_TYPE_PAIR_NODE_SEQUENCE_NODE_H
-#define TASTR_AST_TAG_TYPE_PAIR_NODE_SEQUENCE_NODE_H
+#ifndef TASTR_AST_TAG_TYPE_PAIR_NODE_SEQUENCE_NODE_HPP
+#define TASTR_AST_TAG_TYPE_PAIR_NODE_SEQUENCE_NODE_HPP
 
 #include "Sequence.hpp"
 #include "TagTypePairNode.hpp"
@@ -58,4 +58,4 @@ using TagTypePairNodeSequenceNodeUPtr =
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TAG_TYPE_PAIR_NODE_SEQUENCE_NODE_H */
+#endif /* TASTR_AST_TAG_TYPE_PAIR_NODE_SEQUENCE_NODE_HPP */

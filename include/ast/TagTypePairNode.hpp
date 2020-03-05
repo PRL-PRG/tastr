@@ -1,5 +1,5 @@
-#ifndef TASTR_AST_TAG_TYPE_PAIR_NODE_H
-#define TASTR_AST_TAG_TYPE_PAIR_NODE_H
+#ifndef TASTR_AST_TAG_TYPE_PAIR_NODE_HPP
+#define TASTR_AST_TAG_TYPE_PAIR_NODE_HPP
 
 #include "ast/IdentifierNode.hpp"
 #include "ast/Node.hpp"
@@ -78,4 +78,4 @@ using TagTypePairNodeUPtr = std::unique_ptr<TagTypePairNode>;
 
 } // namespace tastr::ast
 
-#endif /* TASTR_AST_TAG_TYPE_PAIR_NODE_H */
+#endif /* TASTR_AST_TAG_TYPE_PAIR_NODE_HPP */

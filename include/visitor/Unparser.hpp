@@ -1,5 +1,5 @@
-#ifndef TASTR_VISITOR_UNPARSER_H
-#define TASTR_VISITOR_UNPARSER_H
+#ifndef TASTR_VISITOR_UNPARSER_HPP
+#define TASTR_VISITOR_UNPARSER_HPP
 
 #include "visitor/Visitor.hpp"
 
@@ -208,4 +208,4 @@ class Unparser final: public Visitor {
 
 } // namespace tastr::visitor
 
-#endif /* TASTR_VISITOR_UNPARSER_H */
+#endif /* TASTR_VISITOR_UNPARSER_HPP */
