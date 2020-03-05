@@ -57,8 +57,6 @@ class Sequence {
         return *this;
     }
 
-    void accept(tastr::visitor::Visitor& visitor) const;
-
     void push_back(std::unique_ptr<T> value) {
         sequence_.push_back(std::move(value));
     }
