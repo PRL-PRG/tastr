@@ -1,0 +1,549 @@
+[
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/LanguageTypeNode.cpp.o",
+            "src/ast/LanguageTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/LanguageTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/VectorTypeNode.cpp.o",
+            "src/ast/VectorTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/VectorTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/ExternalPointerTypeNode.cpp.o",
+            "src/ast/ExternalPointerTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/ExternalPointerTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/TopLevelNode.cpp.o",
+            "src/ast/TopLevelNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/TopLevelNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-Iinclude/parser",
+            "-obuild/objects/parser/parser.cpp.o",
+            "src/parser/parser.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/parser/parser.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/DoubleScalarTypeNode.cpp.o",
+            "src/ast/DoubleScalarTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/DoubleScalarTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/IntegerScalarTypeNode.cpp.o",
+            "src/ast/IntegerScalarTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/IntegerScalarTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/ExpressionTypeNode.cpp.o",
+            "src/ast/ExpressionTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/ExpressionTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/UnionTypeNode.cpp.o",
+            "src/ast/UnionTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/UnionTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/S4TypeNode.cpp.o",
+            "src/ast/S4TypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/S4TypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/RawScalarTypeNode.cpp.o",
+            "src/ast/RawScalarTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/RawScalarTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-Iinclude/parser",
+            "-obuild/objects/parser/Lexer.cxx.o",
+            "src/parser/Lexer.cxx"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/parser/Lexer.cxx"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/BytecodeTypeNode.cpp.o",
+            "src/ast/BytecodeTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/BytecodeTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/GroupTypeNode.cpp.o",
+            "src/ast/GroupTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/GroupTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/NoNaTypeNode.cpp.o",
+            "src/ast/NoNaTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/NoNaTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/TagTypePairNodeSequenceNode.cpp.o",
+            "src/ast/TagTypePairNodeSequenceNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/TagTypePairNodeSequenceNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/TypeDeclarationNode.cpp.o",
+            "src/ast/TypeDeclarationNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/TypeDeclarationNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/FunctionTypeNode.cpp.o",
+            "src/ast/FunctionTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/FunctionTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/TagTypePairNode.cpp.o",
+            "src/ast/TagTypePairNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/TagTypePairNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/TypeNodeSequenceNode.cpp.o",
+            "src/ast/TypeNodeSequenceNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/TypeNodeSequenceNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/LogicalScalarTypeNode.cpp.o",
+            "src/ast/LogicalScalarTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/LogicalScalarTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/ComplexScalarTypeNode.cpp.o",
+            "src/ast/ComplexScalarTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/ComplexScalarTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/bin/tastr",
+            "build/lib/libtastr.a",
+            "driver/main.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "driver/main.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/TypeDeclarationNodeSequenceNode.cpp.o",
+            "src/ast/TypeDeclarationNodeSequenceNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/TypeDeclarationNodeSequenceNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/AnyTypeNode.cpp.o",
+            "src/ast/AnyTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/AnyTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/VarargTypeNode.cpp.o",
+            "src/ast/VarargTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/VarargTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/StructTypeNode.cpp.o",
+            "src/ast/StructTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/StructTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/CharacterScalarTypeNode.cpp.o",
+            "src/ast/CharacterScalarTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/CharacterScalarTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/PairlistTypeNode.cpp.o",
+            "src/ast/PairlistTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/PairlistTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-Iinclude/parser",
+            "-obuild/objects/parser/Parser.cxx.o",
+            "src/parser/Parser.cxx"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/parser/Parser.cxx"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/IdentifierNode.cpp.o",
+            "src/ast/IdentifierNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/IdentifierNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/ListTypeNode.cpp.o",
+            "src/ast/ListTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/ListTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/SymbolTypeNode.cpp.o",
+            "src/ast/SymbolTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/SymbolTypeNode.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-fPIC",
+            "-O2",
+            "-g",
+            "-ggdb3",
+            "-std=c++17",
+            "-Iinclude",
+            "-obuild/objects/ast/EnvironmentTypeNode.cpp.o",
+            "src/ast/EnvironmentTypeNode.cpp"
+        ],
+        "directory": "/home/aviral/projects/tastr",
+        "file": "src/ast/EnvironmentTypeNode.cpp"
+    }
+]

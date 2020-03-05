@@ -21,6 +21,7 @@ MKDIR := mkdir
 DIRNAME := dirname
 CD := cd
 RM := rm
+CPPCHECK := cppcheck
 CLANGFORMAT := clang-format
 
 RMFLAGS := -rf
@@ -108,6 +109,16 @@ $(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
 	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
 	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
 
+cppcheck:
+	$(CPPCHECK) --quiet                         \
+	            --project=compile_commands.json \
+	            --enable=all                    \
+	            -I$(INCLUDEDIR)                 \
+	            -i$(SRCDIR)/$(PARSERDIR)        \
+	            -i$(INCLUDEDIR)/$(PARSERDIR)    \
+	            src                             \
+	            include
+
 clang-format:
 	$(CLANGFORMAT) -i $(CPPSRCFILES) $(CSRCFILES) $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(DRIVERFILES)
 
@@ -121,4 +132,5 @@ clang-format:
         application    \
         clean          \
         run            \
-        clang-format
+        clang-format   \
+        cppcheck
