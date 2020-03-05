@@ -46,7 +46,9 @@ class TagTypePairNode final: public Node {
         return *this;
     }
 
-    void accept(tastr::visitor::Visitor& visitor) const override final;
+    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+
+    void accept(tastr::visitor::MutableVisitor& visitor) override final;
 
     std::unique_ptr<TagTypePairNode> clone() const {
         return std::unique_ptr<TagTypePairNode>(this->clone_impl());

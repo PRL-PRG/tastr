@@ -1,6 +1,7 @@
-#ifndef TASTR_VISITOR_VISITOR_NOTCLASS_HPP
-#define TASTR_VISITOR_VISITOR_NOTCLASS_HPP
+#ifndef TASTR_VISITOR_VISITOR_HPP
+#define TASTR_VISITOR_VISITOR_HPP
 
-#include "visitor/Visitor.h"
+#include "visitor/ConstVisitor.hpp"
+#include "visitor/MutableVisitor.hpp"
 
-#endif /* TASTR_VISITOR_VISITOR_NOTCLASS_HPP */
+#endif /* TASTR_VISITOR_VISITOR_HPP */

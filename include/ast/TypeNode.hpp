@@ -31,7 +31,9 @@ class TypeNode: public Node {
         return *this;
     }
 
-    virtual void accept(tastr::visitor::Visitor& visitor) const override = 0;
+    virtual void accept(tastr::visitor::ConstVisitor& visitor) const override = 0;
+
+    virtual void accept(tastr::visitor::MutableVisitor& visitor) override = 0;
 
     std::unique_ptr<TypeNode> clone() const {
         return std::unique_ptr<TypeNode>(this->clone_impl());

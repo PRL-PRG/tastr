@@ -40,7 +40,9 @@ class VectorTypeNode: public TypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::Visitor& visitor) const override;
+    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+
+    void accept(tastr::visitor::MutableVisitor& visitor) override final;
 
     std::unique_ptr<VectorTypeNode> clone() const {
         return std::unique_ptr<VectorTypeNode>(this->clone_impl());

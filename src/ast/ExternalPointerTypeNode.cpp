@@ -1,8 +1,13 @@
 #include "ast/ExternalPointerTypeNode.hpp"
 
-#include "visitor/Visitor.hpp"
+#include "visitor/visitor.hpp"
 
 void tastr::ast::ExternalPointerTypeNode::accept(
-    tastr::visitor::Visitor& visitor) const {
+    tastr::visitor::ConstVisitor& visitor) const {
+    visitor.visit(*this);
+}
+
+void tastr::ast::ExternalPointerTypeNode::accept(
+    tastr::visitor::MutableVisitor& visitor) {
     visitor.visit(*this);
 }

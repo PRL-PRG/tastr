@@ -1,16 +1,16 @@
-#ifndef TASTR_VISITOR_VISITOR_HPP
-#define TASTR_VISITOR_VISITOR_HPP
+#ifndef TASTR_VISITOR_CONST_VISITOR_HPP
+#define TASTR_VISITOR_CONST_VISITOR_HPP
 
 #include "ast/ast.hpp"
 
 namespace tastr::visitor {
 
-class Visitor {
+class ConstVisitor {
   public:
-    Visitor() {
+    ConstVisitor() {
     }
 
-    virtual ~Visitor() = default;
+    virtual ~ConstVisitor() = default;
 
     virtual void visit(const tastr::ast::Node& node) = 0;
 
@@ -82,4 +82,4 @@ class Visitor {
 
 } // namespace tastr::visitor
 
-#endif /* TASTR_VISITOR_VISITOR_HPP */
+#endif /* TASTR_VISITOR_CONST_VISITOR_HPP */

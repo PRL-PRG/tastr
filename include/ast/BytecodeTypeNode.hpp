@@ -36,7 +36,9 @@ class BytecodeTypeNode final: public TypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::Visitor& visitor) const override final;
+    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+
+    void accept(tastr::visitor::MutableVisitor& visitor) override final;
 
     std::unique_ptr<BytecodeTypeNode> clone() const {
         return std::unique_ptr<BytecodeTypeNode>(this->clone_impl());

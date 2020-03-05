@@ -6,8 +6,11 @@
 #include <memory>
 
 namespace tastr::visitor {
-class Visitor;
-}
+
+class ConstVisitor;
+class MutableVisitor;
+
+} // namespace tastr::visitor
 
 namespace tastr::ast {
 
@@ -38,7 +41,9 @@ class Node {
     virtual ~Node() {
     }
 
-    virtual void accept(tastr::visitor::Visitor& visitor) const = 0;
+    virtual void accept(tastr::visitor::ConstVisitor& visitor) const = 0;
+
+    virtual void accept(tastr::visitor::MutableVisitor& visitor) = 0;
 
     std::unique_ptr<Node> clone() const {
         return std::unique_ptr<Node>(this->clone_impl());

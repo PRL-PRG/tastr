@@ -1,15 +1,15 @@
-#ifndef TASTR_VISITOR_UNPARSER_HPP
-#define TASTR_VISITOR_UNPARSER_HPP
+#ifndef TASTR_PARSER_UNPARSER_HPP
+#define TASTR_PARSER_UNPARSER_HPP
 
-#include "visitor/Visitor.hpp"
+#include "visitor/visitor.hpp"
 
 #include <ostream>
 
 namespace tastr::visitor {
 
-class Unparser final: public Visitor {
+class Unparser final: public ConstVisitor {
   public:
-    explicit Unparser(std::ostream& os): Visitor(), os_(os) {
+    explicit Unparser(std::ostream& os): ConstVisitor(), os_(os) {
     }
 
     ~Unparser() {
@@ -208,4 +208,4 @@ class Unparser final: public Visitor {
 
 } // namespace tastr::visitor
 
-#endif /* TASTR_VISITOR_UNPARSER_HPP */
+#endif /* TASTR_PARSER_UNPARSER_HPP */

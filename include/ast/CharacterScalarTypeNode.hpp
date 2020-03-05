@@ -38,7 +38,9 @@ class CharacterScalarTypeNode final: public ScalarTypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::Visitor& visitor) const override final;
+    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+
+    void accept(tastr::visitor::MutableVisitor& visitor) override final;
 
     CharacterScalarTypeNodeUPtr clone() const {
         return CharacterScalarTypeNodeUPtr(this->clone_impl());

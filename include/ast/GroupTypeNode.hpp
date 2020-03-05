@@ -38,7 +38,9 @@ class GroupTypeNode final: public TypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::Visitor& visitor) const override final;
+    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+
+    void accept(tastr::visitor::MutableVisitor& visitor) override final;
 
     const tastr::ast::TypeNode& get_inner_type() const {
         return *inner_type_.get();
