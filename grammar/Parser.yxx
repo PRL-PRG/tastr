@@ -94,28 +94,28 @@
 
 %start start;
 
-%printer { yyo << to_string(*$$); } <ScalarTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <EnvironmentTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <ExpressionTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <LanguageTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <SymbolTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <ExternalPointerTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <BytecodeTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <PairlistTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <S4TypeNodePtr>;
-%printer { yyo << to_string(*$$); } <AnyTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <VectorTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <NoNaTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <TypeNodeSequenceNodePtr>;
-%printer { yyo << to_string(*$$); } <TagTypePairNodePtr>;
-%printer { yyo << to_string(*$$); } <TagTypePairNodeSequenceNodePtr>;
-%printer { yyo << to_string(*$$); } <FunctionTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <GroupTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <ListTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <StructTypeNodePtr>;
-%printer { yyo << to_string(*$$); } <IdentifierNodePtr>;
-%printer { yyo << to_string(*$$); } <TypeNodePtr>;
-%printer { yyo << to_string(*$$); } <TypeDeclarationNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <ScalarTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <EnvironmentTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <ExpressionTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <LanguageTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <SymbolTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <ExternalPointerTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <BytecodeTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <PairlistTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <S4TypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <AnyTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <VectorTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <NoNaTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <TypeNodeSequenceNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodeSequenceNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <FunctionTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <GroupTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <ListTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <StructTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <IdentifierNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <TypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <TypeDeclarationNodePtr>;
 %printer { yyo << $$; } <*>;
 
 %destructor { delete $$; } scalartype
@@ -163,6 +163,7 @@
     }
     #include "parser/location.hh"
     #include "ast/ast.hpp"
+    #include "parser/parser.hpp"
     using tastr::ast::CharacterScalarTypeNode;
     using tastr::ast::ComplexScalarTypeNode;
     using tastr::ast::DoubleScalarTypeNode;

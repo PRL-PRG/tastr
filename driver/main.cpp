@@ -1,9 +1,10 @@
 #include "ast/ast.hpp"
+#include "parser/parser.hpp"
 
 #include <cstring>
 #include <iostream>
 
-static void handle_parse_result(tastr::parser::ParseResult&& result) {
+static void handle_parse_result(const tastr::parser::ParseResult& result) {
     std::cout << *result.get_top_level_node();
 
     if (!result) {
@@ -29,15 +30,15 @@ int main(int argc, char* argv[]) {
             /* remove leading and trailing " character */
             std::string string(input + 1, length - 2);
             handle_parse_result(
-                std::move(parse_string(string, debug_lexer, debug_parser)));
+                tastr::parser::parse_string(string, debug_lexer, debug_parser));
 
         } else if (std::string(argv[i]) == "-") {
             handle_parse_result(
-                std::move(parse_stdin(debug_lexer, debug_parser)));
+                tastr::parser::parse_stdin(debug_lexer, debug_parser));
         } else {
             std::filesystem::path filepath(argv[i]);
             handle_parse_result(
-                std::move(parse_file(filepath, debug_lexer, debug_parser)));
+                tastr::parser::parse_file(filepath, debug_lexer, debug_parser));
         }
     }
     return 0;
