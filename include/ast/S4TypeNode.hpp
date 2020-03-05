@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class S4TypeNode final: public TypeNode {
   public:
-    S4TypeNode(const std::string& identifier)
+    explicit S4TypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

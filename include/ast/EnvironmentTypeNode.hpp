@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class EnvironmentTypeNode final: public TypeNode {
   public:
-    EnvironmentTypeNode(const std::string& identifier)
+    explicit EnvironmentTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

@@ -10,7 +10,7 @@ namespace tastr::ast {
 
 class NoNaTypeNode final: public TypeNode {
   public:
-    NoNaTypeNode(std::unique_ptr<VectorTypeNode> inner_type)
+    explicit NoNaTypeNode(std::unique_ptr<VectorTypeNode> inner_type)
         : TypeNode(), inner_type_(std::move(inner_type)) {
     }
 

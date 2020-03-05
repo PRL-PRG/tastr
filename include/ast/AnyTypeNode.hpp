@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class AnyTypeNode final: public TypeNode {
   public:
-    AnyTypeNode(const std::string& identifier)
+    explicit AnyTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

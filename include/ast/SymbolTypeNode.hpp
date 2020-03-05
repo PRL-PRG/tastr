@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class SymbolTypeNode final: public TypeNode {
   public:
-    SymbolTypeNode(const std::string& identifier)
+    explicit SymbolTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

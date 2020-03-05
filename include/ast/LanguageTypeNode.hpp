@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class LanguageTypeNode final: public TypeNode {
   public:
-    LanguageTypeNode(const std::string& identifier)
+    explicit LanguageTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

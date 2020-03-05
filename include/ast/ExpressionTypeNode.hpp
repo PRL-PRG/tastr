@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class ExpressionTypeNode final: public TypeNode {
   public:
-    ExpressionTypeNode(const std::string& identifier)
+    explicit ExpressionTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

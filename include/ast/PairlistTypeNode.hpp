@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class PairlistTypeNode final: public TypeNode {
   public:
-    PairlistTypeNode(const std::string& identifier)
+    explicit PairlistTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

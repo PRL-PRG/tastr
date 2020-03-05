@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class BytecodeTypeNode final: public TypeNode {
   public:
-    BytecodeTypeNode(const std::string& identifier)
+    explicit BytecodeTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 

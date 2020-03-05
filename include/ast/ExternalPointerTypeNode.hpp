@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class ExternalPointerTypeNode final: public TypeNode {
   public:
-    ExternalPointerTypeNode(const std::string& identifier)
+    explicit ExternalPointerTypeNode(const std::string& identifier)
         : TypeNode(), identifier_(identifier) {
     }
 
