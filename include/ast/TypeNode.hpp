@@ -31,7 +31,8 @@ class TypeNode: public Node {
         return *this;
     }
 
-    virtual void accept(tastr::visitor::ConstVisitor& visitor) const override = 0;
+    virtual void
+    accept(tastr::visitor::ConstVisitor& visitor) const override = 0;
 
     virtual void accept(tastr::visitor::MutableVisitor& visitor) override = 0;
 

@@ -20,7 +20,8 @@ class StructTypeNode final: public TypeNode {
     }
 
     StructTypeNode(StructTypeNode&& node)
-        : TypeNode(std::move(node)), element_types_(std::move(node.element_types_)) {
+        : TypeNode(std::move(node))
+        , element_types_(std::move(node.element_types_)) {
     }
 
     StructTypeNode& operator=(const StructTypeNode& node) {

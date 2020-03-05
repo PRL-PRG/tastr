@@ -4,8 +4,7 @@
 #include "parser/Lexer.hpp"
 #include "parser/Parser.hxx"
 #include "parser/ParsingContext.hpp"
-#include "visitor/Unparser.hpp"
-#include "visitor/Visitor.hpp"
+#include "parser/Unparser.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -22,9 +21,9 @@ std::string tastr::parser::to_string(const tastr::ast::Node& node) {
 }
 
 tastr::parser::ParseResult parse_(std::istream& input_stream,
-                                                 std::string& input_stream_name,
-                                                 bool debug_lexer,
-                                                 bool debug_parser) {
+                                  const std::string& input_stream_name,
+                                  bool debug_lexer,
+                                  bool debug_parser) {
     tastr::parser::ParsingContext context(input_stream, input_stream_name);
     tastr::parser::Lexer lexer(context);
     lexer.set_debug_level(debug_lexer);

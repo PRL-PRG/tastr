@@ -12,8 +12,7 @@ class ParsingContext {
   public:
     explicit ParsingContext(std::istream& input_stream,
                             const std::string& input_stream_name)
-        : input_stream_(input_stream)
-        , parse_output_(input_stream_name) {
+        : input_stream_(input_stream), parse_output_(input_stream_name) {
     }
 
     ~ParsingContext() {
