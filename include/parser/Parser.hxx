@@ -50,7 +50,7 @@
         class Lexer;
         class ParsingContext;
     }
-    #include "location.hh"
+    #include "parser/location.hh"
     #include "ast.hpp"
     using tastr::ast::CharacterScalarTypeNode;
     using tastr::ast::ComplexScalarTypeNode;

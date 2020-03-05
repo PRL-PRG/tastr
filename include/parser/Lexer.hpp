@@ -1,8 +1,8 @@
 #ifndef TASTR_LEXER_HPP
 #define TASTR_LEXER_HPP
 
-#include "Parser.hxx"
-#include "ParsingContext.hpp"
+#include "parser/Parser.hxx"
+#include "parser/ParsingContext.hpp"
 
 /* https://stackoverflow.com/questions/40663527/how-to-inherit-from-yyflexlexer
  */

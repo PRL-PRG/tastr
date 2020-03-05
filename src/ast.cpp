@@ -1,8 +1,8 @@
 #include "ast.hpp"
 
-#include "Lexer.hpp"
-#include "Parser.hxx"
-#include "ParsingContext.hpp"
+#include "parser/Lexer.hpp"
+#include "parser/Parser.hxx"
+#include "parser/ParsingContext.hpp"
 #include "visitor/Unparser.hpp"
 
 #include <fstream>

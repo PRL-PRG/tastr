@@ -9,8 +9,8 @@
 
 %{
     #include <string>
-    #include "Lexer.hpp"
-    #include "ParsingContext.hpp"
+    #include "parser/Lexer.hpp"
+    #include "parser/ParsingContext.hpp"
 
     /* Code run each time a pattern is matched. */
     #define YY_USER_ACTION  yylloc->columns(yyleng);

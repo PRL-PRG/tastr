@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_NODE_H
 #define TASTR_AST_NODE_H
 
-#include "location.hh"
+#include "parser/location.hh"
 
 #include <memory>
 

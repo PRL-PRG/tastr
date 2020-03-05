@@ -43,9 +43,9 @@ all: build
 
 build: parser lexer library application
 
-parser: $(SRCDIR)/Parser.cxx $(INCLUDEDIR)/Parser.hxx $(INCLUDEDIR)/location.hh
+parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/location.hh
 
-lexer: $(INCLUDEDIR)/Lexer.hxx $(SRCDIR)/Lexer.cxx
+lexer: $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
 
 library: static-library shared-library
 
@@ -62,19 +62,24 @@ run: application
 	@echo "Write a type declaration. Quit with Ctrl-d."
 	./$(BINDIR)/$(BINNAME) $(BINARGS)
 
-$(SRCDIR)/Parser.cxx $(INCLUDEDIR)/Parser.hxx $(INCLUDEDIR)/location.hh: $(GRAMMARDIR)/Parser.yxx
+$(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/location.hh: $(GRAMMARDIR)/Parser.yxx
 	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
-	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/Parser.cxx
-	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/Parser.hxx
-	$(MV) $(GRAMMARDIR)/location.hh $(INCLUDEDIR)/location.hh
+	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/$(PARSERDIR)/Parser.cxx
+	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
+	$(MV) $(GRAMMARDIR)/location.hh $(INCLUDEDIR)/$(PARSERDIR)/location.hh
 
-$(INCLUDEDIR)/Lexer.hxx $(SRCDIR)/Lexer.cxx: $(GRAMMARDIR)/Lexer.lxx
+$(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx: $(GRAMMARDIR)/Lexer.lxx
 	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
-	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/Lexer.cxx
-	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/Lexer.hxx
+	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
+	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
+	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx
+
+$(OBJDIR)/$(PARSERDIR)/%.o: $(SRCDIR)/$(PARSERDIR)/% $(INCLUDEFILES)
+	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
+	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -I$(INCLUDEDIR)/$(PARSERDIR) -o$@ $<
 
 $(OBJDIR)/%.o: $(SRCDIR)/% $(INCLUDEFILES)
 	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`

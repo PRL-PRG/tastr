@@ -2,7 +2,7 @@
 #define TASTR_PARSER_PARSE_RESULT_H
 
 #include "ast/TopLevelNode.hpp"
-#include "location.hh"
+#include "parser/location.hh"
 
 #include <iostream>
 #include <string>

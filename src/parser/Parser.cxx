@@ -43,8 +43,8 @@
 // Unqualified %code blocks.
 #line 229 "Parser.yxx"
 
-    #include "ParsingContext.hpp"
-    #include "Lexer.hpp"
+    #include "parser/ParsingContext.hpp"
+    #include "parser/Lexer.hpp"
     #undef yylex
     #define yylex lexer.yylex
 
