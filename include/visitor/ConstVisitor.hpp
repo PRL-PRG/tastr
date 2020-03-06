@@ -52,6 +52,8 @@ class ConstVisitor {
 
     virtual void visit(const tastr::ast::S4TypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::WeakReferenceTypeNode& node) = 0;
+
     virtual void visit(const tastr::ast::AnyTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::FunctionTypeNode& node) = 0;

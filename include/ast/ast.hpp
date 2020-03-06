@@ -36,5 +36,6 @@
 #include "ast/UnionTypeNode.hpp"
 #include "ast/VarargTypeNode.hpp"
 #include "ast/VectorTypeNode.hpp"
+#include "ast/WeakReferenceTypeNode.hpp"
 
 #endif /* TASTR_AST_AST_HPP */

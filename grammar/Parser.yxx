@@ -58,6 +58,7 @@
 %token <std::string>                    BYTECODE
 %token <std::string>                    PAIRLIST
 %token <std::string>                    S4
+%token <std::string>                    WEAKREF
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
@@ -70,6 +71,7 @@
 %nterm <BytecodeTypeNodePtr>            bytecodetype
 %nterm <PairlistTypeNodePtr>            pairlisttype
 %nterm <S4TypeNodePtr>                  s4type
+%nterm <WeakReferenceTypeNodePtr>       weakreftype
 %nterm <AnyTypeNodePtr>                 anytype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
@@ -107,6 +109,7 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <BytecodeTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <PairlistTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <S4TypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <WeakReferenceTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <AnyTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <NoNaTypeNodePtr>;
@@ -131,6 +134,7 @@
 %destructor { delete $$; } bytecodetype
 %destructor { delete $$; } pairlisttype
 %destructor { delete $$; } s4type
+%destructor { delete $$; } weakreftype
 %destructor { delete $$; } anytype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
@@ -189,6 +193,8 @@
     using tastr::ast::PairlistTypeNodePtr;
     using tastr::ast::S4TypeNode;
     using tastr::ast::S4TypeNodePtr;
+    using tastr::ast::WeakReferenceTypeNode;
+    using tastr::ast::WeakReferenceTypeNodePtr;
     using tastr::ast::AnyTypeNode;
     using tastr::ast::AnyTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
@@ -317,6 +323,12 @@ s4type:             S4                                      {
                                                                 $$ -> set_location(@1);
                                                             }
       ;
+
+weakreftype:        WEAKREF                                 {
+                                                                $$ = new WeakReferenceTypeNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+           ;
 
 anytype:            ANY                                     {
                                                                 $$ = new AnyTypeNode($1);
@@ -544,6 +556,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       s4type                                  {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       weakreftype                             {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

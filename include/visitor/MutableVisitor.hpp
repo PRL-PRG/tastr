@@ -52,6 +52,8 @@ class MutableVisitor {
 
     virtual void visit(tastr::ast::S4TypeNode& node) = 0;
 
+    virtual void visit(tastr::ast::WeakReferenceTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::AnyTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::FunctionTypeNode& node) = 0;

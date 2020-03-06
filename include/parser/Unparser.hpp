@@ -97,6 +97,10 @@ class Unparser final: public ConstVisitor {
         os_ << node.get_identifier();
     }
 
+    void visit(const tastr::ast::WeakReferenceTypeNode& node) override final {
+        os_ << node.get_identifier();
+    }
+
     void visit(const tastr::ast::AnyTypeNode& node) override final {
         os_ << node.get_identifier();
     }
