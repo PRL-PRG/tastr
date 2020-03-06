@@ -434,6 +434,10 @@ identifier:         INTEGER                                 {
                                                                 $$ = new IdentifierNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
+          |         WEAKREF                                 {
+                                                                $$ = new IdentifierNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
           |         ANY                                     {
                                                                 $$ = new IdentifierNode($1);
                                                                 $$ -> set_location(@1);
