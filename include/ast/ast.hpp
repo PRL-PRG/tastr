@@ -18,6 +18,8 @@
 #include "ast/LogicalScalarTypeNode.hpp"
 #include "ast/NoNaTypeNode.hpp"
 #include "ast/Node.hpp"
+#include "ast/NullTypeNode.hpp"
+#include "ast/NullableTypeNode.hpp"
 #include "ast/PairlistTypeNode.hpp"
 #include "ast/RawScalarTypeNode.hpp"
 #include "ast/S4TypeNode.hpp"

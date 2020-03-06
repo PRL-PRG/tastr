@@ -149,6 +149,15 @@ class Unparser final: public ConstVisitor {
         os_ << "...";
     }
 
+    void visit(const tastr::ast::NullTypeNode& node) override final {
+        os_ << "?";
+    }
+
+    void visit(const tastr::ast::NullableTypeNode& node) override final {
+        os_ << "?";
+        node.get_inner_type().accept(*this);
+    }
+
     void visit(const tastr::ast::TypeNodeSequenceNode& node) override final {
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {

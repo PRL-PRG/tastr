@@ -66,6 +66,10 @@ class MutableVisitor {
 
     virtual void visit(tastr::ast::VarargTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::NullTypeNode& node) = 0;
+
+    virtual void visit(const tastr::ast::NullableTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::TypeNodeSequenceNode& node) = 0;
 
     virtual void visit(tastr::ast::TagTypePairNode& node) = 0;

@@ -177,6 +177,14 @@ class Node {
         return false;
     }
 
+    virtual bool is_null_type_node() const {
+        return false;
+    }
+
+    virtual bool is_nullable_type_node() const {
+        return false;
+    }
+
     void set_location(const tastr::parser::location& location) {
         location_ = location;
     }

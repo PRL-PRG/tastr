@@ -43,6 +43,7 @@
 %token <std::string>                    SEMICOLON     ";";
 %token <std::string>                    COLON         ":";
 %token <std::string>                    VARARG        "...";
+%token <std::string>                    NULLVALUE     "?";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
 %token <std::string>                    COMPLEX
@@ -83,12 +84,15 @@
 %nterm <ListTypeNodePtr>                listtype
 %nterm <StructTypeNodePtr>              structtype
 %nterm <IdentifierNodePtr>              identifier
+%nterm <TypeNodePtr>                    innertype
+%nterm <TypeNodePtr>                    nulltype
 %nterm <TypeNodePtr>                    type
 %nterm <TypeDeclarationNodePtr>         decltype
 
-
+%nonassoc NULLVALUE
 %right ARROW
 %nonassoc COMMA EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
+%nonassoc LOWER_THAN_OR
 %left OR
 
 
@@ -141,6 +145,8 @@
 %destructor { delete $$; } listtype
 %destructor { delete $$; } structtype
 %destructor { delete $$; } identifier
+%destructor { delete $$; } innertype
+%destructor { delete $$; } nulltype
 %destructor { delete $$; } type
 %destructor { delete $$; } decltype
 
@@ -224,6 +230,8 @@
     using tastr::ast::TypeNodeSequenceNodeUPtr;
     using tastr::ast::TagTypePairNodeSequenceNode;
     using tastr::ast::TagTypePairNodeSequenceNodePtr;
+    using tastr::ast::NullTypeNode;
+    using tastr::ast::NullableTypeNode;
 }
 
 /* inserted near top of source file */
@@ -540,11 +548,6 @@ nonuniontype:       scalartype                              {
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       anytype                                 {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                                $$ -> set_location(@$);
-                                                            }
             |       vectortype                              {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
@@ -578,17 +581,45 @@ nonuniontype:       scalartype                              {
             ;
 
 
-type:               nonuniontype                            {
+innertype:          nonuniontype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-    |               type "|" nonuniontype                   {
+         |          innertype OR nonuniontype               {
                                                                 $$ = new UnionTypeNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
-    ;
+         ;
 
+
+nulltype:          "?"                                      {
+                                                                $$ = new NullTypeNode($1);
+                                                                $$ -> set_location(@$);
+                                                            }
+        |          "?" innertype                            {
+                                                                $$ = new NullableTypeNode(std::move(wrap(std::move($2))));
+                                                                $$ -> set_location(@$);
+                                                            }
+        ;
+
+
+type:               innertype %prec LOWER_THAN_OR           {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+    |               nulltype                                {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+    |               anytype                                 {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+    ;
 
 decltype:           TYPEDECL identifier type ";"            {
                                                                 $$ = new TypeDeclarationNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));

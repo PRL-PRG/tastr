@@ -36,6 +36,7 @@ BYTECODE            bytecode|bcd|b
 PAIRLIST            pairlist|plt
 S4                  s4
 ANY                 any|[*]
+NULLVALUE           [?]
 TYPEDECL            type
 BLANK               [ \t\r]
 VARARG              \.\.\.
@@ -82,6 +83,7 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 {PAIRLIST}                  { HANDLE_TOKEN(TOKEN_PAIRLIST) }
 {S4}                        { HANDLE_TOKEN(TOKEN_S4) }
 {ANY}                       { HANDLE_TOKEN(TOKEN_ANY) }
+{NULLVALUE}                 { HANDLE_TOKEN(TOKEN_NULLVALUE) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {
