@@ -34,9 +34,9 @@ class ComplexScalarTypeNode final: public ScalarTypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     std::unique_ptr<ComplexScalarTypeNode> clone() const {
         return std::unique_ptr<ComplexScalarTypeNode>(this->clone_impl());

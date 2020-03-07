@@ -34,9 +34,9 @@ class DoubleScalarTypeNode final: public ScalarTypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     std::unique_ptr<DoubleScalarTypeNode> clone() const {
         return std::unique_ptr<DoubleScalarTypeNode>(this->clone_impl());

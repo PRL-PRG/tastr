@@ -3,11 +3,11 @@
 #include "visitor/visitor.hpp"
 
 void tastr::ast::ComplexScalarTypeNode::accept(
-    tastr::visitor::ConstVisitor& visitor) const {
+    tastr::visitor::ConstNodeVisitor& visitor) const {
     visitor.visit(*this);
 }
 
 void tastr::ast::ComplexScalarTypeNode::accept(
-    tastr::visitor::MutableVisitor& visitor) {
+    tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }

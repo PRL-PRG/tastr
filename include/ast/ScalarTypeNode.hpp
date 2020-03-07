@@ -37,9 +37,10 @@ class ScalarTypeNode: public TypeNode {
     }
 
     virtual void
-    accept(tastr::visitor::ConstVisitor& visitor) const override = 0;
+    accept(tastr::visitor::ConstNodeVisitor& visitor) const override = 0;
 
-    virtual void accept(tastr::visitor::MutableVisitor& visitor) override = 0;
+    virtual void
+    accept(tastr::visitor::MutableNodeVisitor& visitor) override = 0;
 
     std::unique_ptr<ScalarTypeNode> clone() const {
         return std::unique_ptr<ScalarTypeNode>(this->clone_impl());

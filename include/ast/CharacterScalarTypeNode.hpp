@@ -34,13 +34,14 @@ class CharacterScalarTypeNode final: public ScalarTypeNode {
     }
 
     CharacterScalarTypeNode& operator=(CharacterScalarTypeNode&& node) {
-        ScalarTypeNode::operator=(std::move(static_cast<ScalarTypeNode&>(node)));
+        ScalarTypeNode::operator=(
+            std::move(static_cast<ScalarTypeNode&>(node)));
         return *this;
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     CharacterScalarTypeNodeUPtr clone() const {
         return CharacterScalarTypeNodeUPtr(this->clone_impl());

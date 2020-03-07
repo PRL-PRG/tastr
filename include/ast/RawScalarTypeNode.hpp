@@ -33,9 +33,9 @@ class RawScalarTypeNode final: public ScalarTypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     std::unique_ptr<RawScalarTypeNode> clone() const {
         return std::unique_ptr<RawScalarTypeNode>(this->clone_impl());

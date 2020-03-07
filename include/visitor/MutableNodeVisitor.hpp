@@ -5,12 +5,12 @@
 
 namespace tastr::visitor {
 
-class MutableVisitor {
+class MutableNodeVisitor {
   public:
-    MutableVisitor() {
+    MutableNodeVisitor() {
     }
 
-    virtual ~MutableVisitor() = default;
+    virtual ~MutableNodeVisitor() = default;
 
     virtual void visit(tastr::ast::Node& node) = 0;
 

@@ -7,9 +7,9 @@
 
 namespace tastr::visitor {
 
-class Unparser final: public ConstVisitor {
+class Unparser final: public ConstNodeVisitor {
   public:
-    explicit Unparser(std::ostream& os): ConstVisitor(), os_(os) {
+    explicit Unparser(std::ostream& os): ConstNodeVisitor(), os_(os) {
     }
 
     ~Unparser() {

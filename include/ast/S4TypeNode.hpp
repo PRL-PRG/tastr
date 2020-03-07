@@ -36,9 +36,9 @@ class S4TypeNode final: public TypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     std::unique_ptr<S4TypeNode> clone() const {
         return std::unique_ptr<S4TypeNode>(this->clone_impl());

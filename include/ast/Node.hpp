@@ -7,8 +7,8 @@
 
 namespace tastr::visitor {
 
-class ConstVisitor;
-class MutableVisitor;
+class ConstNodeVisitor;
+class MutableNodeVisitor;
 
 } // namespace tastr::visitor
 
@@ -41,9 +41,9 @@ class Node {
     virtual ~Node() {
     }
 
-    virtual void accept(tastr::visitor::ConstVisitor& visitor) const = 0;
+    virtual void accept(tastr::visitor::ConstNodeVisitor& visitor) const = 0;
 
-    virtual void accept(tastr::visitor::MutableVisitor& visitor) = 0;
+    virtual void accept(tastr::visitor::MutableNodeVisitor& visitor) = 0;
 
     std::unique_ptr<Node> clone() const {
         return std::unique_ptr<Node>(this->clone_impl());

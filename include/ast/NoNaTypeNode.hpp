@@ -39,9 +39,9 @@ class NoNaTypeNode final: public TypeNode {
         return *this;
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     const tastr::ast::VectorTypeNode& get_inner_type() const {
         return *inner_type_.get();

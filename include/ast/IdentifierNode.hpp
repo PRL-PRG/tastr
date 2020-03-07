@@ -40,9 +40,9 @@ class IdentifierNode final: public Node {
         return std::unique_ptr<IdentifierNode>(this->clone_impl());
     }
 
-    void accept(tastr::visitor::ConstVisitor& visitor) const override final;
+    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableVisitor& visitor) override final;
+    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
     const std::string& get_name() const {
         return name_;
