@@ -212,39 +212,32 @@
     using tastr::ast::LogicalScalarTypeNode;
     using tastr::ast::TagTypePairNode;
     using tastr::ast::TagTypePairNodePtr;
-    using tastr::ast::TagTypePairNodeUPtr;
     using tastr::ast::NoNaTypeNode;
     using tastr::ast::NoNaTypeNodePtr;
     using tastr::ast::RawScalarTypeNode;
     using tastr::ast::ScalarTypeNodePtr;
-    using tastr::ast::ScalarTypeNodeUPtr;
     using tastr::ast::StructTypeNode;
     using tastr::ast::StructTypeNodePtr;
     using tastr::ast::TupleTypeNode;
     using tastr::ast::TupleTypeNodePtr;
     using tastr::ast::TypeNode;
     using tastr::ast::TypeNodePtr;
-    using tastr::ast::TypeNodeUPtr;
     using tastr::ast::UnionTypeNode;
     using tastr::ast::UnionTypeNodePtr;
     using tastr::ast::VectorTypeNode;
     using tastr::ast::VectorTypeNodePtr;
-    using tastr::ast::VectorTypeNodeUPtr;
     using tastr::ast::TypeDeclarationNode;
     using tastr::ast::TypeDeclarationNodePtr;
-    using tastr::ast::TypeDeclarationNodeUPtr;
-    using tastr::ast::TopLevelNodeUPtr;
     using tastr::ast::IdentifierNode;
     using tastr::ast::IdentifierNodePtr;
-    using tastr::ast::IdentifierNodeUPtr;
     using tastr::ast::VarargTypeNode;
     using tastr::ast::TypeNodeSequenceNode;
     using tastr::ast::TypeNodeSequenceNodePtr;
-    using tastr::ast::TypeNodeSequenceNodeUPtr;
     using tastr::ast::TagTypePairNodeSequenceNode;
     using tastr::ast::TagTypePairNodeSequenceNodePtr;
     using tastr::ast::NullTypeNode;
     using tastr::ast::NullableTypeNode;
+    using tastr::ast::TopLevelNodeUPtr;
 }
 
 /* inserted near top of source file */
