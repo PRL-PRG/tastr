@@ -10,7 +10,8 @@ class TagTypePairNodeSequenceNode final
     : public Node
     , public Sequence<TagTypePairNode> {
   public:
-    TagTypePairNodeSequenceNode(): Node(), Sequence<TagTypePairNode>() {
+    TagTypePairNodeSequenceNode(const std::string& separator)
+        : Node(), Sequence<TagTypePairNode>(separator) {
     }
 
     ~TagTypePairNodeSequenceNode() = default;

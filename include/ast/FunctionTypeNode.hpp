@@ -1,16 +1,21 @@
 #ifndef TASTR_AST_FUNCTION_TYPE_NODE_HPP
 #define TASTR_AST_FUNCTION_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
-#include "TypeNodeSequenceNode.hpp"
+#include "ast/Separator.hpp"
+#include "ast/TypeNode.hpp"
+#include "ast/TypeNodeSequenceNode.hpp"
 
 namespace tastr::ast {
 
-class FunctionTypeNode final: public TypeNode {
+class FunctionTypeNode final
+    : public TypeNode
+    , public Separator {
   public:
     FunctionTypeNode(TypeNodeSequenceNodeUPtr parameter_types,
-                     std::unique_ptr<TypeNode> return_type)
+                     std::unique_ptr<TypeNode> return_type,
+                     const std::string& separator)
         : TypeNode()
+        , Separator(separator)
         , parameter_types_(std::move(parameter_types))
         , return_type_(std::move(return_type)) {
     }
@@ -19,12 +24,14 @@ class FunctionTypeNode final: public TypeNode {
 
     FunctionTypeNode(const FunctionTypeNode& node)
         : TypeNode(node)
+        , Separator(node)
         , parameter_types_(node.parameter_types_->clone())
         , return_type_(node.return_type_->clone()) {
     }
 
     FunctionTypeNode(FunctionTypeNode&& node)
         : TypeNode(std::move(node))
+        , Separator(std::move(node))
         , parameter_types_(std::move(node.parameter_types_))
         , return_type_(std::move(node.return_type_)) {
     }
@@ -34,6 +41,7 @@ class FunctionTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Separator::operator=(node);
         parameter_types_ = node.parameter_types_->clone();
         return_type_ = node.return_type_->clone();
         return *this;
@@ -41,6 +49,7 @@ class FunctionTypeNode final: public TypeNode {
 
     FunctionTypeNode& operator=(FunctionTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Separator::operator=(std::move(node));
         parameter_types_ = std::move(node.parameter_types_);
         return_type_ = std::move(node.return_type_);
         return *this;

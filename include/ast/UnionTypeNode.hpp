@@ -1,17 +1,22 @@
 #ifndef TASTR_AST_UNION_TYPE_NODE_HPP
 #define TASTR_AST_UNION_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Separator.hpp"
+#include "ast/TypeNode.hpp"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class UnionTypeNode final: public TypeNode {
+class UnionTypeNode final
+    : public TypeNode
+    , public Separator {
   public:
     UnionTypeNode(std::unique_ptr<TypeNode> first_type,
-                  std::unique_ptr<TypeNode> second_type)
+                  std::unique_ptr<TypeNode> second_type,
+                  const std::string& separator)
         : TypeNode()
+        , Separator(separator)
         , first_type_(std::move(first_type))
         , second_type_(std::move(second_type)) {
     }
@@ -20,12 +25,14 @@ class UnionTypeNode final: public TypeNode {
 
     UnionTypeNode(const UnionTypeNode& node)
         : TypeNode(node)
+        , Separator(node)
         , first_type_(node.first_type_->clone())
         , second_type_(node.second_type_->clone()) {
     }
 
     UnionTypeNode(UnionTypeNode&& node)
         : TypeNode(std::move(node))
+        , Separator(std::move(node))
         , first_type_(std::move(node.first_type_))
         , second_type_(std::move(node.second_type_)) {
     }
@@ -35,6 +42,7 @@ class UnionTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Separator::operator=(node);
         first_type_ = node.first_type_->clone();
         second_type_ = node.second_type_->clone();
         return *this;
@@ -42,6 +50,7 @@ class UnionTypeNode final: public TypeNode {
 
     UnionTypeNode& operator=(UnionTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Separator::operator=(std::move(node));
         first_type_ = std::move(node.first_type_);
         second_type_ = std::move(node.second_type_);
         return *this;

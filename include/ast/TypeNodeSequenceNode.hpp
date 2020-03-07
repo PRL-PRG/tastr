@@ -10,7 +10,8 @@ class TypeNodeSequenceNode final
     : public Node
     , public Sequence<TypeNode> {
   public:
-    TypeNodeSequenceNode(): Node(), Sequence<TypeNode>() {
+    TypeNodeSequenceNode(const std::string& separator)
+        : Node(), Sequence<TypeNode>(separator) {
     }
 
     ~TypeNodeSequenceNode() = default;

@@ -110,18 +110,19 @@ class Unparser final: public ConstNodeVisitor {
             node.get_parameter_types();
 
         os_ << "<";
+        const std::string& separator = parameter_types.get_separator();
         int show_separator = parameter_types.size() - 1;
         for (auto i = parameter_types.cbegin(); i != parameter_types.cend();
              ++i) {
             os_ << **i;
             if (show_separator) {
-                os_ << ", ";
+                os_ << separator << " ";
             }
             --show_separator;
         }
         os_ << ">";
 
-        os_ << " => ";
+        os_ << " " << node.get_separator() << " ";
         node.get_return_type().accept(*this);
     }
 
@@ -151,7 +152,7 @@ class Unparser final: public ConstNodeVisitor {
 
     void visit(const tastr::ast::UnionTypeNode& node) override final {
         node.get_first_type().accept(*this);
-        os_ << "|";
+        os_ << " " << node.get_separator() << " ";
         node.get_second_type().accept(*this);
     }
 
@@ -169,11 +170,12 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TypeNodeSequenceNode& node) override final {
+        const std::string& separator = node.get_separator();
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
             os_ << **i;
             if (show_separator) {
-                os_ << ", ";
+                os_ << separator << " ";
             }
             --show_separator;
         }
@@ -181,17 +183,18 @@ class Unparser final: public ConstNodeVisitor {
 
     void visit(const tastr::ast::TagTypePairNode& node) override final {
         node.get_identifier().accept(*this);
-        os_ << ":";
+        os_ << " " << node.get_separator() << " ";
         node.get_type().accept(*this);
     }
 
     void
     visit(const tastr::ast::TagTypePairNodeSequenceNode& node) override final {
+        const std::string& separator = node.get_separator();
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
             os_ << **i;
             if (show_separator) {
-                os_ << ", ";
+                os_ << separator << " ";
             }
             --show_separator;
         }
@@ -207,11 +210,12 @@ class Unparser final: public ConstNodeVisitor {
 
     void visit(const tastr::ast::TypeDeclarationNodeSequenceNode& node)
         override final {
+        const std::string& separator = node.get_separator();
         int show_separator = node.size() - 1;
         for (auto i = node.cbegin(); i != node.cend(); ++i) {
             os_ << **i;
             if (show_separator) {
-                os_ << std::endl;
+                os_ << separator;
             }
             --show_separator;
         }

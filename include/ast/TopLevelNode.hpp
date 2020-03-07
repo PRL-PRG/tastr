@@ -11,8 +11,9 @@ namespace tastr::ast {
 
 class TopLevelNode final: public Node {
   public:
-    explicit TopLevelNode(const std::string& name)
-        : name_(name), sequence_(new TypeDeclarationNodeSequenceNode()) {
+    explicit TopLevelNode(const std::string& name, const std::string& separator)
+        : name_(name)
+        , sequence_(new TypeDeclarationNodeSequenceNode(separator)) {
     }
 
     explicit TopLevelNode(const std::string& name,

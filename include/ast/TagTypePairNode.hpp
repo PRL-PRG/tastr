@@ -4,27 +4,38 @@
 #include "ast/IdentifierNode.hpp"
 #include "ast/Node.hpp"
 #include "ast/TypeNode.hpp"
+#include "ast/Separator.hpp"
 
 #include <memory>
 #include <string>
 
 namespace tastr::ast {
 
-class TagTypePairNode final: public Node {
+class TagTypePairNode final
+    : public Node
+    , public Separator {
   public:
     explicit TagTypePairNode(std::unique_ptr<IdentifierNode> identifier,
-                             std::unique_ptr<TypeNode> type)
-        : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
+                             std::unique_ptr<TypeNode> type,
+                             const std::string& separator)
+        : Node()
+        , Separator(separator)
+        , identifier_(std::move(identifier))
+        , type_(std::move(type)) {
     }
 
     ~TagTypePairNode() = default;
 
     TagTypePairNode(const TagTypePairNode& node)
-        : identifier_(node.identifier_->clone()), type_(node.type_->clone()) {
+        : Node(node)
+        , Separator(node)
+        , identifier_(node.identifier_->clone())
+        , type_(node.type_->clone()) {
     }
 
     TagTypePairNode(TagTypePairNode&& node)
         : Node(std::move(node))
+        , Separator(std::move(node))
         , identifier_(std::move(node.identifier_))
         , type_(std::move(node.type_)) {
     }
@@ -34,6 +45,7 @@ class TagTypePairNode final: public Node {
             return *this;
         }
         Node::operator=(node);
+        Separator::operator=(node);
         identifier_ = node.identifier_->clone();
         type_ = node.type_->clone();
         return *this;
@@ -41,6 +53,7 @@ class TagTypePairNode final: public Node {
 
     TagTypePairNode& operator=(TagTypePairNode&& node) {
         Node::operator=(std::move(node));
+        Separator::operator=(std::move(node));
         identifier_ = std::move(node.identifier_);
         type_ = std::move(node.type_);
         return *this;

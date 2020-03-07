@@ -4,6 +4,7 @@
 #include "Node.hpp"
 #include "TagTypePairNode.hpp"
 #include "TypeNode.hpp"
+#include "ast/Separator.hpp"
 
 #include <memory>
 #include <type_traits>
@@ -12,7 +13,7 @@
 namespace tastr::ast {
 
 template <typename T, typename = std::enable_if_t<std::is_base_of_v<Node, T>>>
-class Sequence {
+class Sequence: public Separator {
   public:
     typedef std::vector<std::unique_ptr<T>> sequence_t;
 
@@ -28,24 +29,27 @@ class Sequence {
 
     typedef typename sequence_t::const_reverse_iterator const_reverse_iterator;
 
-    Sequence() {
+    Sequence(const std::string& separator): Separator(separator) {
     }
 
     ~Sequence() = default;
 
-    Sequence(const Sequence<T>& sequence) {
+    Sequence(const Sequence<T>& sequence): Separator(sequence) {
         for (auto node = sequence.cbegin(); node != sequence.cend(); ++node) {
             sequence_.push_back((**node).clone());
         }
     }
 
-    Sequence(Sequence<T>&& sequence): sequence_(std::move(sequence.sequence_)) {
+    Sequence(Sequence<T>&& sequence)
+        : Separator(std::move(sequence))
+        , sequence_(std::move(sequence.sequence_)) {
     }
 
     Sequence& operator=(const Sequence& sequence) {
         if (&sequence == this) {
             return *this;
         }
+        Sequence::operator=(sequence);
         for (auto node = sequence.cbegin(); node != sequence.cend(); ++node) {
             sequence_.push_back((**node).clone());
         }
@@ -54,6 +58,7 @@ class Sequence {
 
     Sequence& operator=(Sequence&& sequence) {
         sequence_ = std::move(sequence.sequence_);
+        Sequence::operator=(std::move(sequence));
         return *this;
     }
 
@@ -113,10 +118,26 @@ class Sequence {
         return std::unique_ptr<Sequence<T>>(this->clone_impl());
     }
 
+    ////////////////////////////////////////////////
+    // const std::string& get_start_tag() const { //
+    //     return get_start_tag_();               //
+    // }                                          //
+    //                                            //
+    // const std::string& get_end_tag() const {   //
+    //     return get_end_tag_();                 //
+    // }                                          //
+    ////////////////////////////////////////////////
+
   private:
     virtual Sequence<T>* clone_impl() const {
         return new Sequence<T>(*this);
     }
+
+    ////////////////////////////////////////////////////////////
+    // virtual const std::string& get_start_tag_() const = 0; //
+    //                                                        //
+    // virtual const std::string& get_end_tag_() const = 0;   //
+    ////////////////////////////////////////////////////////////
 
     sequence_t sequence_;
 };

@@ -355,11 +355,11 @@ listtype:           "((" typeseq "))"                       {
         ;
 
 typeseq:            %empty                                  {
-                                                                $$ = new TypeNodeSequenceNode();
+                                                                $$ = new TypeNodeSequenceNode(",");
                                                                 $$ -> set_location(@$);
                                                             }
        |            type                                    {
-                                                                $$ = new TypeNodeSequenceNode();
+                                                                $$ = new TypeNodeSequenceNode(",");
                                                                 $$ -> push_back(std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
@@ -462,17 +462,17 @@ identifier:         INTEGER                                 {
           ;
 
 namedtype:          identifier ":" type                     {
-                                                                $$ = new TagTypePairNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
+                                                                $$ = new TagTypePairNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))), $2);
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
 namedtypeseq:       %empty                                  {
-                                                                $$ = new TagTypePairNodeSequenceNode();
+                                                                $$ = new TagTypePairNodeSequenceNode(",");
                                                                 $$ -> set_location(@$);
                                                             }
             |       namedtype                               {
-                                                                $$ = new TagTypePairNodeSequenceNode();
+                                                                $$ = new TagTypePairNodeSequenceNode(",");
                                                                 $$ -> push_back(std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@1);
                                                             }
@@ -497,11 +497,11 @@ paramtype:          type                                    {
          ;
 
 paramtypeseq:       %empty                                  {
-                                                                $$ = new TypeNodeSequenceNode();
+                                                                $$ = new TypeNodeSequenceNode(",");
                                                                 $$ -> set_location(@$);
                                                             }
             |       paramtype                               {
-                                                                $$ = new TypeNodeSequenceNode();
+                                                                $$ = new TypeNodeSequenceNode(",");
                                                                 $$ -> push_back(std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
@@ -514,7 +514,7 @@ paramtypeseq:       %empty                                  {
             ;
 
 functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($5))));
+                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($5))), $4);
                                                                 $$ -> set_location(@$);
                                                             }
 
@@ -618,7 +618,7 @@ innertype:          nonuniontype                            {
                                                                 $$ -> set_location(@$);
                                                             }
          |          innertype OR nonuniontype               {
-                                                                $$ = new UnionTypeNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
+                                                                $$ = new UnionTypeNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))), $2);
                                                                 $$ -> set_location(@$);
                                                             }
          ;
