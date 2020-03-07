@@ -7,8 +7,7 @@ namespace tastr::ast {
 
 class RawScalarTypeNode final: public ScalarTypeNode {
   public:
-    explicit RawScalarTypeNode(const std::string& identifier)
-        : ScalarTypeNode(identifier) {
+    explicit RawScalarTypeNode(const std::string& name): ScalarTypeNode(name) {
     }
 
     ~RawScalarTypeNode() = default;

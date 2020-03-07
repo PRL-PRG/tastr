@@ -1,24 +1,25 @@
 #ifndef TASTR_AST_NULL_TYPE_NODE_HPP
 #define TASTR_AST_NULL_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class NullTypeNode final: public TypeNode {
+class NullTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit NullTypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit NullTypeNode(const std::string& name): TypeNode(), Name(name) {
     }
 
     ~NullTypeNode() = default;
 
-    NullTypeNode(const NullTypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+    NullTypeNode(const NullTypeNode& node): TypeNode(node), Name(node) {
     }
 
     NullTypeNode(NullTypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     NullTypeNode& operator=(const NullTypeNode& node) {
@@ -26,13 +27,13 @@ class NullTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     NullTypeNode& operator=(NullTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +49,10 @@ class NullTypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual NullTypeNode* clone_impl() const override final {
         return new NullTypeNode(*this);
     };
-
-    std::string identifier_;
 };
 
 using NullTypeNodePtr = NullTypeNode*;

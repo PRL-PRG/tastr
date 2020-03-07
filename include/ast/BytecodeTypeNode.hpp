@@ -1,24 +1,25 @@
 #ifndef TASTR_AST_BYTECODE_TYPE_NODE_HPP
 #define TASTR_AST_BYTECODE_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class BytecodeTypeNode final: public TypeNode {
+class BytecodeTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit BytecodeTypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit BytecodeTypeNode(const std::string& name): TypeNode(), Name(name) {
     }
 
     ~BytecodeTypeNode() = default;
 
-    BytecodeTypeNode(const BytecodeTypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+    BytecodeTypeNode(const BytecodeTypeNode& node): TypeNode(node), Name(node) {
     }
 
     BytecodeTypeNode(BytecodeTypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     BytecodeTypeNode& operator=(const BytecodeTypeNode& node) {
@@ -26,13 +27,13 @@ class BytecodeTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     BytecodeTypeNode& operator=(BytecodeTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +49,10 @@ class BytecodeTypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual BytecodeTypeNode* clone_impl() const override final {
         return new BytecodeTypeNode(*this);
     };
-
-    std::string identifier_;
 };
 
 using BytecodeTypeNodePtr = BytecodeTypeNode*;

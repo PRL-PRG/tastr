@@ -1,24 +1,25 @@
 #ifndef TASTR_AST_S4_TYPE_NODE_HPP
 #define TASTR_AST_S4_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class S4TypeNode final: public TypeNode {
+class S4TypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit S4TypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit S4TypeNode(const std::string& name): TypeNode(), Name(name) {
     }
 
     ~S4TypeNode() = default;
 
-    S4TypeNode(const S4TypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+    S4TypeNode(const S4TypeNode& node): TypeNode(node), Name(node) {
     }
 
     S4TypeNode(S4TypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     S4TypeNode& operator=(const S4TypeNode& node) {
@@ -26,13 +27,13 @@ class S4TypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     S4TypeNode& operator=(S4TypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +49,10 @@ class S4TypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual S4TypeNode* clone_impl() const override final {
         return new S4TypeNode(*this);
     };
-
-    std::string identifier_;
 };
 
 using S4TypeNodePtr = S4TypeNode*;

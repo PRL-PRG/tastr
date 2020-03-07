@@ -32,27 +32,27 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::CharacterScalarTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::ComplexScalarTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::DoubleScalarTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::IntegerScalarTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::LogicalScalarTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::RawScalarTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::VectorTypeNode& node) override final {
@@ -66,43 +66,43 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::ExpressionTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::LanguageTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::SymbolTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::ExternalPointerTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::BytecodeTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::PairlistTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::S4TypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::WeakReferenceTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::AnyTypeNode& node) override final {
-        os_ << node.get_identifier();
+        os_ << node.get_name();
     }
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {

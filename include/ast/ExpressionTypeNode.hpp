@@ -1,24 +1,27 @@
 #ifndef TASTR_AST_EXPRESSION_TYPE_NODE_HPP
 #define TASTR_AST_EXPRESSION_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class ExpressionTypeNode final: public TypeNode {
+class ExpressionTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit ExpressionTypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit ExpressionTypeNode(const std::string& name)
+        : TypeNode(), Name(name) {
     }
 
     ~ExpressionTypeNode() = default;
 
     ExpressionTypeNode(const ExpressionTypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+        : TypeNode(node), Name(node) {
     }
 
     ExpressionTypeNode(ExpressionTypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     ExpressionTypeNode& operator=(const ExpressionTypeNode& node) {
@@ -26,13 +29,13 @@ class ExpressionTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     ExpressionTypeNode& operator=(ExpressionTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +51,10 @@ class ExpressionTypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual ExpressionTypeNode* clone_impl() const override final {
         return new ExpressionTypeNode(*this);
     };
-
-    std::string identifier_;
 };
 
 using ExpressionTypeNodePtr = ExpressionTypeNode*;

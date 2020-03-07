@@ -1,24 +1,24 @@
 #ifndef TASTR_AST_ANY_TYPE_NODE_HPP
 #define TASTR_AST_ANY_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
-
-class AnyTypeNode final: public TypeNode {
+class AnyTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit AnyTypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit AnyTypeNode(const std::string& name): TypeNode(), Name(name) {
     }
 
     ~AnyTypeNode() = default;
 
-    AnyTypeNode(const AnyTypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+    AnyTypeNode(const AnyTypeNode& node): TypeNode(node), Name(node) {
     }
 
     AnyTypeNode(AnyTypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     AnyTypeNode& operator=(const AnyTypeNode& node) {
@@ -26,13 +26,13 @@ class AnyTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     AnyTypeNode& operator=(AnyTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +48,10 @@ class AnyTypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual AnyTypeNode* clone_impl() const override final {
         return new AnyTypeNode(*this);
     };
-
-    std::string identifier_;
 };
 
 using AnyTypeNodePtr = AnyTypeNode*;

@@ -1,24 +1,27 @@
 #ifndef TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 #define TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class EnvironmentTypeNode final: public TypeNode {
+class EnvironmentTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit EnvironmentTypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit EnvironmentTypeNode(const std::string& name)
+        : TypeNode(), Name(name) {
     }
 
     ~EnvironmentTypeNode() = default;
 
     EnvironmentTypeNode(const EnvironmentTypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+        : TypeNode(node), Name(node) {
     }
 
     EnvironmentTypeNode(EnvironmentTypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     EnvironmentTypeNode& operator=(const EnvironmentTypeNode& node) {
@@ -26,13 +29,13 @@ class EnvironmentTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     EnvironmentTypeNode& operator=(EnvironmentTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +51,10 @@ class EnvironmentTypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual EnvironmentTypeNode* clone_impl() const override final {
         return new EnvironmentTypeNode(*this);
     };
-
-    std::string identifier_;
 };
 
 using EnvironmentTypeNodePtr = EnvironmentTypeNode*;

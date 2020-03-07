@@ -11,8 +11,8 @@ using CharacterScalarTypeNodeUPtr = std::unique_ptr<CharacterScalarTypeNode>;
 
 class CharacterScalarTypeNode final: public ScalarTypeNode {
   public:
-    explicit CharacterScalarTypeNode(const std::string& identifier)
-        : ScalarTypeNode(identifier) {
+    explicit CharacterScalarTypeNode(const std::string& name)
+        : ScalarTypeNode(name) {
     }
 
     ~CharacterScalarTypeNode() = default;

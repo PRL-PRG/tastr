@@ -1,24 +1,25 @@
 #ifndef TASTR_AST_SYMBOL_TYPE_NODE_HPP
 #define TASTR_AST_SYMBOL_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class SymbolTypeNode final: public TypeNode {
+class SymbolTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit SymbolTypeNode(const std::string& identifier)
-        : TypeNode(), identifier_(identifier) {
+    explicit SymbolTypeNode(const std::string& name): TypeNode(), Name(name) {
     }
 
     ~SymbolTypeNode() = default;
 
-    SymbolTypeNode(const SymbolTypeNode& node)
-        : TypeNode(node), identifier_(node.identifier_) {
+    SymbolTypeNode(const SymbolTypeNode& node): TypeNode(node), Name(node) {
     }
 
     SymbolTypeNode(SymbolTypeNode&& node)
-        : TypeNode(std::move(node)), identifier_(std::move(node.identifier_)) {
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     SymbolTypeNode& operator=(const SymbolTypeNode& node) {
@@ -26,13 +27,13 @@ class SymbolTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        identifier_ = node.identifier_;
+        Name::operator=(node);
         return *this;
     }
 
     SymbolTypeNode& operator=(SymbolTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        identifier_ = std::move(node.identifier_);
+        Name::operator=(std::move(node));
         return *this;
     }
 
@@ -48,16 +49,10 @@ class SymbolTypeNode final: public TypeNode {
         return true;
     }
 
-    const std::string& get_identifier() const {
-        return identifier_;
-    }
-
   private:
     virtual SymbolTypeNode* clone_impl() const override final {
         return new SymbolTypeNode(*this);
     }
-
-    std::string identifier_;
 };
 
 using SymbolTypeNodePtr = SymbolTypeNode*;
