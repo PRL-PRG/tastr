@@ -101,6 +101,14 @@ class Sequence {
         return sequence_.crend();
     }
 
+    const std::unique_ptr<T>& at(int index) const {
+        return sequence_.at(index);
+    }
+
+    std::unique_ptr<T>& at(int index) {
+        return sequence_.at(index);
+    }
+
     std::unique_ptr<Sequence<T>> clone() const {
         return std::unique_ptr<Sequence<T>>(this->clone_impl());
     }
