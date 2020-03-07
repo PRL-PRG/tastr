@@ -38,8 +38,8 @@
 %token <std::string>                    RBRACKET             "]";
 %token <std::string>                    LANGLEBRACKET        "<";
 %token <std::string>                    RANGLEBRACKET        ">";
-%token <std::string>                    DOUBLE_LANGLEBRACKET "<<";
-%token <std::string>                    DOUBLE_RANGLEBRACKET ">>";
+%token <std::string>                    DOUBLE_LBRACKET      "[[";
+%token <std::string>                    DOUBLE_RBRACKET      "]]";
 %token <std::string>                    DOUBLE_LBRACE        "{{";
 %token <std::string>                    DOUBLE_RBRACE        "}}";
 %token <std::string>                    SEMICOLON            ";";
@@ -384,7 +384,7 @@ structtype:         "{{" namedtypeseq "}}"                  {
                                                             }
           ;
 
-tupletype:          "<<" typeseq ">>"                       {
+tupletype:          "[[" typeseq "]]"                       {
                                                                 $$ = new TupleTypeNode(std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }

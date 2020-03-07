@@ -329,8 +329,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -486,8 +486,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -650,8 +650,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -883,8 +883,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -1040,8 +1040,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -1197,8 +1197,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -1353,8 +1353,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -1493,13 +1493,13 @@ namespace tastr { namespace parser {
 #line 1494 "Parser.cxx"
         break;
 
-      case 15: // "<<"
+      case 15: // "[["
 #line 130 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
 #line 1500 "Parser.cxx"
         break;
 
-      case 16: // ">>"
+      case 16: // "]]"
 #line 130 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
 #line 1506 "Parser.cxx"
@@ -2166,8 +2166,8 @@ namespace tastr { namespace parser {
       case 12: // "]"
       case 13: // "<"
       case 14: // ">"
-      case 15: // "<<"
-      case 16: // ">>"
+      case 15: // "[["
+      case 16: // "]]"
       case 17: // "{{"
       case 18: // "}}"
       case 19: // ";"
@@ -3408,7 +3408,7 @@ namespace tastr { namespace parser {
   {
   "\"end of file\"", "error", "$undefined", "\"|\"", "\"!\"", "\"=>\"",
   "\",\"", "\"((\"", "\"(\"", "\"))\"", "\")\"", "\"[\"", "\"]\"", "\"<\"",
-  "\">\"", "\"<<\"", "\">>\"", "\"{{\"", "\"}}\"", "\";\"", "\":\"",
+  "\">\"", "\"[[\"", "\"]]\"", "\"{{\"", "\"}}\"", "\";\"", "\":\"",
   "\"...\"", "\"?\"", "INTEGER", "DOUBLE", "COMPLEX", "CHARACTER",
   "LOGICAL", "RAW", "ENVIRONMENT", "EXPRESSION", "LANGUAGE", "SYMBOL",
   "EXTERNALPOINTER", "BYTECODE", "PAIRLIST", "S4", "WEAKREF", "ANY",

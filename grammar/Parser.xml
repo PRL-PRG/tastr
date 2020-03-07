@@ -163,9 +163,9 @@
       <rule number="24" usefulness="useful">
         <lhs>tupletype</lhs>
         <rhs>
-          <symbol>&quot;&lt;&lt;&quot;</symbol>
+          <symbol>&quot;[[&quot;</symbol>
           <symbol>typeseq</symbol>
-          <symbol>&quot;&gt;&gt;&quot;</symbol>
+          <symbol>&quot;]]&quot;</symbol>
         </rhs>
       </rule>
       <rule number="25" usefulness="useful">
@@ -558,8 +558,8 @@
       <terminal symbol-number="12" token-number="267" name="&quot;]&quot;" usefulness="useful"/>
       <terminal symbol-number="13" token-number="268" name="&quot;&lt;&quot;" usefulness="useful" prec="3" assoc="nonassoc"/>
       <terminal symbol-number="14" token-number="269" name="&quot;&gt;&quot;" usefulness="useful"/>
-      <terminal symbol-number="15" token-number="270" name="&quot;&lt;&lt;&quot;" usefulness="useful"/>
-      <terminal symbol-number="16" token-number="271" name="&quot;&gt;&gt;&quot;" usefulness="useful"/>
+      <terminal symbol-number="15" token-number="270" name="&quot;[[&quot;" usefulness="useful"/>
+      <terminal symbol-number="16" token-number="271" name="&quot;]]&quot;" usefulness="useful"/>
       <terminal symbol-number="17" token-number="272" name="&quot;{{&quot;" usefulness="useful"/>
       <terminal symbol-number="18" token-number="273" name="&quot;}}&quot;" usefulness="useful"/>
       <terminal symbol-number="19" token-number="274" name="&quot;;&quot;" usefulness="useful"/>
@@ -1082,7 +1082,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
@@ -1265,7 +1265,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
@@ -1373,7 +1373,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
@@ -1488,7 +1488,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;...&quot;" state="79"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
@@ -1565,7 +1565,7 @@
         <item rule-number="20" point="0">
           <lookaheads>
             <symbol>&quot;,&quot;</symbol>
-            <symbol>&quot;&gt;&gt;&quot;</symbol>
+            <symbol>&quot;]]&quot;</symbol>
           </lookaheads>
         </item>
         <item rule-number="21" point="0"/>
@@ -1606,7 +1606,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
@@ -1772,7 +1772,7 @@
             <symbol>&quot;))&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
             <symbol>&quot;&gt;&quot;</symbol>
-            <symbol>&quot;&gt;&gt;&quot;</symbol>
+            <symbol>&quot;]]&quot;</symbol>
             <symbol>&quot;}}&quot;</symbol>
             <symbol>&quot;;&quot;</symbol>
           </lookaheads>
@@ -1785,7 +1785,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
           <transition type="shift" symbol="DOUBLE" state="37"/>
@@ -2064,7 +2064,7 @@
             <symbol>&quot;))&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
             <symbol>&quot;&gt;&quot;</symbol>
-            <symbol>&quot;&gt;&gt;&quot;</symbol>
+            <symbol>&quot;]]&quot;</symbol>
             <symbol>&quot;}}&quot;</symbol>
             <symbol>&quot;;&quot;</symbol>
           </lookaheads>
@@ -2343,7 +2343,7 @@
             <symbol>&quot;))&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
             <symbol>&quot;&gt;&quot;</symbol>
-            <symbol>&quot;&gt;&gt;&quot;</symbol>
+            <symbol>&quot;]]&quot;</symbol>
             <symbol>&quot;}}&quot;</symbol>
             <symbol>&quot;;&quot;</symbol>
           </lookaheads>
@@ -2529,7 +2529,7 @@
       <actions>
         <transitions>
           <transition type="shift" symbol="&quot;,&quot;" state="91"/>
-          <transition type="shift" symbol="&quot;&gt;&gt;&quot;" state="96"/>
+          <transition type="shift" symbol="&quot;]]&quot;" state="96"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2590,7 +2590,7 @@
             <symbol>&quot;))&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
             <symbol>&quot;&gt;&quot;</symbol>
-            <symbol>&quot;&gt;&gt;&quot;</symbol>
+            <symbol>&quot;]]&quot;</symbol>
             <symbol>&quot;}}&quot;</symbol>
             <symbol>&quot;;&quot;</symbol>
           </lookaheads>
@@ -2673,7 +2673,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
           <transition type="shift" symbol="DOUBLE" state="37"/>
@@ -2786,7 +2786,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
@@ -2921,7 +2921,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;...&quot;" state="79"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
@@ -3124,7 +3124,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>
@@ -3285,7 +3285,7 @@
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
-          <transition type="shift" symbol="&quot;&lt;&lt;&quot;" state="33"/>
+          <transition type="shift" symbol="&quot;[[&quot;" state="33"/>
           <transition type="shift" symbol="&quot;{{&quot;" state="34"/>
           <transition type="shift" symbol="&quot;?&quot;" state="35"/>
           <transition type="shift" symbol="INTEGER" state="36"/>

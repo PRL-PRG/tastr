@@ -41,7 +41,7 @@ Grammar
 
    23 structtype: "{{" namedtypeseq "}}"
 
-   24 tupletype: "<<" typeseq ">>"
+   24 tupletype: "[[" typeseq "]]"
 
    25 identifier: INTEGER
    26           | DOUBLE
@@ -133,8 +133,8 @@ Terminals, with rules where they appear
     "]" <std::string> (267) 17
     "<" <std::string> (268) 53
     ">" <std::string> (269) 53
-    "<<" <std::string> (270) 24
-    ">>" <std::string> (271) 24
+    "[[" <std::string> (270) 24
+    "]]" <std::string> (271) 24
     "{{" <std::string> (272) 23
     "}}" <std::string> (273) 23
     ";" <std::string> (274) 79
@@ -473,7 +473,7 @@ State 25
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36
@@ -561,7 +561,7 @@ State 30
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36
@@ -616,7 +616,7 @@ State 31
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36
@@ -668,7 +668,7 @@ State 32
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "..."            shift, and go to state 79
     "?"              shift, and go to state 35
@@ -719,13 +719,13 @@ State 32
 
 State 33
 
-   24 tupletype: "<<" . typeseq ">>"
+   24 tupletype: "[[" . typeseq "]]"
 
     "!"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36
@@ -812,7 +812,7 @@ State 35
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     INTEGER          shift, and go to state 36
     DOUBLE           shift, and go to state 37
@@ -1195,10 +1195,10 @@ State 82
 State 83
 
    22 typeseq: typeseq . "," type
-   24 tupletype: "<<" typeseq . ">>"
+   24 tupletype: "[[" typeseq . "]]"
 
     ","   shift, and go to state 91
-    ">>"  shift, and go to state 96
+    "]]"  shift, and go to state 96
 
 
 State 84
@@ -1249,7 +1249,7 @@ State 89
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     INTEGER          shift, and go to state 36
     DOUBLE           shift, and go to state 37
@@ -1302,7 +1302,7 @@ State 91
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36
@@ -1368,7 +1368,7 @@ State 94
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "..."            shift, and go to state 79
     "?"              shift, and go to state 35
@@ -1423,7 +1423,7 @@ State 95
 
 State 96
 
-   24 tupletype: "<<" typeseq ">>" .
+   24 tupletype: "[[" typeseq "]]" .
 
     $default  reduce using rule 24 (tupletype)
 
@@ -1471,7 +1471,7 @@ State 99
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36
@@ -1551,7 +1551,7 @@ State 104
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
-    "<<"             shift, and go to state 33
+    "[["             shift, and go to state 33
     "{{"             shift, and go to state 34
     "?"              shift, and go to state 35
     INTEGER          shift, and go to state 36

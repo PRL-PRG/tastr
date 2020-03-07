@@ -138,9 +138,9 @@ class Unparser final: public ConstVisitor {
     }
 
     void visit(const tastr::ast::TupleTypeNode& node) override final {
-        os_ << "<<";
+        os_ << "[[";
         node.get_element_types().accept(*this);
-        os_ << ">>";
+        os_ << "]]";
     }
 
     void visit(const tastr::ast::GroupTypeNode& node) override final {
