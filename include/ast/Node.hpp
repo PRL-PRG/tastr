@@ -113,6 +113,10 @@ class Node {
         return false;
     }
 
+    virtual bool is_tuple_type_node() const {
+        return false;
+    }
+
     virtual bool is_symbol_type_node() const {
         return false;
     }

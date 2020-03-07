@@ -62,6 +62,8 @@ class ConstVisitor {
 
     virtual void visit(const tastr::ast::StructTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::TupleTypeNode& node) = 0;
+
     virtual void visit(const tastr::ast::GroupTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::UnionTypeNode& node) = 0;

@@ -64,6 +64,8 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 "]"                         { HANDLE_TOKEN(TOKEN_RBRACKET) }
 "<"                         { HANDLE_TOKEN(TOKEN_LANGLEBRACKET) }
 ">"                         { HANDLE_TOKEN(TOKEN_RANGLEBRACKET) }
+">>"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RANGLEBRACKET) }
+"<<"                        { HANDLE_TOKEN(TOKEN_DOUBLE_LANGLEBRACKET) }
 "{{"                        { HANDLE_TOKEN(TOKEN_DOUBLE_LBRACE) }
 "}}"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RBRACE) }
 ";"                         { HANDLE_TOKEN(TOKEN_SEMICOLON) }

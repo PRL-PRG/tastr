@@ -25,25 +25,27 @@
 %define api.token.prefix {TOKEN_}
 
 
-%token EOF                              0             "end of file";
-%token <std::string>                    OR            "|";
-%token <std::string>                    EXCLAMATION   "!";
-%token <std::string>                    ARROW         "=>";
-%token <std::string>                    COMMA         ",";
-%token <std::string>                    DOUBLE_LPAREN "((";
-%token <std::string>                    LPAREN        "(";
-%token <std::string>                    DOUBLE_RPAREN "))";
-%token <std::string>                    RPAREN        ")";
-%token <std::string>                    LBRACKET      "[";
-%token <std::string>                    RBRACKET      "]";
-%token <std::string>                    LANGLEBRACKET "<";
-%token <std::string>                    RANGLEBRACKET ">";
-%token <std::string>                    DOUBLE_LBRACE "{{";
-%token <std::string>                    DOUBLE_RBRACE "}}";
-%token <std::string>                    SEMICOLON     ";";
-%token <std::string>                    COLON         ":";
-%token <std::string>                    VARARG        "...";
-%token <std::string>                    NULLVALUE     "?";
+%token EOF                              0                    "end of file";
+%token <std::string>                    OR                   "|";
+%token <std::string>                    EXCLAMATION          "!";
+%token <std::string>                    ARROW                "=>";
+%token <std::string>                    COMMA                ",";
+%token <std::string>                    DOUBLE_LPAREN        "((";
+%token <std::string>                    LPAREN               "(";
+%token <std::string>                    DOUBLE_RPAREN        "))";
+%token <std::string>                    RPAREN               ")";
+%token <std::string>                    LBRACKET             "[";
+%token <std::string>                    RBRACKET             "]";
+%token <std::string>                    LANGLEBRACKET        "<";
+%token <std::string>                    RANGLEBRACKET        ">";
+%token <std::string>                    DOUBLE_LANGLEBRACKET "<<";
+%token <std::string>                    DOUBLE_RANGLEBRACKET ">>";
+%token <std::string>                    DOUBLE_LBRACE        "{{";
+%token <std::string>                    DOUBLE_RBRACE        "}}";
+%token <std::string>                    SEMICOLON            ";";
+%token <std::string>                    COLON                ":";
+%token <std::string>                    VARARG               "...";
+%token <std::string>                    NULLVALUE            "?";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
 %token <std::string>                    COMPLEX
@@ -85,6 +87,7 @@
 %nterm <TypeNodePtr>                    nonuniontype
 %nterm <ListTypeNodePtr>                listtype
 %nterm <StructTypeNodePtr>              structtype
+%nterm <TupleTypeNodePtr>               tupletype
 %nterm <IdentifierNodePtr>              identifier
 %nterm <TypeNodePtr>                    innertype
 %nterm <TypeNodePtr>                    nulltype
@@ -120,6 +123,7 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <GroupTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ListTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <StructTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <TupleTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <IdentifierNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TypeDeclarationNodePtr>;
@@ -148,6 +152,7 @@
 %destructor { delete $$; } nonuniontype
 %destructor { delete $$; } listtype
 %destructor { delete $$; } structtype
+%destructor { delete $$; } tupletype
 %destructor { delete $$; } identifier
 %destructor { delete $$; } innertype
 %destructor { delete $$; } nulltype
@@ -215,6 +220,8 @@
     using tastr::ast::ScalarTypeNodeUPtr;
     using tastr::ast::StructTypeNode;
     using tastr::ast::StructTypeNodePtr;
+    using tastr::ast::TupleTypeNode;
+    using tastr::ast::TupleTypeNodePtr;
     using tastr::ast::TypeNode;
     using tastr::ast::TypeNodePtr;
     using tastr::ast::TypeNodeUPtr;
@@ -377,6 +384,11 @@ structtype:         "{{" namedtypeseq "}}"                  {
                                                             }
           ;
 
+tupletype:          "<<" typeseq ">>"                       {
+                                                                $$ = new TupleTypeNode(std::move(wrap(std::move($2))));
+                                                                $$ -> set_location(@$);
+                                                            }
+         ;
 
 identifier:         INTEGER                                 {
                                                                 $$ = new IdentifierNode($1);
@@ -590,6 +602,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       listtype                                {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       tupletype                               {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

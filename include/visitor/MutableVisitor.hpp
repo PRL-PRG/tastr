@@ -62,6 +62,8 @@ class MutableVisitor {
 
     virtual void visit(tastr::ast::StructTypeNode& node) = 0;
 
+    virtual void visit(tastr::ast::TupleTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::GroupTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::UnionTypeNode& node) = 0;

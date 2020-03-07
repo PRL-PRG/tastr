@@ -29,6 +29,7 @@
 #include "ast/TagTypePairNode.hpp"
 #include "ast/TagTypePairNodeSequenceNode.hpp"
 #include "ast/TopLevelNode.hpp"
+#include "ast/TupleTypeNode.hpp"
 #include "ast/TypeDeclarationNode.hpp"
 #include "ast/TypeDeclarationNodeSequenceNode.hpp"
 #include "ast/TypeNode.hpp"
