@@ -2657,7 +2657,7 @@ namespace tastr { namespace parser {
   case 50:
 #line 493 "Parser.yxx"
                                                             {
-                                                                yylhs.value.as < TypeNodePtr > () = new VarargTypeNode();
+                                                                yylhs.value.as < TypeNodePtr > () = new VarargTypeNode(yystack_[0].value.as < std::string > ());
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yystack_[0].location);
                                                             }
 #line 2664 "Parser.cxx"
@@ -2912,7 +2912,7 @@ namespace tastr { namespace parser {
   case 76:
 #line 631 "Parser.yxx"
                                                             {
-                                                                yylhs.value.as < TypeNodePtr > () = new NullableTypeNode(std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
+                                                                yylhs.value.as < TypeNodePtr > () = new NullableTypeNode(yystack_[1].value.as < std::string > (), std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
 #line 2919 "Parser.cxx"

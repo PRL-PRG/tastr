@@ -1,23 +1,27 @@
 #ifndef TASTR_AST_VARARG_TYPE_NODE_HPP
 #define TASTR_AST_VARARG_TYPE_NODE_HPP
 
+#include "ast/Name.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <iostream>
 
 namespace tastr::ast {
 
-class VarargTypeNode final: public TypeNode {
+class VarargTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit VarargTypeNode(): TypeNode() {
+    explicit VarargTypeNode(const std::string& name): TypeNode(), Name(name) {
     }
 
     ~VarargTypeNode() = default;
 
-    VarargTypeNode(const VarargTypeNode& node): TypeNode(node) {
+    VarargTypeNode(const VarargTypeNode& node): TypeNode(node), Name(node) {
     }
 
-    VarargTypeNode(VarargTypeNode&& node): TypeNode(std::move(node)) {
+    VarargTypeNode(VarargTypeNode&& node)
+        : TypeNode(std::move(node)), Name(std::move(node)) {
     }
 
     VarargTypeNode& operator=(const VarargTypeNode& node) {
@@ -25,11 +29,13 @@ class VarargTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Name::operator=(node);
         return *this;
     }
 
     VarargTypeNode& operator=(VarargTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Name::operator=(std::move(node));
         return *this;
     }
 

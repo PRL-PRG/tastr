@@ -1,26 +1,32 @@
 #ifndef TASTR_AST_NULLABLE_TYPE_NODE_HPP
 #define TASTR_AST_NULLABLE_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Name.hpp"
+#include "ast/TypeNode.hpp"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class NullableTypeNode final: public TypeNode {
+class NullableTypeNode final
+    : public TypeNode
+    , public Name {
   public:
-    explicit NullableTypeNode(std::unique_ptr<TypeNode> inner_type)
-        : TypeNode(), inner_type_(std::move(inner_type)) {
+    explicit NullableTypeNode(const std::string& name,
+                              std::unique_ptr<TypeNode> inner_type)
+        : TypeNode(), Name(name), inner_type_(std::move(inner_type)) {
     }
 
     ~NullableTypeNode() = default;
 
     NullableTypeNode(const NullableTypeNode& node)
-        : TypeNode(node), inner_type_(node.inner_type_->clone()) {
+        : TypeNode(node), Name(node), inner_type_(node.inner_type_->clone()) {
     }
 
     NullableTypeNode(NullableTypeNode&& node)
-        : TypeNode(std::move(node)), inner_type_(std::move(node.inner_type_)) {
+        : TypeNode(std::move(node))
+        , Name(std::move(node))
+        , inner_type_(std::move(node.inner_type_)) {
     }
 
     NullableTypeNode& operator=(const NullableTypeNode& node) {
@@ -28,12 +34,14 @@ class NullableTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Name::operator=(node);
         inner_type_ = node.inner_type_->clone();
         return *this;
     }
 
     NullableTypeNode& operator=(NullableTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Name::operator=(std::move(node));
         inner_type_ = std::move(node.inner_type_);
         return *this;
     }

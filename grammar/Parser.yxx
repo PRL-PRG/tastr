@@ -491,7 +491,7 @@ paramtype:          type                                    {
                                                                 $$ -> set_location(@1);
                                                             }
          |          "..."                                   {
-                                                                $$ = new VarargTypeNode();
+                                                                $$ = new VarargTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
          ;
@@ -629,7 +629,7 @@ nulltype:          "?"                                      {
                                                                 $$ -> set_location(@$);
                                                             }
         |          "?" innertype                            {
-                                                                $$ = new NullableTypeNode(std::move(wrap(std::move($2))));
+                                                                $$ = new NullableTypeNode($1, std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
