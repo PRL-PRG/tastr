@@ -127,27 +127,27 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::ListTypeNode& node) override final {
-        os_ << "((";
+        os_ << node.get_opening_bracket();
         node.get_element_types().accept(*this);
-        os_ << "))";
+        os_ << node.get_closing_bracket();
     }
 
     void visit(const tastr::ast::StructTypeNode& node) override final {
-        os_ << "{{";
+        os_ << node.get_opening_bracket();
         node.get_element_types().accept(*this);
-        os_ << "}}";
+        os_ << node.get_closing_bracket();
     }
 
     void visit(const tastr::ast::TupleTypeNode& node) override final {
-        os_ << "[[";
+        os_ << node.get_opening_bracket();
         node.get_element_types().accept(*this);
-        os_ << "]]";
+        os_ << node.get_closing_bracket();
     }
 
     void visit(const tastr::ast::GroupTypeNode& node) override final {
-        os_ << "(";
+        os_ << node.get_opening_bracket();
         node.get_inner_type().accept(*this);
-        os_ << ")";
+        os_ << node.get_closing_bracket();
     }
 
     void visit(const tastr::ast::UnionTypeNode& node) override final {

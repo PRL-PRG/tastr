@@ -1,26 +1,37 @@
 #ifndef TASTR_AST_GROUP_TYPE_NODE_HPP
 #define TASTR_AST_GROUP_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
+#include "ast/Bracket.hpp"
+#include "ast/TypeNode.hpp"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class GroupTypeNode final: public TypeNode {
+class GroupTypeNode final
+    : public TypeNode
+    , public Bracketed {
   public:
-    explicit GroupTypeNode(std::unique_ptr<TypeNode> inner_type)
-        : TypeNode(), inner_type_(std::move(inner_type)) {
+    explicit GroupTypeNode(const std::string& opening_bracket,
+                           const std::string& closing_bracket,
+                           std::unique_ptr<TypeNode> inner_type)
+        : TypeNode()
+        , Bracketed(opening_bracket, closing_bracket)
+        , inner_type_(std::move(inner_type)) {
     }
 
     ~GroupTypeNode() = default;
 
     GroupTypeNode(const GroupTypeNode& node)
-        : TypeNode(node), inner_type_(node.inner_type_->clone()) {
+        : TypeNode(node)
+        , Bracketed(node)
+        , inner_type_(node.inner_type_->clone()) {
     }
 
     GroupTypeNode(GroupTypeNode&& node)
-        : TypeNode(std::move(node)), inner_type_(std::move(node.inner_type_)) {
+        : TypeNode(std::move(node))
+        , Bracketed(std::move(node))
+        , inner_type_(std::move(node.inner_type_)) {
     }
 
     GroupTypeNode& operator=(const GroupTypeNode& node) {
@@ -28,12 +39,14 @@ class GroupTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Bracketed::operator=(node);
         inner_type_ = node.inner_type_->clone();
         return *this;
     }
 
     GroupTypeNode& operator=(GroupTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Bracketed::operator=(std::move(node));
         inner_type_ = std::move(node.inner_type_);
         return *this;
     }

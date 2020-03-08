@@ -1,26 +1,36 @@
 #ifndef TASTR_AST_STRUCT_TYPE_NODE_HPP
 #define TASTR_AST_STRUCT_TYPE_NODE_HPP
 
-#include "TagTypePairNode.hpp"
-#include "TagTypePairNodeSequenceNode.hpp"
-#include "TypeNode.hpp"
+#include "ast/Bracket.hpp"
+#include "ast/TagTypePairNode.hpp"
+#include "ast/TagTypePairNodeSequenceNode.hpp"
+#include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class StructTypeNode final: public TypeNode {
+class StructTypeNode final
+    : public TypeNode
+    , public Bracketed {
   public:
-    explicit StructTypeNode(TagTypePairNodeSequenceNodeUPtr element_types)
-        : TypeNode(), element_types_(std::move(element_types)) {
+    explicit StructTypeNode(const std::string& opening_bracket,
+                            const std::string& closing_bracket,
+                            TagTypePairNodeSequenceNodeUPtr element_types)
+        : TypeNode()
+        , Bracketed(opening_bracket, closing_bracket)
+        , element_types_(std::move(element_types)) {
     }
 
     ~StructTypeNode() = default;
 
     StructTypeNode(const StructTypeNode& node)
-        : TypeNode(node), element_types_(node.element_types_->clone()) {
+        : TypeNode(node)
+        , Bracketed(node)
+        , element_types_(node.element_types_->clone()) {
     }
 
     StructTypeNode(StructTypeNode&& node)
         : TypeNode(std::move(node))
+        , Bracketed(std::move(node))
         , element_types_(std::move(node.element_types_)) {
     }
 
@@ -29,12 +39,14 @@ class StructTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Bracketed::operator=(node);
         element_types_ = node.element_types_->clone();
         return *this;
     }
 
     StructTypeNode& operator=(StructTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Bracketed::operator=(std::move(node));
         element_types_ = std::move(node.element_types_);
         return *this;
     }

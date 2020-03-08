@@ -1,25 +1,35 @@
 #ifndef TASTR_AST_TUPLE_TYPE_NODE_HPP
 #define TASTR_AST_TUPLE_TYPE_NODE_HPP
 
-#include "TypeNode.hpp"
-#include "TypeNodeSequenceNode.hpp"
+#include "ast/Bracket.hpp"
+#include "ast/TypeNode.hpp"
+#include "ast/TypeNodeSequenceNode.hpp"
 
 namespace tastr::ast {
 
-class TupleTypeNode final: public TypeNode {
+class TupleTypeNode final
+    : public TypeNode
+    , public Bracketed {
   public:
-    explicit TupleTypeNode(TypeNodeSequenceNodeUPtr element_types)
-        : TypeNode(), element_types_(std::move(element_types)) {
+    explicit TupleTypeNode(const std::string& opening_bracket,
+                           const std::string& closing_bracket,
+                           TypeNodeSequenceNodeUPtr element_types)
+        : TypeNode()
+        , Bracketed(opening_bracket, closing_bracket)
+        , element_types_(std::move(element_types)) {
     }
 
     ~TupleTypeNode() = default;
 
     TupleTypeNode(const TupleTypeNode& node)
-        : TypeNode(node), element_types_(node.element_types_->clone()) {
+        : TypeNode(node)
+        , Bracketed(node)
+        , element_types_(node.element_types_->clone()) {
     }
 
     TupleTypeNode(TupleTypeNode&& node)
         : TypeNode(std::move(node))
+        , Bracketed(std::move(node))
         , element_types_(std::move(node.element_types_)) {
     }
 
@@ -28,12 +38,14 @@ class TupleTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        Bracketed::operator=(node);
         element_types_ = node.element_types_->clone();
         return *this;
     }
 
     TupleTypeNode& operator=(TupleTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        Bracketed::operator=(std::move(node));
         element_types_ = std::move(node.element_types_);
         return *this;
     }
