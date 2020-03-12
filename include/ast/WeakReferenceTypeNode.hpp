@@ -47,7 +47,7 @@ class WeakReferenceTypeNode final
         return std::unique_ptr<WeakReferenceTypeNode>(this->clone_impl());
     }
 
-    bool is_bytecode_type_node() const override final {
+    bool is_weak_reference_type_node() const override final {
         return true;
     }
 
