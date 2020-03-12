@@ -45,6 +45,7 @@
 %token <std::string>                    SEMICOLON            ";";
 %token <std::string>                    COLON                ":";
 %token <std::string>                    VARARG               "...";
+%token <std::string>                    UNKNOWN              "???";
 %token <std::string>                    NULLVALUE            "?";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
@@ -74,6 +75,7 @@
 %nterm <PairlistTypeNodePtr>            pairlisttype
 %nterm <S4TypeNodePtr>                  s4type
 %nterm <WeakReferenceTypeNodePtr>       weakreftype
+%nterm <UnknownTypeNodePtr>             unknowntype
 %nterm <AnyTypeNodePtr>                 anytype
 %nterm <VectorTypeNodePtr>              vectortype
 %nterm <NoNaTypeNodePtr>                nonavectortype
@@ -114,6 +116,7 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <S4TypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <WeakReferenceTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <AnyTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <UnknownTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <NoNaTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TypeNodeSequenceNodePtr>;
@@ -140,6 +143,7 @@
 %destructor { delete $$; } s4type
 %destructor { delete $$; } weakreftype
 %destructor { delete $$; } anytype
+%destructor { delete $$; } unknowntype
 %destructor { delete $$; } vectortype
 %destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
@@ -200,6 +204,8 @@
     using tastr::ast::S4TypeNodePtr;
     using tastr::ast::WeakReferenceTypeNode;
     using tastr::ast::WeakReferenceTypeNodePtr;
+    using tastr::ast::UnknownTypeNode;
+    using tastr::ast::UnknownTypeNodePtr;
     using tastr::ast::AnyTypeNode;
     using tastr::ast::AnyTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
@@ -335,6 +341,12 @@ anytype:            ANY                                     {
                                                                 $$ -> set_location(@1);
                                                             }
        ;
+
+unknowntype:        UNKNOWN                                 {
+                                                                $$ = new UnknownTypeNode($1);
+                                                                $$ -> set_location(@1);
+                                                            }
+           ;
 
 vectortype:         scalartype "[" "]"                      {
                                                                 $$ = new VectorTypeNode(std::move(wrap(std::move($1))));
@@ -646,6 +658,11 @@ type:               innertype %prec LOWER_THAN_OR           {
                                                                 $$ -> set_location(@$);
                                                             }
     |               anytype                                 {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+    |               unknowntype                             {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

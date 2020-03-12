@@ -56,6 +56,8 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::AnyTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::UnknownTypeNode& node) = 0;
+
     virtual void visit(const tastr::ast::FunctionTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::ListTypeNode& node) = 0;

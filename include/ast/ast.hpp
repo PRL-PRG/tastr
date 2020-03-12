@@ -35,6 +35,7 @@
 #include "ast/TypeNode.hpp"
 #include "ast/TypeNodeSequenceNode.hpp"
 #include "ast/UnionTypeNode.hpp"
+#include "ast/UnknownTypeNode.hpp"
 #include "ast/VarargTypeNode.hpp"
 #include "ast/VectorTypeNode.hpp"
 #include "ast/WeakReferenceTypeNode.hpp"

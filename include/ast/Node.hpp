@@ -129,6 +129,10 @@ class Node {
         return false;
     }
 
+    virtual bool is_unknown_type_node() const {
+        return false;
+    }
+
     virtual bool is_s4_type_node() const {
         return false;
     }

@@ -44,7 +44,7 @@
 #ifndef YY_YY_PARSER_HXX_INCLUDED
 # define YY_YY_PARSER_HXX_INCLUDED
 // "%code requires" blocks.
-#line 174 "Parser.yxx"
+#line 178 "Parser.yxx"
 
     namespace tastr::parser {
         class Lexer;
@@ -74,6 +74,8 @@
     using tastr::ast::S4TypeNodePtr;
     using tastr::ast::WeakReferenceTypeNode;
     using tastr::ast::WeakReferenceTypeNodePtr;
+    using tastr::ast::UnknownTypeNode;
+    using tastr::ast::UnknownTypeNodePtr;
     using tastr::ast::AnyTypeNode;
     using tastr::ast::AnyTypeNodePtr;
     using tastr::ast::FunctionTypeNode;
@@ -113,7 +115,7 @@
     using tastr::ast::NullableTypeNode;
     using tastr::ast::TopLevelNodeUPtr;
 
-#line 117 "Parser.hxx"
+#line 119 "Parser.hxx"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -248,7 +250,7 @@
 
 #line 9 "Parser.yxx"
 namespace tastr { namespace parser {
-#line 252 "Parser.hxx"
+#line 254 "Parser.hxx"
 
 
 
@@ -523,11 +525,14 @@ namespace tastr { namespace parser {
       // paramtypeseq
       char dummy22[sizeof (TypeNodeSequenceNodePtr)];
 
+      // unknowntype
+      char dummy23[sizeof (UnknownTypeNodePtr)];
+
       // vectortype
-      char dummy23[sizeof (VectorTypeNodePtr)];
+      char dummy24[sizeof (VectorTypeNodePtr)];
 
       // weakreftype
-      char dummy24[sizeof (WeakReferenceTypeNodePtr)];
+      char dummy25[sizeof (WeakReferenceTypeNodePtr)];
 
       // "|"
       // "!"
@@ -548,6 +553,7 @@ namespace tastr { namespace parser {
       // ";"
       // ":"
       // "..."
+      // "???"
       // "?"
       // INTEGER
       // DOUBLE
@@ -567,7 +573,7 @@ namespace tastr { namespace parser {
       // ANY
       // TYPEDECL
       // IDENTIFIER
-      char dummy25[sizeof (std::string)];
+      char dummy26[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -635,26 +641,27 @@ namespace tastr { namespace parser {
         TOKEN_SEMICOLON = 274,
         TOKEN_COLON = 275,
         TOKEN_VARARG = 276,
-        TOKEN_NULLVALUE = 277,
-        TOKEN_INTEGER = 278,
-        TOKEN_DOUBLE = 279,
-        TOKEN_COMPLEX = 280,
-        TOKEN_CHARACTER = 281,
-        TOKEN_LOGICAL = 282,
-        TOKEN_RAW = 283,
-        TOKEN_ENVIRONMENT = 284,
-        TOKEN_EXPRESSION = 285,
-        TOKEN_LANGUAGE = 286,
-        TOKEN_SYMBOL = 287,
-        TOKEN_EXTERNALPOINTER = 288,
-        TOKEN_BYTECODE = 289,
-        TOKEN_PAIRLIST = 290,
-        TOKEN_S4 = 291,
-        TOKEN_WEAKREF = 292,
-        TOKEN_ANY = 293,
-        TOKEN_TYPEDECL = 294,
-        TOKEN_IDENTIFIER = 295,
-        TOKEN_LOWER_THAN_OR = 296
+        TOKEN_UNKNOWN = 277,
+        TOKEN_NULLVALUE = 278,
+        TOKEN_INTEGER = 279,
+        TOKEN_DOUBLE = 280,
+        TOKEN_COMPLEX = 281,
+        TOKEN_CHARACTER = 282,
+        TOKEN_LOGICAL = 283,
+        TOKEN_RAW = 284,
+        TOKEN_ENVIRONMENT = 285,
+        TOKEN_EXPRESSION = 286,
+        TOKEN_LANGUAGE = 287,
+        TOKEN_SYMBOL = 288,
+        TOKEN_EXTERNALPOINTER = 289,
+        TOKEN_BYTECODE = 290,
+        TOKEN_PAIRLIST = 291,
+        TOKEN_S4 = 292,
+        TOKEN_WEAKREF = 293,
+        TOKEN_ANY = 294,
+        TOKEN_TYPEDECL = 295,
+        TOKEN_IDENTIFIER = 296,
+        TOKEN_LOWER_THAN_OR = 297
       };
     };
 
@@ -995,6 +1002,19 @@ namespace tastr { namespace parser {
       {}
 #endif
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, UnknownTypeNodePtr&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const UnknownTypeNodePtr& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, VectorTypeNodePtr&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1049,178 +1069,184 @@ namespace tastr { namespace parser {
         (void) yysym;
         switch (yytype)
         {
-      case 43: // scalartype
-#line 132 "Parser.yxx"
-                    { delete yysym.value.template as < ScalarTypeNodePtr > (); }
-#line 1056 "Parser.hxx"
-        break;
-
-      case 44: // environmenttype
-#line 133 "Parser.yxx"
-                    { delete yysym.value.template as < EnvironmentTypeNodePtr > (); }
-#line 1062 "Parser.hxx"
-        break;
-
-      case 45: // expressiontype
-#line 134 "Parser.yxx"
-                    { delete yysym.value.template as < ExpressionTypeNodePtr > (); }
-#line 1068 "Parser.hxx"
-        break;
-
-      case 46: // languagetype
+      case 44: // scalartype
 #line 135 "Parser.yxx"
-                    { delete yysym.value.template as < LanguageTypeNodePtr > (); }
-#line 1074 "Parser.hxx"
+                    { delete yysym.value.template as < ScalarTypeNodePtr > (); }
+#line 1076 "Parser.hxx"
         break;
 
-      case 47: // symboltype
+      case 45: // environmenttype
 #line 136 "Parser.yxx"
-                    { delete yysym.value.template as < SymbolTypeNodePtr > (); }
-#line 1080 "Parser.hxx"
+                    { delete yysym.value.template as < EnvironmentTypeNodePtr > (); }
+#line 1082 "Parser.hxx"
         break;
 
-      case 48: // externalptrtype
+      case 46: // expressiontype
 #line 137 "Parser.yxx"
-                    { delete yysym.value.template as < ExternalPointerTypeNodePtr > (); }
-#line 1086 "Parser.hxx"
+                    { delete yysym.value.template as < ExpressionTypeNodePtr > (); }
+#line 1088 "Parser.hxx"
         break;
 
-      case 49: // bytecodetype
+      case 47: // languagetype
 #line 138 "Parser.yxx"
-                    { delete yysym.value.template as < BytecodeTypeNodePtr > (); }
-#line 1092 "Parser.hxx"
+                    { delete yysym.value.template as < LanguageTypeNodePtr > (); }
+#line 1094 "Parser.hxx"
         break;
 
-      case 50: // pairlisttype
+      case 48: // symboltype
 #line 139 "Parser.yxx"
-                    { delete yysym.value.template as < PairlistTypeNodePtr > (); }
-#line 1098 "Parser.hxx"
+                    { delete yysym.value.template as < SymbolTypeNodePtr > (); }
+#line 1100 "Parser.hxx"
         break;
 
-      case 51: // s4type
+      case 49: // externalptrtype
 #line 140 "Parser.yxx"
-                    { delete yysym.value.template as < S4TypeNodePtr > (); }
-#line 1104 "Parser.hxx"
+                    { delete yysym.value.template as < ExternalPointerTypeNodePtr > (); }
+#line 1106 "Parser.hxx"
         break;
 
-      case 52: // weakreftype
+      case 50: // bytecodetype
 #line 141 "Parser.yxx"
-                    { delete yysym.value.template as < WeakReferenceTypeNodePtr > (); }
-#line 1110 "Parser.hxx"
+                    { delete yysym.value.template as < BytecodeTypeNodePtr > (); }
+#line 1112 "Parser.hxx"
         break;
 
-      case 53: // anytype
+      case 51: // pairlisttype
 #line 142 "Parser.yxx"
-                    { delete yysym.value.template as < AnyTypeNodePtr > (); }
-#line 1116 "Parser.hxx"
+                    { delete yysym.value.template as < PairlistTypeNodePtr > (); }
+#line 1118 "Parser.hxx"
         break;
 
-      case 54: // vectortype
+      case 52: // s4type
 #line 143 "Parser.yxx"
-                    { delete yysym.value.template as < VectorTypeNodePtr > (); }
-#line 1122 "Parser.hxx"
+                    { delete yysym.value.template as < S4TypeNodePtr > (); }
+#line 1124 "Parser.hxx"
         break;
 
-      case 55: // nonavectortype
+      case 53: // weakreftype
 #line 144 "Parser.yxx"
-                    { delete yysym.value.template as < NoNaTypeNodePtr > (); }
-#line 1128 "Parser.hxx"
+                    { delete yysym.value.template as < WeakReferenceTypeNodePtr > (); }
+#line 1130 "Parser.hxx"
         break;
 
-      case 56: // typeseq
-#line 145 "Parser.yxx"
-                    { delete yysym.value.template as < TypeNodeSequenceNodePtr > (); }
-#line 1134 "Parser.hxx"
-        break;
-
-      case 57: // namedtype
+      case 54: // unknowntype
 #line 146 "Parser.yxx"
-                    { delete yysym.value.template as < TagTypePairNodePtr > (); }
-#line 1140 "Parser.hxx"
+                    { delete yysym.value.template as < UnknownTypeNodePtr > (); }
+#line 1136 "Parser.hxx"
         break;
 
-      case 58: // namedtypeseq
+      case 55: // anytype
+#line 145 "Parser.yxx"
+                    { delete yysym.value.template as < AnyTypeNodePtr > (); }
+#line 1142 "Parser.hxx"
+        break;
+
+      case 56: // vectortype
 #line 147 "Parser.yxx"
-                    { delete yysym.value.template as < TagTypePairNodeSequenceNodePtr > (); }
-#line 1146 "Parser.hxx"
+                    { delete yysym.value.template as < VectorTypeNodePtr > (); }
+#line 1148 "Parser.hxx"
         break;
 
-      case 59: // paramtype
+      case 57: // nonavectortype
 #line 148 "Parser.yxx"
-                    { delete yysym.value.template as < TypeNodePtr > (); }
-#line 1152 "Parser.hxx"
+                    { delete yysym.value.template as < NoNaTypeNodePtr > (); }
+#line 1154 "Parser.hxx"
         break;
 
-      case 60: // paramtypeseq
+      case 58: // typeseq
 #line 149 "Parser.yxx"
                     { delete yysym.value.template as < TypeNodeSequenceNodePtr > (); }
-#line 1158 "Parser.hxx"
+#line 1160 "Parser.hxx"
         break;
 
-      case 61: // functiontype
+      case 59: // namedtype
 #line 150 "Parser.yxx"
-                    { delete yysym.value.template as < FunctionTypeNodePtr > (); }
-#line 1164 "Parser.hxx"
+                    { delete yysym.value.template as < TagTypePairNodePtr > (); }
+#line 1166 "Parser.hxx"
         break;
 
-      case 62: // grouptype
+      case 60: // namedtypeseq
 #line 151 "Parser.yxx"
-                    { delete yysym.value.template as < GroupTypeNodePtr > (); }
-#line 1170 "Parser.hxx"
+                    { delete yysym.value.template as < TagTypePairNodeSequenceNodePtr > (); }
+#line 1172 "Parser.hxx"
         break;
 
-      case 63: // nonuniontype
+      case 61: // paramtype
 #line 152 "Parser.yxx"
                     { delete yysym.value.template as < TypeNodePtr > (); }
-#line 1176 "Parser.hxx"
+#line 1178 "Parser.hxx"
         break;
 
-      case 64: // listtype
+      case 62: // paramtypeseq
 #line 153 "Parser.yxx"
-                    { delete yysym.value.template as < ListTypeNodePtr > (); }
-#line 1182 "Parser.hxx"
+                    { delete yysym.value.template as < TypeNodeSequenceNodePtr > (); }
+#line 1184 "Parser.hxx"
         break;
 
-      case 65: // structtype
+      case 63: // functiontype
 #line 154 "Parser.yxx"
-                    { delete yysym.value.template as < StructTypeNodePtr > (); }
-#line 1188 "Parser.hxx"
+                    { delete yysym.value.template as < FunctionTypeNodePtr > (); }
+#line 1190 "Parser.hxx"
         break;
 
-      case 66: // tupletype
+      case 64: // grouptype
 #line 155 "Parser.yxx"
-                    { delete yysym.value.template as < TupleTypeNodePtr > (); }
-#line 1194 "Parser.hxx"
+                    { delete yysym.value.template as < GroupTypeNodePtr > (); }
+#line 1196 "Parser.hxx"
         break;
 
-      case 67: // identifier
+      case 65: // nonuniontype
 #line 156 "Parser.yxx"
-                    { delete yysym.value.template as < IdentifierNodePtr > (); }
-#line 1200 "Parser.hxx"
+                    { delete yysym.value.template as < TypeNodePtr > (); }
+#line 1202 "Parser.hxx"
         break;
 
-      case 68: // innertype
+      case 66: // listtype
 #line 157 "Parser.yxx"
-                    { delete yysym.value.template as < TypeNodePtr > (); }
-#line 1206 "Parser.hxx"
+                    { delete yysym.value.template as < ListTypeNodePtr > (); }
+#line 1208 "Parser.hxx"
         break;
 
-      case 69: // nulltype
+      case 67: // structtype
 #line 158 "Parser.yxx"
-                    { delete yysym.value.template as < TypeNodePtr > (); }
-#line 1212 "Parser.hxx"
+                    { delete yysym.value.template as < StructTypeNodePtr > (); }
+#line 1214 "Parser.hxx"
         break;
 
-      case 70: // type
+      case 68: // tupletype
 #line 159 "Parser.yxx"
-                    { delete yysym.value.template as < TypeNodePtr > (); }
-#line 1218 "Parser.hxx"
+                    { delete yysym.value.template as < TupleTypeNodePtr > (); }
+#line 1220 "Parser.hxx"
         break;
 
-      case 71: // decltype
+      case 69: // identifier
 #line 160 "Parser.yxx"
+                    { delete yysym.value.template as < IdentifierNodePtr > (); }
+#line 1226 "Parser.hxx"
+        break;
+
+      case 70: // innertype
+#line 161 "Parser.yxx"
+                    { delete yysym.value.template as < TypeNodePtr > (); }
+#line 1232 "Parser.hxx"
+        break;
+
+      case 71: // nulltype
+#line 162 "Parser.yxx"
+                    { delete yysym.value.template as < TypeNodePtr > (); }
+#line 1238 "Parser.hxx"
+        break;
+
+      case 72: // type
+#line 163 "Parser.yxx"
+                    { delete yysym.value.template as < TypeNodePtr > (); }
+#line 1244 "Parser.hxx"
+        break;
+
+      case 73: // decltype
+#line 164 "Parser.yxx"
                     { delete yysym.value.template as < TypeDeclarationNodePtr > (); }
-#line 1224 "Parser.hxx"
+#line 1250 "Parser.hxx"
         break;
 
        default:
@@ -1230,104 +1256,108 @@ namespace tastr { namespace parser {
         // Type destructor.
 switch (yytype)
     {
-      case 53: // anytype
+      case 55: // anytype
         value.template destroy< AnyTypeNodePtr > ();
         break;
 
-      case 49: // bytecodetype
+      case 50: // bytecodetype
         value.template destroy< BytecodeTypeNodePtr > ();
         break;
 
-      case 44: // environmenttype
+      case 45: // environmenttype
         value.template destroy< EnvironmentTypeNodePtr > ();
         break;
 
-      case 45: // expressiontype
+      case 46: // expressiontype
         value.template destroy< ExpressionTypeNodePtr > ();
         break;
 
-      case 48: // externalptrtype
+      case 49: // externalptrtype
         value.template destroy< ExternalPointerTypeNodePtr > ();
         break;
 
-      case 61: // functiontype
+      case 63: // functiontype
         value.template destroy< FunctionTypeNodePtr > ();
         break;
 
-      case 62: // grouptype
+      case 64: // grouptype
         value.template destroy< GroupTypeNodePtr > ();
         break;
 
-      case 67: // identifier
+      case 69: // identifier
         value.template destroy< IdentifierNodePtr > ();
         break;
 
-      case 46: // languagetype
+      case 47: // languagetype
         value.template destroy< LanguageTypeNodePtr > ();
         break;
 
-      case 64: // listtype
+      case 66: // listtype
         value.template destroy< ListTypeNodePtr > ();
         break;
 
-      case 55: // nonavectortype
+      case 57: // nonavectortype
         value.template destroy< NoNaTypeNodePtr > ();
         break;
 
-      case 50: // pairlisttype
+      case 51: // pairlisttype
         value.template destroy< PairlistTypeNodePtr > ();
         break;
 
-      case 51: // s4type
+      case 52: // s4type
         value.template destroy< S4TypeNodePtr > ();
         break;
 
-      case 43: // scalartype
+      case 44: // scalartype
         value.template destroy< ScalarTypeNodePtr > ();
         break;
 
-      case 65: // structtype
+      case 67: // structtype
         value.template destroy< StructTypeNodePtr > ();
         break;
 
-      case 47: // symboltype
+      case 48: // symboltype
         value.template destroy< SymbolTypeNodePtr > ();
         break;
 
-      case 57: // namedtype
+      case 59: // namedtype
         value.template destroy< TagTypePairNodePtr > ();
         break;
 
-      case 58: // namedtypeseq
+      case 60: // namedtypeseq
         value.template destroy< TagTypePairNodeSequenceNodePtr > ();
         break;
 
-      case 66: // tupletype
+      case 68: // tupletype
         value.template destroy< TupleTypeNodePtr > ();
         break;
 
-      case 71: // decltype
+      case 73: // decltype
         value.template destroy< TypeDeclarationNodePtr > ();
         break;
 
-      case 59: // paramtype
-      case 63: // nonuniontype
-      case 68: // innertype
-      case 69: // nulltype
-      case 70: // type
+      case 61: // paramtype
+      case 65: // nonuniontype
+      case 70: // innertype
+      case 71: // nulltype
+      case 72: // type
         value.template destroy< TypeNodePtr > ();
         break;
 
-      case 56: // typeseq
-      case 60: // paramtypeseq
+      case 58: // typeseq
+      case 62: // paramtypeseq
         value.template destroy< TypeNodeSequenceNodePtr > ();
         break;
 
-      case 54: // vectortype
+      case 54: // unknowntype
+        value.template destroy< UnknownTypeNodePtr > ();
+        break;
+
+      case 56: // vectortype
         value.template destroy< VectorTypeNodePtr > ();
         break;
 
-      case 52: // weakreftype
+      case 53: // weakreftype
         value.template destroy< WeakReferenceTypeNodePtr > ();
         break;
 
@@ -1350,25 +1380,26 @@ switch (yytype)
       case 19: // ";"
       case 20: // ":"
       case 21: // "..."
-      case 22: // "?"
-      case 23: // INTEGER
-      case 24: // DOUBLE
-      case 25: // COMPLEX
-      case 26: // CHARACTER
-      case 27: // LOGICAL
-      case 28: // RAW
-      case 29: // ENVIRONMENT
-      case 30: // EXPRESSION
-      case 31: // LANGUAGE
-      case 32: // SYMBOL
-      case 33: // EXTERNALPOINTER
-      case 34: // BYTECODE
-      case 35: // PAIRLIST
-      case 36: // S4
-      case 37: // WEAKREF
-      case 38: // ANY
-      case 39: // TYPEDECL
-      case 40: // IDENTIFIER
+      case 22: // "???"
+      case 23: // "?"
+      case 24: // INTEGER
+      case 25: // DOUBLE
+      case 26: // COMPLEX
+      case 27: // CHARACTER
+      case 28: // LOGICAL
+      case 29: // RAW
+      case 30: // ENVIRONMENT
+      case 31: // EXPRESSION
+      case 32: // LANGUAGE
+      case 33: // SYMBOL
+      case 34: // EXTERNALPOINTER
+      case 35: // BYTECODE
+      case 36: // PAIRLIST
+      case 37: // S4
+      case 38: // WEAKREF
+      case 39: // ANY
+      case 40: // TYPEDECL
+      case 41: // IDENTIFIER
         value.template destroy< std::string > ();
         break;
 
@@ -1461,13 +1492,13 @@ switch (yytype)
       symbol_type (int tok, std::string v, location_type l)
         : super_type(token_type (tok), std::move (v), std::move (l))
       {
-        YY_ASSERT (tok == token::TOKEN_OR || tok == token::TOKEN_EXCLAMATION || tok == token::TOKEN_ARROW || tok == token::TOKEN_COMMA || tok == token::TOKEN_DOUBLE_LPAREN || tok == token::TOKEN_LPAREN || tok == token::TOKEN_DOUBLE_RPAREN || tok == token::TOKEN_RPAREN || tok == token::TOKEN_LBRACKET || tok == token::TOKEN_RBRACKET || tok == token::TOKEN_LANGLEBRACKET || tok == token::TOKEN_RANGLEBRACKET || tok == token::TOKEN_DOUBLE_LBRACKET || tok == token::TOKEN_DOUBLE_RBRACKET || tok == token::TOKEN_DOUBLE_LBRACE || tok == token::TOKEN_DOUBLE_RBRACE || tok == token::TOKEN_SEMICOLON || tok == token::TOKEN_COLON || tok == token::TOKEN_VARARG || tok == token::TOKEN_NULLVALUE || tok == token::TOKEN_INTEGER || tok == token::TOKEN_DOUBLE || tok == token::TOKEN_COMPLEX || tok == token::TOKEN_CHARACTER || tok == token::TOKEN_LOGICAL || tok == token::TOKEN_RAW || tok == token::TOKEN_ENVIRONMENT || tok == token::TOKEN_EXPRESSION || tok == token::TOKEN_LANGUAGE || tok == token::TOKEN_SYMBOL || tok == token::TOKEN_EXTERNALPOINTER || tok == token::TOKEN_BYTECODE || tok == token::TOKEN_PAIRLIST || tok == token::TOKEN_S4 || tok == token::TOKEN_WEAKREF || tok == token::TOKEN_ANY || tok == token::TOKEN_TYPEDECL || tok == token::TOKEN_IDENTIFIER);
+        YY_ASSERT (tok == token::TOKEN_OR || tok == token::TOKEN_EXCLAMATION || tok == token::TOKEN_ARROW || tok == token::TOKEN_COMMA || tok == token::TOKEN_DOUBLE_LPAREN || tok == token::TOKEN_LPAREN || tok == token::TOKEN_DOUBLE_RPAREN || tok == token::TOKEN_RPAREN || tok == token::TOKEN_LBRACKET || tok == token::TOKEN_RBRACKET || tok == token::TOKEN_LANGLEBRACKET || tok == token::TOKEN_RANGLEBRACKET || tok == token::TOKEN_DOUBLE_LBRACKET || tok == token::TOKEN_DOUBLE_RBRACKET || tok == token::TOKEN_DOUBLE_LBRACE || tok == token::TOKEN_DOUBLE_RBRACE || tok == token::TOKEN_SEMICOLON || tok == token::TOKEN_COLON || tok == token::TOKEN_VARARG || tok == token::TOKEN_UNKNOWN || tok == token::TOKEN_NULLVALUE || tok == token::TOKEN_INTEGER || tok == token::TOKEN_DOUBLE || tok == token::TOKEN_COMPLEX || tok == token::TOKEN_CHARACTER || tok == token::TOKEN_LOGICAL || tok == token::TOKEN_RAW || tok == token::TOKEN_ENVIRONMENT || tok == token::TOKEN_EXPRESSION || tok == token::TOKEN_LANGUAGE || tok == token::TOKEN_SYMBOL || tok == token::TOKEN_EXTERNALPOINTER || tok == token::TOKEN_BYTECODE || tok == token::TOKEN_PAIRLIST || tok == token::TOKEN_S4 || tok == token::TOKEN_WEAKREF || tok == token::TOKEN_ANY || tok == token::TOKEN_TYPEDECL || tok == token::TOKEN_IDENTIFIER);
       }
 #else
       symbol_type (int tok, const std::string& v, const location_type& l)
         : super_type(token_type (tok), v, l)
       {
-        YY_ASSERT (tok == token::TOKEN_OR || tok == token::TOKEN_EXCLAMATION || tok == token::TOKEN_ARROW || tok == token::TOKEN_COMMA || tok == token::TOKEN_DOUBLE_LPAREN || tok == token::TOKEN_LPAREN || tok == token::TOKEN_DOUBLE_RPAREN || tok == token::TOKEN_RPAREN || tok == token::TOKEN_LBRACKET || tok == token::TOKEN_RBRACKET || tok == token::TOKEN_LANGLEBRACKET || tok == token::TOKEN_RANGLEBRACKET || tok == token::TOKEN_DOUBLE_LBRACKET || tok == token::TOKEN_DOUBLE_RBRACKET || tok == token::TOKEN_DOUBLE_LBRACE || tok == token::TOKEN_DOUBLE_RBRACE || tok == token::TOKEN_SEMICOLON || tok == token::TOKEN_COLON || tok == token::TOKEN_VARARG || tok == token::TOKEN_NULLVALUE || tok == token::TOKEN_INTEGER || tok == token::TOKEN_DOUBLE || tok == token::TOKEN_COMPLEX || tok == token::TOKEN_CHARACTER || tok == token::TOKEN_LOGICAL || tok == token::TOKEN_RAW || tok == token::TOKEN_ENVIRONMENT || tok == token::TOKEN_EXPRESSION || tok == token::TOKEN_LANGUAGE || tok == token::TOKEN_SYMBOL || tok == token::TOKEN_EXTERNALPOINTER || tok == token::TOKEN_BYTECODE || tok == token::TOKEN_PAIRLIST || tok == token::TOKEN_S4 || tok == token::TOKEN_WEAKREF || tok == token::TOKEN_ANY || tok == token::TOKEN_TYPEDECL || tok == token::TOKEN_IDENTIFIER);
+        YY_ASSERT (tok == token::TOKEN_OR || tok == token::TOKEN_EXCLAMATION || tok == token::TOKEN_ARROW || tok == token::TOKEN_COMMA || tok == token::TOKEN_DOUBLE_LPAREN || tok == token::TOKEN_LPAREN || tok == token::TOKEN_DOUBLE_RPAREN || tok == token::TOKEN_RPAREN || tok == token::TOKEN_LBRACKET || tok == token::TOKEN_RBRACKET || tok == token::TOKEN_LANGLEBRACKET || tok == token::TOKEN_RANGLEBRACKET || tok == token::TOKEN_DOUBLE_LBRACKET || tok == token::TOKEN_DOUBLE_RBRACKET || tok == token::TOKEN_DOUBLE_LBRACE || tok == token::TOKEN_DOUBLE_RBRACE || tok == token::TOKEN_SEMICOLON || tok == token::TOKEN_COLON || tok == token::TOKEN_VARARG || tok == token::TOKEN_UNKNOWN || tok == token::TOKEN_NULLVALUE || tok == token::TOKEN_INTEGER || tok == token::TOKEN_DOUBLE || tok == token::TOKEN_COMPLEX || tok == token::TOKEN_CHARACTER || tok == token::TOKEN_LOGICAL || tok == token::TOKEN_RAW || tok == token::TOKEN_ENVIRONMENT || tok == token::TOKEN_EXPRESSION || tok == token::TOKEN_LANGUAGE || tok == token::TOKEN_SYMBOL || tok == token::TOKEN_EXTERNALPOINTER || tok == token::TOKEN_BYTECODE || tok == token::TOKEN_PAIRLIST || tok == token::TOKEN_S4 || tok == token::TOKEN_WEAKREF || tok == token::TOKEN_ANY || tok == token::TOKEN_TYPEDECL || tok == token::TOKEN_IDENTIFIER);
       }
 #endif
     };
@@ -1805,6 +1836,21 @@ switch (yytype)
       make_VARARG (const std::string& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_VARARG, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_UNKNOWN (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_UNKNOWN, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_UNKNOWN (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_UNKNOWN, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -2413,10 +2459,10 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 152,     ///< Last index in yytable_.
-      yynnts_ = 32,  ///< Number of nonterminal symbols.
+      yylast_ = 136,     ///< Last index in yytable_.
+      yynnts_ = 33,  ///< Number of nonterminal symbols.
       yyfinal_ = 28, ///< Termination state number.
-      yyntokens_ = 42  ///< Number of tokens.
+      yyntokens_ = 43  ///< Number of tokens.
     };
 
 
@@ -2428,7 +2474,7 @@ switch (yytype)
 
 #line 9 "Parser.yxx"
 } } // tastr::parser
-#line 2432 "Parser.hxx"
+#line 2478 "Parser.hxx"
 
 
 

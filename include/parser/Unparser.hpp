@@ -105,6 +105,10 @@ class Unparser final: public ConstNodeVisitor {
         os_ << node.get_name();
     }
 
+    void visit(const tastr::ast::UnknownTypeNode& node) override final {
+        os_ << node.get_name();
+    }
+
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
         const tastr::ast::TypeNodeSequenceNode& parameter_types =
             node.get_parameter_types();

@@ -56,6 +56,8 @@ class MutableNodeVisitor {
 
     virtual void visit(tastr::ast::AnyTypeNode& node) = 0;
 
+    virtual void visit(tastr::ast::UnknownTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::FunctionTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::ListTypeNode& node) = 0;
