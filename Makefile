@@ -8,6 +8,7 @@ PROJECTNAME := tastr
 OBJDIR := $(BUILDDIR)/objects
 BINDIR := $(BUILDDIR)/bin
 LIBDIR := $(BUILDDIR)/lib
+HEADERDIR := $(BUILDDIR)/include/tastr
 OBJNAME := $(PROJECTNAME)
 BINNAME := $(PROJECTNAME)
 LIBNAME := lib$(PROJECTNAME)
@@ -23,12 +24,14 @@ CD := cd
 RM := rm
 CPPCHECK := cppcheck
 CLANGFORMAT := clang-format
+CP := cp
 
 RMFLAGS := -rf
 MKDIRFLAGS := -p
 FLEXFLAGS := -v
 BISONFLAGS := -v
 ARFLAGS := rcs
+CPFLAGS := -R
 
 CXXFLAGS := -O2 -g -ggdb3 -std=c++17
 OBJFLAGS := -c -fPIC $(CXXFLAGS)
@@ -47,17 +50,20 @@ HINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.h')
 HHINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hh')
 HXXINCLUDEFILES := $(shell find $(INCLUDEDIR) -name '*.hxx')
 INCLUDEFILES := $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(HHINCLUDEFILES) $(HXXINCLUDEFILES)
+HEADERFILES := $(patsubst $(INCLUDEDIR)/%,$(HEADERDIR)/%,$(INCLUDEFILES))
 
 DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
 OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
 
 all: build
 
-build: parser lexer library application
+build: parser lexer header library application
 
 parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/location.hh
 
 lexer: $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
+
+header: $(HEADERFILES)
 
 library: static-library shared-library
 
@@ -108,6 +114,11 @@ $(LIBDIR)/$(LIBNAME).so: $(OBJECTFILES)
 $(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
 	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
 	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
+
+$(HEADERFILES): $(INCLUDEFILES)
+	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
+	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
+
 
 cppcheck:
 	$(CPPCHECK) --quiet                         \
