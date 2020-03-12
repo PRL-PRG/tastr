@@ -18,23 +18,25 @@ class MutableNodeVisitor {
 
     virtual void visit(tastr::ast::ScalarTypeNode& node) = 0;
 
+    virtual void visit(tastr::ast::AScalarTypeNode& node) = 0;
+
+    virtual void visit(tastr::ast::NAScalarTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::IdentifierNode& node) = 0;
 
-    virtual void visit(tastr::ast::CharacterScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::CharacterAScalarTypeNode& node) = 0;
 
-    virtual void visit(tastr::ast::ComplexScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::ComplexAScalarTypeNode& node) = 0;
 
-    virtual void visit(tastr::ast::DoubleScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::DoubleAScalarTypeNode& node) = 0;
 
-    virtual void visit(tastr::ast::IntegerScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::IntegerAScalarTypeNode& node) = 0;
 
-    virtual void visit(tastr::ast::LogicalScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::LogicalAScalarTypeNode& node) = 0;
 
-    virtual void visit(tastr::ast::RawScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::RawAScalarTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::VectorTypeNode& node) = 0;
-
-    virtual void visit(tastr::ast::NoNaTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::EnvironmentTypeNode& node) = 0;
 

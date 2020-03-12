@@ -90,11 +90,11 @@
             "-ggdb3",
             "-std=c++17",
             "-Iinclude",
-            "-obuild/objects/ast/DoubleScalarTypeNode.cpp.o",
-            "src/ast/DoubleScalarTypeNode.cpp"
+            "-obuild/objects/ast/DoubleAScalarTypeNode.cpp.o",
+            "src/ast/DoubleAScalarTypeNode.cpp"
         ],
         "directory": "/home/aviral/projects/tastr",
-        "file": "src/ast/DoubleScalarTypeNode.cpp"
+        "file": "src/ast/DoubleAScalarTypeNode.cpp"
     },
     {
         "arguments": [
@@ -106,11 +106,11 @@
             "-ggdb3",
             "-std=c++17",
             "-Iinclude",
-            "-obuild/objects/ast/IntegerScalarTypeNode.cpp.o",
-            "src/ast/IntegerScalarTypeNode.cpp"
+            "-obuild/objects/ast/IntegerAScalarTypeNode.cpp.o",
+            "src/ast/IntegerAScalarTypeNode.cpp"
         ],
         "directory": "/home/aviral/projects/tastr",
-        "file": "src/ast/IntegerScalarTypeNode.cpp"
+        "file": "src/ast/IntegerAScalarTypeNode.cpp"
     },
     {
         "arguments": [
@@ -170,11 +170,11 @@
             "-ggdb3",
             "-std=c++17",
             "-Iinclude",
-            "-obuild/objects/ast/RawScalarTypeNode.cpp.o",
-            "src/ast/RawScalarTypeNode.cpp"
+            "-obuild/objects/ast/RawAScalarTypeNode.cpp.o",
+            "src/ast/RawAScalarTypeNode.cpp"
         ],
         "directory": "/home/aviral/projects/tastr",
-        "file": "src/ast/RawScalarTypeNode.cpp"
+        "file": "src/ast/RawAScalarTypeNode.cpp"
     },
     {
         "arguments": [
@@ -331,11 +331,11 @@
             "-ggdb3",
             "-std=c++17",
             "-Iinclude",
-            "-obuild/objects/ast/LogicalScalarTypeNode.cpp.o",
-            "src/ast/LogicalScalarTypeNode.cpp"
+            "-obuild/objects/ast/LogicalAScalarTypeNode.cpp.o",
+            "src/ast/LogicalAScalarTypeNode.cpp"
         ],
         "directory": "/home/aviral/projects/tastr",
-        "file": "src/ast/LogicalScalarTypeNode.cpp"
+        "file": "src/ast/LogicalAScalarTypeNode.cpp"
     },
     {
         "arguments": [
@@ -347,11 +347,11 @@
             "-ggdb3",
             "-std=c++17",
             "-Iinclude",
-            "-obuild/objects/ast/ComplexScalarTypeNode.cpp.o",
-            "src/ast/ComplexScalarTypeNode.cpp"
+            "-obuild/objects/ast/ComplexAScalarTypeNode.cpp.o",
+            "src/ast/ComplexAScalarTypeNode.cpp"
         ],
         "directory": "/home/aviral/projects/tastr",
-        "file": "src/ast/ComplexScalarTypeNode.cpp"
+        "file": "src/ast/ComplexAScalarTypeNode.cpp"
     },
     {
         "arguments": [
@@ -443,11 +443,11 @@
             "-ggdb3",
             "-std=c++17",
             "-Iinclude",
-            "-obuild/objects/ast/CharacterScalarTypeNode.cpp.o",
-            "src/ast/CharacterScalarTypeNode.cpp"
+            "-obuild/objects/ast/CharacterAScalarTypeNode.cpp.o",
+            "src/ast/CharacterAScalarTypeNode.cpp"
         ],
         "directory": "/home/aviral/projects/tastr",
-        "file": "src/ast/CharacterScalarTypeNode.cpp"
+        "file": "src/ast/CharacterAScalarTypeNode.cpp"
     },
     {
         "arguments": [

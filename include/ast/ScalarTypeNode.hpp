@@ -1,25 +1,21 @@
 #ifndef TASTR_AST_SCALAR_TYPE_NODE_HPP
 #define TASTR_AST_SCALAR_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class ScalarTypeNode
-    : public TypeNode
-    , public Name {
+class ScalarTypeNode: public TypeNode {
   public:
-    explicit ScalarTypeNode(const std::string& name): TypeNode(), Name(name) {
+    explicit ScalarTypeNode(): TypeNode() {
     }
 
     virtual ~ScalarTypeNode() = default;
 
-    ScalarTypeNode(const ScalarTypeNode& node): TypeNode(node), Name(node) {
+    ScalarTypeNode(const ScalarTypeNode& node): TypeNode(node) {
     }
 
-    ScalarTypeNode(ScalarTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+    ScalarTypeNode(ScalarTypeNode&& node): TypeNode(std::move(node)) {
     }
 
     ScalarTypeNode& operator=(const ScalarTypeNode& node) {
@@ -27,13 +23,11 @@ class ScalarTypeNode
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
         return *this;
     }
 
     ScalarTypeNode& operator=(ScalarTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
         return *this;
     }
 

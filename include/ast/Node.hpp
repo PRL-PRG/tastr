@@ -81,7 +81,7 @@ class Node {
         return false;
     }
 
-    virtual bool is_integer_scalar_type_node() const {
+    virtual bool is_integer_a_scalar_type_node() const {
         return false;
     }
 
@@ -106,6 +106,14 @@ class Node {
     }
 
     virtual bool is_scalar_type_node() const {
+        return false;
+    }
+
+    virtual bool is_a_scalar_type_node() const {
+        return false;
+    }
+
+    virtual bool is_na_scalar_type_node() const {
         return false;
     }
 

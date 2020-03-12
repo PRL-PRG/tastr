@@ -18,23 +18,25 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::ScalarTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::AScalarTypeNode& node) = 0;
+
+    virtual void visit(const tastr::ast::NAScalarTypeNode& node) = 0;
+
     virtual void visit(const tastr::ast::IdentifierNode& node) = 0;
 
-    virtual void visit(const tastr::ast::CharacterScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::CharacterAScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::ComplexScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::ComplexAScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::DoubleScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::DoubleAScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::IntegerScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::IntegerAScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::LogicalScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::LogicalAScalarTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::RawScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::RawAScalarTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::VectorTypeNode& node) = 0;
-
-    virtual void visit(const tastr::ast::NoNaTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::EnvironmentTypeNode& node) = 0;
 

@@ -27,42 +27,47 @@ class Unparser final: public ConstNodeVisitor {
         node.accept(*this);
     }
 
+    void visit(const tastr::ast::AScalarTypeNode& node) override final {
+        node.accept(*this);
+    }
+
+    void visit(const tastr::ast::NAScalarTypeNode& node) override final {
+        os_ << "^";
+        node.get_a_scalar_type().accept(*this);
+    }
+
     void visit(const tastr::ast::IdentifierNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::CharacterScalarTypeNode& node) override final {
+    void
+    visit(const tastr::ast::CharacterAScalarTypeNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::ComplexScalarTypeNode& node) override final {
+    void visit(const tastr::ast::ComplexAScalarTypeNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::DoubleScalarTypeNode& node) override final {
+    void visit(const tastr::ast::DoubleAScalarTypeNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::IntegerScalarTypeNode& node) override final {
+    void visit(const tastr::ast::IntegerAScalarTypeNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::LogicalScalarTypeNode& node) override final {
+    void visit(const tastr::ast::LogicalAScalarTypeNode& node) override final {
         os_ << node.get_name();
     }
 
-    void visit(const tastr::ast::RawScalarTypeNode& node) override final {
+    void visit(const tastr::ast::RawAScalarTypeNode& node) override final {
         os_ << node.get_name();
     }
 
     void visit(const tastr::ast::VectorTypeNode& node) override final {
         node.get_scalar_type().accept(*this);
         os_ << "[]";
-    }
-
-    void visit(const tastr::ast::NoNaTypeNode& node) override final {
-        os_ << "^";
-        node.get_inner_type().accept(*this);
     }
 
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {

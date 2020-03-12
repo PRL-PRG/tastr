@@ -65,6 +65,8 @@
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
+%nterm <AScalarTypeNodePtr>             ascalartype
+%nterm <NAScalarTypeNodePtr>            nascalartype
 %nterm <ScalarTypeNodePtr>              scalartype
 %nterm <EnvironmentTypeNodePtr>         environmenttype
 %nterm <ExpressionTypeNodePtr>          expressiontype
@@ -78,7 +80,6 @@
 %nterm <UnknownTypeNodePtr>             unknowntype
 %nterm <AnyTypeNodePtr>                 anytype
 %nterm <VectorTypeNodePtr>              vectortype
-%nterm <NoNaTypeNodePtr>                nonavectortype
 %nterm <TypeNodeSequenceNodePtr>        typeseq
 %nterm <TagTypePairNodePtr>             namedtype
 %nterm <TagTypePairNodeSequenceNodePtr> namedtypeseq
@@ -105,6 +106,8 @@
 
 %start start;
 
+%printer { yyo << tastr::parser::to_string(*$$); } <AScalarTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <NAScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <EnvironmentTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ExpressionTypeNodePtr>;
@@ -118,7 +121,6 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <AnyTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <UnknownTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <VectorTypeNodePtr>;
-%printer { yyo << tastr::parser::to_string(*$$); } <NoNaTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TypeNodeSequenceNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodeSequenceNodePtr>;
@@ -132,6 +134,8 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <TypeDeclarationNodePtr>;
 %printer { yyo << $$; } <*>;
 
+%destructor { delete $$; } ascalartype
+%destructor { delete $$; } nascalartype
 %destructor { delete $$; } scalartype
 %destructor { delete $$; } environmenttype
 %destructor { delete $$; } expressiontype
@@ -145,7 +149,6 @@
 %destructor { delete $$; } anytype
 %destructor { delete $$; } unknowntype
 %destructor { delete $$; } vectortype
-%destructor { delete $$; } nonavectortype
 %destructor { delete $$; } typeseq
 %destructor { delete $$; } namedtype
 %destructor { delete $$; } namedtypeseq
@@ -183,9 +186,9 @@
     #include "parser/location.hh"
     #include "ast/ast.hpp"
     #include "parser/parser.hpp"
-    using tastr::ast::CharacterScalarTypeNode;
-    using tastr::ast::ComplexScalarTypeNode;
-    using tastr::ast::DoubleScalarTypeNode;
+    using tastr::ast::CharacterAScalarTypeNode;
+    using tastr::ast::ComplexAScalarTypeNode;
+    using tastr::ast::DoubleAScalarTypeNode;
     using tastr::ast::ExpressionTypeNode;
     using tastr::ast::ExpressionTypeNodePtr;
     using tastr::ast::EnvironmentTypeNode;
@@ -212,16 +215,17 @@
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
     using tastr::ast::GroupTypeNodePtr;
-    using tastr::ast::IntegerScalarTypeNode;
+    using tastr::ast::IntegerAScalarTypeNode;
     using tastr::ast::ListTypeNode;
     using tastr::ast::ListTypeNodePtr;
-    using tastr::ast::LogicalScalarTypeNode;
+    using tastr::ast::LogicalAScalarTypeNode;
     using tastr::ast::TagTypePairNode;
     using tastr::ast::TagTypePairNodePtr;
-    using tastr::ast::NoNaTypeNode;
-    using tastr::ast::NoNaTypeNodePtr;
-    using tastr::ast::RawScalarTypeNode;
+    using tastr::ast::RawAScalarTypeNode;
     using tastr::ast::ScalarTypeNodePtr;
+    using tastr::ast::AScalarTypeNodePtr;
+    using tastr::ast::NAScalarTypeNode;
+    using tastr::ast::NAScalarTypeNodePtr;
     using tastr::ast::StructTypeNode;
     using tastr::ast::StructTypeNodePtr;
     using tastr::ast::TupleTypeNode;
@@ -256,29 +260,46 @@
 
 %%
 
-scalartype:         INTEGER                                 {
-                                                                $$ = new IntegerScalarTypeNode($1);
+ascalartype:        INTEGER                                 {
+                                                                $$ = new IntegerAScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleScalarTypeNode($1);
+                                                                $$ = new DoubleAScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexScalarTypeNode($1);
+                                                                $$ = new ComplexAScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterScalarTypeNode($1);
+                                                                $$ = new CharacterAScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalScalarTypeNode($1);
+                                                                $$ = new LogicalAScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
                                                             }
           |         RAW                                     {
-                                                                $$ = new RawScalarTypeNode($1);
+                                                                $$ = new RawAScalarTypeNode($1);
                                                                 $$ -> set_location(@1);
+                                                            }
+          ;
+
+nascalartype:       "^" ascalartype                         {
+                                                                $$ = new NAScalarTypeNode(std::move(wrap(std::move($2))));
+                                                                $$ -> set_location(@$);
+                                                            }
+
+scalartype:         ascalartype                             {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+          |         nascalartype                            {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
                                                             }
           ;
 
@@ -353,12 +374,6 @@ vectortype:         scalartype "[" "]"                      {
                                                                 $$ -> set_location(@$);
                                                             }
           ;
-
-nonavectortype:     "^" vectortype                          {
-                                                                $$ = new NoNaTypeNode(std::move(wrap(std::move($2))));
-                                                                $$ -> set_location(@$);
-                                                            }
-              ;
 
 listtype:           "((" typeseq "))"                       {
                                                                 $$ = new ListTypeNode($1, $3, std::move(wrap(std::move($2))));
@@ -587,11 +602,6 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       vectortype                              {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                                $$ -> set_location(@$);
-                                                            }
-            |       nonavectortype                          {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
