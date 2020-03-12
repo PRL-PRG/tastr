@@ -27,7 +27,7 @@
 
 %token EOF                              0                    "end of file";
 %token <std::string>                    OR                   "|";
-%token <std::string>                    EXCLAMATION          "!";
+%token <std::string>                    CARET                "^";
 %token <std::string>                    ARROW                "=>";
 %token <std::string>                    COMMA                ",";
 %token <std::string>                    DOUBLE_LPAREN        "((";
@@ -98,7 +98,7 @@
 
 %nonassoc NULLVALUE
 %right ARROW
-%nonassoc COMMA EXCLAMATION LPAREN LBRACKET LANGLEBRACKET
+%nonassoc COMMA CARET LPAREN LBRACKET LANGLEBRACKET
 %nonassoc LOWER_THAN_OR
 %left OR
 
@@ -354,7 +354,7 @@ vectortype:         scalartype "[" "]"                      {
                                                             }
           ;
 
-nonavectortype:     "!" vectortype                          {
+nonavectortype:     "^" vectortype                          {
                                                                 $$ = new NoNaTypeNode(std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }

@@ -126,7 +126,7 @@
       <rule number="19" usefulness="useful">
         <lhs>nonavectortype</lhs>
         <rhs>
-          <symbol>&quot;!&quot;</symbol>
+          <symbol>&quot;^&quot;</symbol>
           <symbol>vectortype</symbol>
         </rhs>
       </rule>
@@ -559,7 +559,7 @@
       <terminal symbol-number="0" token-number="0" name="&quot;end of file&quot;" usefulness="useful"/>
       <terminal symbol-number="1" token-number="256" name="error" usefulness="useful"/>
       <terminal symbol-number="3" token-number="258" name="&quot;|&quot;" usefulness="useful" prec="5" assoc="left"/>
-      <terminal symbol-number="4" token-number="259" name="&quot;!&quot;" usefulness="useful" prec="3" assoc="nonassoc"/>
+      <terminal symbol-number="4" token-number="259" name="&quot;^&quot;" usefulness="useful" prec="3" assoc="nonassoc"/>
       <terminal symbol-number="5" token-number="260" name="&quot;=&gt;&quot;" usefulness="useful" prec="2" assoc="right"/>
       <terminal symbol-number="6" token-number="261" name="&quot;,&quot;" usefulness="useful" prec="3" assoc="nonassoc"/>
       <terminal symbol-number="7" token-number="262" name="&quot;((&quot;" usefulness="useful"/>
@@ -1094,7 +1094,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -1281,7 +1281,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -1393,7 +1393,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -1512,7 +1512,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -1634,7 +1634,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -1829,7 +1829,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -2731,7 +2731,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -2846,7 +2846,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -2985,7 +2985,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -3192,7 +3192,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>
@@ -3357,7 +3357,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;!&quot;" state="29"/>
+          <transition type="shift" symbol="&quot;^&quot;" state="29"/>
           <transition type="shift" symbol="&quot;((&quot;" state="30"/>
           <transition type="shift" symbol="&quot;(&quot;" state="31"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="32"/>

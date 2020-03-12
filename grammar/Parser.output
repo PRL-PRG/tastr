@@ -33,7 +33,7 @@ Grammar
 
    18 vectortype: scalartype "[" "]"
 
-   19 nonavectortype: "!" vectortype
+   19 nonavectortype: "^" vectortype
 
    20 listtype: "((" typeseq "))"
 
@@ -125,7 +125,7 @@ Terminals, with rules where they appear
     "end of file" (0) 0 84 85
     error (256)
     "|" <std::string> (258) 74
-    "!" <std::string> (259) 19
+    "^" <std::string> (259) 19
     "=>" <std::string> (260) 54
     "," <std::string> (261) 23 48 53
     "((" <std::string> (262) 20
@@ -476,7 +476,7 @@ State 25
 
    81 decltype: TYPEDECL identifier . type ";"
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -549,7 +549,7 @@ State 28
 
 State 29
 
-   19 nonavectortype: "!" . vectortype
+   19 nonavectortype: "^" . vectortype
 
     INTEGER    shift, and go to state 37
     DOUBLE     shift, and go to state 38
@@ -566,7 +566,7 @@ State 30
 
    20 listtype: "((" . typeseq "))"
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -623,7 +623,7 @@ State 31
 
    55 grouptype: "(" . type ")"
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -677,7 +677,7 @@ State 32
 
    54 functiontype: "<" . paramtypeseq ">" "=>" type
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -736,7 +736,7 @@ State 33
 
    25 tupletype: "[[" . typeseq "]]"
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -832,7 +832,7 @@ State 36
    75 nulltype: "?" .
    76         | "?" . innertype
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -1165,7 +1165,7 @@ State 76
 
 State 77
 
-   19 nonavectortype: "!" vectortype .
+   19 nonavectortype: "^" vectortype .
 
     $default  reduce using rule 19 (nonavectortype)
 
@@ -1276,7 +1276,7 @@ State 91
 
    74 innertype: innertype "|" . nonuniontype
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -1329,7 +1329,7 @@ State 93
 
    23 typeseq: typeseq "," . type
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -1397,7 +1397,7 @@ State 96
 
    53 paramtypeseq: paramtypeseq "," . paramtype
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -1502,7 +1502,7 @@ State 101
 
    45 namedtype: identifier ":" . type
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32
@@ -1584,7 +1584,7 @@ State 106
 
    54 functiontype: "<" paramtypeseq ">" "=>" . type
 
-    "!"              shift, and go to state 29
+    "^"              shift, and go to state 29
     "(("             shift, and go to state 30
     "("              shift, and go to state 31
     "<"              shift, and go to state 32

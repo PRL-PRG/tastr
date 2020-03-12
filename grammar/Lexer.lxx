@@ -54,7 +54,7 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 {BLANK}+                    { yylloc -> step(); }
 \n+                         { yylloc -> lines(yyleng); yylloc -> step(); }
 "|"                         { HANDLE_TOKEN(TOKEN_OR) }
-"!"                         { HANDLE_TOKEN(TOKEN_EXCLAMATION) }
+"^"                         { HANDLE_TOKEN(TOKEN_CARET) }
 "=>"                        { HANDLE_TOKEN(TOKEN_ARROW) }
 ","                         { HANDLE_TOKEN(TOKEN_COMMA) }
 "(("                        { HANDLE_TOKEN(TOKEN_DOUBLE_LPAREN) }

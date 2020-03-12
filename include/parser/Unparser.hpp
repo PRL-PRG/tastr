@@ -61,7 +61,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::NoNaTypeNode& node) override final {
-        os_ << "!";
+        os_ << "^";
         node.get_inner_type().accept(*this);
     }
 

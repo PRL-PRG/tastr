@@ -322,7 +322,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -484,7 +484,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -653,7 +653,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -891,7 +891,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -1053,7 +1053,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -1215,7 +1215,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -1376,7 +1376,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -1462,7 +1462,7 @@ namespace tastr { namespace parser {
 #line 1463 "Parser.cxx"
         break;
 
-      case 4: // "!"
+      case 4: // "^"
 #line 133 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
 #line 1469 "Parser.cxx"
@@ -2206,7 +2206,7 @@ namespace tastr { namespace parser {
         break;
 
       case 3: // "|"
-      case 4: // "!"
+      case 4: // "^"
       case 5: // "=>"
       case 6: // ","
       case 7: // "(("
@@ -3473,7 +3473,7 @@ namespace tastr { namespace parser {
   const char*
   const Parser::yytname_[] =
   {
-  "\"end of file\"", "error", "$undefined", "\"|\"", "\"!\"", "\"=>\"",
+  "\"end of file\"", "error", "$undefined", "\"|\"", "\"^\"", "\"=>\"",
   "\",\"", "\"((\"", "\"(\"", "\"))\"", "\")\"", "\"[\"", "\"]\"", "\"<\"",
   "\">\"", "\"[[\"", "\"]]\"", "\"{{\"", "\"}}\"", "\";\"", "\":\"",
   "\"...\"", "\"???\"", "\"?\"", "INTEGER", "DOUBLE", "COMPLEX",
