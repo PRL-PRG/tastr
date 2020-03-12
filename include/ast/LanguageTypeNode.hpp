@@ -1,25 +1,25 @@
 #ifndef TASTR_AST_LANGUAGE_TYPE_NODE_HPP
 #define TASTR_AST_LANGUAGE_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class LanguageTypeNode final
-    : public TypeNode
-    , public Name {
+class LanguageTypeNode final: public TypeNode {
   public:
-    explicit LanguageTypeNode(const std::string& name): TypeNode(), Name(name) {
+    explicit LanguageTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~LanguageTypeNode() = default;
 
-    LanguageTypeNode(const LanguageTypeNode& node): TypeNode(node), Name(node) {
+    LanguageTypeNode(const LanguageTypeNode& node)
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     LanguageTypeNode(LanguageTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     LanguageTypeNode& operator=(const LanguageTypeNode& node) {
@@ -27,13 +27,13 @@ class LanguageTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     LanguageTypeNode& operator=(LanguageTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -49,10 +49,16 @@ class LanguageTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual LanguageTypeNode* clone_impl() const override final {
         return new LanguageTypeNode(*this);
     };
+
+    Keyword keyword_;
 };
 
 using LanguageTypeNodePtr = LanguageTypeNode*;

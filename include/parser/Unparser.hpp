@@ -79,7 +79,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::LanguageTypeNode& node) override final {
-        os_ << node.get_name();
+        os_ << node.get_keyword().get_value();
     }
 
     void visit(const tastr::ast::SymbolTypeNode& node) override final {

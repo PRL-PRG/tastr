@@ -186,6 +186,7 @@
     #include "parser/location.hh"
     #include "ast/ast.hpp"
     #include "parser/parser.hpp"
+    using tastr::ast::Keyword;
     using tastr::ast::CharacterAScalarTypeNode;
     using tastr::ast::ComplexAScalarTypeNode;
     using tastr::ast::DoubleAScalarTypeNode;
@@ -316,7 +317,7 @@ expressiontype:     EXPRESSION                              {
               ;
 
 languagetype:       LANGUAGE                                {
-                                                                $$ = new LanguageTypeNode($1);
+                                                                $$ = new LanguageTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
             ;
