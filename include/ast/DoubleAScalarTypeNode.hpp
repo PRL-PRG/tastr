@@ -7,8 +7,8 @@ namespace tastr::ast {
 
 class DoubleAScalarTypeNode final: public AScalarTypeNode {
   public:
-    explicit DoubleAScalarTypeNode(const std::string& name)
-        : AScalarTypeNode(name) {
+    explicit DoubleAScalarTypeNode(const Keyword& keyword)
+        : AScalarTypeNode(keyword) {
     }
 
     ~DoubleAScalarTypeNode() = default;

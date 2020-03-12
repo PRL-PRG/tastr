@@ -7,8 +7,8 @@ namespace tastr::ast {
 
 class ComplexAScalarTypeNode final: public AScalarTypeNode {
   public:
-    explicit ComplexAScalarTypeNode(const std::string& name)
-        : AScalarTypeNode(name) {
+    explicit ComplexAScalarTypeNode(const Keyword& keyword)
+        : AScalarTypeNode(keyword) {
     }
 
     ~ComplexAScalarTypeNode() = default;

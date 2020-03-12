@@ -56,7 +56,7 @@ class LanguageTypeNode final: public TypeNode {
   private:
     virtual LanguageTypeNode* clone_impl() const override final {
         return new LanguageTypeNode(*this);
-    };
+    }
 
     Keyword keyword_;
 };

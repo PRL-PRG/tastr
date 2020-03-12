@@ -1,27 +1,25 @@
 #ifndef TASTR_AST_EXTERNAL_POINTER_TYPE_NODE_HPP
 #define TASTR_AST_EXTERNAL_POINTER_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class ExternalPointerTypeNode final
-    : public TypeNode
-    , public Name {
+class ExternalPointerTypeNode final: public TypeNode {
   public:
-    explicit ExternalPointerTypeNode(const std::string& name)
-        : TypeNode(), Name(name) {
+    explicit ExternalPointerTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~ExternalPointerTypeNode() = default;
 
     ExternalPointerTypeNode(const ExternalPointerTypeNode& node)
-        : TypeNode(node), Name(node) {
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     ExternalPointerTypeNode(ExternalPointerTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     ExternalPointerTypeNode& operator=(const ExternalPointerTypeNode& node) {
@@ -29,13 +27,13 @@ class ExternalPointerTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     ExternalPointerTypeNode& operator=(ExternalPointerTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -51,10 +49,16 @@ class ExternalPointerTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual ExternalPointerTypeNode* clone_impl() const override final {
         return new ExternalPointerTypeNode(*this);
     };
+
+    Keyword keyword_;
 };
 
 using ExternalPointerTypeNodePtr = ExternalPointerTypeNode*;

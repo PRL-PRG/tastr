@@ -1,27 +1,25 @@
 #ifndef TASTR_AST_A_SCALAR_TYPE_NODE_HPP
 #define TASTR_AST_A_SCALAR_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/ScalarTypeNode.hpp"
 
 namespace tastr::ast {
 
-class AScalarTypeNode
-    : public ScalarTypeNode
-    , public Name {
+class AScalarTypeNode: public ScalarTypeNode {
   public:
-    explicit AScalarTypeNode(const std::string& name)
-        : ScalarTypeNode(), Name(name) {
+    explicit AScalarTypeNode(const Keyword& keyword)
+        : ScalarTypeNode(), keyword_(keyword) {
     }
 
     virtual ~AScalarTypeNode() = default;
 
     AScalarTypeNode(const AScalarTypeNode& node)
-        : ScalarTypeNode(node), Name(node) {
+        : ScalarTypeNode(node), keyword_(node.keyword_) {
     }
 
     AScalarTypeNode(AScalarTypeNode&& node)
-        : ScalarTypeNode(std::move(node)), Name(std::move(node)) {
+        : ScalarTypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     AScalarTypeNode& operator=(const AScalarTypeNode& node) {
@@ -29,13 +27,13 @@ class AScalarTypeNode
             return *this;
         }
         ScalarTypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     AScalarTypeNode& operator=(AScalarTypeNode&& node) {
         ScalarTypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -53,8 +51,14 @@ class AScalarTypeNode
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual AScalarTypeNode* clone_impl() const override = 0;
+
+    Keyword keyword_;
 };
 
 using AScalarTypeNodePtr = AScalarTypeNode*;

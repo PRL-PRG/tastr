@@ -1,27 +1,25 @@
 #ifndef TASTR_AST_WEAK_REFERENCE_TYPE_NODE_HPP
 #define TASTR_AST_WEAK_REFERENCE_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class WeakReferenceTypeNode final
-    : public TypeNode
-    , public Name {
+class WeakReferenceTypeNode final: public TypeNode {
   public:
-    explicit WeakReferenceTypeNode(const std::string& name)
-        : TypeNode(), Name(name) {
+    explicit WeakReferenceTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~WeakReferenceTypeNode() = default;
 
     WeakReferenceTypeNode(const WeakReferenceTypeNode& node)
-        : TypeNode(node), Name(node) {
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     WeakReferenceTypeNode(WeakReferenceTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     WeakReferenceTypeNode& operator=(const WeakReferenceTypeNode& node) {
@@ -29,13 +27,13 @@ class WeakReferenceTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     WeakReferenceTypeNode& operator=(WeakReferenceTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -51,10 +49,16 @@ class WeakReferenceTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual WeakReferenceTypeNode* clone_impl() const override final {
         return new WeakReferenceTypeNode(*this);
     };
+
+    Keyword keyword_;
 };
 
 using WeakReferenceTypeNodePtr = WeakReferenceTypeNode*;

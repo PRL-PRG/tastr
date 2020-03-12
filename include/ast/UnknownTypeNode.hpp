@@ -1,24 +1,25 @@
 #ifndef TASTR_AST_UNKNOWN_TYPE_NODE_HPP
 #define TASTR_AST_UNKNOWN_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
-class UnknownTypeNode final
-    : public TypeNode
-    , public Name {
+
+class UnknownTypeNode final: public TypeNode {
   public:
-    explicit UnknownTypeNode(const std::string& name): TypeNode(), Name(name) {
+    explicit UnknownTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~UnknownTypeNode() = default;
 
-    UnknownTypeNode(const UnknownTypeNode& node): TypeNode(node), Name(node) {
+    UnknownTypeNode(const UnknownTypeNode& node)
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     UnknownTypeNode(UnknownTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     UnknownTypeNode& operator=(const UnknownTypeNode& node) {
@@ -26,13 +27,13 @@ class UnknownTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     UnknownTypeNode& operator=(UnknownTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -48,10 +49,16 @@ class UnknownTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual UnknownTypeNode* clone_impl() const override final {
         return new UnknownTypeNode(*this);
     };
+
+    Keyword keyword_;
 };
 
 using UnknownTypeNodePtr = UnknownTypeNode*;

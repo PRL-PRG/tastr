@@ -262,27 +262,27 @@
 %%
 
 ascalartype:        INTEGER                                 {
-                                                                $$ = new IntegerAScalarTypeNode($1);
+                                                                $$ = new IntegerAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleAScalarTypeNode($1);
+                                                                $$ = new DoubleAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexAScalarTypeNode($1);
+                                                                $$ = new ComplexAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterAScalarTypeNode($1);
+                                                                $$ = new CharacterAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalAScalarTypeNode($1);
+                                                                $$ = new LogicalAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           |         RAW                                     {
-                                                                $$ = new RawAScalarTypeNode($1);
+                                                                $$ = new RawAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           ;
@@ -305,13 +305,13 @@ scalartype:         ascalartype                             {
           ;
 
 environmenttype:    ENVIRONMENT                             {
-                                                                $$ = new EnvironmentTypeNode($1);
+                                                                $$ = new EnvironmentTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
                ;
 
 expressiontype:     EXPRESSION                              {
-                                                                $$ = new ExpressionTypeNode($1);
+                                                                $$ = new ExpressionTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
               ;
@@ -323,49 +323,49 @@ languagetype:       LANGUAGE                                {
             ;
 
 symboltype:         SYMBOL                                  {
-                                                                $$ = new SymbolTypeNode($1);
+                                                                $$ = new SymbolTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
           ;
 
 externalptrtype:    EXTERNALPOINTER                         {
-                                                                $$ = new ExternalPointerTypeNode($1);
+                                                                $$ = new ExternalPointerTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
                ;
 
 bytecodetype:       BYTECODE                                {
-                                                                $$ = new BytecodeTypeNode($1);
+                                                                $$ = new BytecodeTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
             ;
 
 pairlisttype:       PAIRLIST                                {
-                                                                $$ = new PairlistTypeNode($1);
+                                                                $$ = new PairlistTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
             ;
 
 s4type:             S4                                      {
-                                                                $$ = new S4TypeNode($1);
+                                                                $$ = new S4TypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
       ;
 
 weakreftype:        WEAKREF                                 {
-                                                                $$ = new WeakReferenceTypeNode($1);
+                                                                $$ = new WeakReferenceTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
            ;
 
 anytype:            ANY                                     {
-                                                                $$ = new AnyTypeNode($1);
+                                                                $$ = new AnyTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
        ;
 
 unknowntype:        UNKNOWN                                 {
-                                                                $$ = new UnknownTypeNode($1);
+                                                                $$ = new UnknownTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
            ;
@@ -519,7 +519,7 @@ paramtype:          type                                    {
                                                                 $$ -> set_location(@1);
                                                             }
          |          "..."                                   {
-                                                                $$ = new VarargTypeNode($1);
+                                                                $$ = new VarargTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
          ;
@@ -648,7 +648,7 @@ innertype:          nonuniontype                            {
 
 
 nulltype:          "?"                                      {
-                                                                $$ = new NullTypeNode($1);
+                                                                $$ = new NullTypeNode(Keyword($1));
                                                                 $$ -> set_location(@$);
                                                             }
         |          "?" innertype                            {

@@ -1,27 +1,27 @@
 #ifndef TASTR_AST_VARARG_TYPE_NODE_HPP
 #define TASTR_AST_VARARG_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <iostream>
 
 namespace tastr::ast {
 
-class VarargTypeNode final
-    : public TypeNode
-    , public Name {
+class VarargTypeNode final: public TypeNode {
   public:
-    explicit VarargTypeNode(const std::string& name): TypeNode(), Name(name) {
+    explicit VarargTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~VarargTypeNode() = default;
 
-    VarargTypeNode(const VarargTypeNode& node): TypeNode(node), Name(node) {
+    VarargTypeNode(const VarargTypeNode& node)
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     VarargTypeNode(VarargTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     VarargTypeNode& operator=(const VarargTypeNode& node) {
@@ -29,13 +29,13 @@ class VarargTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     VarargTypeNode& operator=(VarargTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -51,10 +51,16 @@ class VarargTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual VarargTypeNode* clone_impl() const override final {
         return new VarargTypeNode(*this);
     };
+
+    Keyword keyword_;
 };
 
 using VarargTypeNodePtr = VarargTypeNode*;

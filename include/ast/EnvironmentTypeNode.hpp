@@ -1,27 +1,25 @@
 #ifndef TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 #define TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class EnvironmentTypeNode final
-    : public TypeNode
-    , public Name {
+class EnvironmentTypeNode final: public TypeNode {
   public:
-    explicit EnvironmentTypeNode(const std::string& name)
-        : TypeNode(), Name(name) {
+    explicit EnvironmentTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~EnvironmentTypeNode() = default;
 
     EnvironmentTypeNode(const EnvironmentTypeNode& node)
-        : TypeNode(node), Name(node) {
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     EnvironmentTypeNode(EnvironmentTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     EnvironmentTypeNode& operator=(const EnvironmentTypeNode& node) {
@@ -29,13 +27,13 @@ class EnvironmentTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     EnvironmentTypeNode& operator=(EnvironmentTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -51,10 +49,16 @@ class EnvironmentTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual EnvironmentTypeNode* clone_impl() const override final {
         return new EnvironmentTypeNode(*this);
-    };
+    }
+
+    Keyword keyword_;
 };
 
 using EnvironmentTypeNodePtr = EnvironmentTypeNode*;

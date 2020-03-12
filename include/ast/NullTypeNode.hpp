@@ -1,25 +1,25 @@
 #ifndef TASTR_AST_NULL_TYPE_NODE_HPP
 #define TASTR_AST_NULL_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class NullTypeNode final
-    : public TypeNode
-    , public Name {
+class NullTypeNode final: public TypeNode {
   public:
-    explicit NullTypeNode(const std::string& name): TypeNode(), Name(name) {
+    explicit NullTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~NullTypeNode() = default;
 
-    NullTypeNode(const NullTypeNode& node): TypeNode(node), Name(node) {
+    NullTypeNode(const NullTypeNode& node)
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     NullTypeNode(NullTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     NullTypeNode& operator=(const NullTypeNode& node) {
@@ -27,13 +27,13 @@ class NullTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     NullTypeNode& operator=(NullTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -49,10 +49,16 @@ class NullTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual NullTypeNode* clone_impl() const override final {
         return new NullTypeNode(*this);
-    };
+    }
+
+    Keyword keyword_;
 };
 
 using NullTypeNodePtr = NullTypeNode*;

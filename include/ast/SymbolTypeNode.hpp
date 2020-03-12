@@ -1,25 +1,25 @@
 #ifndef TASTR_AST_SYMBOL_TYPE_NODE_HPP
 #define TASTR_AST_SYMBOL_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class SymbolTypeNode final
-    : public TypeNode
-    , public Name {
+class SymbolTypeNode final: public TypeNode {
   public:
-    explicit SymbolTypeNode(const std::string& name): TypeNode(), Name(name) {
+    explicit SymbolTypeNode(const Keyword& keyword)
+        : TypeNode(), keyword_(keyword) {
     }
 
     ~SymbolTypeNode() = default;
 
-    SymbolTypeNode(const SymbolTypeNode& node): TypeNode(node), Name(node) {
+    SymbolTypeNode(const SymbolTypeNode& node)
+        : TypeNode(node), keyword_(node.keyword_) {
     }
 
     SymbolTypeNode(SymbolTypeNode&& node)
-        : TypeNode(std::move(node)), Name(std::move(node)) {
+        : TypeNode(std::move(node)), keyword_(std::move(node.keyword_)) {
     }
 
     SymbolTypeNode& operator=(const SymbolTypeNode& node) {
@@ -27,13 +27,13 @@ class SymbolTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        keyword_ = node.keyword_;
         return *this;
     }
 
     SymbolTypeNode& operator=(SymbolTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         return *this;
     }
 
@@ -49,10 +49,16 @@ class SymbolTypeNode final
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual SymbolTypeNode* clone_impl() const override final {
         return new SymbolTypeNode(*this);
     }
+
+    Keyword keyword_;
 };
 
 using SymbolTypeNodePtr = SymbolTypeNode*;
