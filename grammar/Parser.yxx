@@ -681,7 +681,7 @@ type:               innertype %prec LOWER_THAN_OR           {
     ;
 
 decltype:           TYPEDECL identifier type ";"            {
-                                                                $$ = new TypeDeclarationNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));
+                                                                $$ = new TypeDeclarationNode(Keyword($1), std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;

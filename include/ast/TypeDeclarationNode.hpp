@@ -2,6 +2,7 @@
 #define TASTR_AST_TYPE_DECLARATION_NODE_HPP
 
 #include "ast/IdentifierNode.hpp"
+#include "ast/Keyword.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
@@ -11,13 +12,18 @@ namespace tastr::ast {
 
 class TypeDeclarationNode final: public Node {
   public:
-    explicit TypeDeclarationNode(std::unique_ptr<IdentifierNode> identifier,
+    explicit TypeDeclarationNode(const Keyword& keyword,
+                                 std::unique_ptr<IdentifierNode> identifier,
                                  std::unique_ptr<TypeNode> type)
-        : Node(), identifier_(std::move(identifier)), type_(std::move(type)) {
+        : Node()
+        , keyword_(keyword)
+        , identifier_(std::move(identifier))
+        , type_(std::move(type)) {
     }
 
     TypeDeclarationNode(const TypeDeclarationNode& node)
         : Node(node)
+        , keyword_(node.keyword_)
         , identifier_(node.identifier_->clone())
         , type_(node.type_->clone()) {
     }
@@ -26,6 +32,7 @@ class TypeDeclarationNode final: public Node {
 
     TypeDeclarationNode(TypeDeclarationNode&& node)
         : Node(std::move(node))
+        , keyword_(std::move(node.keyword_))
         , identifier_(std::move(node.identifier_))
         , type_(std::move(node.type_)) {
     }
@@ -35,6 +42,7 @@ class TypeDeclarationNode final: public Node {
             return *this;
         }
         Node::operator=(node);
+        keyword_ = node.keyword_;
         identifier_ = node.identifier_->clone();
         type_ = node.type_->clone();
         return *this;
@@ -42,6 +50,7 @@ class TypeDeclarationNode final: public Node {
 
     TypeDeclarationNode& operator=(TypeDeclarationNode&& node) {
         Node::operator=(std::move(node));
+        keyword_ = std::move(node.keyword_);
         identifier_ = std::move(node.identifier_);
         type_ = std::move(node.type_);
         return *this;
@@ -67,11 +76,16 @@ class TypeDeclarationNode final: public Node {
         return true;
     }
 
+    const Keyword& get_keyword() const {
+        return keyword_;
+    }
+
   private:
     virtual TypeDeclarationNode* clone_impl() const override final {
         return new TypeDeclarationNode(*this);
     }
 
+    Keyword keyword_;
     std::unique_ptr<IdentifierNode> identifier_;
     std::unique_ptr<TypeNode> type_;
 };

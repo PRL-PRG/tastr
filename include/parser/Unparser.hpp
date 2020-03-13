@@ -271,7 +271,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TypeDeclarationNode& node) override final {
-        os_ << "type ";
+        os_ << node.get_keyword().get_value() << " ";
         node.get_identifier().accept(*this);
         os_ << " ";
         node.get_type().accept(*this);
