@@ -42,7 +42,7 @@ class DoubleAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<DoubleAScalarTypeNode>(this->clone_impl());
     }
 
-    bool is_double_scalar_type_node() const override final {
+    bool is_double_a_scalar_type_node() const override final {
         return true;
     }
 

@@ -49,15 +49,15 @@ class Node {
         return std::unique_ptr<Node>(this->clone_impl());
     }
 
-    virtual bool is_character_scalar_type_node() const {
+    virtual bool is_character_a_scalar_type_node() const {
         return false;
     }
 
-    virtual bool is_complex_scalar_type_node() const {
+    virtual bool is_complex_a_scalar_type_node() const {
         return false;
     }
 
-    virtual bool is_double_scalar_type_node() const {
+    virtual bool is_double_a_scalar_type_node() const {
         return false;
     }
 
@@ -93,7 +93,7 @@ class Node {
         return false;
     }
 
-    virtual bool is_logical_scalar_type_node() const {
+    virtual bool is_logical_a_scalar_type_node() const {
         return false;
     }
 
@@ -101,7 +101,7 @@ class Node {
         return false;
     }
 
-    virtual bool is_raw_scalar_type_node() const {
+    virtual bool is_raw_a_scalar_type_node() const {
         return false;
     }
 

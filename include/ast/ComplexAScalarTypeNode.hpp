@@ -42,7 +42,7 @@ class ComplexAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<ComplexAScalarTypeNode>(this->clone_impl());
     }
 
-    bool is_complex_scalar_type_node() const override final {
+    bool is_complex_a_scalar_type_node() const override final {
         return true;
     }
 

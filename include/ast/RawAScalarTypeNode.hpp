@@ -41,7 +41,7 @@ class RawAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<RawAScalarTypeNode>(this->clone_impl());
     }
 
-    bool is_raw_scalar_type_node() const override final {
+    bool is_raw_a_scalar_type_node() const override final {
         return true;
     }
 

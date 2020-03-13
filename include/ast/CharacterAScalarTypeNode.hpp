@@ -47,7 +47,7 @@ class CharacterAScalarTypeNode final: public AScalarTypeNode {
         return CharacterAScalarTypeNodeUPtr(this->clone_impl());
     }
 
-    bool is_character_scalar_type_node() const override final {
+    bool is_character_a_scalar_type_node() const override final {
         return true;
     }
 

@@ -42,7 +42,7 @@ class LogicalAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<LogicalAScalarTypeNode>(this->clone_impl());
     }
 
-    bool is_logical_scalar_type_node() const override final {
+    bool is_logical_a_scalar_type_node() const override final {
         return true;
     }
 
