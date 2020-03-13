@@ -66,6 +66,7 @@
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
 %nterm <AScalarTypeNodePtr>             ascalartype
+%nterm <RawAScalarTypeNodePtr>          rawascalartype
 %nterm <NAScalarTypeNodePtr>            nascalartype
 %nterm <ScalarTypeNodePtr>              scalartype
 %nterm <EnvironmentTypeNodePtr>         environmenttype
@@ -106,6 +107,7 @@
 
 %start start;
 
+%printer { yyo << tastr::parser::to_string(*$$); } <RawAScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <AScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <NAScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ScalarTypeNodePtr>;
@@ -134,6 +136,7 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <TypeDeclarationNodePtr>;
 %printer { yyo << $$; } <*>;
 
+%destructor { delete $$; } rawascalartype
 %destructor { delete $$; } ascalartype
 %destructor { delete $$; } nascalartype
 %destructor { delete $$; } scalartype
@@ -223,6 +226,7 @@
     using tastr::ast::TagTypePairNode;
     using tastr::ast::TagTypePairNodePtr;
     using tastr::ast::RawAScalarTypeNode;
+    using tastr::ast::RawAScalarTypeNodePtr;
     using tastr::ast::ScalarTypeNodePtr;
     using tastr::ast::AScalarTypeNodePtr;
     using tastr::ast::NAScalarTypeNode;
@@ -281,11 +285,13 @@ ascalartype:        INTEGER                                 {
                                                                 $$ = new LogicalAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
-          |         RAW                                     {
+          ;
+
+rawascalartype:      RAW                                    {
                                                                 $$ = new RawAScalarTypeNode(Keyword($1));
                                                                 $$ -> set_location(@1);
                                                             }
-          ;
+              ;
 
 nascalartype:       "^" ascalartype                         {
                                                                 $$ = new NAScalarTypeNode(std::move(wrap(std::move($2))));
@@ -293,6 +299,11 @@ nascalartype:       "^" ascalartype                         {
                                                             }
 
 scalartype:         ascalartype                             {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+          |         rawascalartype                          {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
