@@ -7,6 +7,7 @@
 
 %define api.parser.class {Parser}
 %define api.namespace {tastr::parser}
+%define api.location.type {tastr::parser::Location}
 
 /* assert correct cleanup of semantic value objects */
 %define parse.assert
@@ -185,7 +186,7 @@
         class Lexer;
         class ParsingContext;
     }
-    #include "parser/location.hh"
+    #include "parser/Location.hpp"
     #include "ast/ast.hpp"
     #include "parser/parser.hpp"
     using tastr::ast::KeywordNode;

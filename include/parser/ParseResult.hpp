@@ -2,7 +2,7 @@
 #define TASTR_PARSER_PARSE_RESULT_HPP
 
 #include "ast/TopLevelNode.hpp"
-#include "parser/location.hh"
+#include "parser/Location.hpp"
 
 #include <iostream>
 #include <string>
@@ -38,7 +38,7 @@ class ParseResult {
         return state_;
     }
 
-    const tastr::parser::location& get_error_location() const {
+    const tastr::parser::Location& get_error_location() const {
         return location_;
     }
 
@@ -54,7 +54,7 @@ class ParseResult {
         return node_;
     }
 
-    void set_error(const tastr::parser::location& location,
+    void set_error(const tastr::parser::Location& location,
                    const std::string& message) {
         state_ = false;
         location_ = location;
@@ -63,7 +63,7 @@ class ParseResult {
 
   private:
     bool state_;
-    tastr::parser::location location_;
+    tastr::parser::Location location_;
     std::string message_;
     tastr::ast::TopLevelNodeUPtr node_;
 };

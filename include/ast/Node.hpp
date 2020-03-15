@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_NODE_HPP
 #define TASTR_AST_NODE_HPP
 
-#include "parser/location.hh"
+#include "parser/Location.hpp"
 
 #include <memory>
 
@@ -213,22 +213,22 @@ class Node {
         return false;
     }
 
-    void set_location(const tastr::parser::location& location) {
+    void set_location(const tastr::parser::Location& location) {
         location_ = location;
     }
 
-    const tastr::parser::location& get_location() const {
+    const tastr::parser::Location& get_location() const {
         return location_;
     }
 
-    tastr::parser::location& get_location() {
+    tastr::parser::Location& get_location() {
         return location_;
     }
 
   private:
     virtual Node* clone_impl() const = 0;
 
-    tastr::parser::location location_;
+    tastr::parser::Location location_;
 }; // namespace tastr::ast
 
 using NodePtr = Node*;
