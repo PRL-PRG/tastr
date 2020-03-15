@@ -9,16 +9,20 @@ namespace tastr::ast {
 
 class IdentifierNode final: public Node {
   public:
-    explicit IdentifierNode(const std::string& name): Node(), name_(name) {
+    explicit IdentifierNode(const std::string& name, bool quoted = false)
+        : Node(), name_(name), quoted_(quoted) {
     }
 
     ~IdentifierNode() = default;
 
-    IdentifierNode(const IdentifierNode& node): Node(node), name_(node.name_) {
+    IdentifierNode(const IdentifierNode& node)
+        : Node(node), name_(node.name_), quoted_(node.quoted_) {
     }
 
     IdentifierNode(IdentifierNode&& node)
-        : Node(std::move(node)), name_(std::move(node.name_)) {
+        : Node(std::move(node))
+        , name_(std::move(node.name_))
+        , quoted_(std::move(node.quoted_)) {
     }
 
     IdentifierNode& operator=(const IdentifierNode& node) {
@@ -27,12 +31,14 @@ class IdentifierNode final: public Node {
         }
         Node::operator=(node);
         name_ = node.name_;
+        quoted_ = node.quoted_;
         return *this;
     }
 
     IdentifierNode& operator=(IdentifierNode&& node) {
         Node::operator=(std::move(node));
         name_ = std::move(node.name_);
+        quoted_ = std::move(node.quoted_);
         return *this;
     }
 
@@ -48,6 +54,10 @@ class IdentifierNode final: public Node {
         return name_;
     }
 
+    bool is_quoted() const {
+        return quoted_;
+    }
+
     bool is_identifier_node() const override final {
         return true;
     }
@@ -55,9 +65,10 @@ class IdentifierNode final: public Node {
   private:
     virtual IdentifierNode* clone_impl() const override final {
         return new IdentifierNode(*this);
-    };
+    }
 
     std::string name_;
+    bool quoted_;
 };
 
 using IdentifierNodePtr = IdentifierNode*;

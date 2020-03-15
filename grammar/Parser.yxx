@@ -34,8 +34,7 @@
 %token <std::string>                    LPAREN               "(";
 %token <std::string>                    DOUBLE_RPAREN        "))";
 %token <std::string>                    RPAREN               ")";
-%token <std::string>                    LBRACKET             "[";
-%token <std::string>                    RBRACKET             "]";
+%token <std::string>                    VECTOR_BRACKET       "[]";
 %token <std::string>                    LANGLEBRACKET        "<";
 %token <std::string>                    RANGLEBRACKET        ">";
 %token <std::string>                    DOUBLE_LBRACKET      "[[";
@@ -190,6 +189,7 @@
     #include "ast/ast.hpp"
     #include "parser/parser.hpp"
     using tastr::ast::Keyword;
+    using tastr::ast::Operator;
     using tastr::ast::CharacterAScalarTypeNode;
     using tastr::ast::ComplexAScalarTypeNode;
     using tastr::ast::DoubleAScalarTypeNode;
@@ -381,8 +381,8 @@ unknowntype:        UNKNOWN                                 {
                                                             }
            ;
 
-vectortype:         scalartype "[" "]"                      {
-                                                                $$ = new VectorTypeNode(std::move(wrap(std::move($1))));
+vectortype:         scalartype "[]"                         {
+                                                                $$ = new VectorTypeNode(Operator($2), std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
           ;
@@ -553,7 +553,7 @@ paramtypeseq:       %empty                                  {
             ;
 
 functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move($2))), std::move(wrap(std::move($5))), $4);
+                                                                $$ = new FunctionTypeNode(Operator($4), std::move(wrap(std::move($2))), std::move(wrap(std::move($5))));
                                                                 $$ -> set_location(@$);
                                                             }
 
@@ -652,7 +652,7 @@ innertype:          nonuniontype                            {
                                                                 $$ -> set_location(@$);
                                                             }
          |          innertype OR nonuniontype               {
-                                                                $$ = new UnionTypeNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))), $2);
+                                                                $$ = new UnionTypeNode(Operator($2), std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
@@ -663,7 +663,7 @@ nulltype:          "?"                                      {
                                                                 $$ -> set_location(@$);
                                                             }
         |          "?" innertype                            {
-                                                                $$ = new NullableTypeNode($1, std::move(wrap(std::move($2))));
+                                                                $$ = new NullableTypeNode(Operator($1), std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;

@@ -1,45 +1,112 @@
 #include "ast/ast.hpp"
+#include "cxxopts.hpp"
 #include "parser/parser.hpp"
 
 #include <cstring>
 #include <iostream>
 
-static void handle_parse_result(const tastr::parser::ParseResult& result) {
-    std::cout << *result.get_top_level_node();
+cxxopts::ParseResult parse_program_arguments(int& argc, char* argv[]) {
+    cxxopts::Options options("tastr", "Parse type declarations.");
 
-    if (!result) {
-        std::cerr << std::endl
-                  << "Error: " << result.get_error_location()
-                  << " :: " << result.get_error_message() << std::endl;
-        exit(1);
+    options.add_options()
+
+        /* HELP */
+        ("h,help", "Print usage")
+
+        /* LEXER */
+        ("l,lexer",
+         "Debug lexer",
+         cxxopts::value<bool>()->default_value("false")->implicit_value("true"))
+
+        /* PARSER */
+        ("p,parser",
+         "Debug parser",
+         cxxopts::value<bool>()->default_value("false")->implicit_value("true"))
+
+        /* AST */
+        ("a,ast",
+         "Show AST structure",
+         cxxopts::value<bool>()->default_value("false")->implicit_value("true"))
+
+        /* STYLE */
+        ("s,style",
+         "Style output",
+         cxxopts::value<bool>()->default_value("false")->implicit_value(
+             "true"));
+
+    cxxopts::ParseResult program_arguments = options.parse(argc, argv);
+
+    if (program_arguments.count("help")) {
+        std::cout << options.help() << std::endl;
+        exit(0);
     }
+
+    return program_arguments;
 }
 
 int main(int argc, char* argv[]) {
-    bool debug_lexer = false;
-    bool debug_parser = false;
+    cxxopts::ParseResult program_arguments =
+        parse_program_arguments(argc, argv);
 
-    for (int i = 1; i < argc; ++i) {
-        if (argv[i] == std::string("-p")) {
-            debug_parser = true;
-        } else if (argv[i] == std::string("-l")) {
-            debug_lexer = true;
-        } else if (argv[i][0] == '\"') {
-            const char* input = argv[i];
-            int length = strlen(argv[i]);
+    const bool debug_lexer = program_arguments["lexer"].as<bool>();
+    const bool debug_parser = program_arguments["parser"].as<bool>();
+    const bool show_ast = program_arguments["ast"].as<bool>();
+    const bool style_output = program_arguments["style"].as<bool>();
+
+    auto handle_parse_result =
+        [&show_ast, &style_output](const tastr::parser::ParseResult& result) {
+            if (!result) {
+                std::cerr << std::endl
+                          << "Error: " << result.get_error_location()
+                          << " :: " << result.get_error_message() << std::endl;
+                exit(1);
+            }
+
+            tastr::parser::unparse_stdout(
+                *result.get_top_level_node(), show_ast, style_output);
+        };
+
+    /*
+    const std::vector<std::string>& args =
+        program_arguments["positional"].as<std::vector<std::string>>();
+    */
+
+    for (int index = 1; index < argc; ++index) {
+        std::string arg(argv[index]);
+
+        std::size_t length = arg.length();
+
+        if (length == 0) {
+            continue;
+        }
+
+        if (arg == "-") {
+            handle_parse_result(
+                tastr::parser::parse_stdin(debug_lexer, debug_parser));
+            continue;
+        }
+
+        if ((arg[0] == '"' && arg[length - 1] == '"') ||
+            (arg[0] == '\'' && arg[length - 1] == '\'')) {
             /* remove leading and trailing " character */
-            std::string string(input + 1, length - 2);
+            std::string string(arg, 1, length - 2);
             handle_parse_result(
                 tastr::parser::parse_string(string, debug_lexer, debug_parser));
 
-        } else if (std::string(argv[i]) == "-") {
-            handle_parse_result(
-                tastr::parser::parse_stdin(debug_lexer, debug_parser));
-        } else {
-            std::filesystem::path filepath(argv[i]);
-            handle_parse_result(
-                tastr::parser::parse_file(filepath, debug_lexer, debug_parser));
+            continue;
         }
+
+        if ((arg[0] == '"') || (arg[0] == '\'') || (arg[length - 1] == '"') ||
+            (arg[length - 1] == '\'')) {
+            std::cerr << "Argument " << arg
+                      << " should use ' or \" consistently." << std::endl;
+            exit(1);
+        }
+
+        std::filesystem::path filepath(arg);
+        handle_parse_result(
+            tastr::parser::parse_file(filepath, debug_lexer, debug_parser));
     }
+
     return 0;
 }

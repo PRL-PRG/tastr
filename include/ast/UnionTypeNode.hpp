@@ -1,22 +1,20 @@
 #ifndef TASTR_AST_UNION_TYPE_NODE_HPP
 #define TASTR_AST_UNION_TYPE_NODE_HPP
 
-#include "ast/Separator.hpp"
+#include "ast/Operator.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class UnionTypeNode final
-    : public TypeNode
-    , public Separator {
+class UnionTypeNode final: public TypeNode {
   public:
-    UnionTypeNode(std::unique_ptr<TypeNode> first_type,
-                  std::unique_ptr<TypeNode> second_type,
-                  const std::string& separator)
+    UnionTypeNode(const Operator& op,
+                  std::unique_ptr<TypeNode> first_type,
+                  std::unique_ptr<TypeNode> second_type)
         : TypeNode()
-        , Separator(separator)
+        , op_(op)
         , first_type_(std::move(first_type))
         , second_type_(std::move(second_type)) {
     }
@@ -25,14 +23,14 @@ class UnionTypeNode final
 
     UnionTypeNode(const UnionTypeNode& node)
         : TypeNode(node)
-        , Separator(node)
+        , op_(node.op_)
         , first_type_(node.first_type_->clone())
         , second_type_(node.second_type_->clone()) {
     }
 
     UnionTypeNode(UnionTypeNode&& node)
         : TypeNode(std::move(node))
-        , Separator(std::move(node))
+        , op_(std::move(node.op_))
         , first_type_(std::move(node.first_type_))
         , second_type_(std::move(node.second_type_)) {
     }
@@ -42,7 +40,7 @@ class UnionTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Separator::operator=(node);
+        op_ = node.op_;
         first_type_ = node.first_type_->clone();
         second_type_ = node.second_type_->clone();
         return *this;
@@ -50,7 +48,7 @@ class UnionTypeNode final
 
     UnionTypeNode& operator=(UnionTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Separator::operator=(std::move(node));
+        op_ = std::move(node.op_);
         first_type_ = std::move(node.first_type_);
         second_type_ = std::move(node.second_type_);
         return *this;
@@ -62,6 +60,10 @@ class UnionTypeNode final
 
     std::unique_ptr<UnionTypeNode> clone() const {
         return std::unique_ptr<UnionTypeNode>(this->clone_impl());
+    }
+
+    const Operator& get_operator() const {
+        return op_;
     }
 
     const tastr::ast::TypeNode& get_first_type() const {
@@ -81,6 +83,7 @@ class UnionTypeNode final
         return new UnionTypeNode(*this);
     }
 
+    Operator op_;
     std::unique_ptr<TypeNode> first_type_;
     std::unique_ptr<TypeNode> second_type_;
 };

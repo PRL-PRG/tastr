@@ -9,15 +9,60 @@
 #include <fstream>
 #include <sstream>
 
-std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node) {
-    tastr::visitor::Unparser(os).visit(node);
+void check_filepath(const std::filesystem::path& filepath) {
+    if (!std::filesystem::exists(filepath)) {
+        std::cerr << "Error: path '" << filepath << "' does not exist!";
+        exit(1);
+    }
+
+    if (std::filesystem::is_directory(filepath)) {
+        std::cerr << "Error: expected file, path '" << filepath
+                  << "' is a directory!";
+        exit(1);
+    }
+}
+
+std::ostream& unparse_(const tastr::ast::Node& node,
+                       std::ostream& os,
+                       bool show_ast,
+                       bool style_output) {
+    tastr::visitor::Unparser unparser(os, show_ast, style_output);
+    unparser.visit(node);
     return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const tastr::ast::Node& node) {
+    return unparse_(node, os, false, false);
+}
+
 std::string tastr::parser::to_string(const tastr::ast::Node& node) {
-    std::stringstream stream;
-    ::operator<<(stream, node);
-    return stream.str();
+    std::string output;
+    unparse_string(node, output, false, false);
+    return output;
+}
+
+void tastr::parser::unparse_stdout(const tastr::ast::Node& node,
+                                   bool show_ast,
+                                   bool style_output) {
+    unparse_(node, std::cout, show_ast, style_output);
+}
+
+void tastr::parser::unparse_string(const tastr::ast::Node& node,
+                                   std::string& string,
+                                   bool show_ast,
+                                   bool style_output) {
+    std::ostringstream output_stream;
+    unparse_(node, output_stream, show_ast, style_output);
+    string.append(output_stream.str());
+}
+
+void tastr::parser::unparse_file(const tastr::ast::Node& node,
+                                 const std::filesystem::path& filepath,
+                                 bool show_ast,
+                                 bool style_output) {
+    check_filepath(filepath);
+    std::ofstream output_stream(filepath);
+    unparse_(node, output_stream, show_ast, style_output);
 }
 
 tastr::parser::ParseResult parse_(std::istream& input_stream,
@@ -52,15 +97,7 @@ tastr::parser::ParseResult
 tastr::parser::parse_file(const std::filesystem::path& filepath,
                           bool debug_lexer,
                           bool debug_parser) {
-    if (!std::filesystem::exists(filepath)) {
-        std::cerr << "Error: path '" << filepath << "' does not exist!";
-    }
-
-    if (std::filesystem::is_directory(filepath)) {
-        std::cerr << "Error: expected file, path '" << filepath
-                  << "' is a directory!";
-    }
-
+    check_filepath(filepath);
     std::ifstream input_stream(filepath);
     std::string input_stream_name(filepath.native());
     return parse_(input_stream, input_stream_name, debug_lexer, debug_parser);

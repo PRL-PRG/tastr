@@ -61,8 +61,7 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 "("                         { HANDLE_TOKEN(TOKEN_LPAREN) }
 "))"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RPAREN) }
 ")"                         { HANDLE_TOKEN(TOKEN_RPAREN) }
-"["                         { HANDLE_TOKEN(TOKEN_LBRACKET) }
-"]"                         { HANDLE_TOKEN(TOKEN_RBRACKET) }
+"[]"                        { HANDLE_TOKEN(TOKEN_VECTOR_BRACKET) }
 "<"                         { HANDLE_TOKEN(TOKEN_LANGLEBRACKET) }
 ">"                         { HANDLE_TOKEN(TOKEN_RANGLEBRACKET) }
 "]]"                        { HANDLE_TOKEN(TOKEN_DOUBLE_RBRACKET) }

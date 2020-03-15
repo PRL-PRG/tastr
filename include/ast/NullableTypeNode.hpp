@@ -1,31 +1,31 @@
 #ifndef TASTR_AST_NULLABLE_TYPE_NODE_HPP
 #define TASTR_AST_NULLABLE_TYPE_NODE_HPP
 
-#include "ast/Name.hpp"
+#include "ast/Operator.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
 
 namespace tastr::ast {
 
-class NullableTypeNode final
-    : public TypeNode
-    , public Name {
+class NullableTypeNode final: public TypeNode {
   public:
-    explicit NullableTypeNode(const std::string& name,
+    explicit NullableTypeNode(const Operator& op,
                               std::unique_ptr<TypeNode> inner_type)
-        : TypeNode(), Name(name), inner_type_(std::move(inner_type)) {
+        : TypeNode(), op_(op), inner_type_(std::move(inner_type)) {
     }
 
     ~NullableTypeNode() = default;
 
     NullableTypeNode(const NullableTypeNode& node)
-        : TypeNode(node), Name(node), inner_type_(node.inner_type_->clone()) {
+        : TypeNode(node)
+        , op_(node.op_)
+        , inner_type_(node.inner_type_->clone()) {
     }
 
     NullableTypeNode(NullableTypeNode&& node)
         : TypeNode(std::move(node))
-        , Name(std::move(node))
+        , op_(std::move(node.op_))
         , inner_type_(std::move(node.inner_type_)) {
     }
 
@@ -34,14 +34,14 @@ class NullableTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Name::operator=(node);
+        op_ = node.op_;
         inner_type_ = node.inner_type_->clone();
         return *this;
     }
 
     NullableTypeNode& operator=(NullableTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Name::operator=(std::move(node));
+        op_ = std::move(node.op_);
         inner_type_ = std::move(node.inner_type_);
         return *this;
     }
@@ -52,6 +52,10 @@ class NullableTypeNode final
 
     const tastr::ast::TypeNode& get_inner_type() const {
         return *inner_type_.get();
+    }
+
+    const Operator& get_operator() const {
+        return op_;
     }
 
     std::unique_ptr<NullableTypeNode> clone() const {
@@ -67,6 +71,7 @@ class NullableTypeNode final
         return new NullableTypeNode(*this);
     };
 
+    Operator op_;
     std::unique_ptr<TypeNode> inner_type_;
 };
 

@@ -1,6 +1,7 @@
 #ifndef TASTR_AST_VECTOR_TYPE_NODE_HPP
 #define TASTR_AST_VECTOR_TYPE_NODE_HPP
 
+#include "Operator.hpp"
 #include "ScalarTypeNode.hpp"
 #include "TypeNode.hpp"
 
@@ -10,18 +11,22 @@ namespace tastr::ast {
 
 class VectorTypeNode final: public TypeNode {
   public:
-    explicit VectorTypeNode(std::unique_ptr<ScalarTypeNode> scalar_type)
-        : TypeNode(), scalar_type_(std::move(scalar_type)) {
+    explicit VectorTypeNode(const Operator& op,
+                            std::unique_ptr<ScalarTypeNode> scalar_type)
+        : TypeNode(), op_(op), scalar_type_(std::move(scalar_type)) {
     }
 
     ~VectorTypeNode() = default;
 
     VectorTypeNode(const VectorTypeNode& node)
-        : TypeNode(node), scalar_type_(node.scalar_type_->clone()) {
+        : TypeNode(node)
+        , op_(node.op_)
+        , scalar_type_(node.scalar_type_->clone()) {
     }
 
     VectorTypeNode(VectorTypeNode&& node)
         : TypeNode(std::move(node))
+        , op_(std::move(node.op_))
         , scalar_type_(std::move(node.scalar_type_)) {
     }
 
@@ -30,12 +35,14 @@ class VectorTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
+        op_ = node.op_;
         scalar_type_ = node.scalar_type_->clone();
         return *this;
     }
 
     VectorTypeNode& operator=(VectorTypeNode&& node) {
         TypeNode::operator=(std::move(node));
+        op_ = std::move(node.op_);
         scalar_type_ = std::move(node.scalar_type_);
         return *this;
     }
@@ -46,6 +53,10 @@ class VectorTypeNode final: public TypeNode {
 
     std::unique_ptr<VectorTypeNode> clone() const {
         return std::unique_ptr<VectorTypeNode>(this->clone_impl());
+    }
+
+    const Operator& get_operator() const {
+        return op_;
     }
 
     const tastr::ast::ScalarTypeNode& get_scalar_type() const {
@@ -62,6 +73,7 @@ class VectorTypeNode final: public TypeNode {
     }
 
     std::unique_ptr<ScalarTypeNode> scalar_type_;
+    Operator op_;
 };
 
 using VectorTypeNodePtr = VectorTypeNode*;
