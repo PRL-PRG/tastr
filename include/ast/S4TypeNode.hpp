@@ -8,13 +8,13 @@ namespace tastr::ast {
 
 class S4TypeNode final: public TypeNode {
   public:
-    explicit S4TypeNode(const KeywordNode& keyword): TypeNode(), keyword_(keyword) {
+    explicit S4TypeNode(KeywordNodeUPtr keyword): TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~S4TypeNode() = default;
 
     S4TypeNode(const S4TypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     S4TypeNode(S4TypeNode&& node)
@@ -26,7 +26,7 @@ class S4TypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -49,7 +49,7 @@ class S4TypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -57,7 +57,7 @@ class S4TypeNode final: public TypeNode {
         return new S4TypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using S4TypeNodePtr = S4TypeNode*;

@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class WeakReferenceTypeNode final: public TypeNode {
   public:
-    explicit WeakReferenceTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit WeakReferenceTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~WeakReferenceTypeNode() = default;
 
     WeakReferenceTypeNode(const WeakReferenceTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     WeakReferenceTypeNode(WeakReferenceTypeNode&& node)
@@ -27,7 +27,7 @@ class WeakReferenceTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class WeakReferenceTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class WeakReferenceTypeNode final: public TypeNode {
         return new WeakReferenceTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using WeakReferenceTypeNodePtr = WeakReferenceTypeNode*;

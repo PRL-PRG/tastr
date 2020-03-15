@@ -7,8 +7,8 @@ namespace tastr::ast {
 
 class IntegerAScalarTypeNode final: public AScalarTypeNode {
   public:
-    explicit IntegerAScalarTypeNode(const KeywordNode& keyword)
-        : AScalarTypeNode(keyword) {
+    explicit IntegerAScalarTypeNode(KeywordNodeUPtr keyword)
+        : AScalarTypeNode(std::move(keyword)) {
     }
 
     ~IntegerAScalarTypeNode() = default;

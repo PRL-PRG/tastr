@@ -9,11 +9,11 @@ namespace tastr::ast {
 
 class FunctionTypeNode final: public TypeNode {
   public:
-    FunctionTypeNode(const OperatorNode& op,
+    FunctionTypeNode(OperatorNodeUPtr op,
                      TypeNodeSequenceNodeUPtr parameter_types,
                      std::unique_ptr<TypeNode> return_type)
         : TypeNode()
-        , op_(op)
+        , op_(std::move(op))
         , parameter_types_(std::move(parameter_types))
         , return_type_(std::move(return_type)) {
     }
@@ -22,7 +22,7 @@ class FunctionTypeNode final: public TypeNode {
 
     FunctionTypeNode(const FunctionTypeNode& node)
         : TypeNode(node)
-        , op_(node.op_)
+        , op_(node.op_->clone())
         , parameter_types_(node.parameter_types_->clone())
         , return_type_(node.return_type_->clone()) {
     }
@@ -39,7 +39,7 @@ class FunctionTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        op_ = node.op_;
+        op_ = node.op_->clone();
         parameter_types_ = node.parameter_types_->clone();
         return_type_ = node.return_type_->clone();
         return *this;
@@ -62,7 +62,7 @@ class FunctionTypeNode final: public TypeNode {
     }
 
     const OperatorNode& get_operator() const {
-        return op_;
+        return *op_.get();
     }
 
     const TypeNodeSequenceNode& get_parameter_types() const {
@@ -82,7 +82,7 @@ class FunctionTypeNode final: public TypeNode {
         return new FunctionTypeNode(*this);
     };
 
-    OperatorNode op_;
+    OperatorNodeUPtr op_;
     TypeNodeSequenceNodeUPtr parameter_types_;
     std::unique_ptr<TypeNode> return_type_;
 };

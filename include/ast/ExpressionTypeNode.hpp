@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class ExpressionTypeNode final: public TypeNode {
   public:
-    explicit ExpressionTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit ExpressionTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~ExpressionTypeNode() = default;
 
     ExpressionTypeNode(const ExpressionTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     ExpressionTypeNode(ExpressionTypeNode&& node)
@@ -27,7 +27,7 @@ class ExpressionTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class ExpressionTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class ExpressionTypeNode final: public TypeNode {
         return new ExpressionTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using ExpressionTypeNodePtr = ExpressionTypeNode*;

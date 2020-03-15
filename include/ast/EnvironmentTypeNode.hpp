@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class EnvironmentTypeNode final: public TypeNode {
   public:
-    explicit EnvironmentTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit EnvironmentTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~EnvironmentTypeNode() = default;
 
     EnvironmentTypeNode(const EnvironmentTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     EnvironmentTypeNode(EnvironmentTypeNode&& node)
@@ -27,7 +27,7 @@ class EnvironmentTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class EnvironmentTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class EnvironmentTypeNode final: public TypeNode {
         return new EnvironmentTypeNode(*this);
     }
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using EnvironmentTypeNodePtr = EnvironmentTypeNode*;

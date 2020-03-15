@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class PairlistTypeNode final: public TypeNode {
   public:
-    explicit PairlistTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit PairlistTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~PairlistTypeNode() = default;
 
     PairlistTypeNode(const PairlistTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     PairlistTypeNode(PairlistTypeNode&& node)
@@ -27,7 +27,7 @@ class PairlistTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class PairlistTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class PairlistTypeNode final: public TypeNode {
         return new PairlistTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using PairlistTypeNodePtr = PairlistTypeNode*;

@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class LanguageTypeNode final: public TypeNode {
   public:
-    explicit LanguageTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit LanguageTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~LanguageTypeNode() = default;
 
     LanguageTypeNode(const LanguageTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     LanguageTypeNode(LanguageTypeNode&& node)
@@ -27,7 +27,7 @@ class LanguageTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class LanguageTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class LanguageTypeNode final: public TypeNode {
         return new LanguageTypeNode(*this);
     }
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using LanguageTypeNodePtr = LanguageTypeNode*;

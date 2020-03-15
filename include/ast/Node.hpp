@@ -81,6 +81,14 @@ class Node {
         return false;
     }
 
+    virtual bool is_keyword_node() const {
+        return false;
+    }
+
+    virtual bool is_operator_node() const {
+        return false;
+    }
+
     virtual bool is_integer_a_scalar_type_node() const {
         return false;
     }

@@ -11,16 +11,16 @@ namespace tastr::ast {
 
 class VectorTypeNode final: public TypeNode {
   public:
-    explicit VectorTypeNode(const OperatorNode& op,
+    explicit VectorTypeNode(OperatorNodeUPtr op,
                             std::unique_ptr<ScalarTypeNode> scalar_type)
-        : TypeNode(), op_(op), scalar_type_(std::move(scalar_type)) {
+        : TypeNode(), op_(std::move(op)), scalar_type_(std::move(scalar_type)) {
     }
 
     ~VectorTypeNode() = default;
 
     VectorTypeNode(const VectorTypeNode& node)
         : TypeNode(node)
-        , op_(node.op_)
+        , op_(node.op_->clone())
         , scalar_type_(node.scalar_type_->clone()) {
     }
 
@@ -35,7 +35,7 @@ class VectorTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        op_ = node.op_;
+        op_ = node.op_->clone();
         scalar_type_ = node.scalar_type_->clone();
         return *this;
     }
@@ -56,7 +56,7 @@ class VectorTypeNode final: public TypeNode {
     }
 
     const OperatorNode& get_operator() const {
-        return op_;
+        return *op_.get();
     }
 
     const tastr::ast::ScalarTypeNode& get_scalar_type() const {
@@ -73,7 +73,7 @@ class VectorTypeNode final: public TypeNode {
     }
 
     std::unique_ptr<ScalarTypeNode> scalar_type_;
-    OperatorNode op_;
+    OperatorNodeUPtr op_;
 };
 
 using VectorTypeNodePtr = VectorTypeNode*;

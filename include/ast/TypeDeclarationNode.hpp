@@ -12,18 +12,18 @@ namespace tastr::ast {
 
 class TypeDeclarationNode final: public Node {
   public:
-    explicit TypeDeclarationNode(const KeywordNode& keyword,
+    explicit TypeDeclarationNode(KeywordNodeUPtr keyword,
                                  std::unique_ptr<IdentifierNode> identifier,
                                  std::unique_ptr<TypeNode> type)
         : Node()
-        , keyword_(keyword)
+        , keyword_(std::move(keyword))
         , identifier_(std::move(identifier))
         , type_(std::move(type)) {
     }
 
     TypeDeclarationNode(const TypeDeclarationNode& node)
         : Node(node)
-        , keyword_(node.keyword_)
+        , keyword_(node.keyword_->clone())
         , identifier_(node.identifier_->clone())
         , type_(node.type_->clone()) {
     }
@@ -42,7 +42,7 @@ class TypeDeclarationNode final: public Node {
             return *this;
         }
         Node::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         identifier_ = node.identifier_->clone();
         type_ = node.type_->clone();
         return *this;
@@ -77,7 +77,7 @@ class TypeDeclarationNode final: public Node {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -85,7 +85,7 @@ class TypeDeclarationNode final: public Node {
         return new TypeDeclarationNode(*this);
     }
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
     std::unique_ptr<IdentifierNode> identifier_;
     std::unique_ptr<TypeNode> type_;
 };

@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class UnknownTypeNode final: public TypeNode {
   public:
-    explicit UnknownTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit UnknownTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~UnknownTypeNode() = default;
 
     UnknownTypeNode(const UnknownTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     UnknownTypeNode(UnknownTypeNode&& node)
@@ -27,7 +27,7 @@ class UnknownTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class UnknownTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class UnknownTypeNode final: public TypeNode {
         return new UnknownTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using UnknownTypeNodePtr = UnknownTypeNode*;

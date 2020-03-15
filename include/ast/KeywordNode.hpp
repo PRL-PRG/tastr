@@ -44,6 +44,10 @@ class KeywordNode final: public Node {
 
     void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
+    bool is_keyword_node() const override final {
+        return true;
+    }
+
     const std::string& get_value() const {
         return value_;
     }

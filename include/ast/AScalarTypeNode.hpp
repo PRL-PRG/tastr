@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class AScalarTypeNode: public ScalarTypeNode {
   public:
-    explicit AScalarTypeNode(const KeywordNode& keyword)
-        : ScalarTypeNode(), keyword_(keyword) {
+    explicit AScalarTypeNode(KeywordNodeUPtr keyword)
+        : ScalarTypeNode(), keyword_(std::move(keyword)) {
     }
 
     virtual ~AScalarTypeNode() = default;
 
     AScalarTypeNode(const AScalarTypeNode& node)
-        : ScalarTypeNode(node), keyword_(node.keyword_) {
+        : ScalarTypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     AScalarTypeNode(AScalarTypeNode&& node)
@@ -27,7 +27,7 @@ class AScalarTypeNode: public ScalarTypeNode {
             return *this;
         }
         ScalarTypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -52,13 +52,13 @@ class AScalarTypeNode: public ScalarTypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
     virtual AScalarTypeNode* clone_impl() const override = 0;
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using AScalarTypeNodePtr = AScalarTypeNode*;

@@ -7,14 +7,14 @@
 namespace tastr::ast {
 class AnyTypeNode final: public TypeNode {
   public:
-    explicit AnyTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit AnyTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~AnyTypeNode() = default;
 
     AnyTypeNode(const AnyTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     AnyTypeNode(AnyTypeNode&& node)
@@ -26,7 +26,7 @@ class AnyTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -49,7 +49,7 @@ class AnyTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -57,7 +57,7 @@ class AnyTypeNode final: public TypeNode {
         return new AnyTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using AnyTypeNodePtr = AnyTypeNode*;

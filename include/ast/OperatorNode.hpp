@@ -44,6 +44,10 @@ class OperatorNode final: public Node {
 
     void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
+    bool is_operator_node() const override final {
+        return true;
+    }
+
     const std::string& get_value() const {
         return value_;
     }
@@ -55,6 +59,9 @@ class OperatorNode final: public Node {
 
     std::string value_;
 };
+
+using OperatorNodePtr = OperatorNode*;
+using OperatorNodeUPtr = std::unique_ptr<OperatorNode>;
 
 } // namespace tastr::ast
 

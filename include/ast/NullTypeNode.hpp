@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class NullTypeNode final: public TypeNode {
   public:
-    explicit NullTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit NullTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~NullTypeNode() = default;
 
     NullTypeNode(const NullTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     NullTypeNode(NullTypeNode&& node)
@@ -27,7 +27,7 @@ class NullTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class NullTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class NullTypeNode final: public TypeNode {
         return new NullTypeNode(*this);
     }
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using NullTypeNodePtr = NullTypeNode*;

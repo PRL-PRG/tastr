@@ -10,16 +10,16 @@ namespace tastr::ast {
 
 class NullableTypeNode final: public TypeNode {
   public:
-    explicit NullableTypeNode(const OperatorNode& op,
+    explicit NullableTypeNode(OperatorNodeUPtr op,
                               std::unique_ptr<TypeNode> inner_type)
-        : TypeNode(), op_(op), inner_type_(std::move(inner_type)) {
+        : TypeNode(), op_(std::move(op)), inner_type_(std::move(inner_type)) {
     }
 
     ~NullableTypeNode() = default;
 
     NullableTypeNode(const NullableTypeNode& node)
         : TypeNode(node)
-        , op_(node.op_)
+        , op_(node.op_->clone())
         , inner_type_(node.inner_type_->clone()) {
     }
 
@@ -34,7 +34,7 @@ class NullableTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        op_ = node.op_;
+        op_ = node.op_->clone();
         inner_type_ = node.inner_type_->clone();
         return *this;
     }
@@ -55,7 +55,7 @@ class NullableTypeNode final: public TypeNode {
     }
 
     const OperatorNode& get_operator() const {
-        return op_;
+        return *op_.get();
     }
 
     std::unique_ptr<NullableTypeNode> clone() const {
@@ -71,7 +71,7 @@ class NullableTypeNode final: public TypeNode {
         return new NullableTypeNode(*this);
     };
 
-    OperatorNode op_;
+    OperatorNodeUPtr op_;
     std::unique_ptr<TypeNode> inner_type_;
 };
 

@@ -10,14 +10,14 @@ namespace tastr::ast {
 
 class VarargTypeNode final: public TypeNode {
   public:
-    explicit VarargTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit VarargTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~VarargTypeNode() = default;
 
     VarargTypeNode(const VarargTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     VarargTypeNode(VarargTypeNode&& node)
@@ -29,7 +29,7 @@ class VarargTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -52,7 +52,7 @@ class VarargTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -60,7 +60,7 @@ class VarargTypeNode final: public TypeNode {
         return new VarargTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using VarargTypeNodePtr = VarargTypeNode*;

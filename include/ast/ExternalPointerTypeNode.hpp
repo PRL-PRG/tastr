@@ -8,14 +8,14 @@ namespace tastr::ast {
 
 class ExternalPointerTypeNode final: public TypeNode {
   public:
-    explicit ExternalPointerTypeNode(const KeywordNode& keyword)
-        : TypeNode(), keyword_(keyword) {
+    explicit ExternalPointerTypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~ExternalPointerTypeNode() = default;
 
     ExternalPointerTypeNode(const ExternalPointerTypeNode& node)
-        : TypeNode(node), keyword_(node.keyword_) {
+        : TypeNode(node), keyword_(node.keyword_->clone()) {
     }
 
     ExternalPointerTypeNode(ExternalPointerTypeNode&& node)
@@ -27,7 +27,7 @@ class ExternalPointerTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        keyword_ = node.keyword_;
+        keyword_ = node.keyword_->clone();
         return *this;
     }
 
@@ -50,7 +50,7 @@ class ExternalPointerTypeNode final: public TypeNode {
     }
 
     const KeywordNode& get_keyword() const {
-        return keyword_;
+        return *keyword_.get();
     }
 
   private:
@@ -58,7 +58,7 @@ class ExternalPointerTypeNode final: public TypeNode {
         return new ExternalPointerTypeNode(*this);
     };
 
-    KeywordNode keyword_;
+    KeywordNodeUPtr keyword_;
 };
 
 using ExternalPointerTypeNodePtr = ExternalPointerTypeNode*;

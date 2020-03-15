@@ -189,7 +189,9 @@
     #include "ast/ast.hpp"
     #include "parser/parser.hpp"
     using tastr::ast::KeywordNode;
+    using tastr::ast::KeywordNodePtr;
     using tastr::ast::OperatorNode;
+    using tastr::ast::OperatorNodePtr;
     using tastr::ast::CharacterAScalarTypeNode;
     using tastr::ast::ComplexAScalarTypeNode;
     using tastr::ast::DoubleAScalarTypeNode;
@@ -266,29 +268,35 @@
 %%
 
 ascalartype:        INTEGER                                 {
-                                                                $$ = new IntegerAScalarTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new IntegerAScalarTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
           |         DOUBLE                                  {
-                                                                $$ = new DoubleAScalarTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new DoubleAScalarTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
           |         COMPLEX                                 {
-                                                                $$ = new ComplexAScalarTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new ComplexAScalarTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
           |         CHARACTER                               {
-                                                                $$ = new CharacterAScalarTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new CharacterAScalarTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
           |         LOGICAL                                 {
-                                                                $$ = new LogicalAScalarTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new LogicalAScalarTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
           ;
 
 rawascalartype:      RAW                                    {
-                                                                $$ = new RawAScalarTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new RawAScalarTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
               ;
@@ -316,73 +324,85 @@ scalartype:         ascalartype                             {
           ;
 
 environmenttype:    ENVIRONMENT                             {
-                                                                $$ = new EnvironmentTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new EnvironmentTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
                ;
 
 expressiontype:     EXPRESSION                              {
-                                                                $$ = new ExpressionTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new ExpressionTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
               ;
 
 languagetype:       LANGUAGE                                {
-                                                                $$ = new LanguageTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new LanguageTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
             ;
 
 symboltype:         SYMBOL                                  {
-                                                                $$ = new SymbolTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new SymbolTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
           ;
 
 externalptrtype:    EXTERNALPOINTER                         {
-                                                                $$ = new ExternalPointerTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new ExternalPointerTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
                ;
 
 bytecodetype:       BYTECODE                                {
-                                                                $$ = new BytecodeTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new BytecodeTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
             ;
 
 pairlisttype:       PAIRLIST                                {
-                                                                $$ = new PairlistTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new PairlistTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
             ;
 
 s4type:             S4                                      {
-                                                                $$ = new S4TypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new S4TypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
       ;
 
 weakreftype:        WEAKREF                                 {
-                                                                $$ = new WeakReferenceTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new WeakReferenceTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
            ;
 
 anytype:            ANY                                     {
-                                                                $$ = new AnyTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new AnyTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
        ;
 
 unknowntype:        UNKNOWN                                 {
-                                                                $$ = new UnknownTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new UnknownTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
            ;
 
 vectortype:         scalartype "[]"                         {
-                                                                $$ = new VectorTypeNode(OperatorNode($2), std::move(wrap(std::move($1))));
+                                                                OperatorNodePtr op(new OperatorNode($2));
+                                                                $$ = new VectorTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
           ;
@@ -530,7 +550,8 @@ paramtype:          type                                    {
                                                                 $$ -> set_location(@1);
                                                             }
          |          "..."                                   {
-                                                                $$ = new VarargTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new VarargTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@1);
                                                             }
          ;
@@ -553,7 +574,8 @@ paramtypeseq:       %empty                                  {
             ;
 
 functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                $$ = new FunctionTypeNode(OperatorNode($4), std::move(wrap(std::move($2))), std::move(wrap(std::move($5))));
+                                                                OperatorNodePtr op(new OperatorNode($4));
+                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($2))), std::move(wrap(std::move($5))));
                                                                 $$ -> set_location(@$);
                                                             }
 
@@ -652,18 +674,21 @@ innertype:          nonuniontype                            {
                                                                 $$ -> set_location(@$);
                                                             }
          |          innertype OR nonuniontype               {
-                                                                $$ = new UnionTypeNode(OperatorNode($2), std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
+                                                                OperatorNodePtr op(new OperatorNode($2));
+                                                                $$ = new UnionTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
 
 nulltype:          "?"                                      {
-                                                                $$ = new NullTypeNode(KeywordNode($1));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new NullTypeNode(std::move(wrap(std::move(keyword))));
                                                                 $$ -> set_location(@$);
                                                             }
         |          "?" innertype                            {
-                                                                $$ = new NullableTypeNode(OperatorNode($1), std::move(wrap(std::move($2))));
+                                                                OperatorNodePtr op(new OperatorNode($1));
+                                                                $$ = new NullableTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
@@ -692,7 +717,8 @@ type:               innertype %prec LOWER_THAN_OR           {
     ;
 
 decltype:           TYPEDECL identifier type ";"            {
-                                                                $$ = new TypeDeclarationNode(KeywordNode($1), std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));
+                                                                KeywordNodePtr keyword(new KeywordNode($1));
+                                                                $$ = new TypeDeclarationNode(std::move(wrap(std::move(keyword))), std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
