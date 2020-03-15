@@ -99,7 +99,7 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 %%
 
 /* REFERENCE: https://coldfix.eu/2015/05/16/bison-c++11/ */
-tastr::parser::Lexer::Lexer(tastr::parser::ParsingContext& context): yyFlexLexer(context.get_input_stream(), std::cout) {
+tastr::parser::Lexer::Lexer(tastr::parser::ParsingContext& parsing_context): yyFlexLexer(parsing_context.get_input_stream(), std::cout), parsing_context_(parsing_context) {
 }
 
 

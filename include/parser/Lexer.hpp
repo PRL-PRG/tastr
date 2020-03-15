@@ -21,14 +21,36 @@ namespace tastr::parser {
 
 class Lexer: public yyFlexLexer {
   public:
-    explicit Lexer(tastr::parser::ParsingContext& context);
+    explicit Lexer(tastr::parser::ParsingContext& parsing_context);
 
     virtual int yylex(tastr::parser::Parser::semantic_type* yylval,
                       tastr::parser::Parser::location_type* yylloc);
 
+    ParsingContext& get_parsing_context() {
+        return parsing_context_;
+    }
+
+    const ParsingContext& get_parsing_context() const {
+        return parsing_context_;
+    }
+
     void set_debug_level(bool debug) {
         yy_flex_debug = debug;
     }
+
+    std::string& get_identifier() {
+        return identifier_;
+    }
+
+    std::string extract_identifier() {
+        std::string result = identifier_;
+        identifier_.clear();
+        return result;
+    }
+
+  private:
+    ParsingContext& parsing_context_;
+    std::string identifier_;
 };
 
 } // namespace tastr::parser
