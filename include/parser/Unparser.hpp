@@ -52,17 +52,19 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::IdentifierNode& node) override final {
-        if (node.is_quoted()) {
-            os_ << "`";
-        }
+        ast_([this, &node] {
+            if (node.is_quoted()) {
+                os_ << "`";
+            }
 
-        italic_([this, &node] {
-            bright_blue_([this, &node] { os_ << node.get_name(); });
+            italic_([this, &node] {
+                bright_blue_([this, &node] { os_ << node.get_name(); });
+            });
+
+            if (node.is_quoted()) {
+                os_ << "`";
+            }
         });
-
-        if (node.is_quoted()) {
-            os_ << "`";
-        }
     }
 
     void
@@ -225,60 +227,70 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TypeNodeSequenceNode& node) override final {
-        const std::string& separator = node.get_separator();
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
-            (**i).accept(*this);
-            if (show_separator) {
-                os_ << separator << " ";
+        ast_([this, &node] {
+            const std::string& separator = node.get_separator();
+            int show_separator = node.size() - 1;
+            for (auto i = node.cbegin(); i != node.cend(); ++i) {
+                (**i).accept(*this);
+                if (show_separator) {
+                    os_ << separator << " ";
+                }
+                --show_separator;
             }
-            --show_separator;
-        }
+        });
     }
 
     void visit(const tastr::ast::TagTypePairNode& node) override final {
-        node.get_identifier().accept(*this);
-        os_ << " " << node.get_separator() << " ";
-        node.get_type().accept(*this);
+        ast_([this, &node] {
+            node.get_identifier().accept(*this);
+            os_ << " " << node.get_separator() << " ";
+            node.get_type().accept(*this);
+        });
     }
 
     void
     visit(const tastr::ast::TagTypePairNodeSequenceNode& node) override final {
-        const std::string& separator = node.get_separator();
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
-            (**i).accept(*this);
-            if (show_separator) {
-                os_ << separator << " ";
+        ast_([this, &node] {
+            const std::string& separator = node.get_separator();
+            int show_separator = node.size() - 1;
+            for (auto i = node.cbegin(); i != node.cend(); ++i) {
+                (**i).accept(*this);
+                if (show_separator) {
+                    os_ << separator << " ";
+                }
+                --show_separator;
             }
-            --show_separator;
-        }
+        });
     }
 
     void visit(const tastr::ast::TypeDeclarationNode& node) override final {
-        visit(node.get_keyword());
-        os_ << " ";
-        node.get_identifier().accept(*this);
-        os_ << " ";
-        node.get_type().accept(*this);
-        os_ << ";";
+        ast_([this, &node] {
+            visit(node.get_keyword());
+            os_ << " ";
+            node.get_identifier().accept(*this);
+            os_ << " ";
+            node.get_type().accept(*this);
+            os_ << ";";
+        });
     }
 
     void visit(const tastr::ast::TypeDeclarationNodeSequenceNode& node)
         override final {
-        const std::string& separator = node.get_separator();
-        int show_separator = node.size() - 1;
-        for (auto i = node.cbegin(); i != node.cend(); ++i) {
-            (**i).accept(*this);
-            if (show_separator) {
-                os_ << separator;
+        ast_([this, &node] {
+            const std::string& separator = node.get_separator();
+            int show_separator = node.size() - 1;
+            for (auto i = node.cbegin(); i != node.cend(); ++i) {
+                (**i).accept(*this);
+                if (show_separator) {
+                    os_ << separator;
+                }
+                --show_separator;
             }
-            --show_separator;
-        }
+        });
     }
 
     void visit(const tastr::ast::TopLevelNode& node) override final {
-        node.get_type_declarations().accept(*this);
+        ast_([this, &node] { node.get_type_declarations().accept(*this); });
     }
 
   private:
