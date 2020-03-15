@@ -24,6 +24,10 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::IdentifierNode& node) = 0;
 
+    virtual void visit(const tastr::ast::KeywordNode& node) = 0;
+
+    virtual void visit(const tastr::ast::OperatorNode& node) = 0;
+
     virtual void visit(const tastr::ast::CharacterAScalarTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::ComplexAScalarTypeNode& node) = 0;

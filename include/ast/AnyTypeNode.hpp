@@ -1,13 +1,13 @@
 #ifndef TASTR_AST_ANY_TYPE_NODE_HPP
 #define TASTR_AST_ANY_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 class AnyTypeNode final: public TypeNode {
   public:
-    explicit AnyTypeNode(const Keyword& keyword)
+    explicit AnyTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -48,7 +48,7 @@ class AnyTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -57,7 +57,7 @@ class AnyTypeNode final: public TypeNode {
         return new AnyTypeNode(*this);
     };
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using AnyTypeNodePtr = AnyTypeNode*;

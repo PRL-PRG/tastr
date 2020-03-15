@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 #define TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
 class EnvironmentTypeNode final: public TypeNode {
   public:
-    explicit EnvironmentTypeNode(const Keyword& keyword)
+    explicit EnvironmentTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -49,7 +49,7 @@ class EnvironmentTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -58,7 +58,7 @@ class EnvironmentTypeNode final: public TypeNode {
         return new EnvironmentTypeNode(*this);
     }
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using EnvironmentTypeNodePtr = EnvironmentTypeNode*;

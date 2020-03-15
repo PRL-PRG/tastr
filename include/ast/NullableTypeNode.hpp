@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_NULLABLE_TYPE_NODE_HPP
 #define TASTR_AST_NULLABLE_TYPE_NODE_HPP
 
-#include "ast/Operator.hpp"
+#include "ast/OperatorNode.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
@@ -10,7 +10,7 @@ namespace tastr::ast {
 
 class NullableTypeNode final: public TypeNode {
   public:
-    explicit NullableTypeNode(const Operator& op,
+    explicit NullableTypeNode(const OperatorNode& op,
                               std::unique_ptr<TypeNode> inner_type)
         : TypeNode(), op_(op), inner_type_(std::move(inner_type)) {
     }
@@ -54,7 +54,7 @@ class NullableTypeNode final: public TypeNode {
         return *inner_type_.get();
     }
 
-    const Operator& get_operator() const {
+    const OperatorNode& get_operator() const {
         return op_;
     }
 
@@ -71,7 +71,7 @@ class NullableTypeNode final: public TypeNode {
         return new NullableTypeNode(*this);
     };
 
-    Operator op_;
+    OperatorNode op_;
     std::unique_ptr<TypeNode> inner_type_;
 };
 

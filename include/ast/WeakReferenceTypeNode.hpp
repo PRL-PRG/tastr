@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_WEAK_REFERENCE_TYPE_NODE_HPP
 #define TASTR_AST_WEAK_REFERENCE_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
 class WeakReferenceTypeNode final: public TypeNode {
   public:
-    explicit WeakReferenceTypeNode(const Keyword& keyword)
+    explicit WeakReferenceTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -49,7 +49,7 @@ class WeakReferenceTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -58,7 +58,7 @@ class WeakReferenceTypeNode final: public TypeNode {
         return new WeakReferenceTypeNode(*this);
     };
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using WeakReferenceTypeNodePtr = WeakReferenceTypeNode*;

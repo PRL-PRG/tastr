@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_UNION_TYPE_NODE_HPP
 #define TASTR_AST_UNION_TYPE_NODE_HPP
 
-#include "ast/Operator.hpp"
+#include "ast/OperatorNode.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
@@ -10,7 +10,7 @@ namespace tastr::ast {
 
 class UnionTypeNode final: public TypeNode {
   public:
-    UnionTypeNode(const Operator& op,
+    UnionTypeNode(const OperatorNode& op,
                   std::unique_ptr<TypeNode> first_type,
                   std::unique_ptr<TypeNode> second_type)
         : TypeNode()
@@ -62,7 +62,7 @@ class UnionTypeNode final: public TypeNode {
         return std::unique_ptr<UnionTypeNode>(this->clone_impl());
     }
 
-    const Operator& get_operator() const {
+    const OperatorNode& get_operator() const {
         return op_;
     }
 
@@ -83,7 +83,7 @@ class UnionTypeNode final: public TypeNode {
         return new UnionTypeNode(*this);
     }
 
-    Operator op_;
+    OperatorNode op_;
     std::unique_ptr<TypeNode> first_type_;
     std::unique_ptr<TypeNode> second_type_;
 };

@@ -67,6 +67,15 @@ class Unparser final: public ConstNodeVisitor {
         });
     }
 
+    void visit(const tastr::ast::KeywordNode& keyword) override final {
+        // os_ << keyword.get_location().prefix;
+        bright_green_([this, &keyword] { os_ << keyword.get_value(); });
+    }
+
+    void visit(const tastr::ast::OperatorNode& op) override final {
+        bright_red_([this, &op] { os_ << op.get_value(); });
+    }
+
     void
     visit(const tastr::ast::CharacterAScalarTypeNode& node) override final {
         ast_([this, &node] { visit(node.get_keyword()); });
@@ -348,14 +357,6 @@ class Unparser final: public ConstNodeVisitor {
         if (should_show_ast()) {
             bright_gray_([this] { os_ << "»"; });
         }
-    }
-
-    void visit(const tastr::ast::Keyword& keyword) {
-        bright_green_([this, &keyword] { os_ << keyword.get_value(); });
-    }
-
-    void visit(const tastr::ast::Operator& op) {
-        bright_red_([this, &op] { os_ << op.get_value(); });
     }
 
     std::ostream& os_;

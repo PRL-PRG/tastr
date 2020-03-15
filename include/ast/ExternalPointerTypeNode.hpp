@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_EXTERNAL_POINTER_TYPE_NODE_HPP
 #define TASTR_AST_EXTERNAL_POINTER_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
 class ExternalPointerTypeNode final: public TypeNode {
   public:
-    explicit ExternalPointerTypeNode(const Keyword& keyword)
+    explicit ExternalPointerTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -49,7 +49,7 @@ class ExternalPointerTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -58,7 +58,7 @@ class ExternalPointerTypeNode final: public TypeNode {
         return new ExternalPointerTypeNode(*this);
     };
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using ExternalPointerTypeNodePtr = ExternalPointerTypeNode*;

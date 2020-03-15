@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_PAIRLIST_TYPE_NODE_HPP
 #define TASTR_AST_PAIRLIST_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
 class PairlistTypeNode final: public TypeNode {
   public:
-    explicit PairlistTypeNode(const Keyword& keyword)
+    explicit PairlistTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -49,7 +49,7 @@ class PairlistTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -58,7 +58,7 @@ class PairlistTypeNode final: public TypeNode {
         return new PairlistTypeNode(*this);
     };
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using PairlistTypeNodePtr = PairlistTypeNode*;

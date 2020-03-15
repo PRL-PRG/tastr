@@ -7,7 +7,7 @@ namespace tastr::ast {
 
 class RawAScalarTypeNode final: public AScalarTypeNode {
   public:
-    explicit RawAScalarTypeNode(const Keyword& keyword)
+    explicit RawAScalarTypeNode(const KeywordNode& keyword)
         : AScalarTypeNode(keyword) {
     }
 

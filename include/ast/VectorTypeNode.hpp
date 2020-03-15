@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_VECTOR_TYPE_NODE_HPP
 #define TASTR_AST_VECTOR_TYPE_NODE_HPP
 
-#include "Operator.hpp"
+#include "ast/OperatorNode.hpp"
 #include "ScalarTypeNode.hpp"
 #include "TypeNode.hpp"
 
@@ -11,7 +11,7 @@ namespace tastr::ast {
 
 class VectorTypeNode final: public TypeNode {
   public:
-    explicit VectorTypeNode(const Operator& op,
+    explicit VectorTypeNode(const OperatorNode& op,
                             std::unique_ptr<ScalarTypeNode> scalar_type)
         : TypeNode(), op_(op), scalar_type_(std::move(scalar_type)) {
     }
@@ -55,7 +55,7 @@ class VectorTypeNode final: public TypeNode {
         return std::unique_ptr<VectorTypeNode>(this->clone_impl());
     }
 
-    const Operator& get_operator() const {
+    const OperatorNode& get_operator() const {
         return op_;
     }
 
@@ -73,7 +73,7 @@ class VectorTypeNode final: public TypeNode {
     }
 
     std::unique_ptr<ScalarTypeNode> scalar_type_;
-    Operator op_;
+    OperatorNode op_;
 };
 
 using VectorTypeNodePtr = VectorTypeNode*;

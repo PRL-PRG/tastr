@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_FUNCTION_TYPE_NODE_HPP
 #define TASTR_AST_FUNCTION_TYPE_NODE_HPP
 
-#include "ast/Operator.hpp"
+#include "ast/OperatorNode.hpp"
 #include "ast/TypeNode.hpp"
 #include "ast/TypeNodeSequenceNode.hpp"
 
@@ -9,7 +9,7 @@ namespace tastr::ast {
 
 class FunctionTypeNode final: public TypeNode {
   public:
-    FunctionTypeNode(const Operator& op,
+    FunctionTypeNode(const OperatorNode& op,
                      TypeNodeSequenceNodeUPtr parameter_types,
                      std::unique_ptr<TypeNode> return_type)
         : TypeNode()
@@ -61,7 +61,7 @@ class FunctionTypeNode final: public TypeNode {
         return std::unique_ptr<FunctionTypeNode>(this->clone_impl());
     }
 
-    const Operator& get_operator() const {
+    const OperatorNode& get_operator() const {
         return op_;
     }
 
@@ -82,7 +82,7 @@ class FunctionTypeNode final: public TypeNode {
         return new FunctionTypeNode(*this);
     };
 
-    Operator op_;
+    OperatorNode op_;
     TypeNodeSequenceNodeUPtr parameter_types_;
     std::unique_ptr<TypeNode> return_type_;
 };

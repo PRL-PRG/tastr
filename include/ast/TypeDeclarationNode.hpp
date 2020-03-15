@@ -2,7 +2,7 @@
 #define TASTR_AST_TYPE_DECLARATION_NODE_HPP
 
 #include "ast/IdentifierNode.hpp"
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
@@ -12,7 +12,7 @@ namespace tastr::ast {
 
 class TypeDeclarationNode final: public Node {
   public:
-    explicit TypeDeclarationNode(const Keyword& keyword,
+    explicit TypeDeclarationNode(const KeywordNode& keyword,
                                  std::unique_ptr<IdentifierNode> identifier,
                                  std::unique_ptr<TypeNode> type)
         : Node()
@@ -76,7 +76,7 @@ class TypeDeclarationNode final: public Node {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -85,7 +85,7 @@ class TypeDeclarationNode final: public Node {
         return new TypeDeclarationNode(*this);
     }
 
-    Keyword keyword_;
+    KeywordNode keyword_;
     std::unique_ptr<IdentifierNode> identifier_;
     std::unique_ptr<TypeNode> type_;
 };

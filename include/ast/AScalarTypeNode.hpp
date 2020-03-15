@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_A_SCALAR_TYPE_NODE_HPP
 #define TASTR_AST_A_SCALAR_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/ScalarTypeNode.hpp"
 
 namespace tastr::ast {
 
 class AScalarTypeNode: public ScalarTypeNode {
   public:
-    explicit AScalarTypeNode(const Keyword& keyword)
+    explicit AScalarTypeNode(const KeywordNode& keyword)
         : ScalarTypeNode(), keyword_(keyword) {
     }
 
@@ -51,14 +51,14 @@ class AScalarTypeNode: public ScalarTypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
   private:
     virtual AScalarTypeNode* clone_impl() const override = 0;
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using AScalarTypeNodePtr = AScalarTypeNode*;

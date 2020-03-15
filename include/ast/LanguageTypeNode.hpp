@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_LANGUAGE_TYPE_NODE_HPP
 #define TASTR_AST_LANGUAGE_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
 class LanguageTypeNode final: public TypeNode {
   public:
-    explicit LanguageTypeNode(const Keyword& keyword)
+    explicit LanguageTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -49,7 +49,7 @@ class LanguageTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -58,7 +58,7 @@ class LanguageTypeNode final: public TypeNode {
         return new LanguageTypeNode(*this);
     }
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using LanguageTypeNodePtr = LanguageTypeNode*;

@@ -1,7 +1,7 @@
 #ifndef TASTR_AST_VARARG_TYPE_NODE_HPP
 #define TASTR_AST_VARARG_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <iostream>
@@ -10,7 +10,7 @@ namespace tastr::ast {
 
 class VarargTypeNode final: public TypeNode {
   public:
-    explicit VarargTypeNode(const Keyword& keyword)
+    explicit VarargTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -51,7 +51,7 @@ class VarargTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -60,7 +60,7 @@ class VarargTypeNode final: public TypeNode {
         return new VarargTypeNode(*this);
     };
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using VarargTypeNodePtr = VarargTypeNode*;

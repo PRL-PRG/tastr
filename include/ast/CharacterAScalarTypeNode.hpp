@@ -11,7 +11,7 @@ using CharacterAScalarTypeNodeUPtr = std::unique_ptr<CharacterAScalarTypeNode>;
 
 class CharacterAScalarTypeNode final: public AScalarTypeNode {
   public:
-    explicit CharacterAScalarTypeNode(const Keyword& keyword)
+    explicit CharacterAScalarTypeNode(const KeywordNode& keyword)
         : AScalarTypeNode(keyword) {
     }
 

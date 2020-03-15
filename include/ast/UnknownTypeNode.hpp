@@ -1,14 +1,14 @@
 #ifndef TASTR_AST_UNKNOWN_TYPE_NODE_HPP
 #define TASTR_AST_UNKNOWN_TYPE_NODE_HPP
 
-#include "ast/Keyword.hpp"
+#include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
 class UnknownTypeNode final: public TypeNode {
   public:
-    explicit UnknownTypeNode(const Keyword& keyword)
+    explicit UnknownTypeNode(const KeywordNode& keyword)
         : TypeNode(), keyword_(keyword) {
     }
 
@@ -49,7 +49,7 @@ class UnknownTypeNode final: public TypeNode {
         return true;
     }
 
-    const Keyword& get_keyword() const {
+    const KeywordNode& get_keyword() const {
         return keyword_;
     }
 
@@ -58,7 +58,7 @@ class UnknownTypeNode final: public TypeNode {
         return new UnknownTypeNode(*this);
     };
 
-    Keyword keyword_;
+    KeywordNode keyword_;
 };
 
 using UnknownTypeNodePtr = UnknownTypeNode*;
