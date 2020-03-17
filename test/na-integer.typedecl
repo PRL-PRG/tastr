@@ -1,0 +1,3 @@
+type f ^integer;
+type f ^int;
+type f ^i;
