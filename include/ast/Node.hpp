@@ -233,6 +233,10 @@ class Node {
         return false;
     }
 
+    virtual bool is_eof_node() const {
+        return false;
+    }
+
     void set_location(const tastr::parser::Location& location) {
         location_ = location;
     }

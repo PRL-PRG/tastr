@@ -53,12 +53,20 @@ class Location {
     }
     /** \} */
 
-    void set_token_prefix(const std::string& token_prefix) {
-        token_prefix_ = token_prefix;
+    void set_prefix(const std::string& prefix) {
+        prefix_ = prefix;
     }
 
-    const std::string& get_token_prefix() const {
-        return token_prefix_;
+    void append_prefix(const char* str) {
+        prefix_.append(str);
+    }
+
+    void append_prefix(const std::string& str) {
+        prefix_.append(str);
+    }
+
+    const std::string& get_prefix() const {
+        return prefix_;
     }
 
   public:
@@ -67,7 +75,7 @@ class Location {
     /// End of the located region.
     Position end;
 
-    std::string token_prefix_;
+    std::string prefix_;
 };
 
 /// Join two locations, in place.

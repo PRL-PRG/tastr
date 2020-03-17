@@ -34,6 +34,8 @@ class MutableNodeVisitor {
 
     virtual void visit(tastr::ast::EmptyNode& node) = 0;
 
+    virtual void visit(tastr::ast::EofNode& node) = 0;
+
     virtual void visit(tastr::ast::CharacterAScalarTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::ComplexAScalarTypeNode& node) = 0;

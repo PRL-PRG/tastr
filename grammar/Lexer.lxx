@@ -17,7 +17,6 @@
 
     #define HANDLE_TOKEN(token_name)                          \
         yylval->build<std::string>(yytext);                   \
-        get_parsing_context().finish_token_prefix();          \
         return tastr::parser::Parser::token::token_name;
 
 %}
@@ -52,12 +51,12 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
     yylloc -> step();
 %}
 
-{BLANK}+                    { yylloc -> step(); get_parsing_context().append_token_prefix(yytext); }
-\n+                         { yylloc -> lines(yyleng); yylloc -> step(); get_parsing_context().append_token_prefix(yytext); }
-"#"                         { BEGIN(comment); get_parsing_context().append_token_prefix(yytext); }
+{BLANK}+                    { yylloc -> step(); yylloc -> append_prefix(yytext); }
+\n+                         { yylloc -> lines(yyleng); yylloc -> step(); yylloc -> append_prefix(yytext); }
+"#"                         { BEGIN(comment); yylloc -> append_prefix(yytext); }
 <comment>{
-    \n                      { BEGIN(INITIAL); get_parsing_context().append_token_prefix(yytext); }
-    .                       { get_parsing_context().append_token_prefix(yytext); }
+    \n                      { BEGIN(INITIAL); yylloc -> append_prefix(yytext); }
+    .                       { yylloc -> append_prefix(yytext); }
 }
 "|"                         { HANDLE_TOKEN(TOKEN_OR) }
 "^"                         { HANDLE_TOKEN(TOKEN_CARET) }

@@ -59,7 +59,7 @@ all: build
 
 build: parser lexer header library application
 
-parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/location.hh
+parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
 
 lexer: $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
 
@@ -80,13 +80,12 @@ run: application
 	@echo "Write a type declaration. Quit with Ctrl-d."
 	./$(BINDIR)/$(BINNAME) $(BINARGS)
 
-$(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/location.hh: $(GRAMMARDIR)/Parser.yxx
+$(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: $(GRAMMARDIR)/Parser.yxx
 	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/$(PARSERDIR)/Parser.cxx
 	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
-	$(MV) $(GRAMMARDIR)/location.hh $(INCLUDEDIR)/$(PARSERDIR)/location.hh
 
 $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx: $(GRAMMARDIR)/Lexer.lxx
 	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx

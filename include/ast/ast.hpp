@@ -9,6 +9,7 @@
 #include "ast/DoubleAScalarTypeNode.hpp"
 #include "ast/EmptyNode.hpp"
 #include "ast/EnvironmentTypeNode.hpp"
+#include "ast/EofNode.hpp"
 #include "ast/ExpressionTypeNode.hpp"
 #include "ast/ExternalPointerTypeNode.hpp"
 #include "ast/FunctionTypeNode.hpp"

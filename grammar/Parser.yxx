@@ -271,6 +271,8 @@
     using tastr::ast::EmptyNodePtr;
     using tastr::ast::TerminatorNode;
     using tastr::ast::TerminatorNodePtr;
+    using tastr::ast::EofNode;
+    using tastr::ast::EofNodePtr;
 }
 
 /* inserted near top of source file */
@@ -284,8 +286,6 @@ TerminatorNodePtr create_terminator(const std::string& value,
                                     tastr::parser::Location& location,
                                     tastr::parser::ParsingContext& context) {
     TerminatorNodePtr terminator = new TerminatorNode(value);
-    std::cout << "[ " << value << " ] ";
-    location.set_token_prefix(context.pop_token_prefix());
     terminator -> set_location(location);
     return terminator;
 }
@@ -295,8 +295,6 @@ IdentifierNodePtr create_identifier(const std::string& value,
                                     tastr::parser::Location& location,
                                     tastr::parser::ParsingContext& context) {
     IdentifierNodePtr identifier = new IdentifierNode(value, quoted);
-    std::cout << "[ " << value << " ] ";
-    location.set_token_prefix(context.pop_token_prefix());
     identifier -> set_location(location);
     return identifier;
 }
@@ -305,8 +303,6 @@ OperatorNodePtr create_operator(const std::string& value,
                                 tastr::parser::Location& location,
                                 tastr::parser::ParsingContext& context) {
     OperatorNodePtr op = new OperatorNode(value);
-    std::cout << "[ " << value << " ] ";
-    location.set_token_prefix(context.pop_token_prefix());
     op -> set_location(location);
     return op;
 }
@@ -315,8 +311,6 @@ SeparatorNodePtr create_separator(const std::string& value,
                                 tastr::parser::Location& location,
                                 tastr::parser::ParsingContext& context) {
     SeparatorNodePtr op = new SeparatorNode(value);
-    std::cout << "[ " << value << " ] ";
-    location.set_token_prefix(context.pop_token_prefix());
     op -> set_location(location);
     return op;
 }
@@ -325,8 +319,6 @@ KeywordNodePtr create_keyword(const std::string& value,
                                 tastr::parser::Location& location,
                                 tastr::parser::ParsingContext& context) {
     KeywordNodePtr keyword = new KeywordNode(value);
-    std::cout << "[ " << value << " ] ";
-    location.set_token_prefix(context.pop_token_prefix());
     keyword -> set_location(location);
     return keyword;
 }
@@ -337,8 +329,6 @@ T* create_node_with_keyword(const std::string& value,
                             tastr::parser::Location& node_location,
                             tastr::parser::ParsingContext& context) {
     KeywordNodePtr keyword = new KeywordNode(value);
-    std::cout << "[ " << value << " ] ";
-    keyword_location.set_token_prefix(context.pop_token_prefix());
     keyword -> set_location(keyword_location);
     T* node = new T(std::move(wrap(std::move(keyword))));
     node -> set_location(node_location);
@@ -747,8 +737,20 @@ decllist:           decltype                                {
                                                             }
         ;
 
-start:              EOF                                     { }
-     |              decllist EOF                            {   context.get_parse_result().get_top_level_node() -> set_location(@$); }
+start:              EOF                                     {
+                                                                EofNodePtr eof = new EofNode();
+                                                                eof -> set_location(@1);
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(eof))));
+                                                                context.get_parse_result().get_top_level_node() -> set_location(@$);
+                                                            }
+     |              decllist EOF                            {
+                                                                EofNodePtr eof = new EofNode();
+                                                                eof -> set_location(@2);
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(eof))));
+                                                                context.get_parse_result().get_top_level_node() -> set_location(@$);
+                                                            }
      ;
 
 %%

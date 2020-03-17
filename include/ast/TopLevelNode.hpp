@@ -11,7 +11,7 @@ namespace tastr::ast {
 
 class TopLevelNode final: public Node {
   public:
-    typedef std::vector<std::unique_ptr<TypeDeclarationNode>> sequence_t;
+    typedef std::vector<std::unique_ptr<Node>> sequence_t;
 
     typedef sequence_t* sequence_ptr_t;
 
@@ -89,11 +89,11 @@ class TopLevelNode final: public Node {
         return type_declarations_.empty();
     }
 
-    const TypeDeclarationNode& at(int index) const {
+    const Node& at(int index) const {
         return *type_declarations_.at(index).get();
     }
 
-    TypeDeclarationNode& at(int index) {
+    Node& at(int index) {
         return *type_declarations_.at(index).get();
     }
 
