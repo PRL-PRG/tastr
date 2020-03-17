@@ -2,24 +2,31 @@
 #define TASTR_AST_NA_SCALAR_TYPE_NODE_HPP
 
 #include "ast/AScalarTypeNode.hpp"
+#include "ast/OperatorNode.hpp"
 #include "ast/ScalarTypeNode.hpp"
 
 namespace tastr::ast {
 
 class NAScalarTypeNode final: public ScalarTypeNode {
   public:
-    explicit NAScalarTypeNode(std::unique_ptr<AScalarTypeNode> a_scalar_type)
-        : ScalarTypeNode(), a_scalar_type_(std::move(a_scalar_type)) {
+    explicit NAScalarTypeNode(OperatorNodeUPtr op,
+                              std::unique_ptr<AScalarTypeNode> a_scalar_type)
+        : ScalarTypeNode()
+        , op_(std::move(op))
+        , a_scalar_type_(std::move(a_scalar_type)) {
     }
 
     virtual ~NAScalarTypeNode() = default;
 
     NAScalarTypeNode(const NAScalarTypeNode& node)
-        : ScalarTypeNode(node), a_scalar_type_(node.a_scalar_type_->clone()) {
+        : ScalarTypeNode(node)
+        , op_(node.op_->clone())
+        , a_scalar_type_(node.a_scalar_type_->clone()) {
     }
 
     NAScalarTypeNode(NAScalarTypeNode&& node)
         : ScalarTypeNode(std::move(node))
+        , op_(std::move(node.op_))
         , a_scalar_type_(std::move(node.a_scalar_type_)) {
     }
 
@@ -28,12 +35,14 @@ class NAScalarTypeNode final: public ScalarTypeNode {
             return *this;
         }
         ScalarTypeNode::operator=(node);
+        op_ = node.op_->clone();
         a_scalar_type_ = node.a_scalar_type_->clone();
         return *this;
     }
 
     NAScalarTypeNode& operator=(NAScalarTypeNode&& node) {
         ScalarTypeNode::operator=(std::move(node));
+        op_ = std::move(node.op_);
         a_scalar_type_ = std::move(node.a_scalar_type_);
         return *this;
     }
@@ -52,6 +61,10 @@ class NAScalarTypeNode final: public ScalarTypeNode {
         return *a_scalar_type_.get();
     }
 
+    const OperatorNode& get_operator() const {
+        return *op_.get();
+    }
+
     bool is_na_scalar_type_node() const override final {
         return true;
     }
@@ -61,6 +74,7 @@ class NAScalarTypeNode final: public ScalarTypeNode {
         return new NAScalarTypeNode(*this);
     }
 
+    OperatorNodeUPtr op_;
     std::unique_ptr<AScalarTypeNode> a_scalar_type_;
 };
 

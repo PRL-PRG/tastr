@@ -47,7 +47,7 @@ class Unparser final: public ConstNodeVisitor {
     void visit(const tastr::ast::NAScalarTypeNode& node) override final {
         visit_(node.get_location());
         ast_([this, &node] {
-            os_ << "^";
+            node.get_operator().accept(*this);
             node.get_a_scalar_type().accept(*this);
         });
     }

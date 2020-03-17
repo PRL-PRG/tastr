@@ -350,8 +350,8 @@ rawascalartype:      RAW                                    {   $$ = create_node
               ;
 
 nascalartype:       "^" ascalartype                         {
-                                                                //OperatorNodePtr op = create_operator($1, @1, context);
-                                                                $$ = new NAScalarTypeNode(//std::move(wrap(std::move(op))),
+                                                                OperatorNodePtr op = create_operator($1, @1, context);
+                                                                $$ = new NAScalarTypeNode(std::move(wrap(std::move(op))),
                                                                                           std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }

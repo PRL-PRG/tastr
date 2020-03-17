@@ -2491,8 +2491,8 @@ namespace tastr { namespace parser {
   case 8:
 #line 352 "Parser.yxx"
                                                             {
-                                                                //OperatorNodePtr op = create_operator($1, @1, context);
-                                                                yylhs.value.as < NAScalarTypeNodePtr > () = new NAScalarTypeNode(//std::move(wrap(std::move(op))),
+                                                                OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
+                                                                yylhs.value.as < NAScalarTypeNodePtr > () = new NAScalarTypeNode(std::move(wrap(std::move(op))),
                                                                                           std::move(wrap(std::move(yystack_[0].value.as < AScalarTypeNodePtr > ()))));
                                                                 yylhs.value.as < NAScalarTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
@@ -3236,13 +3236,12 @@ namespace tastr { namespace parser {
                                                                 TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
                                                                 node -> set_location(yylhs.location);
                                                                 node -> set_eof_node(eof);
-                                                                
                                                             }
-#line 3242 "Parser.cxx"
+#line 3241 "Parser.cxx"
     break;
 
   case 94:
-#line 749 "Parser.yxx"
+#line 748 "Parser.yxx"
                                                             {
                                                                 EofNodeUPtr eof = std::make_unique<EofNode>();
                                                                 eof -> set_location(yystack_[0].location);
@@ -3250,11 +3249,11 @@ namespace tastr { namespace parser {
                                                                 node -> set_location(yylhs.location);
                                                                 node -> set_eof_node(eof);
                                                             }
-#line 3254 "Parser.cxx"
+#line 3253 "Parser.cxx"
     break;
 
 
-#line 3258 "Parser.cxx"
+#line 3257 "Parser.cxx"
 
             default:
               break;
@@ -3716,7 +3715,7 @@ namespace tastr { namespace parser {
      540,   544,   553,   561,   571,   580,   590,   595,   600,   605,
      610,   615,   620,   625,   630,   635,   640,   645,   650,   655,
      660,   665,   673,   678,   688,   689,   698,   703,   708,   713,
-     720,   731,   735,   741,   749
+     720,   731,   735,   741,   748
   };
 
   // Print the state stack on the debug stream.
@@ -3800,9 +3799,9 @@ namespace tastr { namespace parser {
 
 #line 9 "Parser.yxx"
 } } // tastr::parser
-#line 3804 "Parser.cxx"
+#line 3803 "Parser.cxx"
 
-#line 758 "Parser.yxx"
+#line 757 "Parser.yxx"
 
 
 void tastr::parser::Parser::error(const location_type& location, const std::string& message) {
