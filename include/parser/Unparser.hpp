@@ -296,7 +296,7 @@ class Unparser final: public ConstNodeVisitor {
             visit(node.get_keyword());
             node.get_identifier().accept(*this);
             node.get_type().accept(*this);
-            os_ << ";";
+            node.get_terminator().accept(*this);
         });
     }
 

@@ -87,6 +87,10 @@ class TypeDeclarationNode final: public Node {
         return *keyword_.get();
     }
 
+    const TerminatorNode& get_terminator() const {
+        return *terminator_.get();
+    }
+
   private:
     virtual TypeDeclarationNode* clone_impl() const override final {
         return new TypeDeclarationNode(*this);
