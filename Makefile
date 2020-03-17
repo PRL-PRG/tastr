@@ -150,14 +150,15 @@ cppcheck:
 clang-format:
 	$(CLANGFORMAT) -i $(CPPSRCFILES) $(CSRCFILES) $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(DRIVERFILES)
 
+.INTERMEDIATE: generate-lexer  \
+               generate-parser \
+               copy-header
+
 .PHONY: all             \
         build           \
         parser          \
-        generate-parser \
         lexer           \
-        generate-lexer  \
         header          \
-        copy-header     \
         library         \
         static-library  \
         shared-library  \
