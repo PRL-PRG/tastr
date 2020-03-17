@@ -1,6 +1,6 @@
 SRCDIR := src
 INCLUDEDIR := include
-TESTDIR := test
+TESTSDIR := tests
 GRAMMARDIR := grammar
 DRIVERDIR := driver
 BUILDDIR := build
@@ -57,7 +57,10 @@ HEADERFILES := $(patsubst $(INCLUDEDIR)/%,$(HEADERDIR)/%,$(INCLUDEFILES))
 DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
 OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
 
-TYPEDECLFILES := $(shell find $(TESTDIR) -name '*.typedecl')
+PASSTYPEDECLFILES := $(shell find $(TESTSDIR)/pass -maxdepth 1 -name '*.typedecl')
+FAILTYPEDECLFILES := $(shell find $(TESTSDIR)/fail -maxdepth 1 -name '*.typedecl')
+PASSTYPEDECLFILESOUTPUT := $(patsubst $(TESTSDIR)/pass/%,$(TESTSDIR)/pass/output/%,$(PASSTYPEDECLFILES))
+FAILTYPEDECLFILESOUTPUT := $(patsubst $(TESTSDIR)/fail/%,$(TESTSDIR)/fail/output/%,$(FAILTYPEDECLFILES))
 
 all: build
 
@@ -77,8 +80,10 @@ shared-library: $(LIBDIR)/$(LIBNAME).so
 
 application: $(BINDIR)/$(BINNAME)
 
-clean:
+clean-build:
 	$(RM) $(RMFLAGS) $(BUILDDIR)
+
+clean: clean-build clean-test
 
 run: application
 	@echo "Write a type declaration. Quit with Ctrl-d."
@@ -132,11 +137,35 @@ copy-header: $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
 
-test: $(BINDIR)/$(BINNAME) $(TYPEDECLFILES)
-	@for typedeclfile in $(TYPEDECLFILES); do                                      \
-			echo "Testing" $$typedeclfile;                                             \
-	    $(BINDIR)/$(BINNAME) $$typedeclfile | $(DIFF) $$typedeclfile - || exit 1 ; \
-	done
+test: test-pass test-fail
+
+$(TESTSDIR)/pass/output/%.typedecl: $(TESTSDIR)/pass/%.typedecl $(BINDIR)/$(BINNAME)
+	@echo "Testing" $<;
+	@if $(BINDIR)/$(BINNAME) $< > $@ 2>&1; \
+	then $(DIFF) $< $@;                    \
+	else cat $@ && exit 1;                 \
+	fi
+
+$(TESTSDIR)/fail/output/%.typedecl: $(TESTSDIR)/fail/%.typedecl $(BINDIR)/$(BINNAME)
+	@echo "Testing" $<;
+	@if $(BINDIR)/$(BINNAME) $< > $@ 2>&1; \
+	then cat $@ && exit 1;                 \
+	fi
+
+
+$(TESTSDIR)/pass/output:
+	@$(MKDIR) $(MKDIRFLAGS) $@
+
+test-pass: $(TESTSDIR)/pass/output $(PASSTYPEDECLFILESOUTPUT)
+
+$(TESTSDIR)/fail/output:
+	@$(MKDIR) $(MKDIRFLAGS) $@
+
+test-fail: $(TESTSDIR)/fail/output $(FAILTYPEDECLFILESOUTPUT)
+
+clean-test:
+	$(RM) $(RMFLAGS) $(TESTSDIR)/pass/output
+	$(RM) $(RMFLAGS) $(TESTSDIR)/fail/output
 
 cppcheck:
 	$(CPPCHECK) --quiet                         \
@@ -164,8 +193,12 @@ clang-format:
         static-library  \
         shared-library  \
         application     \
+        clean-build     \
         clean           \
         run             \
         clang-format    \
         test            \
+        test-pass       \
+        test-fail       \
+        clean-test      \
         cppcheck
