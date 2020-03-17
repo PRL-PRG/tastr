@@ -1,0 +1,3 @@
+type f externalptr;
+type f ept;
+type f p;
