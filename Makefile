@@ -1,5 +1,6 @@
 SRCDIR := src
 INCLUDEDIR := include
+TESTDIR := test
 GRAMMARDIR := grammar
 DRIVERDIR := driver
 BUILDDIR := build
@@ -54,6 +55,8 @@ HEADERFILES := $(patsubst $(INCLUDEDIR)/%,$(HEADERDIR)/%,$(INCLUDEFILES))
 
 DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
 OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
+
+TYPEFILES := $(shell find $(TESTDIR) -name '*.type')
 
 all: build
 
@@ -128,6 +131,11 @@ copy-header: $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
 
+test:
+	@for typefile in $(TYPEFILES); do                                   \
+			echo "Testing" $$typefile;                                      \
+	    $(BINDIR)/$(BINNAME) $$typefile | diff $$typefile - || exit 1 ; \
+	done
 
 cppcheck:
 	$(CPPCHECK) --quiet                         \
@@ -157,4 +165,5 @@ clang-format:
         clean           \
         run             \
         clang-format    \
+        test            \
         cppcheck
