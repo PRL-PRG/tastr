@@ -10,5 +10,8 @@ type f l;
 type f complex;
 type f clx;
 type f x;
+type f character;
+type f chr;
+type f s;
 type f raw;
 type f r;
