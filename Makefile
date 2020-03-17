@@ -26,6 +26,7 @@ RM := rm
 CPPCHECK := cppcheck
 CLANGFORMAT := clang-format
 CP := cp
+DIFF := diff
 
 RMFLAGS := -rf
 MKDIRFLAGS := -p
@@ -131,10 +132,10 @@ copy-header: $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
 
-test:
-	@for typefile in $(TYPEFILES); do                                   \
-			echo "Testing" $$typefile;                                      \
-	    $(BINDIR)/$(BINNAME) $$typefile | diff $$typefile - || exit 1 ; \
+test: $(BINDIR)/$(BINNAME) $(TYPEFILES)
+	@for typefile in $(TYPEFILES); do                                      \
+			echo "Testing" $$typefile;                                         \
+	    $(BINDIR)/$(BINNAME) $$typefile | $(DIFF) $$typefile - || exit 1 ; \
 	done
 
 cppcheck:
