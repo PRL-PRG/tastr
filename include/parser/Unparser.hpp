@@ -45,7 +45,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::NAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             os_ << "^";
             node.get_a_scalar_type().accept(*this);
@@ -53,7 +53,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::IdentifierNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             if (node.is_quoted()) {
                 os_ << "`";
@@ -70,66 +70,66 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::KeywordNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         bright_green_([this, &node] { os_ << node.get_value(); });
     }
 
     void visit(const tastr::ast::OperatorNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         bright_red_([this, &node] { os_ << node.get_value(); });
     }
 
     void visit(const tastr::ast::TerminatorNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         bright_red_([this, &node] { os_ << node.get_value(); });
     }
 
     void visit(const tastr::ast::SeparatorNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         bright_red_([this, &node] { os_ << node.get_value(); });
     }
 
     void visit(const tastr::ast::EmptyNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
     }
 
     void visit(const tastr::ast::EofNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
     }
 
     void
     visit(const tastr::ast::CharacterAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::ComplexAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::DoubleAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::IntegerAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::LogicalAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::RawAScalarTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::VectorTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_scalar_type().accept(*this);
             visit(node.get_operator());
@@ -137,62 +137,62 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::ExpressionTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::LanguageTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::SymbolTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::ExternalPointerTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::BytecodeTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::PairlistTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::S4TypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::WeakReferenceTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::AnyTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::UnknownTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::CommaSeparatorNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_first_node().accept(*this);
             node.get_separator().accept(*this);
@@ -201,7 +201,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::ParameterNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
             node.get_elements().accept(*this);
@@ -210,7 +210,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::FunctionTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_parameter().accept(*this);
             node.get_operator().accept(*this);
@@ -219,7 +219,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::ListTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
             node.get_elements().accept(*this);
@@ -228,7 +228,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::StructTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
             node.get_elements().accept(*this);
@@ -237,7 +237,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TupleTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
             node.get_elements().accept(*this);
@@ -246,7 +246,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::GroupTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
             node.get_inner_type().accept(*this);
@@ -255,7 +255,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::UnionTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_first_type().accept(*this);
             visit(node.get_operator());
@@ -264,17 +264,17 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::VarargTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::NullTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] { visit(node.get_keyword()); });
     }
 
     void visit(const tastr::ast::NullableTypeNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             visit(node.get_operator());
             node.get_inner_type().accept(*this);
@@ -282,7 +282,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TagTypePairNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             node.get_identifier().accept(*this);
             node.get_separator().accept(*this);
@@ -291,7 +291,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TypeDeclarationNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             visit(node.get_keyword());
             node.get_identifier().accept(*this);
@@ -301,7 +301,7 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::TopLevelNode& node) override final {
-        os_ << node.get_location().get_prefix();
+        visit_(node.get_location());
         ast_([this, &node] {
             for (int index = 0; index < node.size(); ++index) {
                 node.at(index).accept(*this);
@@ -311,6 +311,10 @@ class Unparser final: public ConstNodeVisitor {
     }
 
   private:
+    void visit_(const tastr::parser::Location& node) {
+        bright_gray_([this, &node] { os_ << node.get_prefix(); });
+    }
+
     template <typename T, typename U, typename V>
     void style_(T style_setter, U style_resetter, V code) {
         if (should_style_output()) {
