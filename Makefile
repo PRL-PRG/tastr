@@ -80,14 +80,22 @@ run: application
 	@echo "Write a type declaration. Quit with Ctrl-d."
 	./$(BINDIR)/$(BINNAME) $(BINARGS)
 
-$(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: $(GRAMMARDIR)/Parser.yxx
+$(SRCDIR)/$(PARSERDIR)/Parser.cxx: generate-parser
+
+$(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: generate-parser
+
+generate-parser: $(GRAMMARDIR)/Parser.yxx
 	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/$(PARSERDIR)/Parser.cxx
 	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
 
-$(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx: $(GRAMMARDIR)/Lexer.lxx
+$(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx: generate-lexer
+
+$(SRCDIR)/$(PARSERDIR)/Lexer.cxx: generate-lexer
+
+generate-lexer: $(GRAMMARDIR)/Lexer.lxx
 	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
@@ -132,15 +140,18 @@ cppcheck:
 clang-format:
 	$(CLANGFORMAT) -i $(CPPSRCFILES) $(CSRCFILES) $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(DRIVERFILES)
 
-.PHONY: all            \
-        build          \
-        parser         \
-        lexer          \
-        library        \
-        static-library \
-        shared-library \
-        application    \
-        clean          \
-        run            \
-        clang-format   \
+.PHONY: all             \
+        build           \
+        parser          \
+        generate-parser \
+        lexer           \
+        generate-lexer  \
+        header          \
+        library         \
+        static-library  \
+        shared-library  \
+        application     \
+        clean           \
+        run             \
+        clang-format    \
         cppcheck
