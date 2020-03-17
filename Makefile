@@ -57,7 +57,7 @@ HEADERFILES := $(patsubst $(INCLUDEDIR)/%,$(HEADERDIR)/%,$(INCLUDEFILES))
 DRIVERFILES := $(shell find $(DRIVERDIR) -name '*.cpp') $(shell find $(DRIVERDIR) -name '*.c') $(shell find $(DRIVERDIR) -name '*.cc')
 OBJECTFILES := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(addsuffix .o,$(SRCFILES)))
 
-TYPEFILES := $(shell find $(TESTDIR) -name '*.type')
+TYPEDECLFILES := $(shell find $(TESTDIR) -name '*.typedecl')
 
 all: build
 
@@ -132,10 +132,10 @@ copy-header: $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
 
-test: $(BINDIR)/$(BINNAME) $(TYPEFILES)
-	@for typefile in $(TYPEFILES); do                                      \
-			echo "Testing" $$typefile;                                         \
-	    $(BINDIR)/$(BINNAME) $$typefile | $(DIFF) $$typefile - || exit 1 ; \
+test: $(BINDIR)/$(BINNAME) $(TYPEDECLFILES)
+	@for typedeclfile in $(TYPEDECLFILES); do                                      \
+			echo "Testing" $$typedeclfile;                                             \
+	    $(BINDIR)/$(BINNAME) $$typedeclfile | $(DIFF) $$typedeclfile - || exit 1 ; \
 	done
 
 cppcheck:
