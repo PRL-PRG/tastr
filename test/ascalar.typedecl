@@ -1,0 +1,14 @@
+type f integer;
+type f int;
+type f i;
+type f double;
+type f dbl;
+type f d;
+type f logical;
+type f lgl;
+type f l;
+type f complex;
+type f clx;
+type f x;
+type f raw;
+type f r;
