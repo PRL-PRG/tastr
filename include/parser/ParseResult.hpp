@@ -15,7 +15,7 @@ class ParseResult {
         : state_(true)
         , location_()
         , message_()
-        , node_(new tastr::ast::TopLevelNode(input_stream_name, "\n")) {
+        , node_(new tastr::ast::TopLevelNode(input_stream_name)) {
     }
 
     ParseResult(const ParseResult& parse_result)

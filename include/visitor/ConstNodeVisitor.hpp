@@ -28,6 +28,12 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::OperatorNode& node) = 0;
 
+    virtual void visit(const tastr::ast::TerminatorNode& node) = 0;
+
+    virtual void visit(const tastr::ast::SeparatorNode& node) = 0;
+
+    virtual void visit(const tastr::ast::EmptyNode& node) = 0;
+
     virtual void visit(const tastr::ast::CharacterAScalarTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::ComplexAScalarTypeNode& node) = 0;
@@ -64,6 +70,10 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::UnknownTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::CommaSeparatorNode& node) = 0;
+
+    virtual void visit(const tastr::ast::ParameterNode& node) = 0;
+
     virtual void visit(const tastr::ast::FunctionTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::ListTypeNode& node) = 0;
@@ -82,16 +92,9 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::NullableTypeNode& node) = 0;
 
-    virtual void visit(const tastr::ast::TypeNodeSequenceNode& node) = 0;
-
     virtual void visit(const tastr::ast::TagTypePairNode& node) = 0;
 
-    virtual void visit(const tastr::ast::TagTypePairNodeSequenceNode& node) = 0;
-
     virtual void visit(const tastr::ast::TypeDeclarationNode& node) = 0;
-
-    virtual void
-    visit(const tastr::ast::TypeDeclarationNodeSequenceNode& node) = 0;
 
     virtual void visit(const tastr::ast::TopLevelNode& node) = 0;
 };

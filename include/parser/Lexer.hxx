@@ -276,6 +276,8 @@ int yyFlexLexer::yylex()
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
+#define quoted_identifier 1
+#define comment 2
 
 #endif
 
@@ -527,9 +529,9 @@ static int yy_flex_strlen ( const char * );
 #undef yyTABLES_NAME
 #endif
 
-#line 101 "Lexer.lxx"
+#line 148 "Lexer.lxx"
 
 
-#line 533 "Lexer.hxx"
+#line 535 "Lexer.hxx"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

@@ -12,11 +12,11 @@ class GroupTypeNode final
     : public TypeNode
     , public Bracketed {
   public:
-    explicit GroupTypeNode(const std::string& opening_bracket,
-                           const std::string& closing_bracket,
-                           std::unique_ptr<TypeNode> inner_type)
+    explicit GroupTypeNode(OperatorNodeUPtr opening_bracket,
+                           OperatorNodeUPtr closing_bracket,
+                           TypeNodeUPtr inner_type)
         : TypeNode()
-        , Bracketed(opening_bracket, closing_bracket)
+        , Bracketed(std::move(opening_bracket), std::move(closing_bracket))
         , inner_type_(std::move(inner_type)) {
     }
 

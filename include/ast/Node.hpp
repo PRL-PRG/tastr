@@ -89,6 +89,10 @@ class Node {
         return false;
     }
 
+    virtual bool is_separator_node() const {
+        return false;
+    }
+
     virtual bool is_integer_a_scalar_type_node() const {
         return false;
     }
@@ -210,6 +214,22 @@ class Node {
     }
 
     virtual bool is_nullable_type_node() const {
+        return false;
+    }
+
+    virtual bool is_comma_separator_node() const {
+        return false;
+    }
+
+    virtual bool is_parameter_node() const {
+        return false;
+    }
+
+    virtual bool is_terminator_node() const {
+        return false;
+    }
+
+    virtual bool is_empty_node() const {
         return false;
     }
 

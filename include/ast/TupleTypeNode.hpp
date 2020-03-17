@@ -3,7 +3,6 @@
 
 #include "ast/Bracket.hpp"
 #include "ast/TypeNode.hpp"
-#include "ast/TypeNodeSequenceNode.hpp"
 
 namespace tastr::ast {
 
@@ -11,26 +10,24 @@ class TupleTypeNode final
     : public TypeNode
     , public Bracketed {
   public:
-    explicit TupleTypeNode(const std::string& opening_bracket,
-                           const std::string& closing_bracket,
-                           TypeNodeSequenceNodeUPtr element_types)
+    explicit TupleTypeNode(OperatorNodeUPtr opening_bracket,
+                           OperatorNodeUPtr closing_bracket,
+                           NodeUPtr elements)
         : TypeNode()
-        , Bracketed(opening_bracket, closing_bracket)
-        , element_types_(std::move(element_types)) {
+        , Bracketed(std::move(opening_bracket), std::move(closing_bracket))
+        , elements_(std::move(elements)) {
     }
 
     ~TupleTypeNode() = default;
 
     TupleTypeNode(const TupleTypeNode& node)
-        : TypeNode(node)
-        , Bracketed(node)
-        , element_types_(node.element_types_->clone()) {
+        : TypeNode(node), Bracketed(node), elements_(node.elements_->clone()) {
     }
 
     TupleTypeNode(TupleTypeNode&& node)
         : TypeNode(std::move(node))
         , Bracketed(std::move(node))
-        , element_types_(std::move(node.element_types_)) {
+        , elements_(std::move(node.elements_)) {
     }
 
     TupleTypeNode& operator=(const TupleTypeNode& node) {
@@ -39,14 +36,14 @@ class TupleTypeNode final
         }
         TypeNode::operator=(node);
         Bracketed::operator=(node);
-        element_types_ = node.element_types_->clone();
+        elements_ = node.elements_->clone();
         return *this;
     }
 
     TupleTypeNode& operator=(TupleTypeNode&& node) {
         TypeNode::operator=(std::move(node));
         Bracketed::operator=(std::move(node));
-        element_types_ = std::move(node.element_types_);
+        elements_ = std::move(node.elements_);
         return *this;
     }
 
@@ -62,8 +59,8 @@ class TupleTypeNode final
         return true;
     }
 
-    TypeNodeSequenceNode& get_element_types() const {
-        return *element_types_.get();
+    Node& get_elements() const {
+        return *elements_.get();
     }
 
   private:
@@ -71,7 +68,7 @@ class TupleTypeNode final
         return new TupleTypeNode(*this);
     };
 
-    TypeNodeSequenceNodeUPtr element_types_;
+    NodeUPtr elements_;
 };
 
 using TupleTypeNodePtr = TupleTypeNode*;

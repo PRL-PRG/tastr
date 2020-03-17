@@ -25,7 +25,6 @@
 /* %define api.token.constructor */
 %define api.token.prefix {TOKEN_}
 
-
 %token EOF                              0                    "end of file";
 %token <std::string>                    OR                   "|";
 %token <std::string>                    CARET                "^";
@@ -65,6 +64,7 @@
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
+%token <std::string>                    QUOTED_IDENTIFIER;
 %nterm <AScalarTypeNodePtr>             ascalartype
 %nterm <RawAScalarTypeNodePtr>          rawascalartype
 %nterm <NAScalarTypeNodePtr>            nascalartype
@@ -81,16 +81,20 @@
 %nterm <UnknownTypeNodePtr>             unknowntype
 %nterm <AnyTypeNodePtr>                 anytype
 %nterm <VectorTypeNodePtr>              vectortype
-%nterm <TypeNodeSequenceNodePtr>        typeseq
+%nterm <NodePtr>                        typeseq
 %nterm <TagTypePairNodePtr>             namedtype
-%nterm <TagTypePairNodeSequenceNodePtr> namedtypeseq
+%nterm <NodePtr>                        namedtypeseq
 %nterm <TypeNodePtr>                    paramtype
-%nterm <TypeNodeSequenceNodePtr>        paramtypeseq
+%nterm <NodePtr>                        paramtypeseq
+%nterm <ParameterNodePtr>               params
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
+%nterm <NodePtr>                        listelement
 %nterm <ListTypeNodePtr>                listtype
+%nterm <NodePtr>                        structelements
 %nterm <StructTypeNodePtr>              structtype
+%nterm <NodePtr>                        tupleelements
 %nterm <TupleTypeNodePtr>               tupletype
 %nterm <IdentifierNodePtr>              identifier
 %nterm <TypeNodePtr>                    innertype
@@ -123,10 +127,10 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <AnyTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <UnknownTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <VectorTypeNodePtr>;
-%printer { yyo << tastr::parser::to_string(*$$); } <TypeNodeSequenceNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <NodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodePtr>;
-%printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodeSequenceNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <FunctionTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <ParameterNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <GroupTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ListTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <StructTypeNodePtr>;
@@ -157,11 +161,15 @@
 %destructor { delete $$; } namedtypeseq
 %destructor { delete $$; } paramtype
 %destructor { delete $$; } paramtypeseq
+%destructor { delete $$; } params
 %destructor { delete $$; } functiontype
 %destructor { delete $$; } grouptype
 %destructor { delete $$; } nonuniontype
+%destructor { delete $$; } listelement
 %destructor { delete $$; } listtype
+%destructor { delete $$; } structelements
 %destructor { delete $$; } structtype
+%destructor { delete $$; } tupleelements
 %destructor { delete $$; } tupletype
 %destructor { delete $$; } identifier
 %destructor { delete $$; } innertype
@@ -189,6 +197,8 @@
     #include "parser/Location.hpp"
     #include "ast/ast.hpp"
     #include "parser/parser.hpp"
+    using tastr::ast::Node;
+    using tastr::ast::NodePtr;
     using tastr::ast::KeywordNode;
     using tastr::ast::KeywordNodePtr;
     using tastr::ast::OperatorNode;
@@ -218,6 +228,8 @@
     using tastr::ast::UnknownTypeNodePtr;
     using tastr::ast::AnyTypeNode;
     using tastr::ast::AnyTypeNodePtr;
+    using tastr::ast::ParameterNode;
+    using tastr::ast::ParameterNodePtr;
     using tastr::ast::FunctionTypeNode;
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
@@ -249,13 +261,16 @@
     using tastr::ast::IdentifierNode;
     using tastr::ast::IdentifierNodePtr;
     using tastr::ast::VarargTypeNode;
-    using tastr::ast::TypeNodeSequenceNode;
-    using tastr::ast::TypeNodeSequenceNodePtr;
-    using tastr::ast::TagTypePairNodeSequenceNode;
-    using tastr::ast::TagTypePairNodeSequenceNodePtr;
     using tastr::ast::NullTypeNode;
     using tastr::ast::NullableTypeNode;
     using tastr::ast::TopLevelNodeUPtr;
+    using tastr::ast::CommaSeparatorNode;
+    using tastr::ast::SeparatorNodePtr;
+    using tastr::ast::SeparatorNode;
+    using tastr::ast::EmptyNode;
+    using tastr::ast::EmptyNodePtr;
+    using tastr::ast::TerminatorNode;
+    using tastr::ast::TerminatorNodePtr;
 }
 
 /* inserted near top of source file */
@@ -264,46 +279,89 @@
     #include "parser/Lexer.hpp"
     #undef yylex
     #define yylex lexer.yylex
+// TODO op
+TerminatorNodePtr create_terminator(const std::string& value,
+                                    tastr::parser::Location& location,
+                                    tastr::parser::ParsingContext& context) {
+    TerminatorNodePtr terminator = new TerminatorNode(value);
+    std::cout << "[ " << value << " ] ";
+    location.set_token_prefix(context.pop_token_prefix());
+    terminator -> set_location(location);
+    return terminator;
+}
+// TODO op
+IdentifierNodePtr create_identifier(const std::string& value,
+                                    bool quoted,
+                                    tastr::parser::Location& location,
+                                    tastr::parser::ParsingContext& context) {
+    IdentifierNodePtr identifier = new IdentifierNode(value, quoted);
+    std::cout << "[ " << value << " ] ";
+    location.set_token_prefix(context.pop_token_prefix());
+    identifier -> set_location(location);
+    return identifier;
+}
+// TODO op
+OperatorNodePtr create_operator(const std::string& value,
+                                tastr::parser::Location& location,
+                                tastr::parser::ParsingContext& context) {
+    OperatorNodePtr op = new OperatorNode(value);
+    std::cout << "[ " << value << " ] ";
+    location.set_token_prefix(context.pop_token_prefix());
+    op -> set_location(location);
+    return op;
+}
+// TODO op
+SeparatorNodePtr create_separator(const std::string& value,
+                                tastr::parser::Location& location,
+                                tastr::parser::ParsingContext& context) {
+    SeparatorNodePtr op = new SeparatorNode(value);
+    std::cout << "[ " << value << " ] ";
+    location.set_token_prefix(context.pop_token_prefix());
+    op -> set_location(location);
+    return op;
+}
+
+KeywordNodePtr create_keyword(const std::string& value,
+                                tastr::parser::Location& location,
+                                tastr::parser::ParsingContext& context) {
+    KeywordNodePtr keyword = new KeywordNode(value);
+    std::cout << "[ " << value << " ] ";
+    location.set_token_prefix(context.pop_token_prefix());
+    keyword -> set_location(location);
+    return keyword;
+}
+
+template<typename T>
+T* create_node_with_keyword(const std::string& value,
+                            tastr::parser::Location& keyword_location,
+                            tastr::parser::Location& node_location,
+                            tastr::parser::ParsingContext& context) {
+    KeywordNodePtr keyword = new KeywordNode(value);
+    std::cout << "[ " << value << " ] ";
+    keyword_location.set_token_prefix(context.pop_token_prefix());
+    keyword -> set_location(keyword_location);
+    T* node = new T(std::move(wrap(std::move(keyword))));
+    node -> set_location(node_location);
+    return node;
+}
 }
 
 %%
 
-ascalartype:        INTEGER                                 {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new IntegerAScalarTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         DOUBLE                                  {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new DoubleAScalarTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         COMPLEX                                 {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new ComplexAScalarTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         CHARACTER                               {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new CharacterAScalarTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         LOGICAL                                 {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new LogicalAScalarTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+ascalartype:        INTEGER                                 {   $$ = create_node_with_keyword<IntegerAScalarTypeNode>($1, @1, @$, context); }
+          |         DOUBLE                                  {   $$ = create_node_with_keyword<DoubleAScalarTypeNode>($1, @1, @$, context); }
+          |         COMPLEX                                 {   $$ = create_node_with_keyword<ComplexAScalarTypeNode>($1, @1, @$, context); }
+          |         CHARACTER                               {   $$ = create_node_with_keyword<CharacterAScalarTypeNode>($1, @1, @$, context); }
+          |         LOGICAL                                 {   $$ = create_node_with_keyword<LogicalAScalarTypeNode>($1, @1, @$, context); }
           ;
 
-rawascalartype:      RAW                                    {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new RawAScalarTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+rawascalartype:      RAW                                    {   $$ = create_node_with_keyword<RawAScalarTypeNode>($1, @1, @$, context); }
               ;
 
 nascalartype:       "^" ascalartype                         {
-                                                                $$ = new NAScalarTypeNode(std::move(wrap(std::move($2))));
+                                                                //OperatorNodePtr op = create_operator($1, @1, context);
+                                                                $$ = new NAScalarTypeNode(//std::move(wrap(std::move(op))),
+                                                                                          std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
 
@@ -324,222 +382,158 @@ scalartype:         ascalartype                             {
                                                             }
           ;
 
-environmenttype:    ENVIRONMENT                             {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new EnvironmentTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+environmenttype:    ENVIRONMENT                             {   $$ = create_node_with_keyword<EnvironmentTypeNode>($1, @1, @$, context); }
                ;
 
-expressiontype:     EXPRESSION                              {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new ExpressionTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+expressiontype:     EXPRESSION                              {   $$ = create_node_with_keyword<ExpressionTypeNode>($1, @1, @$, context);  }
               ;
 
-languagetype:       LANGUAGE                                {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new LanguageTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+languagetype:       LANGUAGE                                {   $$ = create_node_with_keyword<LanguageTypeNode>($1, @1, @$, context);    }
             ;
 
-symboltype:         SYMBOL                                  {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new SymbolTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+symboltype:         SYMBOL                                  {   $$ = create_node_with_keyword<SymbolTypeNode>($1, @1, @$, context);      }
           ;
 
-externalptrtype:    EXTERNALPOINTER                         {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new ExternalPointerTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+externalptrtype:    EXTERNALPOINTER                         {   $$ = create_node_with_keyword<ExternalPointerTypeNode>($1, @1, @$, context); }
                ;
 
-bytecodetype:       BYTECODE                                {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new BytecodeTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+bytecodetype:       BYTECODE                                {   $$ = create_node_with_keyword<BytecodeTypeNode>($1, @1, @$, context); }
             ;
 
-pairlisttype:       PAIRLIST                                {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new PairlistTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+pairlisttype:       PAIRLIST                                {   $$ = create_node_with_keyword<PairlistTypeNode>($1, @1, @$, context); }
             ;
 
-s4type:             S4                                      {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new S4TypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+s4type:             S4                                      {   $$ = create_node_with_keyword<S4TypeNode>($1, @1, @$, context); }
       ;
 
-weakreftype:        WEAKREF                                 {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new WeakReferenceTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+weakreftype:        WEAKREF                                 {   $$ = create_node_with_keyword<WeakReferenceTypeNode>($1, @1, @$, context); }
            ;
 
-anytype:            ANY                                     {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new AnyTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+anytype:            ANY                                     {   $$ = create_node_with_keyword<AnyTypeNode>($1, @1, @$, context); }
        ;
 
-unknowntype:        UNKNOWN                                 {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new UnknownTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+unknowntype:        UNKNOWN                                 {   $$ = create_node_with_keyword<UnknownTypeNode>($1, @1, @$, context); }
            ;
 
 vectortype:         scalartype "[]"                         {
-                                                                OperatorNodePtr op(new OperatorNode($2));
-                                                                $$ = new VectorTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($1))));
+                                                                OperatorNodePtr op = create_operator($2, @2, context);
+                                                                $$ = new VectorTypeNode(std::move(wrap(std::move(op))),
+                                                                                        std::move(wrap(std::move($1))));
                                                                 $$ -> set_location(@$);
                                                             }
           ;
 
-listtype:           "((" typeseq "))"                       {
-                                                                $$ = new ListTypeNode($1, $3, std::move(wrap(std::move($2))));
+listelement:        %empty                                  {
+                                                                $$ = new EmptyNode();
+                                                            }
+           |        type                                    {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                            }
+           ;
+
+listtype:           "((" listelement "))"                   {
+                                                                OperatorNodePtr right = create_operator($3, @3, context);
+                                                                OperatorNodePtr left = create_operator($1, @1, context);
+                                                                $$ = new ListTypeNode(std::move(wrap(std::move(left))),
+                                                                                      std::move(wrap(std::move(right))),
+                                                                                      std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
 
-typeseq:            %empty                                  {
-                                                                $$ = new TypeNodeSequenceNode(",");
-                                                                $$ -> set_location(@$);
-                                                            }
-       |            type                                    {
-                                                                $$ = new TypeNodeSequenceNode(",");
-                                                                $$ -> push_back(std::move(wrap(std::move($1))));
-                                                                $$ -> set_location(@$);
-                                                            }
-       |            typeseq "," type                        {
+typeseq:            type                                    {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
-                                                                $$ -> push_back(std::move(wrap(std::move($3))));
+                                                            }
+       |            typeseq "," type                        {
+                                                                SeparatorNodePtr op = create_separator($2, @2, context);
+                                                                $$ = new CommaSeparatorNode(std::move(wrap(std::move(op))),
+                                                                                            std::move(wrap(std::move($1))),
+                                                                                            std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
        ;
 
-structtype:         "{{" namedtypeseq "}}"                  {
-                                                                $$ = new StructTypeNode($1, $3, std::move(wrap(std::move($2))));
+structelements:     %empty                                  {
+                                                                $$ = new EmptyNode();
+                                                            }
+              |     namedtypeseq                            {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                            }
+              ;
+
+structtype:         "{{" structelements "}}"                {
+                                                                OperatorNodePtr right = create_operator($3, @3, context);
+                                                                OperatorNodePtr left = create_operator($1, @1, context);
+                                                                $$ = new StructTypeNode(std::move(wrap(std::move(left))),
+                                                                                        std::move(wrap(std::move(right))),
+                                                                                        std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
           ;
 
-tupletype:          "[[" typeseq "]]"                       {
-                                                                $$ = new TupleTypeNode($1, $3, std::move(wrap(std::move($2))));
+
+tupleelements:     %empty                                   {
+                                                                $$ = new EmptyNode();
+                                                            }
+             |     typeseq                                  {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                            }
+             ;
+
+tupletype:          "[[" tupleelements "]]"                 {
+                                                                OperatorNodePtr right = create_operator($3, @3, context);
+                                                                OperatorNodePtr left = create_operator($1, @1, context);
+                                                                $$ = new TupleTypeNode(std::move(wrap(std::move(left))),
+                                                                                       std::move(wrap(std::move(right))),
+                                                                                       std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
-identifier:         INTEGER                                 {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         DOUBLE                                  {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         COMPLEX                                 {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         CHARACTER                               {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         LOGICAL                                 {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         RAW                                     {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         ENVIRONMENT                             {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         EXPRESSION                              {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         LANGUAGE                                {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         SYMBOL                                  {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         EXTERNALPOINTER                         {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         BYTECODE                                {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         PAIRLIST                                {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         S4                                      {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         WEAKREF                                 {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         ANY                                     {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         TYPEDECL                                {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         VARARG                                  {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
-          |         IDENTIFIER                              {
-                                                                $$ = new IdentifierNode($1);
-                                                                $$ -> set_location(@1);
-                                                            }
+identifier:         INTEGER                                 { $$ = create_identifier($1, false, @1, context); }
+          |         DOUBLE                                  { $$ = create_identifier($1, false, @1, context); }
+          |         COMPLEX                                 { $$ = create_identifier($1, false, @1, context); }
+          |         CHARACTER                               { $$ = create_identifier($1, false, @1, context); }
+          |         LOGICAL                                 { $$ = create_identifier($1, false, @1, context); }
+          |         RAW                                     { $$ = create_identifier($1, false, @1, context); }
+          |         ENVIRONMENT                             { $$ = create_identifier($1, false, @1, context); }
+          |         EXPRESSION                              { $$ = create_identifier($1, false, @1, context); }
+          |         LANGUAGE                                { $$ = create_identifier($1, false, @1, context); }
+          |         SYMBOL                                  { $$ = create_identifier($1, false, @1, context); }
+          |         EXTERNALPOINTER                         { $$ = create_identifier($1, false, @1, context); }
+          |         BYTECODE                                { $$ = create_identifier($1, false, @1, context); }
+          |         PAIRLIST                                { $$ = create_identifier($1, false, @1, context); }
+          |         S4                                      { $$ = create_identifier($1, false, @1, context); }
+          |         WEAKREF                                 { $$ = create_identifier($1, false, @1, context); }
+          |         ANY                                     { $$ = create_identifier($1, false, @1, context); }
+          |         TYPEDECL                                { $$ = create_identifier($1, false, @1, context); }
+          |         VARARG                                  { $$ = create_identifier($1, false, @1, context); }
+          |         IDENTIFIER                              { $$ = create_identifier($1, false, @1, context); }
+          |         QUOTED_IDENTIFIER                       { $$ = create_identifier($1, true, @1, context);  }
           ;
 
 namedtype:          identifier ":" type                     {
-                                                                $$ = new TagTypePairNode(std::move(wrap(std::move($1))), std::move(wrap(std::move($3))), $2);
+                                                                SeparatorNodePtr separator = create_separator($2, @2, context);
+                                                                $$ = new TagTypePairNode(std::move(wrap(std::move($1))),
+                                                                                         std::move(wrap(std::move($3))),
+                                                                                         std::move(wrap(std::move(separator))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
-namedtypeseq:       %empty                                  {
-                                                                $$ = new TagTypePairNodeSequenceNode(",");
-                                                                $$ -> set_location(@$);
-                                                            }
-            |       namedtype                               {
-                                                                $$ = new TagTypePairNodeSequenceNode(",");
-                                                                $$ -> push_back(std::move(wrap(std::move($1))));
-                                                                $$ -> set_location(@1);
-                                                            }
-            |       namedtypeseq "," namedtype              {
+namedtypeseq:       namedtype                               {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
-                                                                $$ -> push_back(std::move(wrap(std::move($3))));
+                                                            }
+            |       namedtypeseq "," namedtype              {
+                                                                SeparatorNodePtr op = create_separator($2, @2, context);
+                                                                $$ = new CommaSeparatorNode(std::move(wrap(std::move(op))),
+                                                                                            std::move(wrap(std::move($1))),
+                                                                                            std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
             ;
@@ -548,40 +542,56 @@ namedtypeseq:       %empty                                  {
 paramtype:          type                                    {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
-                                                                $$ -> set_location(@1);
                                                             }
-         |          "..."                                   {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new VarargTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@1);
-                                                            }
+         |          "..."                                   {   $$ = create_node_with_keyword<VarargTypeNode>($1, @1, @$, context); }
          ;
 
-paramtypeseq:       %empty                                  {
-                                                                $$ = new TypeNodeSequenceNode(",");
-                                                                $$ -> set_location(@$);
-                                                            }
-            |       paramtype                               {
-                                                                $$ = new TypeNodeSequenceNode(",");
-                                                                $$ -> push_back(std::move(wrap(std::move($1))));
-                                                                $$ -> set_location(@$);
-                                                            }
-            |       paramtypeseq "," paramtype              {
+paramtypeseq:       paramtype                               {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
-                                                                $$ -> push_back(std::move(wrap(std::move($3))));
+                                                            }
+            |       paramtypeseq "," paramtype              {
+                                                                SeparatorNodePtr op = create_separator($2, @2, context);
+                                                                $$ = new CommaSeparatorNode(std::move(wrap(std::move(op))),
+                                                                                            std::move(wrap(std::move($1))),
+                                                                                            std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
             ;
 
-functiontype:       "<" paramtypeseq ">" "=>" type          {
-                                                                OperatorNodePtr op(new OperatorNode($4));
-                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($2))), std::move(wrap(std::move($5))));
+params:             "<" paramtypeseq ">"                    {
+                                                                OperatorNodePtr right = create_operator($3, @3, context);
+                                                                OperatorNodePtr left = create_operator($1, @1, context);
+                                                                $$ = new ParameterNode(std::move(wrap(std::move(left))),
+                                                                                       std::move(wrap(std::move(right))),
+                                                                                       std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
+      |             "<" ">"                                 {
+                                                                OperatorNodePtr right = create_operator($2, @2, context);
+                                                                OperatorNodePtr left = create_operator($1, @1, context);
+                                                                $$ = new ParameterNode(std::move(wrap(std::move(left))),
+                                                                                       std::move(wrap(std::move(right))),
+                                                                                       std::move(wrap(new EmptyNode())));
+                                                                $$ -> set_location(@$);
+                                                            }
+      ;
+
+functiontype:       params "=>" type                        {
+                                                                OperatorNodePtr op = create_operator($2, @2, context);
+                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move(op))),
+                                                                                          std::move(wrap(std::move($1))),
+                                                                                          std::move(wrap(std::move($3))));
+                                                                $$ -> set_location(@$);
+                                                            }
+            ;
 
 grouptype:          "(" type ")"                            {
-                                                                $$ = new GroupTypeNode($1, $3, std::move(wrap(std::move($2))));
+                                                                OperatorNodePtr right = create_operator($3, @3, context);
+                                                                OperatorNodePtr left = create_operator($1, @1, context);
+                                                                $$ = new GroupTypeNode(std::move(wrap(std::move(left))),
+                                                                                       std::move(wrap(std::move(right))),
+                                                                                       std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
@@ -675,21 +685,20 @@ innertype:          nonuniontype                            {
                                                                 $$ -> set_location(@$);
                                                             }
          |          innertype OR nonuniontype               {
-                                                                OperatorNodePtr op(new OperatorNode($2));
-                                                                $$ = new UnionTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($1))), std::move(wrap(std::move($3))));
+                                                                OperatorNodePtr op = create_operator($2, @2, context);
+                                                                $$ = new UnionTypeNode(std::move(wrap(std::move(op))),
+                                                                                       std::move(wrap(std::move($1))),
+                                                                                       std::move(wrap(std::move($3))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;
 
 
-nulltype:          "?"                                      {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new NullTypeNode(std::move(wrap(std::move(keyword))));
-                                                                $$ -> set_location(@$);
-                                                            }
+nulltype:          "?"                                      {   $$ = create_node_with_keyword<NullTypeNode>($1, @1, @$, context); }
         |          "?" innertype                            {
-                                                                OperatorNodePtr op(new OperatorNode($1));
-                                                                $$ = new NullableTypeNode(std::move(wrap(std::move(op))), std::move(wrap(std::move($2))));
+                                                                OperatorNodePtr op = create_operator($1, @1, context);
+                                                                $$ = new NullableTypeNode(std::move(wrap(std::move(op))),
+                                                                                          std::move(wrap(std::move($2))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;
@@ -718,8 +727,12 @@ type:               innertype %prec LOWER_THAN_OR           {
     ;
 
 decltype:           TYPEDECL identifier type ";"            {
-                                                                KeywordNodePtr keyword(new KeywordNode($1));
-                                                                $$ = new TypeDeclarationNode(std::move(wrap(std::move(keyword))), std::move(wrap(std::move($2))), std::move(wrap(std::move($3))));
+                                                                TerminatorNodePtr terminator = create_terminator($4, @4, context);
+                                                                KeywordNodePtr keyword = create_keyword($1, @1, context);
+                                                                $$ = new TypeDeclarationNode(std::move(wrap(std::move(keyword))),
+                                                                                             std::move(wrap(std::move($2))),
+                                                                                             std::move(wrap(std::move($3))),
+                                                                                             std::move(wrap(std::move(terminator))));
                                                                 $$ -> set_location(@$);
                                                             }
         ;

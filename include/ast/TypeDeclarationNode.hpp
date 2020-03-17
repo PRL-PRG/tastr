@@ -3,6 +3,7 @@
 
 #include "ast/IdentifierNode.hpp"
 #include "ast/KeywordNode.hpp"
+#include "ast/TerminatorNode.hpp"
 #include "ast/TypeNode.hpp"
 
 #include <memory>
@@ -13,19 +14,22 @@ namespace tastr::ast {
 class TypeDeclarationNode final: public Node {
   public:
     explicit TypeDeclarationNode(KeywordNodeUPtr keyword,
-                                 std::unique_ptr<IdentifierNode> identifier,
-                                 std::unique_ptr<TypeNode> type)
+                                 IdentifierNodeUPtr identifier,
+                                 TypeNodeUPtr type,
+                                 TerminatorNodeUPtr terminator)
         : Node()
         , keyword_(std::move(keyword))
         , identifier_(std::move(identifier))
-        , type_(std::move(type)) {
+        , type_(std::move(type))
+        , terminator_(std::move(terminator)) {
     }
 
     TypeDeclarationNode(const TypeDeclarationNode& node)
         : Node(node)
         , keyword_(node.keyword_->clone())
         , identifier_(node.identifier_->clone())
-        , type_(node.type_->clone()) {
+        , type_(node.type_->clone())
+        , terminator_(node.terminator_->clone()) {
     }
 
     ~TypeDeclarationNode() = default;
@@ -34,7 +38,8 @@ class TypeDeclarationNode final: public Node {
         : Node(std::move(node))
         , keyword_(std::move(node.keyword_))
         , identifier_(std::move(node.identifier_))
-        , type_(std::move(node.type_)) {
+        , type_(std::move(node.type_))
+        , terminator_(std::move(node.terminator_)) {
     }
 
     TypeDeclarationNode& operator=(const TypeDeclarationNode& node) {
@@ -45,6 +50,7 @@ class TypeDeclarationNode final: public Node {
         keyword_ = node.keyword_->clone();
         identifier_ = node.identifier_->clone();
         type_ = node.type_->clone();
+        terminator_ = node.terminator_->clone();
         return *this;
     }
 
@@ -53,6 +59,7 @@ class TypeDeclarationNode final: public Node {
         keyword_ = std::move(node.keyword_);
         identifier_ = std::move(node.identifier_);
         type_ = std::move(node.type_);
+        terminator_ = std::move(node.terminator_);
         return *this;
     }
 
@@ -86,8 +93,9 @@ class TypeDeclarationNode final: public Node {
     }
 
     KeywordNodeUPtr keyword_;
-    std::unique_ptr<IdentifierNode> identifier_;
-    std::unique_ptr<TypeNode> type_;
+    IdentifierNodeUPtr identifier_;
+    TypeNodeUPtr type_;
+    TerminatorNodeUPtr terminator_;
 };
 
 using TypeDeclarationNodePtr = TypeDeclarationNode*;

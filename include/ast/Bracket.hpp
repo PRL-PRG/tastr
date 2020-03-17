@@ -1,40 +1,44 @@
 #ifndef TASTR_AST_BRACKETED_HPP
 #define TASTR_AST_BRACKETED_HPP
 
+#include "ast/OperatorNode.hpp"
+
 #include <memory>
-#include <string>
 
 namespace tastr::ast {
 
 class Bracketed {
   public:
-    explicit Bracketed(const std::string& opening, const std::string& closing)
-        : opening_(opening), closing_(closing) {
+    explicit Bracketed(OperatorNodeUPtr opening_bracket,
+                       OperatorNodeUPtr closing_bracket)
+        : opening_bracket_(std::move(opening_bracket))
+        , closing_bracket_(std::move(closing_bracket)) {
     }
 
     ~Bracketed() = default;
 
     Bracketed(const Bracketed& bracketed)
-        : opening_(bracketed.opening_), closing_(bracketed.closing_) {
+        : opening_bracket_(bracketed.opening_bracket_->clone())
+        , closing_bracket_(bracketed.closing_bracket_->clone()) {
     }
 
     Bracketed(Bracketed&& bracketed)
-        : opening_(std::move(bracketed.opening_))
-        , closing_(std::move(bracketed.closing_)) {
+        : opening_bracket_(std::move(bracketed.opening_bracket_))
+        , closing_bracket_(std::move(bracketed.closing_bracket_)) {
     }
 
     Bracketed& operator=(const Bracketed& bracketed) {
         if (&bracketed == this) {
             return *this;
         }
-        opening_ = bracketed.opening_;
-        closing_ = bracketed.closing_;
+        opening_bracket_ = bracketed.opening_bracket_->clone();
+        closing_bracket_ = bracketed.closing_bracket_->clone();
         return *this;
     }
 
     Bracketed& operator=(Bracketed&& bracketed) {
-        opening_ = std::move(bracketed.opening_);
-        closing_ = std::move(bracketed.closing_);
+        opening_bracket_ = std::move(bracketed.opening_bracket_);
+        closing_bracket_ = std::move(bracketed.closing_bracket_);
         return *this;
     }
 
@@ -42,12 +46,12 @@ class Bracketed {
         return std::unique_ptr<Bracketed>(this->clone_impl());
     }
 
-    const std::string& get_opening_bracket() const {
-        return opening_;
+    const OperatorNode& get_opening_bracket() const {
+        return *opening_bracket_.get();
     }
 
-    const std::string& get_closing_bracket() const {
-        return closing_;
+    const OperatorNode& get_closing_bracket() const {
+        return *closing_bracket_.get();
     }
 
   private:
@@ -55,8 +59,8 @@ class Bracketed {
         return new Bracketed(*this);
     }
 
-    std::string opening_;
-    std::string closing_;
+    OperatorNodeUPtr opening_bracket_;
+    OperatorNodeUPtr closing_bracket_;
 };
 
 using BracketedPtr = Bracketed*;
