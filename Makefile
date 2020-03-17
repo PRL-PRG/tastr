@@ -122,7 +122,9 @@ $(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
 	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
 	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
 
-$(HEADERFILES): $(INCLUDEFILES)
+$(HEADERFILES): copy-header
+
+copy-header: $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
 
@@ -147,6 +149,7 @@ clang-format:
         lexer           \
         generate-lexer  \
         header          \
+        copy-header     \
         library         \
         static-library  \
         shared-library  \
