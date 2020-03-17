@@ -1,6 +1,7 @@
 #ifndef TASTR_AST_TOP_LEVEL_NODE_HPP
 #define TASTR_AST_TOP_LEVEL_NODE_HPP
 
+#include "EofNode.hpp"
 #include "Node.hpp"
 #include "TypeDeclarationNode.hpp"
 
@@ -11,7 +12,7 @@ namespace tastr::ast {
 
 class TopLevelNode final: public Node {
   public:
-    typedef std::vector<std::unique_ptr<Node>> sequence_t;
+    typedef std::vector<std::unique_ptr<TypeDeclarationNode>> sequence_t;
 
     typedef sequence_t* sequence_ptr_t;
 
@@ -25,7 +26,8 @@ class TopLevelNode final: public Node {
 
     typedef typename sequence_t::const_reverse_iterator const_reverse_iterator;
 
-    explicit TopLevelNode(const std::string& name): name_(name) {
+    explicit TopLevelNode(const std::string& name)
+        : name_(name), eof_node_(nullptr) {
     }
 
     ~TopLevelNode() = default;
@@ -89,12 +91,21 @@ class TopLevelNode final: public Node {
         return type_declarations_.empty();
     }
 
-    const Node& at(int index) const {
+    const TypeDeclarationNode& at(int index) const {
         return *type_declarations_.at(index).get();
     }
 
-    Node& at(int index) {
+    TypeDeclarationNode& at(int index) {
         return *type_declarations_.at(index).get();
+    }
+
+    const EofNode& get_eof_node() const {
+        return *eof_node_.get();
+    }
+
+    void set_eof_node(EofNodeUPtr& node) {
+        eof_node_.reset(node.release());
+        node.reset(nullptr);
     }
 
   private:
@@ -104,6 +115,7 @@ class TopLevelNode final: public Node {
 
     std::string name_;
     sequence_t type_declarations_;
+    EofNodeUPtr eof_node_;
 };
 
 using TopLevelNodePtr = TopLevelNode*;

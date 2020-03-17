@@ -273,6 +273,7 @@
     using tastr::ast::TerminatorNodePtr;
     using tastr::ast::EofNode;
     using tastr::ast::EofNodePtr;
+    using tastr::ast::EofNodeUPtr;
 }
 
 /* inserted near top of source file */
@@ -738,18 +739,18 @@ decllist:           decltype                                {
         ;
 
 start:              EOF                                     {
-                                                                EofNodePtr eof = new EofNode();
+                                                                EofNodeUPtr eof = std::make_unique<EofNode>();
                                                                 eof -> set_location(@1);
                                                                 TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
-                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(eof))));
-                                                                context.get_parse_result().get_top_level_node() -> set_location(@$);
+                                                                node -> set_location(@$);
+                                                                node -> set_eof_node(eof);
                                                             }
      |              decllist EOF                            {
-                                                                EofNodePtr eof = new EofNode();
+                                                                EofNodeUPtr eof = std::make_unique<EofNode>();
                                                                 eof -> set_location(@2);
                                                                 TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
-                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(eof))));
-                                                                context.get_parse_result().get_top_level_node() -> set_location(@$);
+                                                                node -> set_location(@$);
+                                                                node -> set_eof_node(eof);
                                                             }
      ;
 

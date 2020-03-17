@@ -307,6 +307,7 @@ class Unparser final: public ConstNodeVisitor {
                 node.at(index).accept(*this);
             }
         });
+        node.get_eof_node().accept(*this);
     }
 
   private:
