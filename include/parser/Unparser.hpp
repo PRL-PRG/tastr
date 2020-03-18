@@ -338,8 +338,8 @@ class Unparser final: public ConstNodeVisitor {
                 node.at(index).accept(*this);
                 format_ast_view("\n");
             }
+            node.get_eof_node().accept(*this);
         });
-        node.get_eof_node().accept(*this);
     }
 
   private:
