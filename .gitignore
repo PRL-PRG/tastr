@@ -133,3 +133,4 @@ CMakeLists.txt
 
 ## BUILD ARTIFACTS
 build/
+*.sentinel

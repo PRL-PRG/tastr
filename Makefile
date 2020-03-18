@@ -27,6 +27,7 @@ CPPCHECK := cppcheck
 CLANGFORMAT := clang-format
 CP := cp
 DIFF := diff
+TOUCH := touch
 
 RMFLAGS := -rf
 MKDIRFLAGS := -p
@@ -62,54 +63,69 @@ FAILTYPEDECLFILES := $(shell find $(TESTSDIR)/fail -maxdepth 1 -name '*.typedecl
 PASSTYPEDECLFILESOUTPUT := $(patsubst $(TESTSDIR)/pass/%,$(TESTSDIR)/pass/output/%,$(PASSTYPEDECLFILES))
 FAILTYPEDECLFILESOUTPUT := $(patsubst $(TESTSDIR)/fail/%,$(TESTSDIR)/fail/output/%,$(FAILTYPEDECLFILES))
 
+PARSER_SENTINEL := .parser.sentinel
+LEXER_SENTINEL := .lexer.sentinel
+HEADER_SENTINEL := .header.sentinel
+
 all: build
+	@:
 
 build: parser lexer header library application
+	@:
 
 parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
+	@:
 
 lexer: $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
+	@:
 
 header: $(HEADERFILES)
+	@:
 
 library: static-library shared-library
+	@:
 
 static-library: $(LIBDIR)/$(LIBNAME).a
+	@:
 
 shared-library: $(LIBDIR)/$(LIBNAME).so
+	@:
 
 application: $(BINDIR)/$(BINNAME)
+	@:
 
 clean-build:
 	$(RM) $(RMFLAGS) $(BUILDDIR)
+	$(RM) $(RMFLAGS) $(PARSER_SENTINEL) $(LEXER_SENTINEL) $(HEADER_SENTINEL)
 
 clean: clean-build clean-test
+	@:
 
 run: application
 	@echo "Write a type declaration. Quit with Ctrl-d."
 	./$(BINDIR)/$(BINNAME) $(BINARGS)
 
-$(SRCDIR)/$(PARSERDIR)/Parser.cxx: generate-parser
+$(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: $(PARSER_SENTINEL)
+	@:
 
-$(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: generate-parser
-
-generate-parser: $(GRAMMARDIR)/Parser.yxx
+$(PARSER_SENTINEL): $(GRAMMARDIR)/Parser.yxx
 	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/$(PARSERDIR)/Parser.cxx
 	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
+	$(TOUCH) $(PARSER_SENTINEL)
 
-$(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx: generate-lexer
+$(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx: $(LEXER_SENTINEL)
+	@:
 
-$(SRCDIR)/$(PARSERDIR)/Lexer.cxx: generate-lexer
-
-generate-lexer: $(GRAMMARDIR)/Lexer.lxx
+$(LEXER_SENTINEL): $(GRAMMARDIR)/Lexer.lxx
 	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx
 	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
 	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
 	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx
+	$(TOUCH) $(LEXER_SENTINEL)
 
 $(OBJDIR)/$(PARSERDIR)/%.o: $(SRCDIR)/$(PARSERDIR)/% $(INCLUDEFILES)
 	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
@@ -131,13 +147,16 @@ $(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
 	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
 	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
 
-$(HEADERFILES): copy-header
+$(HEADERFILES): $(HEADER_SENTINEL)
+	@:
 
-copy-header: $(INCLUDEFILES)
+$(HEADER_SENTINEL): $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
+	$(TOUCH) $(HEADER_SENTINEL)
 
 test: test-pass test-fail
+	@:
 
 $(TESTSDIR)/pass/output/%.typedecl: $(TESTSDIR)/pass/%.typedecl $(BINDIR)/$(BINNAME)
 	@echo "Testing" $<;
@@ -152,16 +171,17 @@ $(TESTSDIR)/fail/output/%.typedecl: $(TESTSDIR)/fail/%.typedecl $(BINDIR)/$(BINN
 	then cat $@ && exit 1;                 \
 	fi
 
-
 $(TESTSDIR)/pass/output:
 	@$(MKDIR) $(MKDIRFLAGS) $@
 
 test-pass: $(TESTSDIR)/pass/output $(PASSTYPEDECLFILESOUTPUT)
+	@:
 
 $(TESTSDIR)/fail/output:
 	@$(MKDIR) $(MKDIRFLAGS) $@
 
 test-fail: $(TESTSDIR)/fail/output $(FAILTYPEDECLFILESOUTPUT)
+	@:
 
 clean-test:
 	$(RM) $(RMFLAGS) $(TESTSDIR)/pass/output
@@ -179,10 +199,6 @@ cppcheck:
 
 clang-format:
 	$(CLANGFORMAT) -i $(CPPSRCFILES) $(CSRCFILES) $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(DRIVERFILES)
-
-.INTERMEDIATE: generate-lexer  \
-               generate-parser \
-               copy-header
 
 .PHONY: all             \
         build           \
