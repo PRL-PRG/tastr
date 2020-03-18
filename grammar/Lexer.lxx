@@ -41,6 +41,7 @@ PAIRLIST            pairlist|plt
 S4                  s4
 WEAKREF             weakref|wrf|w
 TUPLE               tuple|tpl
+LIST                list|lst
 ANY                 any|[*]
 UNKNOWN             [?][?][?]
 NULLVALUE           [?]
@@ -102,6 +103,7 @@ NON_OCT             [^0-7]
 {S4}                        { HANDLE_TOKEN(TOKEN_S4) }
 {WEAKREF}                   { HANDLE_TOKEN(TOKEN_WEAKREF) }
 {TUPLE}                     { HANDLE_TOKEN(TOKEN_TUPLE) }
+{LIST}                      { HANDLE_TOKEN(TOKEN_LIST) }
 {ANY}                       { HANDLE_TOKEN(TOKEN_ANY) }
 {UNKNOWN}                   { HANDLE_TOKEN(TOKEN_UNKNOWN) }
 {NULLVALUE}                 { HANDLE_TOKEN(TOKEN_NULLVALUE) }

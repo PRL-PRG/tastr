@@ -1,0 +1,4 @@
+type list list<chr>;
+type list list<^int>;
+type lst lst<list<int>>;
+type lst lst<list<list<lst<list<lst<raw>>>>>>;

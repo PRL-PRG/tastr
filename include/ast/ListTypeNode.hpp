@@ -1,78 +1,84 @@
 #ifndef TASTR_AST_LIST_TYPE_NODE_HPP
 #define TASTR_AST_LIST_TYPE_NODE_HPP
 
-#include "ast/Bracket.hpp"
+#include "ast/KeywordNode.hpp"
+#include "ast/ParameterNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+    namespace tastr::ast {
 
-class ListTypeNode final
-    : public TypeNode
-    , public Bracketed {
-  public:
-    explicit ListTypeNode(OperatorNodeUPtr opening_bracket,
-                          OperatorNodeUPtr closing_bracket,
-                          NodeUPtr elements)
-        : TypeNode()
-        , Bracketed(std::move(opening_bracket), std::move(closing_bracket))
-        , elements_(std::move(elements)) {
-    }
+    class ListTypeNode final: public TypeNode {
+      public:
+        explicit ListTypeNode(KeywordNodeUPtr keyword,
+                              ParameterNodeUPtr parameters)
+            : TypeNode()
+            , keyword_(std::move(keyword))
+            , parameters_(std::move(parameters)) {
+        }
 
-    ~ListTypeNode() = default;
+        ~ListTypeNode() = default;
 
-    ListTypeNode(const ListTypeNode& node)
-        : TypeNode(node), Bracketed(node), elements_(node.elements_->clone()) {
-    }
+        ListTypeNode(const ListTypeNode& node)
+            : TypeNode(node)
+            , keyword_(node.keyword_->clone())
+            , parameters_(node.parameters_->clone()) {
+        }
 
-    ListTypeNode(ListTypeNode&& node)
-        : TypeNode(std::move(node))
-        , Bracketed(std::move(node))
-        , elements_(std::move(node.elements_)) {
-    }
+        ListTypeNode(ListTypeNode&& node)
+            : TypeNode(std::move(node))
+            , keyword_(std::move(node.keyword_))
+            , parameters_(std::move(node.parameters_)) {
+        }
 
-    ListTypeNode& operator=(const ListTypeNode& node) {
-        if (&node == this) {
+        ListTypeNode& operator=(const ListTypeNode& node) {
+            if (&node == this) {
+                return *this;
+            }
+            TypeNode::operator=(node);
+            keyword_ = node.keyword_->clone();
+            parameters_ = node.parameters_->clone();
             return *this;
         }
-        TypeNode::operator=(node);
-        Bracketed::operator=(node);
-        elements_ = node.elements_->clone();
-        return *this;
-    }
 
-    ListTypeNode& operator=(ListTypeNode&& node) {
-        TypeNode::operator=(std::move(node));
-        Bracketed::operator=(std::move(node));
-        elements_ = std::move(node.elements_);
-        return *this;
-    }
+        ListTypeNode& operator=(ListTypeNode&& node) {
+            TypeNode::operator=(std::move(node));
+            keyword_ = std::move(node.keyword_);
+            parameters_ = std::move(node.parameters_);
+            return *this;
+        }
 
-    void accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
+        void
+        accept(tastr::visitor::ConstNodeVisitor& visitor) const override final;
 
-    void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
+        void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
-    std::unique_ptr<ListTypeNode> clone() const {
-        return std::unique_ptr<ListTypeNode>(this->clone_impl());
-    }
+        std::unique_ptr<ListTypeNode> clone() const {
+            return std::unique_ptr<ListTypeNode>(this->clone_impl());
+        }
 
-    bool is_list_type_node() const override final {
-        return true;
-    }
+        bool is_list_type_node() const override final {
+            return true;
+        }
 
-    Node& get_elements() const {
-        return *elements_.get();
-    }
+        KeywordNode& get_keyword() const {
+            return *keyword_.get();
+        }
 
-  private:
-    virtual ListTypeNode* clone_impl() const override final {
-        return new ListTypeNode(*this);
+        ParameterNode& get_parameters() const {
+            return *parameters_.get();
+        }
+
+      private:
+        virtual ListTypeNode* clone_impl() const override final {
+            return new ListTypeNode(*this);
+        };
+
+        KeywordNodeUPtr keyword_;
+        ParameterNodeUPtr parameters_;
     };
 
-    NodeUPtr elements_;
-};
-
-using ListTypeNodePtr = ListTypeNode*;
-using ListTypeNodeUPtr = std::unique_ptr<ListTypeNode>;
+    using ListTypeNodePtr = ListTypeNode*;
+    using ListTypeNodeUPtr = std::unique_ptr<ListTypeNode>;
 
 } // namespace tastr::ast
 

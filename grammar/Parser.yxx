@@ -62,6 +62,7 @@
 %token <std::string>                    S4
 %token <std::string>                    WEAKREF
 %token <std::string>                    TUPLE
+%token <std::string>                    LIST
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
@@ -91,7 +92,6 @@
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
-%nterm <NodePtr>                        listelement
 %nterm <ListTypeNodePtr>                listtype
 %nterm <NodePtr>                        structelements
 %nterm <StructTypeNodePtr>              structtype
@@ -166,7 +166,6 @@
 %destructor { delete $$; } functiontype
 %destructor { delete $$; } grouptype
 %destructor { delete $$; } nonuniontype
-%destructor { delete $$; } listelement
 %destructor { delete $$; } listtype
 %destructor { delete $$; } structelements
 %destructor { delete $$; } structtype
@@ -415,21 +414,19 @@ vectortype:         scalartype "[]"                         {
                                                             }
           ;
 
-listelement:        %empty                                  {
-                                                                $$ = new EmptyNode();
-                                                            }
-           |        type                                    {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                            }
-           ;
+listtype:           LIST "<" type ">"                       {
+                                                                KeywordNodePtr keyword = create_keyword($1, @1, context);
 
-listtype:           "((" listelement "))"                   {
-                                                                OperatorNodePtr right = create_operator($3, @3, context);
-                                                                OperatorNodePtr left = create_operator($1, @1, context);
-                                                                $$ = new ListTypeNode(std::move(wrap(std::move(left))),
-                                                                                      std::move(wrap(std::move(right))),
-                                                                                      std::move(wrap(std::move($2))));
+                                                                OperatorNodePtr left = create_operator($2, @2, context);
+                                                                OperatorNodePtr right = create_operator($4, @4, context);
+
+                                                                ParameterNode* parameter = new ParameterNode(std::move(wrap(std::move(left))),
+                                                                                                             std::move(wrap(std::move(right))),
+                                                                                                             std::move(wrap(std::move($3))));
+
+                                                                $$ = new ListTypeNode(std::move(wrap(std::move(keyword))),
+                                                                                      std::move(wrap(std::move(parameter))));
+
                                                                 $$ -> set_location(@$);
                                                             }
         ;
@@ -509,6 +506,7 @@ identifier:         INTEGER                                 { $$ = create_identi
           |         S4                                      { $$ = create_identifier($1, false, @1, context); }
           |         WEAKREF                                 { $$ = create_identifier($1, false, @1, context); }
           |         TUPLE                                   { $$ = create_identifier($1, false, @1, context); }
+          |         LIST                                    { $$ = create_identifier($1, false, @1, context); }
           |         ANY                                     { $$ = create_identifier($1, false, @1, context); }
           |         TYPEDECL                                { $$ = create_identifier($1, false, @1, context); }
           |         VARARG                                  { $$ = create_identifier($1, false, @1, context); }
