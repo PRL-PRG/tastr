@@ -1,5 +1,6 @@
 # tastr: Type AST for R
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 `tastr` is a library that implements a grammar for R types. It provides functions to parse types from input streams (files, strings, etc.) to C++ objects. It also provides the reverse functionality to unparse these objects. 
 The Type AST is modeled using C++ classes. The design relies heavily on unique ownership, i.e., an AST node holds unique references to its child nodes.
 The grammar is implemented using [`flex`](https://westes.github.io/flex/manual/) and [`bison`](https://www.gnu.org/software/bison/manual/bison.html).
