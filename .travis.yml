@@ -18,7 +18,7 @@ before_install:
   - sudo make --directory=/tmp/cppcheck-1.86 install SRCDIR=build CFGDIR=/usr/share/cppcheck HAVE_RULES=yes CXXFLAGS="-O2 -DNDEBUG -Wall -Wno-sign-compare -Wno-unused-function" || true
   - wget http://ftp.gnu.org/gnu/bison/bison-3.5.3.tar.gz -P /tmp/
   - tar -xvf /tmp/bison-3.5.3.tar.gz -C /tmp/
-  - cd /tmp/bison-3.5.3/ && ./configure && make && sudo make install
+  - pushd /tmp/bison-3.5.3 && ./configure && sudo make install && popd
   - sudo apt-get install python-pip
   - sudo pip install scan-build
 
