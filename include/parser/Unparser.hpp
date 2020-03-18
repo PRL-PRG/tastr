@@ -361,13 +361,13 @@ class Unparser final: public ConstNodeVisitor {
     template <typename V>
     void ast_(V code) {
         if (should_show_ast()) {
-            bright_gray_([this] { os_ << "«"; });
+            bright_gray_([this] { os_ << "❬"; });
         }
 
         code();
 
         if (should_show_ast()) {
-            bright_gray_([this] { os_ << "»"; });
+            bright_gray_([this] { os_ << "❭"; });
         }
     }
 
