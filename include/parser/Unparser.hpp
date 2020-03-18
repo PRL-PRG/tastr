@@ -259,11 +259,8 @@ class Unparser final: public ConstNodeVisitor {
     void visit(const tastr::ast::TupleTypeNode& node) override final {
         visit_(node.get_location());
         ast_([this, &node] {
-            node.get_opening_bracket().accept(*this);
-            format_ast_view(" ");
-            node.get_elements().accept(*this);
-            format_ast_view(" ");
-            node.get_closing_bracket().accept(*this);
+            node.get_keyword().accept(*this);
+            node.get_parameters().accept(*this);
         });
     }
 

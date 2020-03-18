@@ -61,6 +61,7 @@
 %token <std::string>                    PAIRLIST
 %token <std::string>                    S4
 %token <std::string>                    WEAKREF
+%token <std::string>                    TUPLE
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
@@ -475,12 +476,19 @@ tupleelements:     %empty                                   {
                                                             }
              ;
 
-tupletype:          "[[" tupleelements "]]"                 {
-                                                                OperatorNodePtr right = create_operator($3, @3, context);
-                                                                OperatorNodePtr left = create_operator($1, @1, context);
-                                                                $$ = new TupleTypeNode(std::move(wrap(std::move(left))),
-                                                                                       std::move(wrap(std::move(right))),
-                                                                                       std::move(wrap(std::move($2))));
+tupletype:         TUPLE "<" tupleelements ">"              {
+                                                                KeywordNodePtr keyword = create_keyword($1, @1, context);
+
+                                                                OperatorNodePtr left = create_operator($2, @2, context);
+                                                                OperatorNodePtr right = create_operator($4, @4, context);
+
+                                                                ParameterNode* parameter = new ParameterNode(std::move(wrap(std::move(left))),
+                                                                                                             std::move(wrap(std::move(right))),
+                                                                                                             std::move(wrap(std::move($3))));
+
+                                                                $$ = new TupleTypeNode(std::move(wrap(std::move(keyword))),
+                                                                                       std::move(wrap(std::move(parameter))));
+
                                                                 $$ -> set_location(@$);
                                                             }
          ;
@@ -500,6 +508,7 @@ identifier:         INTEGER                                 { $$ = create_identi
           |         PAIRLIST                                { $$ = create_identifier($1, false, @1, context); }
           |         S4                                      { $$ = create_identifier($1, false, @1, context); }
           |         WEAKREF                                 { $$ = create_identifier($1, false, @1, context); }
+          |         TUPLE                                   { $$ = create_identifier($1, false, @1, context); }
           |         ANY                                     { $$ = create_identifier($1, false, @1, context); }
           |         TYPEDECL                                { $$ = create_identifier($1, false, @1, context); }
           |         VARARG                                  { $$ = create_identifier($1, false, @1, context); }

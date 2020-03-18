@@ -40,6 +40,7 @@ BYTECODE            bytecode|bcd|b
 PAIRLIST            pairlist|plt
 S4                  s4
 WEAKREF             weakref|wrf|w
+TUPLE               tuple|tpl
 ANY                 any|[*]
 UNKNOWN             [?][?][?]
 NULLVALUE           [?]
@@ -100,6 +101,7 @@ NON_OCT             [^0-7]
 {PAIRLIST}                  { HANDLE_TOKEN(TOKEN_PAIRLIST) }
 {S4}                        { HANDLE_TOKEN(TOKEN_S4) }
 {WEAKREF}                   { HANDLE_TOKEN(TOKEN_WEAKREF) }
+{TUPLE}                     { HANDLE_TOKEN(TOKEN_TUPLE) }
 {ANY}                       { HANDLE_TOKEN(TOKEN_ANY) }
 {UNKNOWN}                   { HANDLE_TOKEN(TOKEN_UNKNOWN) }
 {NULLVALUE}                 { HANDLE_TOKEN(TOKEN_NULLVALUE) }
@@ -118,6 +120,7 @@ NON_OCT             [^0-7]
 
     \\u                         { throw tastr::parser::Parser::syntax_error(*yylloc, "\\uxxxx sequences not supported inside backticks: " + std::string(yytext)); }
     \\U                         { throw tastr::parser::Parser::syntax_error(*yylloc, "\\Uxxxxxxxx sequences not supported inside backticks: " + std::string(yytext)); }
+    \\`                         { get_identifier().append("\\`");  }
     [^`]                        { get_identifier().append(yytext); }
 }
 

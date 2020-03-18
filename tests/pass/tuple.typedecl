@@ -1,0 +1,6 @@
+type tuple tuple<>;
+type tuple tuple<int>;
+type tpl tpl<tuple<>>;
+type tuple tuple<int, character[]>;
+type tpl tuple<^int, tuple<character[]>>;
+type tuple tuple<tuple<>, tuple<>, tuple<>>;
