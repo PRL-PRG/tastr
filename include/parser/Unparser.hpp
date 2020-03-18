@@ -71,22 +71,30 @@ class Unparser final: public ConstNodeVisitor {
 
     void visit(const tastr::ast::KeywordNode& node) override final {
         visit_(node.get_location());
-        bright_green_([this, &node] { os_ << node.get_value(); });
+        ast_([this, &node] {
+            bright_green_([this, &node] { os_ << node.get_value(); });
+        });
     }
 
     void visit(const tastr::ast::OperatorNode& node) override final {
         visit_(node.get_location());
-        bright_red_([this, &node] { os_ << node.get_value(); });
+        ast_([this, &node] {
+            bright_red_([this, &node] { os_ << node.get_value(); });
+        });
     }
 
     void visit(const tastr::ast::TerminatorNode& node) override final {
         visit_(node.get_location());
-        bright_red_([this, &node] { os_ << node.get_value(); });
+        ast_([this, &node] {
+            bright_red_([this, &node] { os_ << node.get_value(); });
+        });
     }
 
     void visit(const tastr::ast::SeparatorNode& node) override final {
         visit_(node.get_location());
-        bright_red_([this, &node] { os_ << node.get_value(); });
+        ast_([this, &node] {
+            bright_red_([this, &node] { os_ << node.get_value(); });
+        });
     }
 
     void visit(const tastr::ast::EmptyNode& node) override final {
