@@ -56,8 +56,7 @@ int main(int argc, char* argv[]) {
     auto handle_parse_result =
         [&show_ast, &style_output](const tastr::parser::ParseResult& result) {
             if (!result) {
-                std::cerr << std::endl
-                          << "Error: " << result.get_error_location()
+                std::cerr << "Error: " << result.get_error_location()
                           << " :: " << result.get_error_message() << std::endl;
                 exit(1);
             }

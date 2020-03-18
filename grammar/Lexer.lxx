@@ -97,7 +97,6 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 .                           {
-                                std::cout << "Lexer Error: " << *yylloc << " :: " << "invalid character: '" << yytext << "'" << std::endl;
                                 throw tastr::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));
                             }
 <<EOF>>                     return tastr::parser::Parser::token::TOKEN_EOF;
