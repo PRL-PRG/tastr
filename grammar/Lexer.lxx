@@ -47,6 +47,7 @@ TYPEDECL            type
 BLANK               [ \t\r]
 VARARG              \.\.\.
 IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
+NON_HEX             [^0-9A-Fa-f]
 NON_OCT             [^0-7]
 
 %x quoted_identifier
@@ -110,6 +111,10 @@ NON_OCT             [^0-7]
     \\0{NON_OCT}                { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
     \\00{NON_OCT}               { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
     \\000                       { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
+
+    \\x0{NON_HEX}               { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
+    \\x00                       { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
+    \\x{NON_HEX}                { throw tastr::parser::Parser::syntax_error(*yylloc, "\\x used without hex digits: " + std::string(yytext)); }
     [^`]                        { get_identifier().append(yytext); }
 }
 
