@@ -1,0 +1,22 @@
+# alphabets
+type `fun` any;
+type `AsterisK` any;
+
+# numbers
+type `1` any;
+type `AsterisK` any;
+type `fun` any;
+type `AsterisK` any;
+
+# punctuations
+type `!@#$%^&*()~{}|{[}];:"'<,.>?/\\`` any;
+
+# octal numbers
+type `\1` any;
+type `_\1` any;
+type `_\1*` any;
+type `\04` any;
+type `\02` any;
+type `?\06` any;
+type `?\07/` any;
+
