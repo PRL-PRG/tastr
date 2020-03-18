@@ -19,6 +19,10 @@
         yylval->build<std::string>(yytext);                   \
         return tastr::parser::Parser::token::token_name;
 
+    #define HANDLE_QUOTED_IDENTIFIER()                                \
+        yylval->build<std::string>(extract_identifier());             \
+        return tastr::parser::Parser::token::TOKEN_QUOTED_IDENTIFIER;
+
 %}
 
 INTEGER             integer|int|i
@@ -43,6 +47,9 @@ TYPEDECL            type
 BLANK               [ \t\r]
 VARARG              \.\.\.
 IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
+
+%x quoted_identifier
+%x comment
 
 %%
 
@@ -96,6 +103,12 @@ IDENTIFIER          [a-zA-Z.][a-zA-Z0-9._]*
 {NULLVALUE}                 { HANDLE_TOKEN(TOKEN_NULLVALUE) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }
+"`"                         { BEGIN(quoted_identifier); }
+<quoted_identifier>{
+    `                           { BEGIN(INITIAL); HANDLE_QUOTED_IDENTIFIER() }
+    [^`]                        { get_identifier().append(yytext); }
+}
+
 .                           {
                                 throw tastr::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));
                             }
