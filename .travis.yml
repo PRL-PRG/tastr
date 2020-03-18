@@ -5,6 +5,8 @@ dist: bionic
 before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -q
+  - sudo apt-get install flex
+  - sudo apt-get install bison
   - sudo apt-get install gcc-9 -qy
   - sudo apt-get install g++-9 -qy
   - sudo apt-get install clang-8 -qy
