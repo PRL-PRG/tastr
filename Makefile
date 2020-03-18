@@ -67,43 +67,41 @@ PARSER_SENTINEL := .parser.sentinel
 LEXER_SENTINEL := .lexer.sentinel
 HEADER_SENTINEL := .header.sentinel
 
+
+################################################################################
+# ALL
+################################################################################
+
+.PHONY: all
 all: build
 	@:
 
+.PHONY: clean
+clean: clean-build clean-test
+	@:
+
+
+################################################################################
+# BUILD
+################################################################################
+
+.PHONY: build
 build: parser lexer header library application
 	@:
 
-parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
-	@:
-
-lexer: $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
-	@:
-
-header: $(HEADERFILES)
-	@:
-
-library: static-library shared-library
-	@:
-
-static-library: $(LIBDIR)/$(LIBNAME).a
-	@:
-
-shared-library: $(LIBDIR)/$(LIBNAME).so
-	@:
-
-application: $(BINDIR)/$(BINNAME)
-	@:
-
+.PHONY: clean-build
 clean-build:
 	$(RM) $(RMFLAGS) $(BUILDDIR)
 	$(RM) $(RMFLAGS) $(PARSER_SENTINEL) $(LEXER_SENTINEL) $(HEADER_SENTINEL)
 
-clean: clean-build clean-test
-	@:
 
-run: application
-	@echo "Write a type declaration. Quit with Ctrl-d."
-	./$(BINDIR)/$(BINNAME) $(BINARGS)
+################################################################################
+# PARSER
+################################################################################
+
+.PHONY: parser
+parser: $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
+	@:
 
 $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: $(PARSER_SENTINEL)
 	@:
@@ -116,6 +114,15 @@ $(PARSER_SENTINEL): $(GRAMMARDIR)/Parser.yxx
 	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
 	$(TOUCH) $(PARSER_SENTINEL)
 
+
+################################################################################
+# LEXER
+################################################################################
+
+.PHONY: lexer
+lexer: $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
+	@:
+
 $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx: $(LEXER_SENTINEL)
 	@:
 
@@ -127,25 +134,14 @@ $(LEXER_SENTINEL): $(GRAMMARDIR)/Lexer.lxx
 	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx
 	$(TOUCH) $(LEXER_SENTINEL)
 
-$(OBJDIR)/$(PARSERDIR)/%.o: $(SRCDIR)/$(PARSERDIR)/% $(INCLUDEFILES)
-	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
-	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -I$(INCLUDEDIR)/$(PARSERDIR) -o$@ $<
 
-$(OBJDIR)/%.o: $(SRCDIR)/% $(INCLUDEFILES)
-	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
-	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -o$@ $<
+################################################################################
+# HEADER
+################################################################################
 
-$(LIBDIR)/$(LIBNAME).a: $(OBJECTFILES)
-	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
-	$(AR) $(ARFLAGS) $@ $^
-
-$(LIBDIR)/$(LIBNAME).so: $(OBJECTFILES)
-	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
-	$(CXX) $(LIBFLAGS) -o $@ $^
-
-$(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
-	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
-	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
+.PHONY: header
+header: $(HEADERFILES)
+	@:
 
 $(HEADERFILES): $(HEADER_SENTINEL)
 	@:
@@ -155,8 +151,74 @@ $(HEADER_SENTINEL): $(INCLUDEFILES)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
 	$(TOUCH) $(HEADER_SENTINEL)
 
+
+################################################################################
+# LIBRARY
+################################################################################
+
+.PHONY: library
+library: static-library shared-library
+	@:
+
+.PHONY: static-library
+static-library: $(LIBDIR)/$(LIBNAME).a
+	@:
+
+.PHONY: shared-library
+shared-library: $(LIBDIR)/$(LIBNAME).so
+	@:
+
+$(LIBDIR)/$(LIBNAME).a: $(OBJECTFILES)
+	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
+	$(AR) $(ARFLAGS) $@ $^
+
+$(LIBDIR)/$(LIBNAME).so: $(OBJECTFILES)
+	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
+	$(CXX) $(LIBFLAGS) -o $@ $^
+
+$(OBJDIR)/$(PARSERDIR)/%.o: $(SRCDIR)/$(PARSERDIR)/% $(INCLUDEFILES)
+	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
+	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -I$(INCLUDEDIR)/$(PARSERDIR) -o$@ $<
+
+$(OBJDIR)/%.o: $(SRCDIR)/% $(INCLUDEFILES)
+	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
+	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -o$@ $<
+
+
+################################################################################
+# APPLICATION
+################################################################################
+
+.PHONY: application
+application: $(BINDIR)/$(BINNAME)
+	@:
+
+$(BINDIR)/$(BINNAME): $(DRIVERFILES) $(LIBDIR)/$(LIBNAME).a
+	@$(MKDIR) $(MKDIRFLAGS) $(BINDIR)
+	$(CXX) $(BINFLAGS) -I$(INCLUDEDIR) -o$@ $^
+
+
+################################################################################
+# TESTS
+################################################################################
+
+.PHONY: test
 test: test-pass test-fail
 	@:
+
+.PHONY: test-pass
+test-pass: $(TESTSDIR)/pass/output $(PASSTYPEDECLFILESOUTPUT)
+	@:
+
+.PHONY: test-fail
+test-fail: $(TESTSDIR)/fail/output $(FAILTYPEDECLFILESOUTPUT)
+	@:
+
+$(TESTSDIR)/pass/output:
+	@$(MKDIR) $(MKDIRFLAGS) $@
+
+$(TESTSDIR)/fail/output:
+	@$(MKDIR) $(MKDIRFLAGS) $@
 
 $(TESTSDIR)/pass/output/%.typedecl: $(TESTSDIR)/pass/%.typedecl $(BINDIR)/$(BINNAME)
 	@echo "Testing" $<;
@@ -171,22 +233,27 @@ $(TESTSDIR)/fail/output/%.typedecl: $(TESTSDIR)/fail/%.typedecl $(BINDIR)/$(BINN
 	then cat $@ && exit 1;                 \
 	fi
 
-$(TESTSDIR)/pass/output:
-	@$(MKDIR) $(MKDIRFLAGS) $@
-
-test-pass: $(TESTSDIR)/pass/output $(PASSTYPEDECLFILESOUTPUT)
-	@:
-
-$(TESTSDIR)/fail/output:
-	@$(MKDIR) $(MKDIRFLAGS) $@
-
-test-fail: $(TESTSDIR)/fail/output $(FAILTYPEDECLFILESOUTPUT)
-	@:
-
+.PHONY: clean-test
 clean-test:
 	$(RM) $(RMFLAGS) $(TESTSDIR)/pass/output
 	$(RM) $(RMFLAGS) $(TESTSDIR)/fail/output
 
+
+################################################################################
+# RUN
+################################################################################
+
+.PHONY: run
+run: application
+	@echo "Write a type declaration. Quit with Ctrl-d."
+	./$(BINDIR)/$(BINNAME) $(BINARGS)
+
+
+################################################################################
+# MISCELLANEOUS
+################################################################################
+
+.PHONY: cppcheck
 cppcheck:
 	$(CPPCHECK) --quiet                         \
 	            --project=compile_commands.json \
@@ -197,24 +264,6 @@ cppcheck:
 	            src                             \
 	            include
 
+.PHONY: clang-format
 clang-format:
 	$(CLANGFORMAT) -i $(CPPSRCFILES) $(CSRCFILES) $(HPPINCLUDEFILES) $(HINCLUDEFILES) $(DRIVERFILES)
-
-.PHONY: all             \
-        build           \
-        parser          \
-        lexer           \
-        header          \
-        library         \
-        static-library  \
-        shared-library  \
-        application     \
-        clean-build     \
-        clean           \
-        run             \
-        clang-format    \
-        test            \
-        test-pass       \
-        test-fail       \
-        clean-test      \
-        cppcheck
