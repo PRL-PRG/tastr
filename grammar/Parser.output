@@ -4,6 +4,8 @@ Terminals unused in grammar
     "))"
     "[["
     "]]"
+    "{{"
+    "}}"
     LBRACKET
 
 
@@ -54,257 +56,253 @@ Grammar
    24 typeseq: type
    25        | typeseq "," type
 
-   26 structelements: %empty
-   27               | namedtypeseq
+   26 structtype: STRUCT "<" namedtypeseq ">"
 
-   28 structtype: "{{" structelements "}}"
+   27 tupleelements: %empty
+   28              | typeseq
 
-   29 tupleelements: %empty
-   30              | typeseq
+   29 tupletype: TUPLE "<" tupleelements ">"
 
-   31 tupletype: TUPLE "<" tupleelements ">"
+   30 identifier: INTEGER
+   31           | DOUBLE
+   32           | COMPLEX
+   33           | CHARACTER
+   34           | LOGICAL
+   35           | RAW
+   36           | ENVIRONMENT
+   37           | EXPRESSION
+   38           | LANGUAGE
+   39           | SYMBOL
+   40           | EXTERNALPOINTER
+   41           | BYTECODE
+   42           | PAIRLIST
+   43           | S4
+   44           | WEAKREF
+   45           | TUPLE
+   46           | LIST
+   47           | STRUCT
+   48           | ANY
+   49           | TYPEDECL
+   50           | "..."
+   51           | IDENTIFIER
+   52           | QUOTED_IDENTIFIER
 
-   32 identifier: INTEGER
-   33           | DOUBLE
-   34           | COMPLEX
-   35           | CHARACTER
-   36           | LOGICAL
-   37           | RAW
-   38           | ENVIRONMENT
-   39           | EXPRESSION
-   40           | LANGUAGE
-   41           | SYMBOL
-   42           | EXTERNALPOINTER
-   43           | BYTECODE
-   44           | PAIRLIST
-   45           | S4
-   46           | WEAKREF
-   47           | TUPLE
-   48           | LIST
-   49           | ANY
-   50           | TYPEDECL
-   51           | "..."
-   52           | IDENTIFIER
-   53           | QUOTED_IDENTIFIER
+   53 namedtype: identifier ":" type
 
-   54 namedtype: identifier ":" type
+   54 namedtypeseq: namedtype
+   55             | namedtypeseq "," namedtype
 
-   55 namedtypeseq: namedtype
-   56             | namedtypeseq "," namedtype
+   56 paramtype: type
+   57          | "..."
 
-   57 paramtype: type
-   58          | "..."
+   58 paramtypeseq: paramtype
+   59             | paramtypeseq "," paramtype
 
-   59 paramtypeseq: paramtype
-   60             | paramtypeseq "," paramtype
+   60 params: "<" paramtypeseq ">"
+   61       | "<" ">"
 
-   61 params: "<" paramtypeseq ">"
-   62       | "<" ">"
+   62 functiontype: params "=>" type
 
-   63 functiontype: params "=>" type
+   63 grouptype: "(" type ")"
 
-   64 grouptype: "(" type ")"
+   64 nonuniontype: scalartype
+   65             | environmenttype
+   66             | expressiontype
+   67             | languagetype
+   68             | symboltype
+   69             | externalptrtype
+   70             | bytecodetype
+   71             | pairlisttype
+   72             | s4type
+   73             | weakreftype
+   74             | vectortype
+   75             | functiontype
+   76             | structtype
+   77             | listtype
+   78             | tupletype
+   79             | grouptype
 
-   65 nonuniontype: scalartype
-   66             | environmenttype
-   67             | expressiontype
-   68             | languagetype
-   69             | symboltype
-   70             | externalptrtype
-   71             | bytecodetype
-   72             | pairlisttype
-   73             | s4type
-   74             | weakreftype
-   75             | vectortype
-   76             | functiontype
-   77             | structtype
-   78             | listtype
-   79             | tupletype
-   80             | grouptype
+   80 innertype: nonuniontype
+   81          | innertype "|" nonuniontype
 
-   81 innertype: nonuniontype
-   82          | innertype "|" nonuniontype
+   82 nulltype: "?"
+   83         | "?" innertype
 
-   83 nulltype: "?"
-   84         | "?" innertype
+   84 type: innertype
+   85     | nulltype
+   86     | anytype
+   87     | unknowntype
 
-   85 type: innertype
-   86     | nulltype
-   87     | anytype
-   88     | unknowntype
+   88 decltype: TYPEDECL identifier type ";"
 
-   89 decltype: TYPEDECL identifier type ";"
+   89 decllist: decltype
+   90         | decllist decltype
 
-   90 decllist: decltype
-   91         | decllist decltype
-
-   92 start: "end of file"
-   93      | decllist "end of file"
+   91 start: "end of file"
+   92      | decllist "end of file"
 
 
 Terminals, with rules where they appear
 
-    "end of file" (0) 0 92 93
+    "end of file" (0) 0 91 92
     error (256)
-    "|" <std::string> (258) 82
+    "|" <std::string> (258) 81
     "^" <std::string> (259) 7
-    "=>" <std::string> (260) 63
-    "," <std::string> (261) 25 56 60
+    "=>" <std::string> (260) 62
+    "," <std::string> (261) 25 55 59
     "((" <std::string> (262)
-    "(" <std::string> (263) 64
+    "(" <std::string> (263) 63
     "))" <std::string> (264)
-    ")" <std::string> (265) 64
+    ")" <std::string> (265) 63
     "[]" <std::string> (266) 22
-    "<" <std::string> (267) 23 31 61 62
-    ">" <std::string> (268) 23 31 61 62
+    "<" <std::string> (267) 23 26 29 60 61
+    ">" <std::string> (268) 23 26 29 60 61
     "[[" <std::string> (269)
     "]]" <std::string> (270)
-    "{{" <std::string> (271) 28
-    "}}" <std::string> (272) 28
-    ";" <std::string> (273) 89
-    ":" <std::string> (274) 54
-    "..." <std::string> (275) 51 58
+    "{{" <std::string> (271)
+    "}}" <std::string> (272)
+    ";" <std::string> (273) 88
+    ":" <std::string> (274) 53
+    "..." <std::string> (275) 50 57
     "???" <std::string> (276) 21
-    "?" <std::string> (277) 83 84
-    INTEGER <std::string> (278) 1 32
-    DOUBLE <std::string> (279) 2 33
-    COMPLEX <std::string> (280) 3 34
-    CHARACTER <std::string> (281) 4 35
-    LOGICAL <std::string> (282) 5 36
-    RAW <std::string> (283) 6 37
-    ENVIRONMENT <std::string> (284) 11 38
-    EXPRESSION <std::string> (285) 12 39
-    LANGUAGE <std::string> (286) 13 40
-    SYMBOL <std::string> (287) 14 41
-    EXTERNALPOINTER <std::string> (288) 15 42
-    BYTECODE <std::string> (289) 16 43
-    PAIRLIST <std::string> (290) 17 44
-    S4 <std::string> (291) 18 45
-    WEAKREF <std::string> (292) 19 46
-    TUPLE <std::string> (293) 31 47
-    LIST <std::string> (294) 23 48
-    ANY <std::string> (295) 20 49
-    TYPEDECL <std::string> (296) 50 89
-    IDENTIFIER <std::string> (297) 52
-    QUOTED_IDENTIFIER <std::string> (298) 53
-    LBRACKET (299)
-    LOWER_THAN_OR (300)
+    "?" <std::string> (277) 82 83
+    INTEGER <std::string> (278) 1 30
+    DOUBLE <std::string> (279) 2 31
+    COMPLEX <std::string> (280) 3 32
+    CHARACTER <std::string> (281) 4 33
+    LOGICAL <std::string> (282) 5 34
+    RAW <std::string> (283) 6 35
+    ENVIRONMENT <std::string> (284) 11 36
+    EXPRESSION <std::string> (285) 12 37
+    LANGUAGE <std::string> (286) 13 38
+    SYMBOL <std::string> (287) 14 39
+    EXTERNALPOINTER <std::string> (288) 15 40
+    BYTECODE <std::string> (289) 16 41
+    PAIRLIST <std::string> (290) 17 42
+    S4 <std::string> (291) 18 43
+    WEAKREF <std::string> (292) 19 44
+    TUPLE <std::string> (293) 29 45
+    LIST <std::string> (294) 23 46
+    STRUCT <std::string> (295) 26 47
+    ANY <std::string> (296) 20 48
+    TYPEDECL <std::string> (297) 49 88
+    IDENTIFIER <std::string> (298) 51
+    QUOTED_IDENTIFIER <std::string> (299) 52
+    LBRACKET (300)
+    LOWER_THAN_OR (301)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (46)
+    $accept (47)
         on left: 0
-    ascalartype <AScalarTypeNodePtr> (47)
+    ascalartype <AScalarTypeNodePtr> (48)
         on left: 1 2 3 4 5
         on right: 7 8
-    rawascalartype <RawAScalarTypeNodePtr> (48)
+    rawascalartype <RawAScalarTypeNodePtr> (49)
         on left: 6
         on right: 9
-    nascalartype <NAScalarTypeNodePtr> (49)
+    nascalartype <NAScalarTypeNodePtr> (50)
         on left: 7
         on right: 10
-    scalartype <ScalarTypeNodePtr> (50)
+    scalartype <ScalarTypeNodePtr> (51)
         on left: 8 9 10
-        on right: 22 65
-    environmenttype <EnvironmentTypeNodePtr> (51)
+        on right: 22 64
+    environmenttype <EnvironmentTypeNodePtr> (52)
         on left: 11
-        on right: 66
-    expressiontype <ExpressionTypeNodePtr> (52)
+        on right: 65
+    expressiontype <ExpressionTypeNodePtr> (53)
         on left: 12
-        on right: 67
-    languagetype <LanguageTypeNodePtr> (53)
+        on right: 66
+    languagetype <LanguageTypeNodePtr> (54)
         on left: 13
-        on right: 68
-    symboltype <SymbolTypeNodePtr> (54)
+        on right: 67
+    symboltype <SymbolTypeNodePtr> (55)
         on left: 14
-        on right: 69
-    externalptrtype <ExternalPointerTypeNodePtr> (55)
+        on right: 68
+    externalptrtype <ExternalPointerTypeNodePtr> (56)
         on left: 15
-        on right: 70
-    bytecodetype <BytecodeTypeNodePtr> (56)
+        on right: 69
+    bytecodetype <BytecodeTypeNodePtr> (57)
         on left: 16
-        on right: 71
-    pairlisttype <PairlistTypeNodePtr> (57)
+        on right: 70
+    pairlisttype <PairlistTypeNodePtr> (58)
         on left: 17
-        on right: 72
-    s4type <S4TypeNodePtr> (58)
+        on right: 71
+    s4type <S4TypeNodePtr> (59)
         on left: 18
-        on right: 73
-    weakreftype <WeakReferenceTypeNodePtr> (59)
+        on right: 72
+    weakreftype <WeakReferenceTypeNodePtr> (60)
         on left: 19
-        on right: 74
-    unknowntype <UnknownTypeNodePtr> (60)
+        on right: 73
+    unknowntype <UnknownTypeNodePtr> (61)
         on left: 21
-        on right: 88
-    anytype <AnyTypeNodePtr> (61)
-        on left: 20
         on right: 87
-    vectortype <VectorTypeNodePtr> (62)
-        on left: 22
-        on right: 75
-    typeseq <NodePtr> (63)
-        on left: 24 25
-        on right: 25 30
-    namedtype <TagTypePairNodePtr> (64)
-        on left: 54
-        on right: 55 56
-    namedtypeseq <NodePtr> (65)
-        on left: 55 56
-        on right: 27 56
-    paramtype <TypeNodePtr> (66)
-        on left: 57 58
-        on right: 59 60
-    paramtypeseq <NodePtr> (67)
-        on left: 59 60
-        on right: 60 61
-    params <ParameterNodePtr> (68)
-        on left: 61 62
-        on right: 63
-    functiontype <FunctionTypeNodePtr> (69)
-        on left: 63
-        on right: 76
-    grouptype <GroupTypeNodePtr> (70)
-        on left: 64
-        on right: 80
-    nonuniontype <TypeNodePtr> (71)
-        on left: 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80
-        on right: 81 82
-    listtype <ListTypeNodePtr> (72)
-        on left: 23
-        on right: 78
-    structelements <NodePtr> (73)
-        on left: 26 27
-        on right: 28
-    structtype <StructTypeNodePtr> (74)
-        on left: 28
-        on right: 77
-    tupleelements <NodePtr> (75)
-        on left: 29 30
-        on right: 31
-    tupletype <TupleTypeNodePtr> (76)
-        on left: 31
-        on right: 79
-    identifier <IdentifierNodePtr> (77)
-        on left: 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53
-        on right: 54 89
-    innertype <TypeNodePtr> (78)
-        on left: 81 82
-        on right: 82 84 85
-    nulltype <TypeNodePtr> (79)
-        on left: 83 84
+    anytype <AnyTypeNodePtr> (62)
+        on left: 20
         on right: 86
+    vectortype <VectorTypeNodePtr> (63)
+        on left: 22
+        on right: 74
+    typeseq <NodePtr> (64)
+        on left: 24 25
+        on right: 25 28
+    namedtype <TagTypePairNodePtr> (65)
+        on left: 53
+        on right: 54 55
+    namedtypeseq <NodePtr> (66)
+        on left: 54 55
+        on right: 26 55
+    paramtype <TypeNodePtr> (67)
+        on left: 56 57
+        on right: 58 59
+    paramtypeseq <NodePtr> (68)
+        on left: 58 59
+        on right: 59 60
+    params <ParameterNodePtr> (69)
+        on left: 60 61
+        on right: 62
+    functiontype <FunctionTypeNodePtr> (70)
+        on left: 62
+        on right: 75
+    grouptype <GroupTypeNodePtr> (71)
+        on left: 63
+        on right: 79
+    nonuniontype <TypeNodePtr> (72)
+        on left: 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79
+        on right: 80 81
+    listtype <ListTypeNodePtr> (73)
+        on left: 23
+        on right: 77
+    structtype <StructTypeNodePtr> (74)
+        on left: 26
+        on right: 76
+    tupleelements <NodePtr> (75)
+        on left: 27 28
+        on right: 29
+    tupletype <TupleTypeNodePtr> (76)
+        on left: 29
+        on right: 78
+    identifier <IdentifierNodePtr> (77)
+        on left: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52
+        on right: 53 88
+    innertype <TypeNodePtr> (78)
+        on left: 80 81
+        on right: 81 83 84
+    nulltype <TypeNodePtr> (79)
+        on left: 82 83
+        on right: 85
     type <TypeNodePtr> (80)
-        on left: 85 86 87 88
-        on right: 23 24 25 54 57 63 64 89
+        on left: 84 85 86 87
+        on right: 23 24 25 53 56 62 63 88
     decltype <TypeDeclarationNodePtr> (81)
-        on left: 89
-        on right: 90 91
+        on left: 88
+        on right: 89 90
     decllist (82)
-        on left: 90 91
-        on right: 91 93
+        on left: 89 90
+        on right: 90 92
     start (83)
-        on left: 92 93
+        on left: 91 92
         on right: 0
 
 
@@ -322,14 +320,14 @@ State 0
 
 State 1
 
-   92 start: "end of file" .
+   91 start: "end of file" .
 
-    $default  reduce using rule 92 (start)
+    $default  reduce using rule 91 (start)
 
 
 State 2
 
-   89 decltype: TYPEDECL . identifier type ";"
+   88 decltype: TYPEDECL . identifier type ";"
 
     "..."              shift, and go to state 6
     INTEGER            shift, and go to state 7
@@ -349,201 +347,208 @@ State 2
     WEAKREF            shift, and go to state 21
     TUPLE              shift, and go to state 22
     LIST               shift, and go to state 23
-    ANY                shift, and go to state 24
-    TYPEDECL           shift, and go to state 25
-    IDENTIFIER         shift, and go to state 26
-    QUOTED_IDENTIFIER  shift, and go to state 27
+    STRUCT             shift, and go to state 24
+    ANY                shift, and go to state 25
+    TYPEDECL           shift, and go to state 26
+    IDENTIFIER         shift, and go to state 27
+    QUOTED_IDENTIFIER  shift, and go to state 28
 
-    identifier  go to state 28
+    identifier  go to state 29
 
 
 State 3
 
-   90 decllist: decltype .
+   89 decllist: decltype .
 
-    $default  reduce using rule 90 (decllist)
+    $default  reduce using rule 89 (decllist)
 
 
 State 4
 
-   91 decllist: decllist . decltype
-   93 start: decllist . "end of file"
+   90 decllist: decllist . decltype
+   92 start: decllist . "end of file"
 
-    "end of file"  shift, and go to state 29
+    "end of file"  shift, and go to state 30
     TYPEDECL       shift, and go to state 2
 
-    decltype  go to state 30
+    decltype  go to state 31
 
 
 State 5
 
     0 $accept: start . "end of file"
 
-    "end of file"  shift, and go to state 31
+    "end of file"  shift, and go to state 32
 
 
 State 6
 
-   51 identifier: "..." .
-
-    $default  reduce using rule 51 (identifier)
-
-
-State 7
-
-   32 identifier: INTEGER .
-
-    $default  reduce using rule 32 (identifier)
-
-
-State 8
-
-   33 identifier: DOUBLE .
-
-    $default  reduce using rule 33 (identifier)
-
-
-State 9
-
-   34 identifier: COMPLEX .
-
-    $default  reduce using rule 34 (identifier)
-
-
-State 10
-
-   35 identifier: CHARACTER .
-
-    $default  reduce using rule 35 (identifier)
-
-
-State 11
-
-   36 identifier: LOGICAL .
-
-    $default  reduce using rule 36 (identifier)
-
-
-State 12
-
-   37 identifier: RAW .
-
-    $default  reduce using rule 37 (identifier)
-
-
-State 13
-
-   38 identifier: ENVIRONMENT .
-
-    $default  reduce using rule 38 (identifier)
-
-
-State 14
-
-   39 identifier: EXPRESSION .
-
-    $default  reduce using rule 39 (identifier)
-
-
-State 15
-
-   40 identifier: LANGUAGE .
-
-    $default  reduce using rule 40 (identifier)
-
-
-State 16
-
-   41 identifier: SYMBOL .
-
-    $default  reduce using rule 41 (identifier)
-
-
-State 17
-
-   42 identifier: EXTERNALPOINTER .
-
-    $default  reduce using rule 42 (identifier)
-
-
-State 18
-
-   43 identifier: BYTECODE .
-
-    $default  reduce using rule 43 (identifier)
-
-
-State 19
-
-   44 identifier: PAIRLIST .
-
-    $default  reduce using rule 44 (identifier)
-
-
-State 20
-
-   45 identifier: S4 .
-
-    $default  reduce using rule 45 (identifier)
-
-
-State 21
-
-   46 identifier: WEAKREF .
-
-    $default  reduce using rule 46 (identifier)
-
-
-State 22
-
-   47 identifier: TUPLE .
-
-    $default  reduce using rule 47 (identifier)
-
-
-State 23
-
-   48 identifier: LIST .
-
-    $default  reduce using rule 48 (identifier)
-
-
-State 24
-
-   49 identifier: ANY .
-
-    $default  reduce using rule 49 (identifier)
-
-
-State 25
-
-   50 identifier: TYPEDECL .
+   50 identifier: "..." .
 
     $default  reduce using rule 50 (identifier)
 
 
+State 7
+
+   30 identifier: INTEGER .
+
+    $default  reduce using rule 30 (identifier)
+
+
+State 8
+
+   31 identifier: DOUBLE .
+
+    $default  reduce using rule 31 (identifier)
+
+
+State 9
+
+   32 identifier: COMPLEX .
+
+    $default  reduce using rule 32 (identifier)
+
+
+State 10
+
+   33 identifier: CHARACTER .
+
+    $default  reduce using rule 33 (identifier)
+
+
+State 11
+
+   34 identifier: LOGICAL .
+
+    $default  reduce using rule 34 (identifier)
+
+
+State 12
+
+   35 identifier: RAW .
+
+    $default  reduce using rule 35 (identifier)
+
+
+State 13
+
+   36 identifier: ENVIRONMENT .
+
+    $default  reduce using rule 36 (identifier)
+
+
+State 14
+
+   37 identifier: EXPRESSION .
+
+    $default  reduce using rule 37 (identifier)
+
+
+State 15
+
+   38 identifier: LANGUAGE .
+
+    $default  reduce using rule 38 (identifier)
+
+
+State 16
+
+   39 identifier: SYMBOL .
+
+    $default  reduce using rule 39 (identifier)
+
+
+State 17
+
+   40 identifier: EXTERNALPOINTER .
+
+    $default  reduce using rule 40 (identifier)
+
+
+State 18
+
+   41 identifier: BYTECODE .
+
+    $default  reduce using rule 41 (identifier)
+
+
+State 19
+
+   42 identifier: PAIRLIST .
+
+    $default  reduce using rule 42 (identifier)
+
+
+State 20
+
+   43 identifier: S4 .
+
+    $default  reduce using rule 43 (identifier)
+
+
+State 21
+
+   44 identifier: WEAKREF .
+
+    $default  reduce using rule 44 (identifier)
+
+
+State 22
+
+   45 identifier: TUPLE .
+
+    $default  reduce using rule 45 (identifier)
+
+
+State 23
+
+   46 identifier: LIST .
+
+    $default  reduce using rule 46 (identifier)
+
+
+State 24
+
+   47 identifier: STRUCT .
+
+    $default  reduce using rule 47 (identifier)
+
+
+State 25
+
+   48 identifier: ANY .
+
+    $default  reduce using rule 48 (identifier)
+
+
 State 26
 
-   52 identifier: IDENTIFIER .
+   49 identifier: TYPEDECL .
 
-    $default  reduce using rule 52 (identifier)
+    $default  reduce using rule 49 (identifier)
 
 
 State 27
 
-   53 identifier: QUOTED_IDENTIFIER .
+   51 identifier: IDENTIFIER .
 
-    $default  reduce using rule 53 (identifier)
+    $default  reduce using rule 51 (identifier)
 
 
 State 28
 
-   89 decltype: TYPEDECL identifier . type ";"
+   52 identifier: QUOTED_IDENTIFIER .
 
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
+    $default  reduce using rule 52 (identifier)
+
+
+State 29
+
+   88 decltype: TYPEDECL identifier . type ";"
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
     "???"            shift, and go to state 36
     "?"              shift, and go to state 37
     INTEGER          shift, and go to state 38
@@ -563,58 +568,59 @@ State 28
     WEAKREF          shift, and go to state 52
     TUPLE            shift, and go to state 53
     LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
 
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 81
-
-
-State 29
-
-   93 start: decllist "end of file" .
-
-    $default  reduce using rule 93 (start)
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 82
 
 
 State 30
 
-   91 decllist: decllist decltype .
+   92 start: decllist "end of file" .
 
-    $default  reduce using rule 91 (decllist)
+    $default  reduce using rule 92 (start)
 
 
 State 31
+
+   90 decllist: decllist decltype .
+
+    $default  reduce using rule 90 (decllist)
+
+
+State 32
 
     0 $accept: start "end of file" .
 
     $default  accept
 
 
-State 32
+State 33
 
     7 nascalartype: "^" . ascalartype
 
@@ -624,77 +630,16 @@ State 32
     CHARACTER  shift, and go to state 41
     LOGICAL    shift, and go to state 42
 
-    ascalartype  go to state 82
-
-
-State 33
-
-   64 grouptype: "(" . type ")"
-
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
-    "???"            shift, and go to state 36
-    "?"              shift, and go to state 37
-    INTEGER          shift, and go to state 38
-    DOUBLE           shift, and go to state 39
-    COMPLEX          shift, and go to state 40
-    CHARACTER        shift, and go to state 41
-    LOGICAL          shift, and go to state 42
-    RAW              shift, and go to state 43
-    ENVIRONMENT      shift, and go to state 44
-    EXPRESSION       shift, and go to state 45
-    LANGUAGE         shift, and go to state 46
-    SYMBOL           shift, and go to state 47
-    EXTERNALPOINTER  shift, and go to state 48
-    BYTECODE         shift, and go to state 49
-    PAIRLIST         shift, and go to state 50
-    S4               shift, and go to state 51
-    WEAKREF          shift, and go to state 52
-    TUPLE            shift, and go to state 53
-    LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
-
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 83
+    ascalartype  go to state 83
 
 
 State 34
 
-   61 params: "<" . paramtypeseq ">"
-   62       | "<" . ">"
+   63 grouptype: "(" . type ")"
 
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    ">"              shift, and go to state 84
-    "{{"             shift, and go to state 35
-    "..."            shift, and go to state 85
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
     "???"            shift, and go to state 36
     "?"              shift, and go to state 37
     INTEGER          shift, and go to state 38
@@ -714,71 +659,97 @@ State 34
     WEAKREF          shift, and go to state 52
     TUPLE            shift, and go to state 53
     LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
 
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    paramtype        go to state 86
-    paramtypeseq     go to state 87
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 88
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 84
 
 
 State 35
 
-   28 structtype: "{{" . structelements "}}"
+   60 params: "<" . paramtypeseq ">"
+   61       | "<" . ">"
 
-    "..."              shift, and go to state 6
-    INTEGER            shift, and go to state 7
-    DOUBLE             shift, and go to state 8
-    COMPLEX            shift, and go to state 9
-    CHARACTER          shift, and go to state 10
-    LOGICAL            shift, and go to state 11
-    RAW                shift, and go to state 12
-    ENVIRONMENT        shift, and go to state 13
-    EXPRESSION         shift, and go to state 14
-    LANGUAGE           shift, and go to state 15
-    SYMBOL             shift, and go to state 16
-    EXTERNALPOINTER    shift, and go to state 17
-    BYTECODE           shift, and go to state 18
-    PAIRLIST           shift, and go to state 19
-    S4                 shift, and go to state 20
-    WEAKREF            shift, and go to state 21
-    TUPLE              shift, and go to state 22
-    LIST               shift, and go to state 23
-    ANY                shift, and go to state 24
-    TYPEDECL           shift, and go to state 25
-    IDENTIFIER         shift, and go to state 26
-    QUOTED_IDENTIFIER  shift, and go to state 27
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
+    ">"              shift, and go to state 85
+    "..."            shift, and go to state 86
+    "???"            shift, and go to state 36
+    "?"              shift, and go to state 37
+    INTEGER          shift, and go to state 38
+    DOUBLE           shift, and go to state 39
+    COMPLEX          shift, and go to state 40
+    CHARACTER        shift, and go to state 41
+    LOGICAL          shift, and go to state 42
+    RAW              shift, and go to state 43
+    ENVIRONMENT      shift, and go to state 44
+    EXPRESSION       shift, and go to state 45
+    LANGUAGE         shift, and go to state 46
+    SYMBOL           shift, and go to state 47
+    EXTERNALPOINTER  shift, and go to state 48
+    BYTECODE         shift, and go to state 49
+    PAIRLIST         shift, and go to state 50
+    S4               shift, and go to state 51
+    WEAKREF          shift, and go to state 52
+    TUPLE            shift, and go to state 53
+    LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
 
-    $default  reduce using rule 26 (structelements)
-
-    namedtype       go to state 89
-    namedtypeseq    go to state 90
-    structelements  go to state 91
-    identifier      go to state 92
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    paramtype        go to state 87
+    paramtypeseq     go to state 88
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 89
 
 
 State 36
@@ -790,13 +761,12 @@ State 36
 
 State 37
 
-   83 nulltype: "?" .
-   84         | "?" . innertype
+   82 nulltype: "?" .
+   83         | "?" . innertype
 
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
     INTEGER          shift, and go to state 38
     DOUBLE           shift, and go to state 39
     COMPLEX          shift, and go to state 40
@@ -814,31 +784,32 @@ State 37
     WEAKREF          shift, and go to state 52
     TUPLE            shift, and go to state 53
     LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
 
-    $default  reduce using rule 83 (nulltype)
+    $default  reduce using rule 82 (nulltype)
 
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 93
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 90
 
 
 State 38
@@ -948,619 +919,402 @@ State 52
 
 State 53
 
-   31 tupletype: TUPLE . "<" tupleelements ">"
+   29 tupletype: TUPLE . "<" tupleelements ">"
 
-    "<"  shift, and go to state 94
+    "<"  shift, and go to state 91
 
 
 State 54
 
    23 listtype: LIST . "<" type ">"
 
-    "<"  shift, and go to state 95
+    "<"  shift, and go to state 92
 
 
 State 55
+
+   26 structtype: STRUCT . "<" namedtypeseq ">"
+
+    "<"  shift, and go to state 93
+
+
+State 56
 
    20 anytype: ANY .
 
     $default  reduce using rule 20 (anytype)
 
 
-State 56
+State 57
 
     8 scalartype: ascalartype .
 
     $default  reduce using rule 8 (scalartype)
 
 
-State 57
+State 58
 
     9 scalartype: rawascalartype .
 
     $default  reduce using rule 9 (scalartype)
 
 
-State 58
+State 59
 
    10 scalartype: nascalartype .
 
     $default  reduce using rule 10 (scalartype)
 
 
-State 59
-
-   22 vectortype: scalartype . "[]"
-   65 nonuniontype: scalartype .
-
-    "[]"  shift, and go to state 96
-
-    $default  reduce using rule 65 (nonuniontype)
-
-
 State 60
 
-   66 nonuniontype: environmenttype .
+   22 vectortype: scalartype . "[]"
+   64 nonuniontype: scalartype .
 
-    $default  reduce using rule 66 (nonuniontype)
+    "[]"  shift, and go to state 94
+
+    $default  reduce using rule 64 (nonuniontype)
 
 
 State 61
 
-   67 nonuniontype: expressiontype .
+   65 nonuniontype: environmenttype .
 
-    $default  reduce using rule 67 (nonuniontype)
+    $default  reduce using rule 65 (nonuniontype)
 
 
 State 62
 
-   68 nonuniontype: languagetype .
+   66 nonuniontype: expressiontype .
 
-    $default  reduce using rule 68 (nonuniontype)
+    $default  reduce using rule 66 (nonuniontype)
 
 
 State 63
 
-   69 nonuniontype: symboltype .
+   67 nonuniontype: languagetype .
 
-    $default  reduce using rule 69 (nonuniontype)
+    $default  reduce using rule 67 (nonuniontype)
 
 
 State 64
 
-   70 nonuniontype: externalptrtype .
+   68 nonuniontype: symboltype .
 
-    $default  reduce using rule 70 (nonuniontype)
+    $default  reduce using rule 68 (nonuniontype)
 
 
 State 65
 
-   71 nonuniontype: bytecodetype .
+   69 nonuniontype: externalptrtype .
 
-    $default  reduce using rule 71 (nonuniontype)
+    $default  reduce using rule 69 (nonuniontype)
 
 
 State 66
 
-   72 nonuniontype: pairlisttype .
+   70 nonuniontype: bytecodetype .
 
-    $default  reduce using rule 72 (nonuniontype)
+    $default  reduce using rule 70 (nonuniontype)
 
 
 State 67
 
-   73 nonuniontype: s4type .
+   71 nonuniontype: pairlisttype .
 
-    $default  reduce using rule 73 (nonuniontype)
+    $default  reduce using rule 71 (nonuniontype)
 
 
 State 68
 
-   74 nonuniontype: weakreftype .
+   72 nonuniontype: s4type .
 
-    $default  reduce using rule 74 (nonuniontype)
+    $default  reduce using rule 72 (nonuniontype)
 
 
 State 69
 
-   88 type: unknowntype .
+   73 nonuniontype: weakreftype .
 
-    $default  reduce using rule 88 (type)
+    $default  reduce using rule 73 (nonuniontype)
 
 
 State 70
 
-   87 type: anytype .
+   87 type: unknowntype .
 
     $default  reduce using rule 87 (type)
 
 
 State 71
 
-   75 nonuniontype: vectortype .
+   86 type: anytype .
 
-    $default  reduce using rule 75 (nonuniontype)
+    $default  reduce using rule 86 (type)
 
 
 State 72
 
-   63 functiontype: params . "=>" type
+   74 nonuniontype: vectortype .
 
-    "=>"  shift, and go to state 97
+    $default  reduce using rule 74 (nonuniontype)
 
 
 State 73
 
-   76 nonuniontype: functiontype .
+   62 functiontype: params . "=>" type
 
-    $default  reduce using rule 76 (nonuniontype)
+    "=>"  shift, and go to state 95
 
 
 State 74
 
-   80 nonuniontype: grouptype .
+   75 nonuniontype: functiontype .
 
-    $default  reduce using rule 80 (nonuniontype)
+    $default  reduce using rule 75 (nonuniontype)
 
 
 State 75
 
-   81 innertype: nonuniontype .
+   79 nonuniontype: grouptype .
 
-    $default  reduce using rule 81 (innertype)
+    $default  reduce using rule 79 (nonuniontype)
 
 
 State 76
 
-   78 nonuniontype: listtype .
+   80 innertype: nonuniontype .
 
-    $default  reduce using rule 78 (nonuniontype)
+    $default  reduce using rule 80 (innertype)
 
 
 State 77
 
-   77 nonuniontype: structtype .
+   77 nonuniontype: listtype .
 
     $default  reduce using rule 77 (nonuniontype)
 
 
 State 78
 
-   79 nonuniontype: tupletype .
+   76 nonuniontype: structtype .
 
-    $default  reduce using rule 79 (nonuniontype)
+    $default  reduce using rule 76 (nonuniontype)
 
 
 State 79
 
-   82 innertype: innertype . "|" nonuniontype
-   85 type: innertype .
+   78 nonuniontype: tupletype .
 
-    "|"  shift, and go to state 98
-
-    $default  reduce using rule 85 (type)
+    $default  reduce using rule 78 (nonuniontype)
 
 
 State 80
 
-   86 type: nulltype .
+   81 innertype: innertype . "|" nonuniontype
+   84 type: innertype .
 
-    $default  reduce using rule 86 (type)
+    "|"  shift, and go to state 96
+
+    $default  reduce using rule 84 (type)
 
 
 State 81
 
-   89 decltype: TYPEDECL identifier type . ";"
+   85 type: nulltype .
 
-    ";"  shift, and go to state 99
+    $default  reduce using rule 85 (type)
 
 
 State 82
+
+   88 decltype: TYPEDECL identifier type . ";"
+
+    ";"  shift, and go to state 97
+
+
+State 83
 
     7 nascalartype: "^" ascalartype .
 
     $default  reduce using rule 7 (nascalartype)
 
 
-State 83
-
-   64 grouptype: "(" type . ")"
-
-    ")"  shift, and go to state 100
-
-
 State 84
 
-   62 params: "<" ">" .
+   63 grouptype: "(" type . ")"
 
-    $default  reduce using rule 62 (params)
+    ")"  shift, and go to state 98
 
 
 State 85
 
-   58 paramtype: "..." .
-
-    $default  reduce using rule 58 (paramtype)
-
-
-State 86
-
-   59 paramtypeseq: paramtype .
-
-    $default  reduce using rule 59 (paramtypeseq)
-
-
-State 87
-
-   60 paramtypeseq: paramtypeseq . "," paramtype
-   61 params: "<" paramtypeseq . ">"
-
-    ","  shift, and go to state 101
-    ">"  shift, and go to state 102
-
-
-State 88
-
-   57 paramtype: type .
-
-    $default  reduce using rule 57 (paramtype)
-
-
-State 89
-
-   55 namedtypeseq: namedtype .
-
-    $default  reduce using rule 55 (namedtypeseq)
-
-
-State 90
-
-   27 structelements: namedtypeseq .
-   56 namedtypeseq: namedtypeseq . "," namedtype
-
-    ","  shift, and go to state 103
-
-    $default  reduce using rule 27 (structelements)
-
-
-State 91
-
-   28 structtype: "{{" structelements . "}}"
-
-    "}}"  shift, and go to state 104
-
-
-State 92
-
-   54 namedtype: identifier . ":" type
-
-    ":"  shift, and go to state 105
-
-
-State 93
-
-   82 innertype: innertype . "|" nonuniontype
-   84 nulltype: "?" innertype .
-
-    "|"  shift, and go to state 98
-
-    $default  reduce using rule 84 (nulltype)
-
-
-State 94
-
-   31 tupletype: TUPLE "<" . tupleelements ">"
-
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
-    "???"            shift, and go to state 36
-    "?"              shift, and go to state 37
-    INTEGER          shift, and go to state 38
-    DOUBLE           shift, and go to state 39
-    COMPLEX          shift, and go to state 40
-    CHARACTER        shift, and go to state 41
-    LOGICAL          shift, and go to state 42
-    RAW              shift, and go to state 43
-    ENVIRONMENT      shift, and go to state 44
-    EXPRESSION       shift, and go to state 45
-    LANGUAGE         shift, and go to state 46
-    SYMBOL           shift, and go to state 47
-    EXTERNALPOINTER  shift, and go to state 48
-    BYTECODE         shift, and go to state 49
-    PAIRLIST         shift, and go to state 50
-    S4               shift, and go to state 51
-    WEAKREF          shift, and go to state 52
-    TUPLE            shift, and go to state 53
-    LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
-
-    $default  reduce using rule 29 (tupleelements)
-
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    typeseq          go to state 106
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupleelements    go to state 107
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 108
-
-
-State 95
-
-   23 listtype: LIST "<" . type ">"
-
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
-    "???"            shift, and go to state 36
-    "?"              shift, and go to state 37
-    INTEGER          shift, and go to state 38
-    DOUBLE           shift, and go to state 39
-    COMPLEX          shift, and go to state 40
-    CHARACTER        shift, and go to state 41
-    LOGICAL          shift, and go to state 42
-    RAW              shift, and go to state 43
-    ENVIRONMENT      shift, and go to state 44
-    EXPRESSION       shift, and go to state 45
-    LANGUAGE         shift, and go to state 46
-    SYMBOL           shift, and go to state 47
-    EXTERNALPOINTER  shift, and go to state 48
-    BYTECODE         shift, and go to state 49
-    PAIRLIST         shift, and go to state 50
-    S4               shift, and go to state 51
-    WEAKREF          shift, and go to state 52
-    TUPLE            shift, and go to state 53
-    LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
-
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 109
-
-
-State 96
-
-   22 vectortype: scalartype "[]" .
-
-    $default  reduce using rule 22 (vectortype)
-
-
-State 97
-
-   63 functiontype: params "=>" . type
-
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
-    "???"            shift, and go to state 36
-    "?"              shift, and go to state 37
-    INTEGER          shift, and go to state 38
-    DOUBLE           shift, and go to state 39
-    COMPLEX          shift, and go to state 40
-    CHARACTER        shift, and go to state 41
-    LOGICAL          shift, and go to state 42
-    RAW              shift, and go to state 43
-    ENVIRONMENT      shift, and go to state 44
-    EXPRESSION       shift, and go to state 45
-    LANGUAGE         shift, and go to state 46
-    SYMBOL           shift, and go to state 47
-    EXTERNALPOINTER  shift, and go to state 48
-    BYTECODE         shift, and go to state 49
-    PAIRLIST         shift, and go to state 50
-    S4               shift, and go to state 51
-    WEAKREF          shift, and go to state 52
-    TUPLE            shift, and go to state 53
-    LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
-
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 110
-
-
-State 98
-
-   82 innertype: innertype "|" . nonuniontype
-
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
-    INTEGER          shift, and go to state 38
-    DOUBLE           shift, and go to state 39
-    COMPLEX          shift, and go to state 40
-    CHARACTER        shift, and go to state 41
-    LOGICAL          shift, and go to state 42
-    RAW              shift, and go to state 43
-    ENVIRONMENT      shift, and go to state 44
-    EXPRESSION       shift, and go to state 45
-    LANGUAGE         shift, and go to state 46
-    SYMBOL           shift, and go to state 47
-    EXTERNALPOINTER  shift, and go to state 48
-    BYTECODE         shift, and go to state 49
-    PAIRLIST         shift, and go to state 50
-    S4               shift, and go to state 51
-    WEAKREF          shift, and go to state 52
-    TUPLE            shift, and go to state 53
-    LIST             shift, and go to state 54
-
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 111
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-
-
-State 99
-
-   89 decltype: TYPEDECL identifier type ";" .
-
-    $default  reduce using rule 89 (decltype)
-
-
-State 100
-
-   64 grouptype: "(" type ")" .
-
-    $default  reduce using rule 64 (grouptype)
-
-
-State 101
-
-   60 paramtypeseq: paramtypeseq "," . paramtype
-
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
-    "..."            shift, and go to state 85
-    "???"            shift, and go to state 36
-    "?"              shift, and go to state 37
-    INTEGER          shift, and go to state 38
-    DOUBLE           shift, and go to state 39
-    COMPLEX          shift, and go to state 40
-    CHARACTER        shift, and go to state 41
-    LOGICAL          shift, and go to state 42
-    RAW              shift, and go to state 43
-    ENVIRONMENT      shift, and go to state 44
-    EXPRESSION       shift, and go to state 45
-    LANGUAGE         shift, and go to state 46
-    SYMBOL           shift, and go to state 47
-    EXTERNALPOINTER  shift, and go to state 48
-    BYTECODE         shift, and go to state 49
-    PAIRLIST         shift, and go to state 50
-    S4               shift, and go to state 51
-    WEAKREF          shift, and go to state 52
-    TUPLE            shift, and go to state 53
-    LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
-
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    paramtype        go to state 112
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 88
-
-
-State 102
-
-   61 params: "<" paramtypeseq ">" .
+   61 params: "<" ">" .
 
     $default  reduce using rule 61 (params)
 
 
-State 103
+State 86
 
-   56 namedtypeseq: namedtypeseq "," . namedtype
+   57 paramtype: "..." .
+
+    $default  reduce using rule 57 (paramtype)
+
+
+State 87
+
+   58 paramtypeseq: paramtype .
+
+    $default  reduce using rule 58 (paramtypeseq)
+
+
+State 88
+
+   59 paramtypeseq: paramtypeseq . "," paramtype
+   60 params: "<" paramtypeseq . ">"
+
+    ","  shift, and go to state 99
+    ">"  shift, and go to state 100
+
+
+State 89
+
+   56 paramtype: type .
+
+    $default  reduce using rule 56 (paramtype)
+
+
+State 90
+
+   81 innertype: innertype . "|" nonuniontype
+   83 nulltype: "?" innertype .
+
+    "|"  shift, and go to state 96
+
+    $default  reduce using rule 83 (nulltype)
+
+
+State 91
+
+   29 tupletype: TUPLE "<" . tupleelements ">"
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
+    "???"            shift, and go to state 36
+    "?"              shift, and go to state 37
+    INTEGER          shift, and go to state 38
+    DOUBLE           shift, and go to state 39
+    COMPLEX          shift, and go to state 40
+    CHARACTER        shift, and go to state 41
+    LOGICAL          shift, and go to state 42
+    RAW              shift, and go to state 43
+    ENVIRONMENT      shift, and go to state 44
+    EXPRESSION       shift, and go to state 45
+    LANGUAGE         shift, and go to state 46
+    SYMBOL           shift, and go to state 47
+    EXTERNALPOINTER  shift, and go to state 48
+    BYTECODE         shift, and go to state 49
+    PAIRLIST         shift, and go to state 50
+    S4               shift, and go to state 51
+    WEAKREF          shift, and go to state 52
+    TUPLE            shift, and go to state 53
+    LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
+
+    $default  reduce using rule 27 (tupleelements)
+
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    typeseq          go to state 101
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupleelements    go to state 102
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 103
+
+
+State 92
+
+   23 listtype: LIST "<" . type ">"
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
+    "???"            shift, and go to state 36
+    "?"              shift, and go to state 37
+    INTEGER          shift, and go to state 38
+    DOUBLE           shift, and go to state 39
+    COMPLEX          shift, and go to state 40
+    CHARACTER        shift, and go to state 41
+    LOGICAL          shift, and go to state 42
+    RAW              shift, and go to state 43
+    ENVIRONMENT      shift, and go to state 44
+    EXPRESSION       shift, and go to state 45
+    LANGUAGE         shift, and go to state 46
+    SYMBOL           shift, and go to state 47
+    EXTERNALPOINTER  shift, and go to state 48
+    BYTECODE         shift, and go to state 49
+    PAIRLIST         shift, and go to state 50
+    S4               shift, and go to state 51
+    WEAKREF          shift, and go to state 52
+    TUPLE            shift, and go to state 53
+    LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
+
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 104
+
+
+State 93
+
+   26 structtype: STRUCT "<" . namedtypeseq ">"
 
     "..."              shift, and go to state 6
     INTEGER            shift, and go to state 7
@@ -1580,30 +1334,31 @@ State 103
     WEAKREF            shift, and go to state 21
     TUPLE              shift, and go to state 22
     LIST               shift, and go to state 23
-    ANY                shift, and go to state 24
-    TYPEDECL           shift, and go to state 25
-    IDENTIFIER         shift, and go to state 26
-    QUOTED_IDENTIFIER  shift, and go to state 27
+    STRUCT             shift, and go to state 24
+    ANY                shift, and go to state 25
+    TYPEDECL           shift, and go to state 26
+    IDENTIFIER         shift, and go to state 27
+    QUOTED_IDENTIFIER  shift, and go to state 28
 
-    namedtype   go to state 113
-    identifier  go to state 92
-
-
-State 104
-
-   28 structtype: "{{" structelements "}}" .
-
-    $default  reduce using rule 28 (structtype)
+    namedtype     go to state 105
+    namedtypeseq  go to state 106
+    identifier    go to state 107
 
 
-State 105
+State 94
 
-   54 namedtype: identifier ":" . type
+   22 vectortype: scalartype "[]" .
 
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
+    $default  reduce using rule 22 (vectortype)
+
+
+State 95
+
+   62 functiontype: params "=>" . type
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
     "???"            shift, and go to state 36
     "?"              shift, and go to state 37
     INTEGER          shift, and go to state 38
@@ -1623,110 +1378,248 @@ State 105
     WEAKREF          shift, and go to state 52
     TUPLE            shift, and go to state 53
     LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
 
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 114
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 108
 
 
-State 106
+State 96
+
+   81 innertype: innertype "|" . nonuniontype
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
+    INTEGER          shift, and go to state 38
+    DOUBLE           shift, and go to state 39
+    COMPLEX          shift, and go to state 40
+    CHARACTER        shift, and go to state 41
+    LOGICAL          shift, and go to state 42
+    RAW              shift, and go to state 43
+    ENVIRONMENT      shift, and go to state 44
+    EXPRESSION       shift, and go to state 45
+    LANGUAGE         shift, and go to state 46
+    SYMBOL           shift, and go to state 47
+    EXTERNALPOINTER  shift, and go to state 48
+    BYTECODE         shift, and go to state 49
+    PAIRLIST         shift, and go to state 50
+    S4               shift, and go to state 51
+    WEAKREF          shift, and go to state 52
+    TUPLE            shift, and go to state 53
+    LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
+
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 109
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+
+
+State 97
+
+   88 decltype: TYPEDECL identifier type ";" .
+
+    $default  reduce using rule 88 (decltype)
+
+
+State 98
+
+   63 grouptype: "(" type ")" .
+
+    $default  reduce using rule 63 (grouptype)
+
+
+State 99
+
+   59 paramtypeseq: paramtypeseq "," . paramtype
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
+    "..."            shift, and go to state 86
+    "???"            shift, and go to state 36
+    "?"              shift, and go to state 37
+    INTEGER          shift, and go to state 38
+    DOUBLE           shift, and go to state 39
+    COMPLEX          shift, and go to state 40
+    CHARACTER        shift, and go to state 41
+    LOGICAL          shift, and go to state 42
+    RAW              shift, and go to state 43
+    ENVIRONMENT      shift, and go to state 44
+    EXPRESSION       shift, and go to state 45
+    LANGUAGE         shift, and go to state 46
+    SYMBOL           shift, and go to state 47
+    EXTERNALPOINTER  shift, and go to state 48
+    BYTECODE         shift, and go to state 49
+    PAIRLIST         shift, and go to state 50
+    S4               shift, and go to state 51
+    WEAKREF          shift, and go to state 52
+    TUPLE            shift, and go to state 53
+    LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
+
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    paramtype        go to state 110
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 89
+
+
+State 100
+
+   60 params: "<" paramtypeseq ">" .
+
+    $default  reduce using rule 60 (params)
+
+
+State 101
 
    25 typeseq: typeseq . "," type
-   30 tupleelements: typeseq .
+   28 tupleelements: typeseq .
 
-    ","  shift, and go to state 115
+    ","  shift, and go to state 111
 
-    $default  reduce using rule 30 (tupleelements)
-
-
-State 107
-
-   31 tupletype: TUPLE "<" tupleelements . ">"
-
-    ">"  shift, and go to state 116
+    $default  reduce using rule 28 (tupleelements)
 
 
-State 108
+State 102
+
+   29 tupletype: TUPLE "<" tupleelements . ">"
+
+    ">"  shift, and go to state 112
+
+
+State 103
 
    24 typeseq: type .
 
     $default  reduce using rule 24 (typeseq)
 
 
-State 109
+State 104
 
    23 listtype: LIST "<" type . ">"
 
-    ">"  shift, and go to state 117
+    ">"  shift, and go to state 113
+
+
+State 105
+
+   54 namedtypeseq: namedtype .
+
+    $default  reduce using rule 54 (namedtypeseq)
+
+
+State 106
+
+   26 structtype: STRUCT "<" namedtypeseq . ">"
+   55 namedtypeseq: namedtypeseq . "," namedtype
+
+    ","  shift, and go to state 114
+    ">"  shift, and go to state 115
+
+
+State 107
+
+   53 namedtype: identifier . ":" type
+
+    ":"  shift, and go to state 116
+
+
+State 108
+
+   62 functiontype: params "=>" type .
+
+    $default  reduce using rule 62 (functiontype)
+
+
+State 109
+
+   81 innertype: innertype "|" nonuniontype .
+
+    $default  reduce using rule 81 (innertype)
 
 
 State 110
 
-   63 functiontype: params "=>" type .
+   59 paramtypeseq: paramtypeseq "," paramtype .
 
-    $default  reduce using rule 63 (functiontype)
+    $default  reduce using rule 59 (paramtypeseq)
 
 
 State 111
 
-   82 innertype: innertype "|" nonuniontype .
-
-    $default  reduce using rule 82 (innertype)
-
-
-State 112
-
-   60 paramtypeseq: paramtypeseq "," paramtype .
-
-    $default  reduce using rule 60 (paramtypeseq)
-
-
-State 113
-
-   56 namedtypeseq: namedtypeseq "," namedtype .
-
-    $default  reduce using rule 56 (namedtypeseq)
-
-
-State 114
-
-   54 namedtype: identifier ":" type .
-
-    $default  reduce using rule 54 (namedtype)
-
-
-State 115
-
    25 typeseq: typeseq "," . type
 
-    "^"              shift, and go to state 32
-    "("              shift, and go to state 33
-    "<"              shift, and go to state 34
-    "{{"             shift, and go to state 35
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
     "???"            shift, and go to state 36
     "?"              shift, and go to state 37
     INTEGER          shift, and go to state 38
@@ -1746,52 +1639,163 @@ State 115
     WEAKREF          shift, and go to state 52
     TUPLE            shift, and go to state 53
     LIST             shift, and go to state 54
-    ANY              shift, and go to state 55
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
 
-    ascalartype      go to state 56
-    rawascalartype   go to state 57
-    nascalartype     go to state 58
-    scalartype       go to state 59
-    environmenttype  go to state 60
-    expressiontype   go to state 61
-    languagetype     go to state 62
-    symboltype       go to state 63
-    externalptrtype  go to state 64
-    bytecodetype     go to state 65
-    pairlisttype     go to state 66
-    s4type           go to state 67
-    weakreftype      go to state 68
-    unknowntype      go to state 69
-    anytype          go to state 70
-    vectortype       go to state 71
-    params           go to state 72
-    functiontype     go to state 73
-    grouptype        go to state 74
-    nonuniontype     go to state 75
-    listtype         go to state 76
-    structtype       go to state 77
-    tupletype        go to state 78
-    innertype        go to state 79
-    nulltype         go to state 80
-    type             go to state 118
-
-
-State 116
-
-   31 tupletype: TUPLE "<" tupleelements ">" .
-
-    $default  reduce using rule 31 (tupletype)
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 117
 
 
-State 117
+State 112
+
+   29 tupletype: TUPLE "<" tupleelements ">" .
+
+    $default  reduce using rule 29 (tupletype)
+
+
+State 113
 
    23 listtype: LIST "<" type ">" .
 
     $default  reduce using rule 23 (listtype)
 
 
-State 118
+State 114
+
+   55 namedtypeseq: namedtypeseq "," . namedtype
+
+    "..."              shift, and go to state 6
+    INTEGER            shift, and go to state 7
+    DOUBLE             shift, and go to state 8
+    COMPLEX            shift, and go to state 9
+    CHARACTER          shift, and go to state 10
+    LOGICAL            shift, and go to state 11
+    RAW                shift, and go to state 12
+    ENVIRONMENT        shift, and go to state 13
+    EXPRESSION         shift, and go to state 14
+    LANGUAGE           shift, and go to state 15
+    SYMBOL             shift, and go to state 16
+    EXTERNALPOINTER    shift, and go to state 17
+    BYTECODE           shift, and go to state 18
+    PAIRLIST           shift, and go to state 19
+    S4                 shift, and go to state 20
+    WEAKREF            shift, and go to state 21
+    TUPLE              shift, and go to state 22
+    LIST               shift, and go to state 23
+    STRUCT             shift, and go to state 24
+    ANY                shift, and go to state 25
+    TYPEDECL           shift, and go to state 26
+    IDENTIFIER         shift, and go to state 27
+    QUOTED_IDENTIFIER  shift, and go to state 28
+
+    namedtype   go to state 118
+    identifier  go to state 107
+
+
+State 115
+
+   26 structtype: STRUCT "<" namedtypeseq ">" .
+
+    $default  reduce using rule 26 (structtype)
+
+
+State 116
+
+   53 namedtype: identifier ":" . type
+
+    "^"              shift, and go to state 33
+    "("              shift, and go to state 34
+    "<"              shift, and go to state 35
+    "???"            shift, and go to state 36
+    "?"              shift, and go to state 37
+    INTEGER          shift, and go to state 38
+    DOUBLE           shift, and go to state 39
+    COMPLEX          shift, and go to state 40
+    CHARACTER        shift, and go to state 41
+    LOGICAL          shift, and go to state 42
+    RAW              shift, and go to state 43
+    ENVIRONMENT      shift, and go to state 44
+    EXPRESSION       shift, and go to state 45
+    LANGUAGE         shift, and go to state 46
+    SYMBOL           shift, and go to state 47
+    EXTERNALPOINTER  shift, and go to state 48
+    BYTECODE         shift, and go to state 49
+    PAIRLIST         shift, and go to state 50
+    S4               shift, and go to state 51
+    WEAKREF          shift, and go to state 52
+    TUPLE            shift, and go to state 53
+    LIST             shift, and go to state 54
+    STRUCT           shift, and go to state 55
+    ANY              shift, and go to state 56
+
+    ascalartype      go to state 57
+    rawascalartype   go to state 58
+    nascalartype     go to state 59
+    scalartype       go to state 60
+    environmenttype  go to state 61
+    expressiontype   go to state 62
+    languagetype     go to state 63
+    symboltype       go to state 64
+    externalptrtype  go to state 65
+    bytecodetype     go to state 66
+    pairlisttype     go to state 67
+    s4type           go to state 68
+    weakreftype      go to state 69
+    unknowntype      go to state 70
+    anytype          go to state 71
+    vectortype       go to state 72
+    params           go to state 73
+    functiontype     go to state 74
+    grouptype        go to state 75
+    nonuniontype     go to state 76
+    listtype         go to state 77
+    structtype       go to state 78
+    tupletype        go to state 79
+    innertype        go to state 80
+    nulltype         go to state 81
+    type             go to state 119
+
+
+State 117
 
    25 typeseq: typeseq "," type .
 
     $default  reduce using rule 25 (typeseq)
+
+
+State 118
+
+   55 namedtypeseq: namedtypeseq "," namedtype .
+
+    $default  reduce using rule 55 (namedtypeseq)
+
+
+State 119
+
+   53 namedtype: identifier ":" type .
+
+    $default  reduce using rule 53 (namedtype)

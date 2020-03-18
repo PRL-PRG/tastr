@@ -1,33 +1,33 @@
 #ifndef TASTR_AST_STRUCT_TYPE_NODE_HPP
 #define TASTR_AST_STRUCT_TYPE_NODE_HPP
 
-#include "ast/Bracket.hpp"
+#include "ast/KeywordNode.hpp"
+#include "ast/ParameterNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr::ast {
 
-class StructTypeNode final
-    : public TypeNode
-    , public Bracketed {
+class StructTypeNode final: public TypeNode {
   public:
-    explicit StructTypeNode(OperatorNodeUPtr opening_bracket,
-                            OperatorNodeUPtr closing_bracket,
-                            NodeUPtr elements)
+    explicit StructTypeNode(KeywordNodeUPtr keyword,
+                            ParameterNodeUPtr parameters)
         : TypeNode()
-        , Bracketed(std::move(opening_bracket), std::move(closing_bracket))
-        , elements_(std::move(elements)) {
+        , keyword_(std::move(keyword))
+        , parameters_(std::move(parameters)) {
     }
 
     ~StructTypeNode() = default;
 
     StructTypeNode(const StructTypeNode& node)
-        : TypeNode(node), Bracketed(node), elements_(node.elements_->clone()) {
+        : TypeNode(node)
+        , keyword_(node.keyword_->clone())
+        , parameters_(node.parameters_->clone()) {
     }
 
     StructTypeNode(StructTypeNode&& node)
         : TypeNode(std::move(node))
-        , Bracketed(std::move(node))
-        , elements_(std::move(node.elements_)) {
+        , keyword_(std::move(node.keyword_))
+        , parameters_(std::move(node.parameters_)) {
     }
 
     StructTypeNode& operator=(const StructTypeNode& node) {
@@ -35,15 +35,15 @@ class StructTypeNode final
             return *this;
         }
         TypeNode::operator=(node);
-        Bracketed::operator=(node);
-        elements_ = node.elements_->clone();
+        keyword_ = node.keyword_->clone();
+        parameters_ = node.parameters_->clone();
         return *this;
     }
 
     StructTypeNode& operator=(StructTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        Bracketed::operator=(std::move(node));
-        elements_ = std::move(node.elements_);
+        keyword_ = std::move(node.keyword_);
+        parameters_ = std::move(node.parameters_);
         return *this;
     }
 
@@ -59,16 +59,21 @@ class StructTypeNode final
         return true;
     }
 
-    Node& get_elements() const {
-        return *elements_.get();
+    KeywordNode& get_keyword() const {
+        return *keyword_.get();
+    }
+
+    ParameterNode& get_parameters() const {
+        return *parameters_.get();
     }
 
   private:
     virtual StructTypeNode* clone_impl() const override final {
         return new StructTypeNode(*this);
-    }
+    };
 
-    NodeUPtr elements_;
+    KeywordNodeUPtr keyword_;
+    ParameterNodeUPtr parameters_;
 };
 
 using StructTypeNodePtr = StructTypeNode*;

@@ -63,6 +63,7 @@
 %token <std::string>                    WEAKREF
 %token <std::string>                    TUPLE
 %token <std::string>                    LIST
+%token <std::string>                    STRUCT
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
 %token <std::string>                    IDENTIFIER;
@@ -93,7 +94,6 @@
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
 %nterm <ListTypeNodePtr>                listtype
-%nterm <NodePtr>                        structelements
 %nterm <StructTypeNodePtr>              structtype
 %nterm <NodePtr>                        tupleelements
 %nterm <TupleTypeNodePtr>               tupletype
@@ -167,7 +167,6 @@
 %destructor { delete $$; } grouptype
 %destructor { delete $$; } nonuniontype
 %destructor { delete $$; } listtype
-%destructor { delete $$; } structelements
 %destructor { delete $$; } structtype
 %destructor { delete $$; } tupleelements
 %destructor { delete $$; } tupletype
@@ -444,21 +443,19 @@ typeseq:            type                                    {
                                                             }
        ;
 
-structelements:     %empty                                  {
-                                                                $$ = new EmptyNode();
-                                                            }
-              |     namedtypeseq                            {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                            }
-              ;
+structtype:         STRUCT "<" namedtypeseq ">"             {
+                                                                KeywordNodePtr keyword = create_keyword($1, @1, context);
 
-structtype:         "{{" structelements "}}"                {
-                                                                OperatorNodePtr right = create_operator($3, @3, context);
-                                                                OperatorNodePtr left = create_operator($1, @1, context);
-                                                                $$ = new StructTypeNode(std::move(wrap(std::move(left))),
-                                                                                        std::move(wrap(std::move(right))),
-                                                                                        std::move(wrap(std::move($2))));
+                                                                OperatorNodePtr left = create_operator($2, @2, context);
+                                                                OperatorNodePtr right = create_operator($4, @4, context);
+
+                                                                ParameterNode* parameter = new ParameterNode(std::move(wrap(std::move(left))),
+                                                                                                             std::move(wrap(std::move(right))),
+                                                                                                             std::move(wrap(std::move($3))));
+
+                                                                $$ = new StructTypeNode(std::move(wrap(std::move(keyword))),
+                                                                                        std::move(wrap(std::move(parameter))));
+
                                                                 $$ -> set_location(@$);
                                                             }
           ;
@@ -507,6 +504,7 @@ identifier:         INTEGER                                 { $$ = create_identi
           |         WEAKREF                                 { $$ = create_identifier($1, false, @1, context); }
           |         TUPLE                                   { $$ = create_identifier($1, false, @1, context); }
           |         LIST                                    { $$ = create_identifier($1, false, @1, context); }
+          |         STRUCT                                  { $$ = create_identifier($1, false, @1, context); }
           |         ANY                                     { $$ = create_identifier($1, false, @1, context); }
           |         TYPEDECL                                { $$ = create_identifier($1, false, @1, context); }
           |         VARARG                                  { $$ = create_identifier($1, false, @1, context); }

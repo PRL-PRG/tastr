@@ -1,0 +1,4 @@
+type struct struct<name: int>;
+type struct struct<name: struct<name2: chr>>;
+type srt srt<struct: srt<srt: struct<list: chr>>>;
+
