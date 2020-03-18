@@ -64,8 +64,8 @@ NON_OCT             [^0-7]
 \n+                         { yylloc -> lines(yyleng); yylloc -> step(); yylloc -> append_prefix(yytext); }
 "#"                         { BEGIN(comment); yylloc -> append_prefix(yytext); }
 <comment>{
-    \n                      { BEGIN(INITIAL); yylloc -> append_prefix(yytext); }
-    .                       { yylloc -> append_prefix(yytext); }
+    \n                      { BEGIN(INITIAL); yylloc -> lines(yyleng); yylloc -> step(); yylloc -> append_prefix(yytext); }
+    .                       { yylloc -> step(); yylloc -> append_prefix(yytext); }
 }
 "|"                         { HANDLE_TOKEN(TOKEN_OR) }
 "^"                         { HANDLE_TOKEN(TOKEN_CARET) }
