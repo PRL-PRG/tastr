@@ -203,7 +203,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_first_node().accept(*this);
+            format_ast_view(" ");
             node.get_separator().accept(*this);
+            format_ast_view(" ");
             node.get_second_node().accept(*this);
         });
     }
@@ -212,7 +214,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
+            format_ast_view(" ");
             node.get_elements().accept(*this);
+            format_ast_view(" ");
             node.get_closing_bracket().accept(*this);
         });
     }
@@ -221,7 +225,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_parameter().accept(*this);
+            format_ast_view(" ");
             node.get_operator().accept(*this);
+            format_ast_view(" ");
             node.get_return_type().accept(*this);
         });
     }
@@ -230,7 +236,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
+            format_ast_view(" ");
             node.get_elements().accept(*this);
+            format_ast_view(" ");
             node.get_closing_bracket().accept(*this);
         });
     }
@@ -239,7 +247,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
+            format_ast_view(" ");
             node.get_elements().accept(*this);
+            format_ast_view(" ");
             node.get_closing_bracket().accept(*this);
         });
     }
@@ -248,7 +258,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
+            format_ast_view(" ");
             node.get_elements().accept(*this);
+            format_ast_view(" ");
             node.get_closing_bracket().accept(*this);
         });
     }
@@ -257,7 +269,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_opening_bracket().accept(*this);
+            format_ast_view(" ");
             node.get_inner_type().accept(*this);
+            format_ast_view(" ");
             node.get_closing_bracket().accept(*this);
         });
     }
@@ -266,7 +280,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_first_type().accept(*this);
+            format_ast_view(" ");
             visit(node.get_operator());
+            format_ast_view(" ");
             node.get_second_type().accept(*this);
         });
     }
@@ -293,7 +309,9 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             node.get_identifier().accept(*this);
+            format_ast_view(" ");
             node.get_separator().accept(*this);
+            format_ast_view(" ");
             node.get_type().accept(*this);
         });
     }
@@ -302,8 +320,11 @@ class Unparser final: public ConstNodeVisitor {
         visit_(node.get_location());
         ast_([this, &node] {
             visit(node.get_keyword());
+            format_ast_view(" ");
             node.get_identifier().accept(*this);
+            format_ast_view(" ");
             node.get_type().accept(*this);
+            format_ast_view(" ");
             node.get_terminator().accept(*this);
         });
     }
@@ -313,6 +334,7 @@ class Unparser final: public ConstNodeVisitor {
         ast_([this, &node] {
             for (int index = 0; index < node.size(); ++index) {
                 node.at(index).accept(*this);
+                format_ast_view("\n");
             }
         });
         node.get_eof_node().accept(*this);
@@ -320,7 +342,9 @@ class Unparser final: public ConstNodeVisitor {
 
   private:
     void visit_(const tastr::parser::Location& node) {
-        bright_gray_([this, &node] { os_ << node.get_prefix(); });
+        if (!should_show_ast()) {
+            bright_gray_([this, &node] { os_ << node.get_prefix(); });
+        }
     }
 
     template <typename T, typename U, typename V>
@@ -376,6 +400,12 @@ class Unparser final: public ConstNodeVisitor {
 
         if (should_show_ast()) {
             bright_gray_([this] { os_ << "❭"; });
+        }
+    }
+
+    void format_ast_view(const std::string& formatting = "") {
+        if (should_show_ast()) {
+            os_ << formatting;
         }
     }
 
