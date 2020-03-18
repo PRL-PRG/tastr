@@ -99,10 +99,12 @@ class Unparser final: public ConstNodeVisitor {
 
     void visit(const tastr::ast::EmptyNode& node) override final {
         visit_(node.get_location());
+        ast_([] {});
     }
 
     void visit(const tastr::ast::EofNode& node) override final {
         visit_(node.get_location());
+        ast_([] {});
     }
 
     void
