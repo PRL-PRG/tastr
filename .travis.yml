@@ -7,6 +7,7 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install flex
   - sudo apt-get install bison
+  - sudo apt-get install libfl-dev
   - sudo apt-get install gcc-9 -qy
   - sudo apt-get install g++-9 -qy
   - sudo apt-get install clang-8 -qy
