@@ -8,7 +8,8 @@ namespace tastr::ast {
 
 class S4TypeNode final: public TypeNode {
   public:
-    explicit S4TypeNode(KeywordNodeUPtr keyword): TypeNode(), keyword_(std::move(keyword)) {
+    explicit S4TypeNode(KeywordNodeUPtr keyword)
+        : TypeNode(), keyword_(std::move(keyword)) {
     }
 
     ~S4TypeNode() = default;

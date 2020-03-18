@@ -1,9 +1,9 @@
 #ifndef TASTR_AST_VECTOR_TYPE_NODE_HPP
 #define TASTR_AST_VECTOR_TYPE_NODE_HPP
 
-#include "ast/OperatorNode.hpp"
 #include "ScalarTypeNode.hpp"
 #include "TypeNode.hpp"
+#include "ast/OperatorNode.hpp"
 
 #include <memory>
 
