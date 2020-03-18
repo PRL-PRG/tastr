@@ -3,7 +3,6 @@
 %defines "Parser.hxx"
 
 %skeleton "lalr1.cc"
-%require "3.5.2"
 
 %define api.parser.class {Parser}
 %define api.namespace {tastr::parser}
