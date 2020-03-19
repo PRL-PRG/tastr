@@ -46,10 +46,6 @@ class IntegerAScalarTypeNode final: public AScalarTypeNode {
         return kind_;
     }
 
-    bool is_integer_a_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual IntegerAScalarTypeNode* clone_impl() const override final {
         return new IntegerAScalarTypeNode(*this);

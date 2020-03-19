@@ -79,10 +79,6 @@ class CommaSeparatorNode final: public Node {
         return *second_node_.get();
     }
 
-    bool is_comma_separator_node() const override final {
-        return true;
-    }
-
   private:
     virtual CommaSeparatorNode* clone_impl() const override final {
         return new CommaSeparatorNode(*this);

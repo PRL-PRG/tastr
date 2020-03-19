@@ -59,10 +59,6 @@ class StructTypeNode final: public TypeNode {
         return kind_;
     }
 
-    bool is_struct_type_node() const override final {
-        return true;
-    }
-
     KeywordNode& get_keyword() const {
         return *keyword_.get();
     }

@@ -41,10 +41,6 @@ class ScalarTypeNode: public TypeNode {
         return std::unique_ptr<ScalarTypeNode>(this->clone_impl());
     }
 
-    bool is_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual ScalarTypeNode* clone_impl() const override = 0;
 };

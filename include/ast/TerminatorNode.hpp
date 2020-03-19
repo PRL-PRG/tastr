@@ -49,10 +49,6 @@ class TerminatorNode final: public Node {
         return kind_;
     }
 
-    bool is_terminator_node() const override final {
-        return true;
-    }
-
     const std::string& get_value() const {
         return value_;
     }

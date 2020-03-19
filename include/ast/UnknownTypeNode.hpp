@@ -49,10 +49,6 @@ class UnknownTypeNode final: public TypeNode {
         return kind_;
     }
 
-    bool is_unknown_type_node() const override final {
-        return true;
-    }
-
     const KeywordNode& get_keyword() const {
         return *keyword_.get();
     }

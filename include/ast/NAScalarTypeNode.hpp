@@ -69,10 +69,6 @@ class NAScalarTypeNode final: public ScalarTypeNode {
         return kind_;
     }
 
-    bool is_na_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual NAScalarTypeNode* clone_impl() const override final {
         return new NAScalarTypeNode(*this);

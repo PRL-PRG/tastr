@@ -45,10 +45,6 @@ class RawAScalarTypeNode final: public AScalarTypeNode {
         return kind_;
     }
 
-    bool is_raw_a_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual RawAScalarTypeNode* clone_impl() const override final {
         return new RawAScalarTypeNode(*this);

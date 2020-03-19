@@ -62,9 +62,6 @@ class IdentifierNode final: public Node {
         return quoted_;
     }
 
-    bool is_identifier_node() const override final {
-        return true;
-    }
 
   private:
     virtual IdentifierNode* clone_impl() const override final {

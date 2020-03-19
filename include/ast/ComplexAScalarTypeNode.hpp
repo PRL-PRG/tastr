@@ -46,10 +46,6 @@ class ComplexAScalarTypeNode final: public AScalarTypeNode {
         return kind_;
     }
 
-    bool is_complex_a_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual ComplexAScalarTypeNode* clone_impl() const override final {
         return new ComplexAScalarTypeNode(*this);

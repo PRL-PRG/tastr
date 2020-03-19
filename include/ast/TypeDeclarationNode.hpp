@@ -83,10 +83,6 @@ class TypeDeclarationNode final: public Node {
         return *type_.get();
     }
 
-    bool is_type_declaration_node() const override final {
-        return true;
-    }
-
     const KeywordNode& get_keyword() const {
         return *keyword_.get();
     }

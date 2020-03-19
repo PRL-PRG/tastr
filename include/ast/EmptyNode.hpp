@@ -44,11 +44,7 @@ class EmptyNode final: public Node {
     Kind get_kind() const override final {
         return kind_;
     }
-
-    bool is_empty_node() const override final {
-        return true;
-    }
-
+    
   private:
     virtual EmptyNode* clone_impl() const override final {
         return new EmptyNode(*this);

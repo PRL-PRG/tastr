@@ -47,10 +47,6 @@ class AScalarTypeNode: public ScalarTypeNode {
         return std::unique_ptr<AScalarTypeNode>(this->clone_impl());
     }
 
-    bool is_a_scalar_type_node() const override final {
-        return true;
-    }
-
     const KeywordNode& get_keyword() const {
         return *keyword_.get();
     }

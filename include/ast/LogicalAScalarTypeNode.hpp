@@ -46,10 +46,6 @@ class LogicalAScalarTypeNode final: public AScalarTypeNode {
         return kind_;
     }
 
-    bool is_logical_a_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual LogicalAScalarTypeNode* clone_impl() const override final {
         return new LogicalAScalarTypeNode(*this);

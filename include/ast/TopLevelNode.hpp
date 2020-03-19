@@ -75,10 +75,6 @@ class TopLevelNode final: public Node {
         return kind_;
     }
 
-    bool is_top_level_node() const override final {
-        return true;
-    }
-
     const sequence_t& get_type_declarations() const {
         return type_declarations_;
     }

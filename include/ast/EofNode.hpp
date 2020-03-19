@@ -45,10 +45,6 @@ class EofNode final: public Node {
         return kind_;
     }
 
-    bool is_eof_node() const override final {
-        return true;
-    }
-
   private:
     virtual EofNode* clone_impl() const override final {
         return new EofNode(*this);

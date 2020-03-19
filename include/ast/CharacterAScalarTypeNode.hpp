@@ -51,10 +51,6 @@ class CharacterAScalarTypeNode final: public AScalarTypeNode {
         return kind_;
     }
 
-    bool is_character_a_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual CharacterAScalarTypeNode* clone_impl() const override final {
         return new CharacterAScalarTypeNode(*this);

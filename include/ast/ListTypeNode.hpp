@@ -58,10 +58,6 @@ class ListTypeNode final: public TypeNode {
         return kind_;
     }
 
-    bool is_list_type_node() const override final {
-        return true;
-    }
-
     KeywordNode& get_keyword() const {
         return *keyword_.get();
     }

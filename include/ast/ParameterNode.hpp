@@ -59,10 +59,6 @@ class ParameterNode final
         return kind_;
     }
 
-    bool is_parameter_node() const override final {
-        return true;
-    }
-
     Node& get_elements() const {
         return *elements_.get();
     }

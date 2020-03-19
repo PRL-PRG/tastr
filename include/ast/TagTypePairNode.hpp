@@ -81,10 +81,6 @@ class TagTypePairNode final: public Node {
         return *separator_.get();
     }
 
-    bool is_tag_type_pair_node() const override final {
-        return true;
-    }
-
   private:
     virtual TagTypePairNode* clone_impl() const override final {
         return new TagTypePairNode(*this);

@@ -67,10 +67,6 @@ class GroupTypeNode final
         return kind_;
     }
 
-    bool is_group_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual GroupTypeNode* clone_impl() const override final {
         return new GroupTypeNode(*this);

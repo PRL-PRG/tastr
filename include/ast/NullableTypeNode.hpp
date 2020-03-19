@@ -66,10 +66,6 @@ class NullableTypeNode final: public TypeNode {
         return kind_;
     }
 
-    bool is_nullable_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual NullableTypeNode* clone_impl() const override final {
         return new NullableTypeNode(*this);

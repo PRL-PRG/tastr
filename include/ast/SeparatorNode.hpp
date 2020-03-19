@@ -48,10 +48,6 @@ class SeparatorNode final: public Node {
         return kind_;
     }
 
-    bool is_separator_node() const override final {
-        return true;
-    }
-
     const std::string& get_value() const {
         return value_;
     }

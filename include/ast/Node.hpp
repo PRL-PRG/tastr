@@ -95,192 +95,164 @@ class Node {
 
     virtual Kind get_kind() const = 0;
 
-    virtual bool is_character_a_scalar_type_node() const {
-        return false;
+    bool is_character_a_scalar_type_node() const {
+        return get_kind() == Kind::CharacterAScalarType;
     }
 
-    virtual bool is_complex_a_scalar_type_node() const {
-        return false;
+    bool is_complex_a_scalar_type_node() const {
+        return get_kind() == Kind::ComplexAScalarType;
     }
 
-    virtual bool is_double_a_scalar_type_node() const {
-        return false;
+    bool is_double_a_scalar_type_node() const {
+        return get_kind() == Kind::DoubleAScalarType;
     }
 
-    virtual bool is_environment_type_node() const {
-        return false;
+    bool is_environment_type_node() const {
+        return get_kind() == Kind::EnvironmentType;
     }
 
-    virtual bool is_expression_type_node() const {
-        return false;
+    bool is_expression_type_node() const {
+        return get_kind() == Kind::ExpressionType;
     }
 
-    virtual bool is_function_type_node() const {
-        return false;
+    bool is_function_type_node() const {
+        return get_kind() == Kind::FunctionType;
     }
 
-    virtual bool is_group_type_node() const {
-        return false;
+    bool is_group_type_node() const {
+        return get_kind() == Kind::GroupType;
     }
 
-    virtual bool is_identifier_node() const {
-        return false;
+    bool is_identifier_node() const {
+        return get_kind() == Kind::Identifier;
     }
 
-    virtual bool is_keyword_node() const {
-        return false;
+    bool is_keyword_node() const {
+        return get_kind() == Kind::Keyword;
     }
 
-    virtual bool is_operator_node() const {
-        return false;
+    bool is_operator_node() const {
+        return get_kind() == Kind::Operator;
     }
 
-    virtual bool is_separator_node() const {
-        return false;
+    bool is_separator_node() const {
+        return get_kind() == Kind::Separator;
     }
 
-    virtual bool is_integer_a_scalar_type_node() const {
-        return false;
+    bool is_integer_a_scalar_type_node() const {
+        return get_kind() == Kind::IntegerAScalarType;
     }
 
-    virtual bool is_language_type_node() const {
-        return false;
+    bool is_language_type_node() const {
+        return get_kind() == Kind::LanguageType;
     }
 
-    virtual bool is_list_type_node() const {
-        return false;
+    bool is_list_type_node() const {
+        return get_kind() == Kind::ListType;
     }
 
-    virtual bool is_logical_a_scalar_type_node() const {
-        return false;
+    bool is_logical_a_scalar_type_node() const {
+        return get_kind() == Kind::LogicalAScalarType;
     }
 
-    virtual bool is_no_na_type_node() const {
-        return false;
+    bool is_raw_a_scalar_type_node() const {
+        return get_kind() == Kind::RawAScalarType;
     }
 
-    virtual bool is_raw_a_scalar_type_node() const {
-        return false;
+    bool is_na_scalar_type_node() const {
+        return get_kind() == Kind::NAScalarType;
     }
 
-    virtual bool is_scalar_type_node() const {
-        return false;
+    bool is_struct_type_node() const {
+        return get_kind() == Kind::StructType;
     }
 
-    virtual bool is_a_scalar_type_node() const {
-        return false;
+    bool is_tuple_type_node() const {
+        return get_kind() == Kind::TupleType;
     }
 
-    virtual bool is_na_scalar_type_node() const {
-        return false;
+    bool is_symbol_type_node() const {
+        return get_kind() == Kind::SymbolType;
     }
 
-    virtual bool is_struct_type_node() const {
-        return false;
+    bool is_external_pointer_type_node() const {
+        return get_kind() == Kind::ExternalPointerType;
     }
 
-    virtual bool is_tuple_type_node() const {
-        return false;
+    bool is_any_type_node() const {
+        return get_kind() == Kind::AnyType;
     }
 
-    virtual bool is_symbol_type_node() const {
-        return false;
+    bool is_unknown_type_node() const {
+        return get_kind() == Kind::UnknownType;
     }
 
-    virtual bool is_external_pointer_type_node() const {
-        return false;
+    bool is_s4_type_node() const {
+        return get_kind() == Kind::S4Type;
     }
 
-    virtual bool is_any_type_node() const {
-        return false;
+    bool is_pairlist_type_node() const {
+        return get_kind() == Kind::PairlistType;
     }
 
-    virtual bool is_unknown_type_node() const {
-        return false;
+    bool is_bytecode_type_node() const {
+        return get_kind() == Kind::BytecodeType;
     }
 
-    virtual bool is_s4_type_node() const {
-        return false;
+    bool is_weak_reference_type_node() const {
+        return get_kind() == Kind::WeakReferenceType;
     }
 
-    virtual bool is_pairlist_type_node() const {
-        return false;
+    bool is_tag_type_pair_node() const {
+        return get_kind() == Kind::TagTypePair;
     }
 
-    virtual bool is_bytecode_type_node() const {
-        return false;
+    bool is_type_declaration_node() const {
+        return get_kind() == Kind::TypeDeclaration;
     }
 
-    virtual bool is_weak_reference_type_node() const {
-        return false;
+    bool is_top_level_node() const {
+        return get_kind() == Kind::TopLevel;
     }
 
-    virtual bool is_tag_type_pair_node() const {
-        return false;
+    bool is_union_type_node() const {
+        return get_kind() == Kind::UnionType;
     }
 
-    virtual bool is_type_declaration_node() const {
-        return false;
+    bool is_vararg_type_node() const {
+        return get_kind() == Kind::VarargType;
     }
 
-    virtual bool is_top_level_node() const {
-        return false;
+    bool is_vector_type_node() const {
+        return get_kind() == Kind::VectorType;
     }
 
-    virtual bool is_type_node() const {
-        return false;
+    bool is_null_type_node() const {
+        return get_kind() == Kind::NullType;
     }
 
-    virtual bool is_union_type_node() const {
-        return false;
+    bool is_nullable_type_node() const {
+        return get_kind() == Kind::NullableType;
     }
 
-    virtual bool is_vararg_type_node() const {
-        return false;
+    bool is_comma_separator_node() const {
+        return get_kind() == Kind::CommaSeparator;
     }
 
-    virtual bool is_vector_type_node() const {
-        return false;
+    bool is_parameter_node() const {
+        return get_kind() == Kind::Parameter;
     }
 
-    virtual bool is_type_declaration_node_sequence_node() const {
-        return false;
+    bool is_terminator_node() const {
+        return get_kind() == Kind::Terminator;
     }
 
-    virtual bool is_type_node_sequence_node() const {
-        return false;
+    bool is_empty_node() const {
+        return get_kind() == Kind::Empty;
     }
 
-    virtual bool is_tag_type_pair_node_sequence_node() const {
-        return false;
-    }
-
-    virtual bool is_null_type_node() const {
-        return false;
-    }
-
-    virtual bool is_nullable_type_node() const {
-        return false;
-    }
-
-    virtual bool is_comma_separator_node() const {
-        return false;
-    }
-
-    virtual bool is_parameter_node() const {
-        return false;
-    }
-
-    virtual bool is_terminator_node() const {
-        return false;
-    }
-
-    virtual bool is_empty_node() const {
-        return false;
-    }
-
-    virtual bool is_eof_node() const {
-        return false;
+    bool is_eof_node() const {
+        return get_kind() == Kind::Eof;
     }
 
     void set_location(const tastr::parser::Location& location) {

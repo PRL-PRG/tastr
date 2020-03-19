@@ -46,10 +46,6 @@ class DoubleAScalarTypeNode final: public AScalarTypeNode {
         return kind_;
     }
 
-    bool is_double_a_scalar_type_node() const override final {
-        return true;
-    }
-
   private:
     virtual DoubleAScalarTypeNode* clone_impl() const override final {
         return new DoubleAScalarTypeNode(*this);
