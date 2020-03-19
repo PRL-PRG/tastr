@@ -42,6 +42,10 @@ class IntegerAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<IntegerAScalarTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_integer_a_scalar_type_node() const override final {
         return true;
     }
@@ -49,7 +53,9 @@ class IntegerAScalarTypeNode final: public AScalarTypeNode {
   private:
     virtual IntegerAScalarTypeNode* clone_impl() const override final {
         return new IntegerAScalarTypeNode(*this);
-    };
+    }
+
+    static const Kind kind_;
 };
 
 using IntegerAScalarTypeNodePtr = IntegerAScalarTypeNode*;

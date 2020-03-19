@@ -11,3 +11,6 @@ void tastr::ast::ExternalPointerTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::ExternalPointerTypeNode::kind_ =
+    tastr::ast::Node::Kind::ExternalPointerType;

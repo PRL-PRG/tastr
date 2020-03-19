@@ -50,6 +50,10 @@ class IdentifierNode final: public Node {
 
     void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const std::string& get_name() const {
         return name_;
     }
@@ -69,6 +73,7 @@ class IdentifierNode final: public Node {
 
     std::string name_;
     bool quoted_;
+    static const Kind kind_;
 };
 
 using IdentifierNodePtr = IdentifierNode*;

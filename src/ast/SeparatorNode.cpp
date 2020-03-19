@@ -11,3 +11,6 @@ void tastr::ast::SeparatorNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::SeparatorNode::kind_ =
+    tastr::ast::Node::Kind::Separator;

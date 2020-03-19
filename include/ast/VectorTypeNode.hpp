@@ -55,6 +55,10 @@ class VectorTypeNode final: public TypeNode {
         return std::unique_ptr<VectorTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const OperatorNode& get_operator() const {
         return *op_.get();
     }
@@ -74,6 +78,8 @@ class VectorTypeNode final: public TypeNode {
 
     std::unique_ptr<ScalarTypeNode> scalar_type_;
     OperatorNodeUPtr op_;
+
+    static const Kind kind_;
 };
 
 using VectorTypeNodePtr = VectorTypeNode*;

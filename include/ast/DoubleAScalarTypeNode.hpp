@@ -42,6 +42,10 @@ class DoubleAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<DoubleAScalarTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_double_a_scalar_type_node() const override final {
         return true;
     }
@@ -50,6 +54,8 @@ class DoubleAScalarTypeNode final: public AScalarTypeNode {
     virtual DoubleAScalarTypeNode* clone_impl() const override final {
         return new DoubleAScalarTypeNode(*this);
     };
+
+    static const Kind kind_;
 };
 
 using DoubleAScalarTypeNodePtr = DoubleAScalarTypeNode*;

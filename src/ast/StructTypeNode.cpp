@@ -11,3 +11,6 @@ void tastr::ast::StructTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::StructTypeNode::kind_ =
+    tastr::ast::Node::Kind::StructType;

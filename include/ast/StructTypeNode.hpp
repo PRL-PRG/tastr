@@ -55,6 +55,10 @@ class StructTypeNode final: public TypeNode {
         return std::unique_ptr<StructTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_struct_type_node() const override final {
         return true;
     }
@@ -74,6 +78,8 @@ class StructTypeNode final: public TypeNode {
 
     KeywordNodeUPtr keyword_;
     ParameterNodeUPtr parameters_;
+
+    static const Kind kind_;
 };
 
 using StructTypeNodePtr = StructTypeNode*;

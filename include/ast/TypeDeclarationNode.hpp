@@ -71,6 +71,10 @@ class TypeDeclarationNode final: public Node {
         return std::unique_ptr<TypeDeclarationNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const tastr::ast::IdentifierNode& get_identifier() const {
         return *identifier_.get();
     }
@@ -100,6 +104,8 @@ class TypeDeclarationNode final: public Node {
     IdentifierNodeUPtr identifier_;
     TypeNodeUPtr type_;
     TerminatorNodeUPtr terminator_;
+
+    static const Kind kind_;
 };
 
 using TypeDeclarationNodePtr = TypeDeclarationNode*;

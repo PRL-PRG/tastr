@@ -11,3 +11,6 @@ void tastr::ast::DoubleAScalarTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::DoubleAScalarTypeNode::kind_ =
+    tastr::ast::Node::Kind::DoubleAScalarType;

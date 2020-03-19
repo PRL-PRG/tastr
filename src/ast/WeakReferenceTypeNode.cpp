@@ -11,3 +11,6 @@ void tastr::ast::WeakReferenceTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::WeakReferenceTypeNode::kind_ =
+    tastr::ast::Node::Kind::WeakReferenceType;

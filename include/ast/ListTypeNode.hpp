@@ -54,6 +54,10 @@ class ListTypeNode final: public TypeNode {
         return std::unique_ptr<ListTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_list_type_node() const override final {
         return true;
     }
@@ -73,6 +77,8 @@ class ListTypeNode final: public TypeNode {
 
     KeywordNodeUPtr keyword_;
     ParameterNodeUPtr parameters_;
+
+    static const Kind kind_;
 };
 
 using ListTypeNodePtr = ListTypeNode*;

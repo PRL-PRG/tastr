@@ -63,6 +63,10 @@ class GroupTypeNode final
         return std::unique_ptr<GroupTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_group_type_node() const override final {
         return true;
     }
@@ -73,6 +77,8 @@ class GroupTypeNode final
     };
 
     std::unique_ptr<TypeNode> inner_type_;
+
+    static const Kind kind_;
 };
 
 using GroupTypeNodePtr = GroupTypeNode*;

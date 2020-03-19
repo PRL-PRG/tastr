@@ -11,3 +11,6 @@ void tastr::ast::GroupTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::GroupTypeNode::kind_ =
+    tastr::ast::Node::Kind::GroupType;

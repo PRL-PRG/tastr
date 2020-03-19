@@ -11,3 +11,6 @@ void tastr::ast::S4TypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::S4TypeNode::kind_ =
+    tastr::ast::Node::Kind::S4Type;

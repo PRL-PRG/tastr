@@ -45,6 +45,10 @@ class SymbolTypeNode final: public TypeNode {
         return std::unique_ptr<SymbolTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_symbol_type_node() const override final {
         return true;
     }
@@ -59,6 +63,8 @@ class SymbolTypeNode final: public TypeNode {
     }
 
     KeywordNodeUPtr keyword_;
+
+    static const Kind kind_;
 };
 
 using SymbolTypeNodePtr = SymbolTypeNode*;

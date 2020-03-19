@@ -41,6 +41,10 @@ class EofNode final: public Node {
 
     void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_eof_node() const override final {
         return true;
     }
@@ -49,6 +53,8 @@ class EofNode final: public Node {
     virtual EofNode* clone_impl() const override final {
         return new EofNode(*this);
     }
+
+    static const Kind kind_;
 };
 
 using EofNodePtr = EofNode*;

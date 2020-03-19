@@ -41,6 +41,10 @@ class EmptyNode final: public Node {
 
     void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_empty_node() const override final {
         return true;
     }
@@ -49,6 +53,8 @@ class EmptyNode final: public Node {
     virtual EmptyNode* clone_impl() const override final {
         return new EmptyNode(*this);
     }
+
+    static const Kind kind_;
 };
 
 using EmptyNodePtr = EmptyNode*;

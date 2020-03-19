@@ -47,6 +47,10 @@ class VarargTypeNode final: public TypeNode {
         return std::unique_ptr<VarargTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_vararg_type_node() const override final {
         return true;
     }
@@ -61,6 +65,8 @@ class VarargTypeNode final: public TypeNode {
     };
 
     KeywordNodeUPtr keyword_;
+
+    static const Kind kind_;
 };
 
 using VarargTypeNodePtr = VarargTypeNode*;

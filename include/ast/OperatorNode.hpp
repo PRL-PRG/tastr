@@ -44,6 +44,10 @@ class OperatorNode final: public Node {
 
     void accept(tastr::visitor::MutableNodeVisitor& visitor) override final;
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_operator_node() const override final {
         return true;
     }
@@ -58,6 +62,8 @@ class OperatorNode final: public Node {
     }
 
     std::string value_;
+
+    static const Kind kind_;
 };
 
 using OperatorNodePtr = OperatorNode*;

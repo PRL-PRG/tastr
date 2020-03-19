@@ -65,6 +65,10 @@ class TagTypePairNode final: public Node {
         return std::unique_ptr<TagTypePairNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const tastr::ast::IdentifierNode& get_identifier() const {
         return *identifier_.get();
     }
@@ -89,6 +93,8 @@ class TagTypePairNode final: public Node {
     std::unique_ptr<IdentifierNode> identifier_;
     std::unique_ptr<TypeNode> type_;
     std::unique_ptr<SeparatorNode> separator_;
+
+    static const Kind kind_;
 };
 
 using TagTypePairNodePtr = TagTypePairNode*;

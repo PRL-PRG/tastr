@@ -71,6 +71,10 @@ class TopLevelNode final: public Node {
         return std::unique_ptr<TopLevelNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_top_level_node() const override final {
         return true;
     }
@@ -116,6 +120,8 @@ class TopLevelNode final: public Node {
     std::string name_;
     sequence_t type_declarations_;
     EofNodeUPtr eof_node_;
+
+    static const Kind kind_;
 };
 
 using TopLevelNodePtr = TopLevelNode*;

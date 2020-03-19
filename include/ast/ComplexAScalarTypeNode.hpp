@@ -42,6 +42,10 @@ class ComplexAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<ComplexAScalarTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_complex_a_scalar_type_node() const override final {
         return true;
     }
@@ -50,6 +54,8 @@ class ComplexAScalarTypeNode final: public AScalarTypeNode {
     virtual ComplexAScalarTypeNode* clone_impl() const override final {
         return new ComplexAScalarTypeNode(*this);
     };
+
+    static const Kind kind_;
 };
 
 using ComplexAScalarTypeNodePtr = ComplexAScalarTypeNode*;

@@ -11,3 +11,6 @@ void tastr::ast::TopLevelNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::TopLevelNode::kind_ =
+    tastr::ast::Node::Kind::TopLevel;

@@ -62,6 +62,10 @@ class NullableTypeNode final: public TypeNode {
         return std::unique_ptr<NullableTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_nullable_type_node() const override final {
         return true;
     }
@@ -73,6 +77,8 @@ class NullableTypeNode final: public TypeNode {
 
     OperatorNodeUPtr op_;
     std::unique_ptr<TypeNode> inner_type_;
+
+    static const Kind kind_;
 };
 
 using NullableTypeNodePtr = NullableTypeNode*;

@@ -11,3 +11,6 @@ void tastr::ast::OperatorNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::OperatorNode::kind_ =
+    tastr::ast::Node::Kind::Operator;

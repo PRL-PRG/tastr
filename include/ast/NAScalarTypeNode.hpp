@@ -65,6 +65,10 @@ class NAScalarTypeNode final: public ScalarTypeNode {
         return *op_.get();
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_na_scalar_type_node() const override final {
         return true;
     }
@@ -76,6 +80,8 @@ class NAScalarTypeNode final: public ScalarTypeNode {
 
     OperatorNodeUPtr op_;
     std::unique_ptr<AScalarTypeNode> a_scalar_type_;
+
+    static const Kind kind_;
 };
 
 using NAScalarTypeNodePtr = NAScalarTypeNode*;

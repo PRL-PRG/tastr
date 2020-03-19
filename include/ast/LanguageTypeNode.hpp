@@ -45,6 +45,10 @@ class LanguageTypeNode final: public TypeNode {
         return std::unique_ptr<LanguageTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_language_type_node() const override final {
         return true;
     }
@@ -59,6 +63,8 @@ class LanguageTypeNode final: public TypeNode {
     }
 
     KeywordNodeUPtr keyword_;
+
+    static const Kind kind_;
 };
 
 using LanguageTypeNodePtr = LanguageTypeNode*;

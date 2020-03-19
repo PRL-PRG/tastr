@@ -42,6 +42,10 @@ class LogicalAScalarTypeNode final: public AScalarTypeNode {
         return std::unique_ptr<LogicalAScalarTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_logical_a_scalar_type_node() const override final {
         return true;
     }
@@ -50,6 +54,8 @@ class LogicalAScalarTypeNode final: public AScalarTypeNode {
     virtual LogicalAScalarTypeNode* clone_impl() const override final {
         return new LogicalAScalarTypeNode(*this);
     };
+
+    static const Kind kind_;
 };
 
 using LogicalAScalarTypeNodePtr = LogicalAScalarTypeNode*;

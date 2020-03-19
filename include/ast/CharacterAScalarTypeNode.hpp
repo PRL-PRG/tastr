@@ -47,6 +47,10 @@ class CharacterAScalarTypeNode final: public AScalarTypeNode {
         return CharacterAScalarTypeNodeUPtr(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_character_a_scalar_type_node() const override final {
         return true;
     }
@@ -55,6 +59,8 @@ class CharacterAScalarTypeNode final: public AScalarTypeNode {
     virtual CharacterAScalarTypeNode* clone_impl() const override final {
         return new CharacterAScalarTypeNode(*this);
     };
+
+    static const Kind kind_;
 };
 
 } // namespace tastr::ast

@@ -61,6 +61,10 @@ class FunctionTypeNode final: public TypeNode {
         return std::unique_ptr<FunctionTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const OperatorNode& get_operator() const {
         return *op_.get();
     }
@@ -85,6 +89,8 @@ class FunctionTypeNode final: public TypeNode {
     OperatorNodeUPtr op_;
     ParameterNodeUPtr parameter_;
     TypeNodeUPtr return_type_;
+
+    static const Kind kind_;
 };
 
 using FunctionTypeNodePtr = FunctionTypeNode*;

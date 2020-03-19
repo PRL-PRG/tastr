@@ -11,3 +11,6 @@ void tastr::ast::EnvironmentTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::EnvironmentTypeNode::kind_ =
+    tastr::ast::Node::Kind::EnvironmentType;

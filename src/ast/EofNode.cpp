@@ -10,3 +10,6 @@ void tastr::ast::EofNode::accept(
 void tastr::ast::EofNode::accept(tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::EofNode::kind_ =
+    tastr::ast::Node::Kind::Eof;

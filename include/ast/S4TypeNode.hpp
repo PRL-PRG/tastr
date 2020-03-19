@@ -45,6 +45,10 @@ class S4TypeNode final: public TypeNode {
         return std::unique_ptr<S4TypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_s4_type_node() const override final {
         return true;
     }
@@ -59,6 +63,8 @@ class S4TypeNode final: public TypeNode {
     };
 
     KeywordNodeUPtr keyword_;
+
+    static const Kind kind_;
 };
 
 using S4TypeNodePtr = S4TypeNode*;

@@ -11,3 +11,6 @@ void tastr::ast::ListTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::ListTypeNode::kind_ =
+    tastr::ast::Node::Kind::ListType;

@@ -11,3 +11,6 @@ void tastr::ast::UnionTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::UnionTypeNode::kind_ =
+    tastr::ast::Node::Kind::UnionType;

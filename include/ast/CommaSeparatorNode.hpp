@@ -63,6 +63,10 @@ class CommaSeparatorNode final: public Node {
         return std::unique_ptr<CommaSeparatorNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const tastr::ast::SeparatorNode& get_separator() const {
         return *separator_.get();
     }
@@ -87,6 +91,8 @@ class CommaSeparatorNode final: public Node {
     std::unique_ptr<SeparatorNode> separator_;
     std::unique_ptr<Node> first_node_;
     std::unique_ptr<Node> second_node_;
+
+    static const Kind kind_;
 };
 
 using CommaSeparatorNodePtr = CommaSeparatorNode*;

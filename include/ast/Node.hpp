@@ -4,6 +4,7 @@
 #include "parser/Location.hpp"
 
 #include <memory>
+#include <ostream>
 
 namespace tastr::visitor {
 
@@ -16,6 +17,49 @@ namespace tastr::ast {
 
 class Node {
   public:
+    enum Kind {
+        AnyType,
+        BytecodeType,
+        CharacterAScalarType,
+        CommaSeparator,
+        ComplexAScalarType,
+        DoubleAScalarType,
+        Empty,
+        EnvironmentType,
+        Eof,
+        ExpressionType,
+        ExternalPointerType,
+        FunctionType,
+        GroupType,
+        Identifier,
+        IntegerAScalarType,
+        Keyword,
+        LanguageType,
+        ListType,
+        LogicalAScalarType,
+        NAScalarType,
+        NullableType,
+        NullType,
+        Operator,
+        PairlistType,
+        Parameter,
+        RawAScalarType,
+        S4Type,
+        Separator,
+        StructType,
+        SymbolType,
+        TagTypePair,
+        Terminator,
+        TopLevel,
+        TupleType,
+        TypeDeclaration,
+        UnionType,
+        UnknownType,
+        VarargType,
+        VectorType,
+        WeakReferenceType
+    };
+
     Node() {
     }
 
@@ -48,6 +92,8 @@ class Node {
     std::unique_ptr<Node> clone() const {
         return std::unique_ptr<Node>(this->clone_impl());
     }
+
+    virtual Kind get_kind() const = 0;
 
     virtual bool is_character_a_scalar_type_node() const {
         return false;
@@ -276,5 +322,9 @@ T& as(U& u) {
 }
 
 } // namespace tastr::ast
+
+std::ostream& operator<<(std::ostream& os, const tastr::ast::Node::Kind& kind);
+
+std::string to_string(const tastr::ast::Node::Kind& kind);
 
 #endif /* TASTR_AST_NODE_HPP */

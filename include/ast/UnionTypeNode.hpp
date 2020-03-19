@@ -62,6 +62,10 @@ class UnionTypeNode final: public TypeNode {
         return std::unique_ptr<UnionTypeNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     const OperatorNode& get_operator() const {
         return *op_.get();
     }
@@ -86,6 +90,8 @@ class UnionTypeNode final: public TypeNode {
     OperatorNodeUPtr op_;
     std::unique_ptr<TypeNode> first_type_;
     std::unique_ptr<TypeNode> second_type_;
+
+    static const Kind kind_;
 };
 
 using UnionTypeNodePtr = UnionTypeNode*;

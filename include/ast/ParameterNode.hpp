@@ -55,6 +55,10 @@ class ParameterNode final
         return std::unique_ptr<ParameterNode>(this->clone_impl());
     }
 
+    Kind get_kind() const override final {
+        return kind_;
+    }
+
     bool is_parameter_node() const override final {
         return true;
     }
@@ -69,6 +73,8 @@ class ParameterNode final
     }
 
     NodeUPtr elements_;
+
+    static const Kind kind_;
 };
 
 using ParameterNodePtr = ParameterNode*;

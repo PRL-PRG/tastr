@@ -11,3 +11,6 @@ void tastr::ast::SymbolTypeNode::accept(
     tastr::visitor::MutableNodeVisitor& visitor) {
     visitor.visit(*this);
 }
+
+const tastr::ast::Node::Kind tastr::ast::SymbolTypeNode::kind_ =
+    tastr::ast::Node::Kind::SymbolType;
