@@ -29,125 +29,150 @@ To clean the build artifacts, run:
 
 ## Type Grammar
 
-`<integer>`: `"integer"`
-           | `"int"`
-           | `"i"`
 
-`<double>`: `"double"`
-          | `"dbl"`
-          | `"d"` 
+```
 
-`<complex>`: `"complex"` 
-           | `"clx"` 
-           | `"x"`
+<integer>: "integer"
+         | "int"
+         | "i"
 
-`<character>`: `"character"` 
-             | `"chr"` 
-             | `"s"`
+<double>: "double"
+        | "dbl"
+        | "d"
 
-`<logical>`: `"logical"` 
-           | `"lgl"` 
-           | `"l"`
+<complex>: "complex"
+         | "clx"
+         | "x"
 
-`<raw>`: `"raw"` 
-       | `"r"`
+<character>: "character"
+           | "chr"
+           | "s"
 
-`<environment>`: `"environment"`
-               | `"env"`
-               | `"t"`
+<logical>: "logical"
+         | "lgl"
+         | "l"
 
-`<expression>`: `"expression"`
-              | `"exr"`
-              | `"e"` 
+<raw>: "raw"
+     | "r"
 
-`<language>`: `"language"` 
-            | `"lng"` 
-            | `"g"`
+<ascalar>: <integer>
+         | <double>
+         | <complex>
+         | <character>
+         | <logical>
 
-`<symbol>`: `"symbol"` 
-          | `"sym"` 
-          | `"y"`
+<nascalar>:  "^" <ascalar>
 
-`<externalptr>`: `"externalptr"`
-               | `"ept"`
-               | `"p"`
+<scalar>: <ascalar>
+        | <raw>
+        | <nascalar>
 
-`<bytecode>`: `"bytecode"`
-            | `"bcd"`
-            | `"b"`
+<environment>: "environment"
+             | "env"
+             | "t"
 
-`<pairlist>`: `"pairlist"`
-            | `"plt"`
+<expression>: "expression"
+            | "exr"
+            | "e"
 
-`<s4>`: `"s4"`
+<language>: "language"
+          | "lng"
+          | "g"
 
-`<any>`: `"any"`
-       | `"*"`
+<symbol>: "symbol"
+        | "sym"
+        | "y"
 
-`<scalar>` : `<integer>`
-           | `<double>`
-           | `<complex>`
-           | `<character>`
-           | `<logical>`
-           | `<raw>`
+<externalptr>: "externalptr"
+             | "ept"
+             | "p"
 
-`<vector>`: `<scalar>` `"["` `"]"`
+<bytecode>: "bytecode"
+          | "bcd"
+          | "b"
 
-`<nona>`: `"!"` `<vector>`
+<pairlist>: "pairlist"
+          | "plt"
 
-`<list>`: `"(("` `<typeseq>` `"))"`
+<s4>: "s4"
 
-`<typeseq>`: ` `
-           | `<type>`
-           | `<typeseq>` `","` `<type>`
+<weakref>: "weakref"
+         | "wrf"
+         | "w"
 
-`<struct>`: `"{{"` `<tagtypeseq>` `"}}"`
+<any>: "any"
+     | "*"
 
-`<tagtypeseq>`: ` `
-              | `<tagtype>`
-              | `<tagtypeseq>` `","` `<tagtype>`
+<unknown> : "???"
 
-`<tagtype>`: `<tag>` `":"` `<type>`
+<vector>: <scalar> "[" "]"
 
-`<tag>`: `<identifier>`
+<list>: "list" "<" <type> ">"
+      | "lst" "<" <type> ">"
 
- `<function>`: `"<"` `<paramseq>` `">"` `"=>"` `<type>`
+<struct>: "struct" "<" <namedtypeseq> ">"
+        | "srt" "<" <namedtypeseq> ">"
 
-`<param>`: `<type>`
-         | `"..."`
-
-`<paramseq>`: ` `
-            | `<param>`
-            | `<paramseq>` `","` `<param>`
-
-`<group>`: `"("` `<type>`  `")"`
-
-`<union>`: `<type>` `"|"` `<type>`
-
-`<type>`: `<scalar>`
-        | `<environment>`
-        | `<expression>`
-        | `<language>`
-        | `<symbol>`
-        | `<externalptr>`
-        | `<bytecode>`
-        | `<pairlist>`
-        | `<s4>`
-        | `<any>`
-        | `<vector>`
-        | `<nona>`
-        | `<list>`
-        | `<struct>`
-        | `<function>`
-        | `<group>`
-        | `<union>`
+<tuple>: "tuple" "<" <typeseq> ">"
+       | "tpl" "<" <typeseq> ">"
 
 
-`<decl>`: `"type"` `<identifier>` `<type>` `";"`
+<function>: <params> "=>" <type>
 
-`<declseq>`: `<decl>`
-           | `<declseq>` `<decl>`
+<typeseq>: <type>
+         | <typeseq> "," <type>
 
+<namedtype>: <identifier> ":" <type>
+
+<namedtypeseq> : <namedtype>
+               | <namedtypeseq> "," <namedtype>
+
+<param>: <type>
+       | "..."
+
+<paramseq>: <param>
+          | <paramseq> "," <param>
+
+<params>: "<" <paramseq> ">"
+        | "<" ">"
+
+
+<group>: "(" <type>  ")"
+
+<nonunion>: <scalar>
+          | <environment>
+          | <expression>
+          | <language>
+          | <symbol>
+          | <externalptr>
+          | <bytecode>
+          | <pairlist>
+          | <s4>
+          | <weakref>
+          | <vector>
+          | <function>
+          | <list>
+          | <struct>
+          | <tuple>
+          | <group>
+
+<union>: <nonunion>
+       | <union> "|" <nonunion>
+
+<null>: "?"
+      | "?" <union>
+
+<type>: <union>
+      | <null>
+      | <any>
+      | <unknown>
+
+<decl>: "type" <identifier> <type> ";"
+
+<declseq>: <decl>
+         | <declseq> <decl>
+
+```
 
 
 ## Useful Resources
