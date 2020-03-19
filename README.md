@@ -194,5 +194,5 @@ To clean the build artifacts, run:
 - [Compiling C/C++ software](https://gist.github.com/gubatron/32f82053596c24b6bec6)
 
 ### R
-- [https://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html](Various uses of quoting in R)
+- [Various uses of quoting in R](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html)
 
