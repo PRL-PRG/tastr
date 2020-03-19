@@ -366,7 +366,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.move< TypeNodePtr > (std::move (that.value));
@@ -541,7 +541,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.copy< TypeNodePtr > (YY_MOVE (that.value));
@@ -723,7 +723,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.move< TypeNodePtr > (YY_MOVE (s.value));
@@ -974,7 +974,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.YY_MOVE_OR_COPY< TypeNodePtr > (YY_MOVE (that.value));
@@ -1149,7 +1149,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.move< TypeNodePtr > (YY_MOVE (that.value));
@@ -1324,7 +1324,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.copy< TypeNodePtr > (that.value);
@@ -1498,7 +1498,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.move< TypeNodePtr > (that.value);
@@ -2032,7 +2032,7 @@ namespace tastr { namespace parser {
 #line 2033 "Parser.cxx"
         break;
 
-      case 78: // innertype
+      case 78: // uniontype
 #line 140 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
 #line 2039 "Parser.cxx"
@@ -2383,7 +2383,7 @@ namespace tastr { namespace parser {
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         yylhs.value.emplace< TypeNodePtr > ();
@@ -3719,7 +3719,7 @@ namespace tastr { namespace parser {
   "weakreftype", "unknowntype", "anytype", "vectortype", "typeseq",
   "namedtype", "namedtypeseq", "paramtype", "paramtypeseq", "params",
   "functiontype", "grouptype", "nonuniontype", "listtype", "structtype",
-  "tupleelements", "tupletype", "identifier", "innertype", "nulltype",
+  "tupleelements", "tupletype", "identifier", "uniontype", "nulltype",
   "type", "decltype", "decllist", "start", YY_NULLPTR
   };
 

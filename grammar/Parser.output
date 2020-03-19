@@ -122,13 +122,13 @@ Grammar
    78             | tupletype
    79             | grouptype
 
-   80 innertype: nonuniontype
-   81          | innertype "|" nonuniontype
+   80 uniontype: nonuniontype
+   81          | uniontype "|" nonuniontype
 
    82 nulltype: "?"
-   83         | "?" innertype
+   83         | "?" uniontype
 
-   84 type: innertype
+   84 type: uniontype
    85     | nulltype
    86     | anytype
    87     | unknowntype
@@ -286,7 +286,7 @@ Nonterminals, with rules where they appear
     identifier <IdentifierNodePtr> (77)
         on left: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52
         on right: 53 88
-    innertype <TypeNodePtr> (78)
+    uniontype <TypeNodePtr> (78)
         on left: 80 81
         on right: 81 83 84
     nulltype <TypeNodePtr> (79)
@@ -594,7 +594,7 @@ State 29
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 82
 
@@ -685,7 +685,7 @@ State 34
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 84
 
@@ -747,7 +747,7 @@ State 35
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 89
 
@@ -762,7 +762,7 @@ State 36
 State 37
 
    82 nulltype: "?" .
-   83         | "?" . innertype
+   83         | "?" . uniontype
 
     "^"              shift, and go to state 33
     "("              shift, and go to state 34
@@ -809,7 +809,7 @@ State 37
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 90
+    uniontype        go to state 90
 
 
 State 38
@@ -1083,9 +1083,9 @@ State 75
 
 State 76
 
-   80 innertype: nonuniontype .
+   80 uniontype: nonuniontype .
 
-    $default  reduce using rule 80 (innertype)
+    $default  reduce using rule 80 (uniontype)
 
 
 State 77
@@ -1111,8 +1111,8 @@ State 79
 
 State 80
 
-   81 innertype: innertype . "|" nonuniontype
-   84 type: innertype .
+   81 uniontype: uniontype . "|" nonuniontype
+   84 type: uniontype .
 
     "|"  shift, and go to state 96
 
@@ -1186,8 +1186,8 @@ State 89
 
 State 90
 
-   81 innertype: innertype . "|" nonuniontype
-   83 nulltype: "?" innertype .
+   81 uniontype: uniontype . "|" nonuniontype
+   83 nulltype: "?" uniontype .
 
     "|"  shift, and go to state 96
 
@@ -1250,7 +1250,7 @@ State 91
     structtype       go to state 78
     tupleelements    go to state 102
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 103
 
@@ -1307,7 +1307,7 @@ State 92
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 104
 
@@ -1404,14 +1404,14 @@ State 95
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 108
 
 
 State 96
 
-   81 innertype: innertype "|" . nonuniontype
+   81 uniontype: uniontype "|" . nonuniontype
 
     "^"              shift, and go to state 33
     "("              shift, and go to state 34
@@ -1526,7 +1526,7 @@ State 99
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 89
 
@@ -1601,9 +1601,9 @@ State 108
 
 State 109
 
-   81 innertype: innertype "|" nonuniontype .
+   81 uniontype: uniontype "|" nonuniontype .
 
-    $default  reduce using rule 81 (innertype)
+    $default  reduce using rule 81 (uniontype)
 
 
 State 110
@@ -1665,7 +1665,7 @@ State 111
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 117
 
@@ -1775,7 +1775,7 @@ State 116
     listtype         go to state 77
     structtype       go to state 78
     tupletype        go to state 79
-    innertype        go to state 80
+    uniontype        go to state 80
     nulltype         go to state 81
     type             go to state 119
 

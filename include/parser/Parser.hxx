@@ -544,7 +544,7 @@ namespace tastr { namespace parser {
 
       // paramtype
       // nonuniontype
-      // innertype
+      // uniontype
       // nulltype
       // type
       char dummy24[sizeof (TypeNodePtr)];
@@ -1306,7 +1306,7 @@ namespace tastr { namespace parser {
 #line 1307 "Parser.hxx"
         break;
 
-      case 78: // innertype
+      case 78: // uniontype
 #line 174 "Parser.yxx"
                     { delete yysym.value.template as < TypeNodePtr > (); }
 #line 1313 "Parser.hxx"
@@ -1434,7 +1434,7 @@ switch (yytype)
 
       case 67: // paramtype
       case 72: // nonuniontype
-      case 78: // innertype
+      case 78: // uniontype
       case 79: // nulltype
       case 80: // type
         value.template destroy< TypeNodePtr > ();

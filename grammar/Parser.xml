@@ -514,15 +514,15 @@
         </rhs>
       </rule>
       <rule number="80" usefulness="useful">
-        <lhs>innertype</lhs>
+        <lhs>uniontype</lhs>
         <rhs>
           <symbol>nonuniontype</symbol>
         </rhs>
       </rule>
       <rule number="81" usefulness="useful">
-        <lhs>innertype</lhs>
+        <lhs>uniontype</lhs>
         <rhs>
-          <symbol>innertype</symbol>
+          <symbol>uniontype</symbol>
           <symbol>&quot;|&quot;</symbol>
           <symbol>nonuniontype</symbol>
         </rhs>
@@ -537,13 +537,13 @@
         <lhs>nulltype</lhs>
         <rhs>
           <symbol>&quot;?&quot;</symbol>
-          <symbol>innertype</symbol>
+          <symbol>uniontype</symbol>
         </rhs>
       </rule>
       <rule number="84" usefulness="useful" percent_prec="LOWER_THAN_OR">
         <lhs>type</lhs>
         <rhs>
-          <symbol>innertype</symbol>
+          <symbol>uniontype</symbol>
         </rhs>
       </rule>
       <rule number="85" usefulness="useful">
@@ -680,7 +680,7 @@
       <nonterminal symbol-number="75" name="tupleelements" usefulness="useful"/>
       <nonterminal symbol-number="76" name="tupletype" usefulness="useful"/>
       <nonterminal symbol-number="77" name="identifier" usefulness="useful"/>
-      <nonterminal symbol-number="78" name="innertype" usefulness="useful"/>
+      <nonterminal symbol-number="78" name="uniontype" usefulness="useful"/>
       <nonterminal symbol-number="79" name="nulltype" usefulness="useful"/>
       <nonterminal symbol-number="80" name="type" usefulness="useful"/>
       <nonterminal symbol-number="81" name="decltype" usefulness="useful"/>
@@ -1262,7 +1262,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="82"/>
         </transitions>
@@ -1444,7 +1444,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="84"/>
         </transitions>
@@ -1569,7 +1569,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="89"/>
         </transitions>
@@ -1695,7 +1695,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="90"/>
+          <transition type="goto" symbol="uniontype" state="90"/>
         </transitions>
         <errors/>
         <reductions>
@@ -2600,7 +2600,7 @@
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupleelements" state="102"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="103"/>
         </transitions>
@@ -2718,7 +2718,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="104"/>
         </transitions>
@@ -2913,7 +2913,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="108"/>
         </transitions>
@@ -3159,7 +3159,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="89"/>
         </transitions>
@@ -3438,7 +3438,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="117"/>
         </transitions>
@@ -3658,7 +3658,7 @@
           <transition type="goto" symbol="listtype" state="77"/>
           <transition type="goto" symbol="structtype" state="78"/>
           <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="innertype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="80"/>
           <transition type="goto" symbol="nulltype" state="81"/>
           <transition type="goto" symbol="type" state="119"/>
         </transitions>

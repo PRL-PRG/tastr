@@ -98,7 +98,7 @@
 %nterm <NodePtr>                        tupleelements
 %nterm <TupleTypeNodePtr>               tupletype
 %nterm <IdentifierNodePtr>              identifier
-%nterm <TypeNodePtr>                    innertype
+%nterm <TypeNodePtr>                    uniontype
 %nterm <TypeNodePtr>                    nulltype
 %nterm <TypeNodePtr>                    type
 %nterm <TypeDeclarationNodePtr>         decltype
@@ -171,7 +171,7 @@
 %destructor { delete $$; } tupleelements
 %destructor { delete $$; } tupletype
 %destructor { delete $$; } identifier
-%destructor { delete $$; } innertype
+%destructor { delete $$; } uniontype
 %destructor { delete $$; } nulltype
 %destructor { delete $$; } type
 %destructor { delete $$; } decltype
@@ -675,12 +675,12 @@ nonuniontype:       scalartype                              {
             ;
 
 
-innertype:          nonuniontype                            {
+uniontype:          nonuniontype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-         |          innertype OR nonuniontype               {
+         |          uniontype OR nonuniontype               {
                                                                 OperatorNodePtr op = create_operator($2, @2, context);
                                                                 $$ = new UnionTypeNode(std::move(wrap(std::move(op))),
                                                                                        std::move(wrap(std::move($1))),
@@ -691,7 +691,7 @@ innertype:          nonuniontype                            {
 
 
 nulltype:          "?"                                      {   $$ = create_node_with_keyword<NullTypeNode>($1, @1, @$, context); }
-        |          "?" innertype                            {
+        |          "?" uniontype                            {
                                                                 OperatorNodePtr op = create_operator($1, @1, context);
                                                                 $$ = new NullableTypeNode(std::move(wrap(std::move(op))),
                                                                                           std::move(wrap(std::move($2))));
@@ -700,7 +700,7 @@ nulltype:          "?"                                      {   $$ = create_node
         ;
 
 
-type:               innertype %prec LOWER_THAN_OR           {
+type:               uniontype %prec LOWER_THAN_OR           {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
