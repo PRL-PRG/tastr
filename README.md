@@ -137,7 +137,7 @@ To clean the build artifacts, run:
         | "<" ">"
 
 
-<group>: "(" <type>  ")"
+<group>: "(" <type> ")"
 
 <nonunion>: <scalar>
           | <environment>
