@@ -108,11 +108,11 @@ $(SRCDIR)/$(PARSERDIR)/Parser.cxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx: $(PARSE
 
 $(PARSER_SENTINEL): $(GRAMMARDIR)/Parser.yxx
 	$(CD) $(GRAMMARDIR) && $(BISON) $(BISONFLAGS) --xml --graph=Parser.gv Parser.yxx
-	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
-	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
+	@$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
+	@$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Parser.cxx $(SRCDIR)/$(PARSERDIR)/Parser.cxx
 	$(MV) $(GRAMMARDIR)/Parser.hxx $(INCLUDEDIR)/$(PARSERDIR)/Parser.hxx
-	$(TOUCH) $(PARSER_SENTINEL)
+	@$(TOUCH) $(PARSER_SENTINEL)
 
 
 ################################################################################
@@ -128,11 +128,11 @@ $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx: $(LEXER_S
 
 $(LEXER_SENTINEL): $(GRAMMARDIR)/Lexer.lxx
 	$(CD) $(GRAMMARDIR) && $(FLEX) $(FLEXFLAGS) Lexer.lxx
-	$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
-	$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
+	@$(MKDIR) $(MKDIRFLAGS) $(SRCDIR)/$(PARSERDIR)
+	@$(MKDIR) $(MKDIRFLAGS) $(INCLUDEDIR)/$(PARSERDIR)
 	$(MV) $(GRAMMARDIR)/Lexer.cxx $(SRCDIR)/$(PARSERDIR)/Lexer.cxx
 	$(MV) $(GRAMMARDIR)/Lexer.hxx $(INCLUDEDIR)/$(PARSERDIR)/Lexer.hxx
-	$(TOUCH) $(LEXER_SENTINEL)
+	@$(TOUCH) $(LEXER_SENTINEL)
 
 
 ################################################################################
@@ -149,7 +149,7 @@ $(HEADERFILES): $(HEADER_SENTINEL)
 $(HEADER_SENTINEL): $(INCLUDEFILES)
 	@$(MKDIR) $(MKDIRFLAGS) $(HEADERDIR)
 	$(CP) $(CPFLAGS) $(INCLUDEDIR)/* $(HEADERDIR)
-	$(TOUCH) $(HEADER_SENTINEL)
+	@$(TOUCH) $(HEADER_SENTINEL)
 
 
 ################################################################################
@@ -169,19 +169,19 @@ shared-library: $(LIBDIR)/$(LIBNAME).so
 	@:
 
 $(LIBDIR)/$(LIBNAME).a: $(OBJECTFILES)
-	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
+	@$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
 	$(AR) $(ARFLAGS) $@ $^
 
 $(LIBDIR)/$(LIBNAME).so: $(OBJECTFILES)
-	$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
+	@$(MKDIR) $(MKDIRFLAGS) $(LIBDIR)
 	$(CXX) $(LIBFLAGS) -o $@ $^
 
 $(OBJDIR)/$(PARSERDIR)/%.o: $(SRCDIR)/$(PARSERDIR)/% $(INCLUDEFILES)
-	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
+	@$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
 	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -I$(INCLUDEDIR)/$(PARSERDIR) -o$@ $<
 
 $(OBJDIR)/%.o: $(SRCDIR)/% $(INCLUDEFILES)
-	$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
+	@$(MKDIR) $(MKDIRFLAGS) `$(DIRNAME) $@`
 	$(CXX) $(OBJFLAGS) -I$(INCLUDEDIR) -o$@ $<
 
 
