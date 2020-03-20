@@ -7,7 +7,7 @@
 The Type AST is modeled using C++ classes. The design relies heavily on unique ownership, i.e., an AST node holds unique references to its child nodes.
 The grammar is implemented using [`flex`](https://westes.github.io/flex/manual/) and [`bison`](https://www.gnu.org/software/bison/manual/bison.html).
 
-## Administration
+## Installation
 
 To obtain the project source, run:
 
@@ -27,8 +27,62 @@ To clean the build artifacts, run:
 `$` `make clean`
 
 
-## Type Grammar
+To execute tests, run:
 
+$ make test
+
+For building and testing in parallel, invoke `make` with `-j` flag.
+
+## Usage
+
+The `tastr` executable (`build/bin/tastr`) parses type declarations from different sources and unparses them back.
+
+```
+> build/bin/tastr --help
+Parse type declarations.
+Usage:
+tastr [OPTION...]
+
+-h, --help    Print usage
+-l, --lexer   Debug lexer
+-p, --parser  Debug parser
+-a, --ast     Show AST structure
+-s, --style   Style output
+```
+
+### Render input
+
+Pass the filename to render the input as is (retains spaces, newlines and comments):
+
+![](docs/images/vanilla-input.png "Vanilla Output")
+
+Pass `--style` flag to render with styling.
+
+![](docs/images/style-input.png "Styled Output")
+
+To read the input from stdin pass `-` argument (press `Ctrl-D` to simulate end of input).
+
+![](docs/images/stdin-input.png "Input read from stdin")
+
+Input can also be directly parsed from the argument if it is quoted using `"` or `'`.
+
+![](docs/images/argument-single-quoted.png "Reading argument directly")
+
+![](docs/images/argument-double-quoted.png "Reading argument directly")
+
+
+### View AST structure
+
+Use `--ast` flag to view the ast structure without any styling.
+
+![](docs/images/vanilla-ast.png "Vanilla AST")
+
+Use `--style` flag along with `--ast` to view the ast structure with styling.
+
+![](docs/images/style-ast.png "Styled AST")
+
+
+## Type Grammar
 
 ```
 
@@ -221,3 +275,24 @@ To clean the build artifacts, run:
 ### R
 - [Various uses of quoting in R](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html)
 
+### Miscellaneous
+- [Unicode Characters in the 'Punctuation, Open' Category](https://www.fileformat.info/info/unicode/category/Ps/list.htm)
+- http://www.fileformat.info/info/unicode/block/control_pictures/images.htm
+- https://www.htmlsymbols.xyz/arrow-symbols
+
+
+## TODO
+
+1. Check `clone_impl`, it should be empty for abstract base classes and defined for concrete classes.
+
+    \\u[0-9A-Fa-f]{1,4}     { get_identifier().push_back(yytext); }
+    \\U[0-9A-Fa-f]{1,8}     { get_identifier().push_back(yytext); }
+    \\u{LBRACE}[0-9A-Fa-f]{1,4}{RBRACE} { get_identifier().push_back(yytext); }
+    \\U{LBRACE}[0-9A-Fa-f]{1,8}{RBRACE} { get_identifier().push_back(yytext); }
+
+
+
+
+
+    \\[0-7]{2}              { get_identifier().append("0"); get_identifier().push_back(yytext[1]); get_identifier().push_back(yytext[2]); }
+    \\[0-7]{3}              { get_identifier().append(yytext); }
