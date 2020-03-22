@@ -673,6 +673,11 @@ nonuniontype:       scalartype                              {
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
+            |       unknowntype                             {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
             ;
 
 
@@ -712,11 +717,6 @@ type:               uniontype %prec LOWER_THAN_OR           {
                                                                 $$ -> set_location(@$);
                                                             }
     |               anytype                                 {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                                $$ -> set_location(@$);
-                                                            }
-    |               unknowntype                             {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

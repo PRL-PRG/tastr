@@ -3151,10 +3151,10 @@ namespace tastr { namespace parser {
     break;
 
   case 81:
-#line 679 "Parser.yxx"
+#line 676 "Parser.yxx"
                                                             {
-                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
-                                                                yystack_[0].value.as < TypeNodePtr > () = nullptr;
+                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < UnknownTypeNodePtr > ();
+                                                                yystack_[0].value.as < UnknownTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
 #line 3161 "Parser.cxx"
@@ -3163,37 +3163,37 @@ namespace tastr { namespace parser {
   case 82:
 #line 684 "Parser.yxx"
                                                             {
+                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
+                                                                yystack_[0].value.as < TypeNodePtr > () = nullptr;
+                                                                yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
+                                                            }
+#line 3171 "Parser.cxx"
+    break;
+
+  case 83:
+#line 689 "Parser.yxx"
+                                                            {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TypeNodePtr > () = new UnionTypeNode(std::move(wrap(std::move(op))),
                                                                                        std::move(wrap(std::move(yystack_[2].value.as < TypeNodePtr > ()))),
                                                                                        std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3173 "Parser.cxx"
-    break;
-
-  case 83:
-#line 694 "Parser.yxx"
-                                                            {   yylhs.value.as < TypeNodePtr > () = create_node_with_keyword<NullTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 3179 "Parser.cxx"
+#line 3183 "Parser.cxx"
     break;
 
   case 84:
-#line 695 "Parser.yxx"
+#line 699 "Parser.yxx"
+                                                            {   yylhs.value.as < TypeNodePtr > () = create_node_with_keyword<NullTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
+#line 3189 "Parser.cxx"
+    break;
+
+  case 85:
+#line 700 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TypeNodePtr > () = new NullableTypeNode(std::move(wrap(std::move(op))),
                                                                                           std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
-                                                                yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
-                                                            }
-#line 3190 "Parser.cxx"
-    break;
-
-  case 85:
-#line 704 "Parser.yxx"
-                                                            {
-                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
-                                                                yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
 #line 3200 "Parser.cxx"
@@ -3212,8 +3212,8 @@ namespace tastr { namespace parser {
   case 87:
 #line 714 "Parser.yxx"
                                                             {
-                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < AnyTypeNodePtr > ();
-                                                                yystack_[0].value.as < AnyTypeNodePtr > () = nullptr;
+                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
+                                                                yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
 #line 3220 "Parser.cxx"
@@ -3222,8 +3222,8 @@ namespace tastr { namespace parser {
   case 88:
 #line 719 "Parser.yxx"
                                                             {
-                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < UnknownTypeNodePtr > ();
-                                                                yystack_[0].value.as < UnknownTypeNodePtr > () = nullptr;
+                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < AnyTypeNodePtr > ();
+                                                                yystack_[0].value.as < AnyTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
 #line 3230 "Parser.cxx"
@@ -3585,15 +3585,15 @@ namespace tastr { namespace parser {
        0,    92,     0,    90,     0,     0,    51,    31,    32,    33,
       34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
       44,    45,    46,    47,    48,    49,    50,    52,    53,     0,
-      93,    91,     1,     0,     0,     0,    22,    83,     0,     2,
+      93,    91,     1,     0,     0,     0,    22,    84,     0,     2,
        3,     4,     5,     6,     7,    12,    13,    14,    15,    16,
       17,    18,    19,    20,     0,     0,     0,    21,     9,    10,
       11,    65,    66,    67,    68,    69,    70,    71,    72,    73,
-      74,    88,    87,    75,     0,    76,    80,    81,    78,    77,
-      79,    85,    86,     0,     8,     0,    62,    58,    59,     0,
-      57,    84,    28,     0,     0,    23,     0,     0,    89,    64,
+      74,    81,    88,    75,     0,    76,    80,    82,    78,    77,
+      79,    86,    87,     0,     8,     0,    62,    58,    59,     0,
+      57,    85,    28,     0,     0,    23,     0,     0,    89,    64,
        0,    61,    29,     0,    25,     0,    55,     0,     0,    63,
-      82,    60,     0,    30,    24,     0,    27,     0,    26,    56,
+      83,    60,     0,    30,    24,     0,    27,     0,    26,    56,
       54
   };
 
@@ -3634,7 +3634,7 @@ namespace tastr { namespace parser {
       37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
       47,    48,    49,    50,    51,    52,    53,    54,    55,    56,
       57,    33,     0,     0,     0,    34,     0,     0,     0,    35,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    36,     0,
        0,    39,    40,    41,    42,    43,    44,    45,    46,    47,
       48,    49,    50,    51,    52,    53,    54,    55,    56,     6,
        0,     0,     0,     7,     8,     9,    10,    11,    12,    13,
@@ -3661,7 +3661,7 @@ namespace tastr { namespace parser {
       22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
       32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
       42,     4,    -1,    -1,    -1,     8,    -1,    -1,    -1,    12,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    21,    -1,
       -1,    24,    25,    26,    27,    28,    29,    30,    31,    32,
       33,    34,    35,    36,    37,    38,    39,    40,    41,    20,
       -1,    -1,    -1,    24,    25,    26,    27,    28,    29,    30,
@@ -3698,7 +3698,7 @@ namespace tastr { namespace parser {
       78,    78,    78,    78,    66,    67,    67,    68,    68,    69,
       69,    70,    70,    71,    72,    73,    73,    73,    73,    73,
       73,    73,    73,    73,    73,    73,    73,    73,    73,    73,
-      73,    79,    79,    80,    80,    81,    81,    81,    81,    82,
+      73,    73,    79,    79,    80,    80,    81,    81,    81,    82,
       83,    83,    84,    84
   };
 
@@ -3713,7 +3713,7 @@ namespace tastr { namespace parser {
        1,     1,     1,     1,     3,     1,     3,     1,     1,     1,
        3,     3,     2,     3,     3,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     3,     1,     2,     1,     1,     1,     1,     4,
+       1,     1,     1,     3,     1,     2,     1,     1,     1,     4,
        1,     2,     1,     2
   };
 
@@ -3754,7 +3754,7 @@ namespace tastr { namespace parser {
      510,   511,   512,   513,   516,   525,   529,   539,   543,   546,
      550,   559,   567,   577,   586,   596,   601,   606,   611,   616,
      621,   626,   631,   636,   641,   646,   651,   656,   661,   666,
-     671,   679,   684,   694,   695,   704,   709,   714,   719,   726,
+     671,   676,   684,   689,   699,   700,   709,   714,   719,   726,
      737,   741,   747,   754
   };
 

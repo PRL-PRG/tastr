@@ -514,12 +514,18 @@
         </rhs>
       </rule>
       <rule number="80" usefulness="useful">
+        <lhs>nonuniontype</lhs>
+        <rhs>
+          <symbol>unknowntype</symbol>
+        </rhs>
+      </rule>
+      <rule number="81" usefulness="useful">
         <lhs>uniontype</lhs>
         <rhs>
           <symbol>nonuniontype</symbol>
         </rhs>
       </rule>
-      <rule number="81" usefulness="useful">
+      <rule number="82" usefulness="useful">
         <lhs>uniontype</lhs>
         <rhs>
           <symbol>uniontype</symbol>
@@ -527,41 +533,35 @@
           <symbol>nonuniontype</symbol>
         </rhs>
       </rule>
-      <rule number="82" usefulness="useful">
+      <rule number="83" usefulness="useful">
         <lhs>nulltype</lhs>
         <rhs>
           <symbol>&quot;null&quot;</symbol>
         </rhs>
       </rule>
-      <rule number="83" usefulness="useful">
+      <rule number="84" usefulness="useful">
         <lhs>nulltype</lhs>
         <rhs>
           <symbol>&quot;?&quot;</symbol>
           <symbol>uniontype</symbol>
         </rhs>
       </rule>
-      <rule number="84" usefulness="useful" percent_prec="LOWER_THAN_OR">
+      <rule number="85" usefulness="useful" percent_prec="LOWER_THAN_OR">
         <lhs>type</lhs>
         <rhs>
           <symbol>uniontype</symbol>
         </rhs>
       </rule>
-      <rule number="85" usefulness="useful">
+      <rule number="86" usefulness="useful">
         <lhs>type</lhs>
         <rhs>
           <symbol>nulltype</symbol>
         </rhs>
       </rule>
-      <rule number="86" usefulness="useful">
-        <lhs>type</lhs>
-        <rhs>
-          <symbol>anytype</symbol>
-        </rhs>
-      </rule>
       <rule number="87" usefulness="useful">
         <lhs>type</lhs>
         <rhs>
-          <symbol>unknowntype</symbol>
+          <symbol>anytype</symbol>
         </rhs>
       </rule>
       <rule number="88" usefulness="useful">
@@ -1599,13 +1599,13 @@
 
     <state number="37">
       <itemset>
-        <item rule-number="82" point="1"/>
+        <item rule-number="83" point="1"/>
       </itemset>
       <actions>
         <transitions/>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="82" enabled="true"/>
+          <reduction symbol="$default" rule="83" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
@@ -1632,6 +1632,7 @@
         <item rule-number="17" point="0"/>
         <item rule-number="18" point="0"/>
         <item rule-number="19" point="0"/>
+        <item rule-number="21" point="0"/>
         <item rule-number="22" point="0"/>
         <item rule-number="23" point="0"/>
         <item rule-number="26" point="0"/>
@@ -1658,13 +1659,15 @@
         <item rule-number="79" point="0"/>
         <item rule-number="80" point="0"/>
         <item rule-number="81" point="0"/>
-        <item rule-number="83" point="1"/>
+        <item rule-number="82" point="0"/>
+        <item rule-number="84" point="1"/>
       </itemset>
       <actions>
         <transitions>
           <transition type="shift" symbol="&quot;^&quot;" state="33"/>
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
+          <transition type="shift" symbol="&quot;???&quot;" state="36"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -1696,6 +1699,7 @@
           <transition type="goto" symbol="pairlisttype" state="68"/>
           <transition type="goto" symbol="s4type" state="69"/>
           <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
           <transition type="goto" symbol="vectortype" state="73"/>
           <transition type="goto" symbol="params" state="74"/>
           <transition type="goto" symbol="functiontype" state="75"/>
@@ -2173,13 +2177,13 @@
 
     <state number="71">
       <itemset>
-        <item rule-number="87" point="1"/>
+        <item rule-number="80" point="1"/>
       </itemset>
       <actions>
         <transitions/>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="87" enabled="true"/>
+          <reduction symbol="$default" rule="80" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
@@ -2187,13 +2191,13 @@
 
     <state number="72">
       <itemset>
-        <item rule-number="86" point="1"/>
+        <item rule-number="87" point="1"/>
       </itemset>
       <actions>
         <transitions/>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="86" enabled="true"/>
+          <reduction symbol="$default" rule="87" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
@@ -2257,13 +2261,13 @@
 
     <state number="77">
       <itemset>
-        <item rule-number="80" point="1"/>
+        <item rule-number="81" point="1"/>
       </itemset>
       <actions>
         <transitions/>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="80" enabled="true"/>
+          <reduction symbol="$default" rule="81" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
@@ -2313,8 +2317,8 @@
 
     <state number="81">
       <itemset>
-        <item rule-number="81" point="1"/>
-        <item rule-number="84" point="1">
+        <item rule-number="82" point="1"/>
+        <item rule-number="85" point="1">
           <lookaheads>
             <symbol>&quot;,&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
@@ -2329,23 +2333,23 @@
         </transitions>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="84" enabled="true"/>
+          <reduction symbol="$default" rule="85" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts>
-        <resolution rule="84" symbol="&quot;|&quot;" type="shift">LOWER_THAN_OR &lt; &quot;|&quot;</resolution>
+        <resolution rule="85" symbol="&quot;|&quot;" type="shift">LOWER_THAN_OR &lt; &quot;|&quot;</resolution>
       </solved-conflicts>
     </state>
 
     <state number="82">
       <itemset>
-        <item rule-number="85" point="1"/>
+        <item rule-number="86" point="1"/>
       </itemset>
       <actions>
         <transitions/>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="85" enabled="true"/>
+          <reduction symbol="$default" rule="86" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
@@ -2467,8 +2471,8 @@
 
     <state number="91">
       <itemset>
-        <item rule-number="81" point="1"/>
-        <item rule-number="83" point="2">
+        <item rule-number="82" point="1"/>
+        <item rule-number="84" point="2">
           <lookaheads>
             <symbol>&quot;|&quot;</symbol>
             <symbol>&quot;,&quot;</symbol>
@@ -2484,8 +2488,8 @@
         </transitions>
         <errors/>
         <reductions>
-          <reduction symbol="&quot;|&quot;" rule="83" enabled="false"/>
-          <reduction symbol="$default" rule="83" enabled="true"/>
+          <reduction symbol="&quot;|&quot;" rule="84" enabled="false"/>
+          <reduction symbol="$default" rule="84" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
@@ -2954,6 +2958,7 @@
         <item rule-number="17" point="0"/>
         <item rule-number="18" point="0"/>
         <item rule-number="19" point="0"/>
+        <item rule-number="21" point="0"/>
         <item rule-number="22" point="0"/>
         <item rule-number="23" point="0"/>
         <item rule-number="26" point="0"/>
@@ -2978,13 +2983,15 @@
         <item rule-number="77" point="0"/>
         <item rule-number="78" point="0"/>
         <item rule-number="79" point="0"/>
-        <item rule-number="81" point="2"/>
+        <item rule-number="80" point="0"/>
+        <item rule-number="82" point="2"/>
       </itemset>
       <actions>
         <transitions>
           <transition type="shift" symbol="&quot;^&quot;" state="33"/>
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
+          <transition type="shift" symbol="&quot;???&quot;" state="36"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -3016,6 +3023,7 @@
           <transition type="goto" symbol="pairlisttype" state="68"/>
           <transition type="goto" symbol="s4type" state="69"/>
           <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
           <transition type="goto" symbol="vectortype" state="73"/>
           <transition type="goto" symbol="params" state="74"/>
           <transition type="goto" symbol="functiontype" state="75"/>
@@ -3317,13 +3325,13 @@
 
     <state number="110">
       <itemset>
-        <item rule-number="81" point="3"/>
+        <item rule-number="82" point="3"/>
       </itemset>
       <actions>
         <transitions/>
         <errors/>
         <reductions>
-          <reduction symbol="$default" rule="81" enabled="true"/>
+          <reduction symbol="$default" rule="82" enabled="true"/>
         </reductions>
       </actions>
       <solved-conflicts/>
