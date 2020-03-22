@@ -45,6 +45,7 @@
 %token <std::string>                    COLON                ":";
 %token <std::string>                    VARARG               "...";
 %token <std::string>                    UNKNOWN              "???";
+%token <std::string>                    NULLOP               "null";
 %token <std::string>                    NULLVALUE            "?";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
@@ -103,7 +104,7 @@
 %nterm <TypeNodePtr>                    type
 %nterm <TypeDeclarationNodePtr>         decltype
 
-%nonassoc NULLVALUE
+%nonassoc NULLOP
 %right ARROW
 %nonassoc COMMA CARET LPAREN LBRACKET LANGLEBRACKET
 %nonassoc LOWER_THAN_OR
@@ -690,7 +691,7 @@ uniontype:          nonuniontype                            {
          ;
 
 
-nulltype:          "?"                                      {   $$ = create_node_with_keyword<NullTypeNode>($1, @1, @$, context); }
+nulltype:          "null"                                   {   $$ = create_node_with_keyword<NullTypeNode>($1, @1, @$, context); }
         |          "?" uniontype                            {
                                                                 OperatorNodePtr op = create_operator($1, @1, context);
                                                                 $$ = new NullableTypeNode(std::move(wrap(std::move(op))),

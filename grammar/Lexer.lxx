@@ -45,7 +45,8 @@ LIST                list|lst
 STRUCT              struct|srt
 ANY                 any|[*]
 UNKNOWN             [?][?][?]
-NULLVALUE           [?]
+NULLOP              [?]
+NULLVALUE           null
 TYPEDECL            type
 BLANK               [ \t\r]
 VARARG              \.\.\.
@@ -108,6 +109,7 @@ NON_OCT             [^0-7]
 {STRUCT}                    { HANDLE_TOKEN(TOKEN_STRUCT) }
 {ANY}                       { HANDLE_TOKEN(TOKEN_ANY) }
 {UNKNOWN}                   { HANDLE_TOKEN(TOKEN_UNKNOWN) }
+{NULLOP}                    { HANDLE_TOKEN(TOKEN_NULLOP) }
 {NULLVALUE}                 { HANDLE_TOKEN(TOKEN_NULLVALUE) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }

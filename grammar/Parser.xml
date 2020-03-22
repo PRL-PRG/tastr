@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<bison-xml-report version="3.5.2" bug-report="bug-bison@gnu.org" url="https://www.gnu.org/software/bison/">
+<bison-xml-report version="3.5.3" bug-report="bug-bison@gnu.org" url="https://www.gnu.org/software/bison/">
 
   <filename>Parser.yxx</filename>
 
@@ -530,7 +530,7 @@
       <rule number="82" usefulness="useful">
         <lhs>nulltype</lhs>
         <rhs>
-          <symbol>&quot;?&quot;</symbol>
+          <symbol>&quot;null&quot;</symbol>
         </rhs>
       </rule>
       <rule number="83" usefulness="useful">
@@ -622,70 +622,71 @@
       <terminal symbol-number="19" token-number="274" name="&quot;:&quot;" usefulness="useful"/>
       <terminal symbol-number="20" token-number="275" name="&quot;...&quot;" usefulness="useful"/>
       <terminal symbol-number="21" token-number="276" name="&quot;???&quot;" usefulness="useful"/>
-      <terminal symbol-number="22" token-number="277" name="&quot;?&quot;" usefulness="useful" prec="1" assoc="nonassoc"/>
-      <terminal symbol-number="23" token-number="278" name="INTEGER" usefulness="useful"/>
-      <terminal symbol-number="24" token-number="279" name="DOUBLE" usefulness="useful"/>
-      <terminal symbol-number="25" token-number="280" name="COMPLEX" usefulness="useful"/>
-      <terminal symbol-number="26" token-number="281" name="CHARACTER" usefulness="useful"/>
-      <terminal symbol-number="27" token-number="282" name="LOGICAL" usefulness="useful"/>
-      <terminal symbol-number="28" token-number="283" name="RAW" usefulness="useful"/>
-      <terminal symbol-number="29" token-number="284" name="ENVIRONMENT" usefulness="useful"/>
-      <terminal symbol-number="30" token-number="285" name="EXPRESSION" usefulness="useful"/>
-      <terminal symbol-number="31" token-number="286" name="LANGUAGE" usefulness="useful"/>
-      <terminal symbol-number="32" token-number="287" name="SYMBOL" usefulness="useful"/>
-      <terminal symbol-number="33" token-number="288" name="EXTERNALPOINTER" usefulness="useful"/>
-      <terminal symbol-number="34" token-number="289" name="BYTECODE" usefulness="useful"/>
-      <terminal symbol-number="35" token-number="290" name="PAIRLIST" usefulness="useful"/>
-      <terminal symbol-number="36" token-number="291" name="S4" usefulness="useful"/>
-      <terminal symbol-number="37" token-number="292" name="WEAKREF" usefulness="useful"/>
-      <terminal symbol-number="38" token-number="293" name="TUPLE" usefulness="useful"/>
-      <terminal symbol-number="39" token-number="294" name="LIST" usefulness="useful"/>
-      <terminal symbol-number="40" token-number="295" name="STRUCT" usefulness="useful"/>
-      <terminal symbol-number="41" token-number="296" name="ANY" usefulness="useful"/>
-      <terminal symbol-number="42" token-number="297" name="TYPEDECL" usefulness="useful"/>
-      <terminal symbol-number="43" token-number="298" name="IDENTIFIER" usefulness="useful"/>
-      <terminal symbol-number="44" token-number="299" name="QUOTED_IDENTIFIER" usefulness="useful"/>
-      <terminal symbol-number="45" token-number="300" name="LBRACKET" usefulness="unused-in-grammar" prec="3" assoc="nonassoc"/>
-      <terminal symbol-number="46" token-number="301" name="LOWER_THAN_OR" usefulness="useful" prec="4" assoc="nonassoc"/>
+      <terminal symbol-number="22" token-number="277" name="&quot;null&quot;" usefulness="useful" prec="1" assoc="nonassoc"/>
+      <terminal symbol-number="23" token-number="278" name="&quot;?&quot;" usefulness="useful"/>
+      <terminal symbol-number="24" token-number="279" name="INTEGER" usefulness="useful"/>
+      <terminal symbol-number="25" token-number="280" name="DOUBLE" usefulness="useful"/>
+      <terminal symbol-number="26" token-number="281" name="COMPLEX" usefulness="useful"/>
+      <terminal symbol-number="27" token-number="282" name="CHARACTER" usefulness="useful"/>
+      <terminal symbol-number="28" token-number="283" name="LOGICAL" usefulness="useful"/>
+      <terminal symbol-number="29" token-number="284" name="RAW" usefulness="useful"/>
+      <terminal symbol-number="30" token-number="285" name="ENVIRONMENT" usefulness="useful"/>
+      <terminal symbol-number="31" token-number="286" name="EXPRESSION" usefulness="useful"/>
+      <terminal symbol-number="32" token-number="287" name="LANGUAGE" usefulness="useful"/>
+      <terminal symbol-number="33" token-number="288" name="SYMBOL" usefulness="useful"/>
+      <terminal symbol-number="34" token-number="289" name="EXTERNALPOINTER" usefulness="useful"/>
+      <terminal symbol-number="35" token-number="290" name="BYTECODE" usefulness="useful"/>
+      <terminal symbol-number="36" token-number="291" name="PAIRLIST" usefulness="useful"/>
+      <terminal symbol-number="37" token-number="292" name="S4" usefulness="useful"/>
+      <terminal symbol-number="38" token-number="293" name="WEAKREF" usefulness="useful"/>
+      <terminal symbol-number="39" token-number="294" name="TUPLE" usefulness="useful"/>
+      <terminal symbol-number="40" token-number="295" name="LIST" usefulness="useful"/>
+      <terminal symbol-number="41" token-number="296" name="STRUCT" usefulness="useful"/>
+      <terminal symbol-number="42" token-number="297" name="ANY" usefulness="useful"/>
+      <terminal symbol-number="43" token-number="298" name="TYPEDECL" usefulness="useful"/>
+      <terminal symbol-number="44" token-number="299" name="IDENTIFIER" usefulness="useful"/>
+      <terminal symbol-number="45" token-number="300" name="QUOTED_IDENTIFIER" usefulness="useful"/>
+      <terminal symbol-number="46" token-number="301" name="LBRACKET" usefulness="unused-in-grammar" prec="3" assoc="nonassoc"/>
+      <terminal symbol-number="47" token-number="302" name="LOWER_THAN_OR" usefulness="useful" prec="4" assoc="nonassoc"/>
     </terminals>
     <nonterminals>
-      <nonterminal symbol-number="47" name="$accept" usefulness="useful"/>
-      <nonterminal symbol-number="48" name="ascalartype" usefulness="useful"/>
-      <nonterminal symbol-number="49" name="rawascalartype" usefulness="useful"/>
-      <nonterminal symbol-number="50" name="nascalartype" usefulness="useful"/>
-      <nonterminal symbol-number="51" name="scalartype" usefulness="useful"/>
-      <nonterminal symbol-number="52" name="environmenttype" usefulness="useful"/>
-      <nonterminal symbol-number="53" name="expressiontype" usefulness="useful"/>
-      <nonterminal symbol-number="54" name="languagetype" usefulness="useful"/>
-      <nonterminal symbol-number="55" name="symboltype" usefulness="useful"/>
-      <nonterminal symbol-number="56" name="externalptrtype" usefulness="useful"/>
-      <nonterminal symbol-number="57" name="bytecodetype" usefulness="useful"/>
-      <nonterminal symbol-number="58" name="pairlisttype" usefulness="useful"/>
-      <nonterminal symbol-number="59" name="s4type" usefulness="useful"/>
-      <nonterminal symbol-number="60" name="weakreftype" usefulness="useful"/>
-      <nonterminal symbol-number="61" name="unknowntype" usefulness="useful"/>
-      <nonterminal symbol-number="62" name="anytype" usefulness="useful"/>
-      <nonterminal symbol-number="63" name="vectortype" usefulness="useful"/>
-      <nonterminal symbol-number="64" name="typeseq" usefulness="useful"/>
-      <nonterminal symbol-number="65" name="namedtype" usefulness="useful"/>
-      <nonterminal symbol-number="66" name="namedtypeseq" usefulness="useful"/>
-      <nonterminal symbol-number="67" name="paramtype" usefulness="useful"/>
-      <nonterminal symbol-number="68" name="paramtypeseq" usefulness="useful"/>
-      <nonterminal symbol-number="69" name="params" usefulness="useful"/>
-      <nonterminal symbol-number="70" name="functiontype" usefulness="useful"/>
-      <nonterminal symbol-number="71" name="grouptype" usefulness="useful"/>
-      <nonterminal symbol-number="72" name="nonuniontype" usefulness="useful"/>
-      <nonterminal symbol-number="73" name="listtype" usefulness="useful"/>
-      <nonterminal symbol-number="74" name="structtype" usefulness="useful"/>
-      <nonterminal symbol-number="75" name="tupleelements" usefulness="useful"/>
-      <nonterminal symbol-number="76" name="tupletype" usefulness="useful"/>
-      <nonterminal symbol-number="77" name="identifier" usefulness="useful"/>
-      <nonterminal symbol-number="78" name="uniontype" usefulness="useful"/>
-      <nonterminal symbol-number="79" name="nulltype" usefulness="useful"/>
-      <nonterminal symbol-number="80" name="type" usefulness="useful"/>
-      <nonterminal symbol-number="81" name="decltype" usefulness="useful"/>
-      <nonterminal symbol-number="82" name="decllist" usefulness="useful"/>
-      <nonterminal symbol-number="83" name="start" usefulness="useful"/>
+      <nonterminal symbol-number="48" name="$accept" usefulness="useful"/>
+      <nonterminal symbol-number="49" name="ascalartype" usefulness="useful"/>
+      <nonterminal symbol-number="50" name="rawascalartype" usefulness="useful"/>
+      <nonterminal symbol-number="51" name="nascalartype" usefulness="useful"/>
+      <nonterminal symbol-number="52" name="scalartype" usefulness="useful"/>
+      <nonterminal symbol-number="53" name="environmenttype" usefulness="useful"/>
+      <nonterminal symbol-number="54" name="expressiontype" usefulness="useful"/>
+      <nonterminal symbol-number="55" name="languagetype" usefulness="useful"/>
+      <nonterminal symbol-number="56" name="symboltype" usefulness="useful"/>
+      <nonterminal symbol-number="57" name="externalptrtype" usefulness="useful"/>
+      <nonterminal symbol-number="58" name="bytecodetype" usefulness="useful"/>
+      <nonterminal symbol-number="59" name="pairlisttype" usefulness="useful"/>
+      <nonterminal symbol-number="60" name="s4type" usefulness="useful"/>
+      <nonterminal symbol-number="61" name="weakreftype" usefulness="useful"/>
+      <nonterminal symbol-number="62" name="unknowntype" usefulness="useful"/>
+      <nonterminal symbol-number="63" name="anytype" usefulness="useful"/>
+      <nonterminal symbol-number="64" name="vectortype" usefulness="useful"/>
+      <nonterminal symbol-number="65" name="typeseq" usefulness="useful"/>
+      <nonterminal symbol-number="66" name="namedtype" usefulness="useful"/>
+      <nonterminal symbol-number="67" name="namedtypeseq" usefulness="useful"/>
+      <nonterminal symbol-number="68" name="paramtype" usefulness="useful"/>
+      <nonterminal symbol-number="69" name="paramtypeseq" usefulness="useful"/>
+      <nonterminal symbol-number="70" name="params" usefulness="useful"/>
+      <nonterminal symbol-number="71" name="functiontype" usefulness="useful"/>
+      <nonterminal symbol-number="72" name="grouptype" usefulness="useful"/>
+      <nonterminal symbol-number="73" name="nonuniontype" usefulness="useful"/>
+      <nonterminal symbol-number="74" name="listtype" usefulness="useful"/>
+      <nonterminal symbol-number="75" name="structtype" usefulness="useful"/>
+      <nonterminal symbol-number="76" name="tupleelements" usefulness="useful"/>
+      <nonterminal symbol-number="77" name="tupletype" usefulness="useful"/>
+      <nonterminal symbol-number="78" name="identifier" usefulness="useful"/>
+      <nonterminal symbol-number="79" name="uniontype" usefulness="useful"/>
+      <nonterminal symbol-number="80" name="nulltype" usefulness="useful"/>
+      <nonterminal symbol-number="81" name="type" usefulness="useful"/>
+      <nonterminal symbol-number="82" name="decltype" usefulness="useful"/>
+      <nonterminal symbol-number="83" name="decllist" usefulness="useful"/>
+      <nonterminal symbol-number="84" name="start" usefulness="useful"/>
     </nonterminals>
   </grammar>
 
@@ -1219,52 +1220,53 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="82"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="83"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -1325,12 +1327,12 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="goto" symbol="ascalartype" state="83"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="goto" symbol="ascalartype" state="84"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -1401,52 +1403,53 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="84"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="85"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -1521,57 +1524,58 @@
           <transition type="shift" symbol="&quot;^&quot;" state="33"/>
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
-          <transition type="shift" symbol="&quot;&gt;&quot;" state="85"/>
-          <transition type="shift" symbol="&quot;...&quot;" state="86"/>
+          <transition type="shift" symbol="&quot;&gt;&quot;" state="86"/>
+          <transition type="shift" symbol="&quot;...&quot;" state="87"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="paramtype" state="87"/>
-          <transition type="goto" symbol="paramtypeseq" state="88"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="89"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="paramtype" state="88"/>
+          <transition type="goto" symbol="paramtypeseq" state="89"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="90"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -1594,6 +1598,20 @@
     </state>
 
     <state number="37">
+      <itemset>
+        <item rule-number="82" point="1"/>
+      </itemset>
+      <actions>
+        <transitions/>
+        <errors/>
+        <reductions>
+          <reduction symbol="$default" rule="82" enabled="true"/>
+        </reductions>
+      </actions>
+      <solved-conflicts/>
+    </state>
+
+    <state number="38">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -1640,15 +1658,6 @@
         <item rule-number="79" point="0"/>
         <item rule-number="80" point="0"/>
         <item rule-number="81" point="0"/>
-        <item rule-number="82" point="1">
-          <lookaheads>
-            <symbol>&quot;|&quot;</symbol>
-            <symbol>&quot;,&quot;</symbol>
-            <symbol>&quot;)&quot;</symbol>
-            <symbol>&quot;&gt;&quot;</symbol>
-            <symbol>&quot;;&quot;</symbol>
-          </lookaheads>
-        </item>
         <item rule-number="83" point="1"/>
       </itemset>
       <actions>
@@ -1656,56 +1665,54 @@
           <transition type="shift" symbol="&quot;^&quot;" state="33"/>
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="90"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="91"/>
         </transitions>
         <errors/>
-        <reductions>
-          <reduction symbol="$default" rule="82" enabled="true"/>
-        </reductions>
+        <reductions/>
       </actions>
       <solved-conflicts/>
     </state>
 
-    <state number="38">
+    <state number="39">
       <itemset>
         <item rule-number="1" point="1"/>
       </itemset>
@@ -1719,7 +1726,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="39">
+    <state number="40">
       <itemset>
         <item rule-number="2" point="1"/>
       </itemset>
@@ -1733,7 +1740,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="40">
+    <state number="41">
       <itemset>
         <item rule-number="3" point="1"/>
       </itemset>
@@ -1747,7 +1754,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="41">
+    <state number="42">
       <itemset>
         <item rule-number="4" point="1"/>
       </itemset>
@@ -1761,7 +1768,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="42">
+    <state number="43">
       <itemset>
         <item rule-number="5" point="1"/>
       </itemset>
@@ -1775,7 +1782,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="43">
+    <state number="44">
       <itemset>
         <item rule-number="6" point="1"/>
       </itemset>
@@ -1789,7 +1796,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="44">
+    <state number="45">
       <itemset>
         <item rule-number="11" point="1"/>
       </itemset>
@@ -1803,7 +1810,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="45">
+    <state number="46">
       <itemset>
         <item rule-number="12" point="1"/>
       </itemset>
@@ -1817,7 +1824,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="46">
+    <state number="47">
       <itemset>
         <item rule-number="13" point="1"/>
       </itemset>
@@ -1831,7 +1838,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="47">
+    <state number="48">
       <itemset>
         <item rule-number="14" point="1"/>
       </itemset>
@@ -1845,7 +1852,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="48">
+    <state number="49">
       <itemset>
         <item rule-number="15" point="1"/>
       </itemset>
@@ -1859,7 +1866,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="49">
+    <state number="50">
       <itemset>
         <item rule-number="16" point="1"/>
       </itemset>
@@ -1873,7 +1880,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="50">
+    <state number="51">
       <itemset>
         <item rule-number="17" point="1"/>
       </itemset>
@@ -1887,7 +1894,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="51">
+    <state number="52">
       <itemset>
         <item rule-number="18" point="1"/>
       </itemset>
@@ -1901,7 +1908,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="52">
+    <state number="53">
       <itemset>
         <item rule-number="19" point="1"/>
       </itemset>
@@ -1915,23 +1922,9 @@
       <solved-conflicts/>
     </state>
 
-    <state number="53">
-      <itemset>
-        <item rule-number="29" point="1"/>
-      </itemset>
-      <actions>
-        <transitions>
-          <transition type="shift" symbol="&quot;&lt;&quot;" state="91"/>
-        </transitions>
-        <errors/>
-        <reductions/>
-      </actions>
-      <solved-conflicts/>
-    </state>
-
     <state number="54">
       <itemset>
-        <item rule-number="23" point="1"/>
+        <item rule-number="29" point="1"/>
       </itemset>
       <actions>
         <transitions>
@@ -1945,7 +1938,7 @@
 
     <state number="55">
       <itemset>
-        <item rule-number="26" point="1"/>
+        <item rule-number="23" point="1"/>
       </itemset>
       <actions>
         <transitions>
@@ -1959,6 +1952,20 @@
 
     <state number="56">
       <itemset>
+        <item rule-number="26" point="1"/>
+      </itemset>
+      <actions>
+        <transitions>
+          <transition type="shift" symbol="&quot;&lt;&quot;" state="94"/>
+        </transitions>
+        <errors/>
+        <reductions/>
+      </actions>
+      <solved-conflicts/>
+    </state>
+
+    <state number="57">
+      <itemset>
         <item rule-number="20" point="1"/>
       </itemset>
       <actions>
@@ -1971,7 +1978,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="57">
+    <state number="58">
       <itemset>
         <item rule-number="8" point="1"/>
       </itemset>
@@ -1985,7 +1992,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="58">
+    <state number="59">
       <itemset>
         <item rule-number="9" point="1"/>
       </itemset>
@@ -1999,7 +2006,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="59">
+    <state number="60">
       <itemset>
         <item rule-number="10" point="1"/>
       </itemset>
@@ -2013,7 +2020,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="60">
+    <state number="61">
       <itemset>
         <item rule-number="22" point="1"/>
         <item rule-number="64" point="1">
@@ -2028,7 +2035,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;[]&quot;" state="94"/>
+          <transition type="shift" symbol="&quot;[]&quot;" state="95"/>
         </transitions>
         <errors/>
         <reductions>
@@ -2038,7 +2045,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="61">
+    <state number="62">
       <itemset>
         <item rule-number="65" point="1"/>
       </itemset>
@@ -2052,7 +2059,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="62">
+    <state number="63">
       <itemset>
         <item rule-number="66" point="1"/>
       </itemset>
@@ -2066,7 +2073,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="63">
+    <state number="64">
       <itemset>
         <item rule-number="67" point="1"/>
       </itemset>
@@ -2080,7 +2087,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="64">
+    <state number="65">
       <itemset>
         <item rule-number="68" point="1"/>
       </itemset>
@@ -2094,7 +2101,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="65">
+    <state number="66">
       <itemset>
         <item rule-number="69" point="1"/>
       </itemset>
@@ -2108,7 +2115,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="66">
+    <state number="67">
       <itemset>
         <item rule-number="70" point="1"/>
       </itemset>
@@ -2122,7 +2129,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="67">
+    <state number="68">
       <itemset>
         <item rule-number="71" point="1"/>
       </itemset>
@@ -2136,7 +2143,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="68">
+    <state number="69">
       <itemset>
         <item rule-number="72" point="1"/>
       </itemset>
@@ -2150,7 +2157,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="69">
+    <state number="70">
       <itemset>
         <item rule-number="73" point="1"/>
       </itemset>
@@ -2164,7 +2171,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="70">
+    <state number="71">
       <itemset>
         <item rule-number="87" point="1"/>
       </itemset>
@@ -2178,7 +2185,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="71">
+    <state number="72">
       <itemset>
         <item rule-number="86" point="1"/>
       </itemset>
@@ -2192,7 +2199,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="72">
+    <state number="73">
       <itemset>
         <item rule-number="74" point="1"/>
       </itemset>
@@ -2206,13 +2213,13 @@
       <solved-conflicts/>
     </state>
 
-    <state number="73">
+    <state number="74">
       <itemset>
         <item rule-number="62" point="1"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;=&gt;&quot;" state="95"/>
+          <transition type="shift" symbol="&quot;=&gt;&quot;" state="96"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2220,7 +2227,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="74">
+    <state number="75">
       <itemset>
         <item rule-number="75" point="1"/>
       </itemset>
@@ -2234,7 +2241,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="75">
+    <state number="76">
       <itemset>
         <item rule-number="79" point="1"/>
       </itemset>
@@ -2248,7 +2255,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="76">
+    <state number="77">
       <itemset>
         <item rule-number="80" point="1"/>
       </itemset>
@@ -2262,7 +2269,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="77">
+    <state number="78">
       <itemset>
         <item rule-number="77" point="1"/>
       </itemset>
@@ -2276,7 +2283,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="78">
+    <state number="79">
       <itemset>
         <item rule-number="76" point="1"/>
       </itemset>
@@ -2290,7 +2297,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="79">
+    <state number="80">
       <itemset>
         <item rule-number="78" point="1"/>
       </itemset>
@@ -2304,7 +2311,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="80">
+    <state number="81">
       <itemset>
         <item rule-number="81" point="1"/>
         <item rule-number="84" point="1">
@@ -2318,7 +2325,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;|&quot;" state="96"/>
+          <transition type="shift" symbol="&quot;|&quot;" state="97"/>
         </transitions>
         <errors/>
         <reductions>
@@ -2330,7 +2337,7 @@
       </solved-conflicts>
     </state>
 
-    <state number="81">
+    <state number="82">
       <itemset>
         <item rule-number="85" point="1"/>
       </itemset>
@@ -2344,13 +2351,13 @@
       <solved-conflicts/>
     </state>
 
-    <state number="82">
+    <state number="83">
       <itemset>
         <item rule-number="88" point="3"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;;&quot;" state="97"/>
+          <transition type="shift" symbol="&quot;;&quot;" state="98"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2358,7 +2365,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="83">
+    <state number="84">
       <itemset>
         <item rule-number="7" point="2"/>
       </itemset>
@@ -2372,13 +2379,13 @@
       <solved-conflicts/>
     </state>
 
-    <state number="84">
+    <state number="85">
       <itemset>
         <item rule-number="63" point="2"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;)&quot;" state="98"/>
+          <transition type="shift" symbol="&quot;)&quot;" state="99"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2386,7 +2393,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="85">
+    <state number="86">
       <itemset>
         <item rule-number="61" point="2"/>
       </itemset>
@@ -2400,7 +2407,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="86">
+    <state number="87">
       <itemset>
         <item rule-number="57" point="1"/>
       </itemset>
@@ -2414,7 +2421,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="87">
+    <state number="88">
       <itemset>
         <item rule-number="58" point="1"/>
       </itemset>
@@ -2428,15 +2435,15 @@
       <solved-conflicts/>
     </state>
 
-    <state number="88">
+    <state number="89">
       <itemset>
         <item rule-number="59" point="1"/>
         <item rule-number="60" point="2"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;,&quot;" state="99"/>
-          <transition type="shift" symbol="&quot;&gt;&quot;" state="100"/>
+          <transition type="shift" symbol="&quot;,&quot;" state="100"/>
+          <transition type="shift" symbol="&quot;&gt;&quot;" state="101"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2444,7 +2451,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="89">
+    <state number="90">
       <itemset>
         <item rule-number="56" point="1"/>
       </itemset>
@@ -2458,11 +2465,12 @@
       <solved-conflicts/>
     </state>
 
-    <state number="90">
+    <state number="91">
       <itemset>
         <item rule-number="81" point="1"/>
         <item rule-number="83" point="2">
           <lookaheads>
+            <symbol>&quot;|&quot;</symbol>
             <symbol>&quot;,&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
             <symbol>&quot;&gt;&quot;</symbol>
@@ -2472,19 +2480,18 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;|&quot;" state="96"/>
+          <transition type="shift" symbol="&quot;|&quot;" state="97"/>
         </transitions>
         <errors/>
         <reductions>
+          <reduction symbol="&quot;|&quot;" rule="83" enabled="false"/>
           <reduction symbol="$default" rule="83" enabled="true"/>
         </reductions>
       </actions>
-      <solved-conflicts>
-        <resolution rule="83" symbol="&quot;|&quot;" type="shift">&quot;?&quot; &lt; &quot;|&quot;</resolution>
-      </solved-conflicts>
+      <solved-conflicts/>
     </state>
 
-    <state number="91">
+    <state number="92">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -2555,54 +2562,55 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="typeseq" state="101"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupleelements" state="102"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="103"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="typeseq" state="102"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupleelements" state="103"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="104"/>
         </transitions>
         <errors/>
         <reductions>
@@ -2612,7 +2620,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="92">
+    <state number="93">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -2675,52 +2683,53 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="104"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="105"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2728,7 +2737,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="93">
+    <state number="94">
       <itemset>
         <item rule-number="26" point="2"/>
         <item rule-number="30" point="0"/>
@@ -2783,9 +2792,9 @@
           <transition type="shift" symbol="TYPEDECL" state="26"/>
           <transition type="shift" symbol="IDENTIFIER" state="27"/>
           <transition type="shift" symbol="QUOTED_IDENTIFIER" state="28"/>
-          <transition type="goto" symbol="namedtype" state="105"/>
-          <transition type="goto" symbol="namedtypeseq" state="106"/>
-          <transition type="goto" symbol="identifier" state="107"/>
+          <transition type="goto" symbol="namedtype" state="106"/>
+          <transition type="goto" symbol="namedtypeseq" state="107"/>
+          <transition type="goto" symbol="identifier" state="108"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2793,7 +2802,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="94">
+    <state number="95">
       <itemset>
         <item rule-number="22" point="2"/>
       </itemset>
@@ -2807,7 +2816,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="95">
+    <state number="96">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -2870,52 +2879,53 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="108"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="109"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -2923,7 +2933,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="96">
+    <state number="97">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -2975,45 +2985,45 @@
           <transition type="shift" symbol="&quot;^&quot;" state="33"/>
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="109"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="110"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3021,7 +3031,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="97">
+    <state number="98">
       <itemset>
         <item rule-number="88" point="4"/>
       </itemset>
@@ -3035,7 +3045,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="98">
+    <state number="99">
       <itemset>
         <item rule-number="63" point="3"/>
       </itemset>
@@ -3049,7 +3059,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="99">
+    <state number="100">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -3113,55 +3123,56 @@
           <transition type="shift" symbol="&quot;^&quot;" state="33"/>
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
-          <transition type="shift" symbol="&quot;...&quot;" state="86"/>
+          <transition type="shift" symbol="&quot;...&quot;" state="87"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="paramtype" state="110"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="89"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="paramtype" state="111"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="90"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3169,7 +3180,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="100">
+    <state number="101">
       <itemset>
         <item rule-number="60" point="3"/>
       </itemset>
@@ -3183,7 +3194,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="101">
+    <state number="102">
       <itemset>
         <item rule-number="25" point="1"/>
         <item rule-number="28" point="1">
@@ -3194,7 +3205,7 @@
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;,&quot;" state="111"/>
+          <transition type="shift" symbol="&quot;,&quot;" state="112"/>
         </transitions>
         <errors/>
         <reductions>
@@ -3204,13 +3215,13 @@
       <solved-conflicts/>
     </state>
 
-    <state number="102">
+    <state number="103">
       <itemset>
         <item rule-number="29" point="3"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;&gt;&quot;" state="112"/>
+          <transition type="shift" symbol="&quot;&gt;&quot;" state="113"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3218,7 +3229,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="103">
+    <state number="104">
       <itemset>
         <item rule-number="24" point="1"/>
       </itemset>
@@ -3232,13 +3243,13 @@
       <solved-conflicts/>
     </state>
 
-    <state number="104">
+    <state number="105">
       <itemset>
         <item rule-number="23" point="3"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;&gt;&quot;" state="113"/>
+          <transition type="shift" symbol="&quot;&gt;&quot;" state="114"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3246,7 +3257,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="105">
+    <state number="106">
       <itemset>
         <item rule-number="54" point="1"/>
       </itemset>
@@ -3260,29 +3271,15 @@
       <solved-conflicts/>
     </state>
 
-    <state number="106">
+    <state number="107">
       <itemset>
         <item rule-number="26" point="3"/>
         <item rule-number="55" point="1"/>
       </itemset>
       <actions>
         <transitions>
-          <transition type="shift" symbol="&quot;,&quot;" state="114"/>
-          <transition type="shift" symbol="&quot;&gt;&quot;" state="115"/>
-        </transitions>
-        <errors/>
-        <reductions/>
-      </actions>
-      <solved-conflicts/>
-    </state>
-
-    <state number="107">
-      <itemset>
-        <item rule-number="53" point="1"/>
-      </itemset>
-      <actions>
-        <transitions>
-          <transition type="shift" symbol="&quot;:&quot;" state="116"/>
+          <transition type="shift" symbol="&quot;,&quot;" state="115"/>
+          <transition type="shift" symbol="&quot;&gt;&quot;" state="116"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3291,6 +3288,20 @@
     </state>
 
     <state number="108">
+      <itemset>
+        <item rule-number="53" point="1"/>
+      </itemset>
+      <actions>
+        <transitions>
+          <transition type="shift" symbol="&quot;:&quot;" state="117"/>
+        </transitions>
+        <errors/>
+        <reductions/>
+      </actions>
+      <solved-conflicts/>
+    </state>
+
+    <state number="109">
       <itemset>
         <item rule-number="62" point="3"/>
       </itemset>
@@ -3304,7 +3315,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="109">
+    <state number="110">
       <itemset>
         <item rule-number="81" point="3"/>
       </itemset>
@@ -3318,7 +3329,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="110">
+    <state number="111">
       <itemset>
         <item rule-number="59" point="3"/>
       </itemset>
@@ -3332,7 +3343,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="111">
+    <state number="112">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -3395,52 +3406,53 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="117"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="118"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3448,7 +3460,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="112">
+    <state number="113">
       <itemset>
         <item rule-number="29" point="4"/>
       </itemset>
@@ -3462,7 +3474,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="113">
+    <state number="114">
       <itemset>
         <item rule-number="23" point="4"/>
       </itemset>
@@ -3476,7 +3488,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="114">
+    <state number="115">
       <itemset>
         <item rule-number="30" point="0"/>
         <item rule-number="31" point="0"/>
@@ -3529,8 +3541,8 @@
           <transition type="shift" symbol="TYPEDECL" state="26"/>
           <transition type="shift" symbol="IDENTIFIER" state="27"/>
           <transition type="shift" symbol="QUOTED_IDENTIFIER" state="28"/>
-          <transition type="goto" symbol="namedtype" state="118"/>
-          <transition type="goto" symbol="identifier" state="107"/>
+          <transition type="goto" symbol="namedtype" state="119"/>
+          <transition type="goto" symbol="identifier" state="108"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3538,7 +3550,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="115">
+    <state number="116">
       <itemset>
         <item rule-number="26" point="4"/>
       </itemset>
@@ -3552,7 +3564,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="116">
+    <state number="117">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -3615,52 +3627,53 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
-          <transition type="shift" symbol="INTEGER" state="38"/>
-          <transition type="shift" symbol="DOUBLE" state="39"/>
-          <transition type="shift" symbol="COMPLEX" state="40"/>
-          <transition type="shift" symbol="CHARACTER" state="41"/>
-          <transition type="shift" symbol="LOGICAL" state="42"/>
-          <transition type="shift" symbol="RAW" state="43"/>
-          <transition type="shift" symbol="ENVIRONMENT" state="44"/>
-          <transition type="shift" symbol="EXPRESSION" state="45"/>
-          <transition type="shift" symbol="LANGUAGE" state="46"/>
-          <transition type="shift" symbol="SYMBOL" state="47"/>
-          <transition type="shift" symbol="EXTERNALPOINTER" state="48"/>
-          <transition type="shift" symbol="BYTECODE" state="49"/>
-          <transition type="shift" symbol="PAIRLIST" state="50"/>
-          <transition type="shift" symbol="S4" state="51"/>
-          <transition type="shift" symbol="WEAKREF" state="52"/>
-          <transition type="shift" symbol="TUPLE" state="53"/>
-          <transition type="shift" symbol="LIST" state="54"/>
-          <transition type="shift" symbol="STRUCT" state="55"/>
-          <transition type="shift" symbol="ANY" state="56"/>
-          <transition type="goto" symbol="ascalartype" state="57"/>
-          <transition type="goto" symbol="rawascalartype" state="58"/>
-          <transition type="goto" symbol="nascalartype" state="59"/>
-          <transition type="goto" symbol="scalartype" state="60"/>
-          <transition type="goto" symbol="environmenttype" state="61"/>
-          <transition type="goto" symbol="expressiontype" state="62"/>
-          <transition type="goto" symbol="languagetype" state="63"/>
-          <transition type="goto" symbol="symboltype" state="64"/>
-          <transition type="goto" symbol="externalptrtype" state="65"/>
-          <transition type="goto" symbol="bytecodetype" state="66"/>
-          <transition type="goto" symbol="pairlisttype" state="67"/>
-          <transition type="goto" symbol="s4type" state="68"/>
-          <transition type="goto" symbol="weakreftype" state="69"/>
-          <transition type="goto" symbol="unknowntype" state="70"/>
-          <transition type="goto" symbol="anytype" state="71"/>
-          <transition type="goto" symbol="vectortype" state="72"/>
-          <transition type="goto" symbol="params" state="73"/>
-          <transition type="goto" symbol="functiontype" state="74"/>
-          <transition type="goto" symbol="grouptype" state="75"/>
-          <transition type="goto" symbol="nonuniontype" state="76"/>
-          <transition type="goto" symbol="listtype" state="77"/>
-          <transition type="goto" symbol="structtype" state="78"/>
-          <transition type="goto" symbol="tupletype" state="79"/>
-          <transition type="goto" symbol="uniontype" state="80"/>
-          <transition type="goto" symbol="nulltype" state="81"/>
-          <transition type="goto" symbol="type" state="119"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="INTEGER" state="39"/>
+          <transition type="shift" symbol="DOUBLE" state="40"/>
+          <transition type="shift" symbol="COMPLEX" state="41"/>
+          <transition type="shift" symbol="CHARACTER" state="42"/>
+          <transition type="shift" symbol="LOGICAL" state="43"/>
+          <transition type="shift" symbol="RAW" state="44"/>
+          <transition type="shift" symbol="ENVIRONMENT" state="45"/>
+          <transition type="shift" symbol="EXPRESSION" state="46"/>
+          <transition type="shift" symbol="LANGUAGE" state="47"/>
+          <transition type="shift" symbol="SYMBOL" state="48"/>
+          <transition type="shift" symbol="EXTERNALPOINTER" state="49"/>
+          <transition type="shift" symbol="BYTECODE" state="50"/>
+          <transition type="shift" symbol="PAIRLIST" state="51"/>
+          <transition type="shift" symbol="S4" state="52"/>
+          <transition type="shift" symbol="WEAKREF" state="53"/>
+          <transition type="shift" symbol="TUPLE" state="54"/>
+          <transition type="shift" symbol="LIST" state="55"/>
+          <transition type="shift" symbol="STRUCT" state="56"/>
+          <transition type="shift" symbol="ANY" state="57"/>
+          <transition type="goto" symbol="ascalartype" state="58"/>
+          <transition type="goto" symbol="rawascalartype" state="59"/>
+          <transition type="goto" symbol="nascalartype" state="60"/>
+          <transition type="goto" symbol="scalartype" state="61"/>
+          <transition type="goto" symbol="environmenttype" state="62"/>
+          <transition type="goto" symbol="expressiontype" state="63"/>
+          <transition type="goto" symbol="languagetype" state="64"/>
+          <transition type="goto" symbol="symboltype" state="65"/>
+          <transition type="goto" symbol="externalptrtype" state="66"/>
+          <transition type="goto" symbol="bytecodetype" state="67"/>
+          <transition type="goto" symbol="pairlisttype" state="68"/>
+          <transition type="goto" symbol="s4type" state="69"/>
+          <transition type="goto" symbol="weakreftype" state="70"/>
+          <transition type="goto" symbol="unknowntype" state="71"/>
+          <transition type="goto" symbol="anytype" state="72"/>
+          <transition type="goto" symbol="vectortype" state="73"/>
+          <transition type="goto" symbol="params" state="74"/>
+          <transition type="goto" symbol="functiontype" state="75"/>
+          <transition type="goto" symbol="grouptype" state="76"/>
+          <transition type="goto" symbol="nonuniontype" state="77"/>
+          <transition type="goto" symbol="listtype" state="78"/>
+          <transition type="goto" symbol="structtype" state="79"/>
+          <transition type="goto" symbol="tupletype" state="80"/>
+          <transition type="goto" symbol="uniontype" state="81"/>
+          <transition type="goto" symbol="nulltype" state="82"/>
+          <transition type="goto" symbol="type" state="120"/>
         </transitions>
         <errors/>
         <reductions/>
@@ -3668,7 +3681,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="117">
+    <state number="118">
       <itemset>
         <item rule-number="25" point="3"/>
       </itemset>
@@ -3682,7 +3695,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="118">
+    <state number="119">
       <itemset>
         <item rule-number="55" point="3"/>
       </itemset>
@@ -3696,7 +3709,7 @@
       <solved-conflicts/>
     </state>
 
-    <state number="119">
+    <state number="120">
       <itemset>
         <item rule-number="53" point="3"/>
       </itemset>
