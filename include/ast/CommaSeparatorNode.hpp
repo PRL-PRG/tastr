@@ -17,7 +17,9 @@ class CommaSeparatorNode final: public Node {
         : Node()
         , separator_(std::move(separator))
         , first_node_(std::move(first_node))
-        , second_node_(std::move(second_node)) {
+        , second_node_(std::move(second_node))
+        , node_count_(0) {
+        initialize_node_count_();
     }
 
     ~CommaSeparatorNode() = default;
@@ -26,14 +28,16 @@ class CommaSeparatorNode final: public Node {
         : Node(node)
         , separator_(node.separator_->clone())
         , first_node_(node.first_node_->clone())
-        , second_node_(node.second_node_->clone()) {
+        , second_node_(node.second_node_->clone())
+        , node_count_(node.node_count_) {
     }
 
     CommaSeparatorNode(CommaSeparatorNode&& node)
         : Node(std::move(node))
         , separator_(std::move(node.separator_))
         , first_node_(std::move(node.first_node_))
-        , second_node_(std::move(node.second_node_)) {
+        , second_node_(std::move(node.second_node_))
+        , node_count_(std::move(node.node_count_)) {
     }
 
     CommaSeparatorNode& operator=(const CommaSeparatorNode& node) {
@@ -44,6 +48,7 @@ class CommaSeparatorNode final: public Node {
         separator_ = node.separator_->clone();
         first_node_ = node.first_node_->clone();
         second_node_ = node.second_node_->clone();
+        node_count_ = node.node_count_;
         return *this;
     }
 
@@ -52,6 +57,7 @@ class CommaSeparatorNode final: public Node {
         separator_ = std::move(node.separator_);
         first_node_ = std::move(node.first_node_);
         second_node_ = std::move(node.second_node_);
+        node_count_ = std::move(node.node_count_);
         return *this;
     }
 
@@ -79,14 +85,34 @@ class CommaSeparatorNode final: public Node {
         return *second_node_.get();
     }
 
+    count_t get_node_count() const {
+        return node_count_;
+    }
+
   private:
     virtual CommaSeparatorNode* clone_impl() const override final {
         return new CommaSeparatorNode(*this);
     }
 
+    void initialize_node_count_() {
+        count_t first_node_count = 1;
+
+        if (first_node_->is_comma_separator_node()) {
+            first_node_count = as<CommaSeparatorNode>(first_node_.get())->get_node_count();
+        }
+
+        count_t second_node_count = 1;
+        if (second_node_->is_comma_separator_node()) {
+            second_node_count = as<CommaSeparatorNode>(second_node_.get())->get_node_count();
+        }
+
+        node_count_ = first_node_count + second_node_count;
+    }
+
     std::unique_ptr<SeparatorNode> separator_;
     std::unique_ptr<Node> first_node_;
     std::unique_ptr<Node> second_node_;
+    count_t node_count_;
 
     static const Kind kind_;
 };

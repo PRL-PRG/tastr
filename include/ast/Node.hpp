@@ -60,6 +60,8 @@ class Node {
         WeakReferenceType
     };
 
+    using count_t = int;
+
     Node() {
     }
 
