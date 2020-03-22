@@ -577,8 +577,8 @@ namespace tastr { namespace parser {
       // ":"
       // "..."
       // "???"
-      // "null"
       // "?"
+      // "null"
       // INTEGER
       // DOUBLE
       // COMPLEX
@@ -1473,8 +1473,8 @@ switch (yytype)
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX

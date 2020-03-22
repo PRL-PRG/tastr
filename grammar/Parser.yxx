@@ -45,8 +45,8 @@
 %token <std::string>                    COLON                ":";
 %token <std::string>                    VARARG               "...";
 %token <std::string>                    UNKNOWN              "???";
-%token <std::string>                    NULLOP               "null";
-%token <std::string>                    NULLVALUE            "?";
+%token <std::string>                    NULLOP               "?";
+%token <std::string>                    NULLVALUE            "null";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
 %token <std::string>                    COMPLEX

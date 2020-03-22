@@ -9,9 +9,6 @@ Terminals unused in grammar
     LBRACKET
 
 
-State 91 conflicts: 1 shift/reduce
-
-
 Grammar
 
     0 $accept: start "end of file"
@@ -168,8 +165,8 @@ Terminals, with rules where they appear
     ":" <std::string> (274) 53
     "..." <std::string> (275) 50 57
     "???" <std::string> (276) 21
-    "null" <std::string> (277) 83
-    "?" <std::string> (278) 84
+    "?" <std::string> (277) 84
+    "null" <std::string> (278) 83
     INTEGER <std::string> (279) 1 30
     DOUBLE <std::string> (280) 2 31
     COMPLEX <std::string> (281) 3 32
@@ -554,8 +551,8 @@ State 29
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -646,8 +643,8 @@ State 34
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -707,8 +704,8 @@ State 35
     ">"              shift, and go to state 86
     "..."            shift, and go to state 87
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -768,13 +765,6 @@ State 36
 
 State 37
 
-   83 nulltype: "null" .
-
-    $default  reduce using rule 83 (nulltype)
-
-
-State 38
-
    84 nulltype: "?" . uniontype
 
     "^"              shift, and go to state 33
@@ -823,6 +813,13 @@ State 38
     structtype       go to state 79
     tupletype        go to state 80
     uniontype        go to state 91
+
+
+State 38
+
+   83 nulltype: "null" .
+
+    $default  reduce using rule 83 (nulltype)
 
 
 State 39
@@ -1204,7 +1201,6 @@ State 91
 
     "|"  shift, and go to state 97
 
-    "|"       [reduce using rule 84 (nulltype)]
     $default  reduce using rule 84 (nulltype)
 
 
@@ -1216,8 +1212,8 @@ State 92
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -1278,8 +1274,8 @@ State 93
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -1376,8 +1372,8 @@ State 96
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -1500,8 +1496,8 @@ State 100
     "<"              shift, and go to state 35
     "..."            shift, and go to state 87
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -1641,8 +1637,8 @@ State 112
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41
@@ -1752,8 +1748,8 @@ State 117
     "("              shift, and go to state 34
     "<"              shift, and go to state 35
     "???"            shift, and go to state 36
-    "null"           shift, and go to state 37
-    "?"              shift, and go to state 38
+    "?"              shift, and go to state 37
+    "null"           shift, and go to state 38
     INTEGER          shift, and go to state 39
     DOUBLE           shift, and go to state 40
     COMPLEX          shift, and go to state 41

@@ -622,8 +622,8 @@
       <terminal symbol-number="19" token-number="274" name="&quot;:&quot;" usefulness="useful"/>
       <terminal symbol-number="20" token-number="275" name="&quot;...&quot;" usefulness="useful"/>
       <terminal symbol-number="21" token-number="276" name="&quot;???&quot;" usefulness="useful"/>
-      <terminal symbol-number="22" token-number="277" name="&quot;null&quot;" usefulness="useful" prec="1" assoc="nonassoc"/>
-      <terminal symbol-number="23" token-number="278" name="&quot;?&quot;" usefulness="useful"/>
+      <terminal symbol-number="22" token-number="277" name="&quot;?&quot;" usefulness="useful" prec="1" assoc="nonassoc"/>
+      <terminal symbol-number="23" token-number="278" name="&quot;null&quot;" usefulness="useful"/>
       <terminal symbol-number="24" token-number="279" name="INTEGER" usefulness="useful"/>
       <terminal symbol-number="25" token-number="280" name="DOUBLE" usefulness="useful"/>
       <terminal symbol-number="26" token-number="281" name="COMPLEX" usefulness="useful"/>
@@ -1220,8 +1220,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -1403,8 +1403,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -1527,8 +1527,8 @@
           <transition type="shift" symbol="&quot;&gt;&quot;" state="86"/>
           <transition type="shift" symbol="&quot;...&quot;" state="87"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -1598,20 +1598,6 @@
     </state>
 
     <state number="37">
-      <itemset>
-        <item rule-number="83" point="1"/>
-      </itemset>
-      <actions>
-        <transitions/>
-        <errors/>
-        <reductions>
-          <reduction symbol="$default" rule="83" enabled="true"/>
-        </reductions>
-      </actions>
-      <solved-conflicts/>
-    </state>
-
-    <state number="38">
       <itemset>
         <item rule-number="1" point="0"/>
         <item rule-number="2" point="0"/>
@@ -1712,6 +1698,20 @@
         </transitions>
         <errors/>
         <reductions/>
+      </actions>
+      <solved-conflicts/>
+    </state>
+
+    <state number="38">
+      <itemset>
+        <item rule-number="83" point="1"/>
+      </itemset>
+      <actions>
+        <transitions/>
+        <errors/>
+        <reductions>
+          <reduction symbol="$default" rule="83" enabled="true"/>
+        </reductions>
       </actions>
       <solved-conflicts/>
     </state>
@@ -2474,7 +2474,6 @@
         <item rule-number="82" point="1"/>
         <item rule-number="84" point="2">
           <lookaheads>
-            <symbol>&quot;|&quot;</symbol>
             <symbol>&quot;,&quot;</symbol>
             <symbol>&quot;)&quot;</symbol>
             <symbol>&quot;&gt;&quot;</symbol>
@@ -2488,11 +2487,12 @@
         </transitions>
         <errors/>
         <reductions>
-          <reduction symbol="&quot;|&quot;" rule="84" enabled="false"/>
           <reduction symbol="$default" rule="84" enabled="true"/>
         </reductions>
       </actions>
-      <solved-conflicts/>
+      <solved-conflicts>
+        <resolution rule="84" symbol="&quot;|&quot;" type="shift">&quot;?&quot; &lt; &quot;|&quot;</resolution>
+      </solved-conflicts>
     </state>
 
     <state number="92">
@@ -2566,8 +2566,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -2687,8 +2687,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -2883,8 +2883,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -3133,8 +3133,8 @@
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;...&quot;" state="87"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -3414,8 +3414,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>
@@ -3635,8 +3635,8 @@
           <transition type="shift" symbol="&quot;(&quot;" state="34"/>
           <transition type="shift" symbol="&quot;&lt;&quot;" state="35"/>
           <transition type="shift" symbol="&quot;???&quot;" state="36"/>
-          <transition type="shift" symbol="&quot;null&quot;" state="37"/>
-          <transition type="shift" symbol="&quot;?&quot;" state="38"/>
+          <transition type="shift" symbol="&quot;?&quot;" state="37"/>
+          <transition type="shift" symbol="&quot;null&quot;" state="38"/>
           <transition type="shift" symbol="INTEGER" state="39"/>
           <transition type="shift" symbol="DOUBLE" state="40"/>
           <transition type="shift" symbol="COMPLEX" state="41"/>

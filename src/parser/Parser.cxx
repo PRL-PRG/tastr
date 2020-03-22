@@ -403,8 +403,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -579,8 +579,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -762,8 +762,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -1014,8 +1014,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -1190,8 +1190,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -1366,8 +1366,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -1541,8 +1541,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -1721,13 +1721,13 @@ namespace tastr { namespace parser {
 #line 1722 "Parser.cxx"
         break;
 
-      case 22: // "null"
+      case 22: // "?"
 #line 143 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
 #line 1728 "Parser.cxx"
         break;
 
-      case 23: // "?"
+      case 23: // "null"
 #line 143 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
 #line 1734 "Parser.cxx"
@@ -2433,8 +2433,8 @@ namespace tastr { namespace parser {
       case 19: // ":"
       case 20: // "..."
       case 21: // "???"
-      case 22: // "null"
-      case 23: // "?"
+      case 22: // "?"
+      case 23: // "null"
       case 24: // INTEGER
       case 25: // DOUBLE
       case 26: // COMPLEX
@@ -3567,7 +3567,7 @@ namespace tastr { namespace parser {
        1,   -61,   169,   -61,     2,     4,   -61,   -61,   -61,   -61,
      -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
      -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   108,
-     -61,   -61,   -61,    22,   108,    -1,   -61,   -61,   147,   -61,
+     -61,   -61,   -61,    22,   108,    -1,   -61,   147,   -61,   -61,
      -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
      -61,   -61,   -61,   -61,    -4,    -2,     5,   -61,   -61,   -61,
      -61,     7,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
@@ -3585,7 +3585,7 @@ namespace tastr { namespace parser {
        0,    92,     0,    90,     0,     0,    51,    31,    32,    33,
       34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
       44,    45,    46,    47,    48,    49,    50,    52,    53,     0,
-      93,    91,     1,     0,     0,     0,    22,    84,     0,     2,
+      93,    91,     1,     0,     0,     0,    22,     0,    84,     2,
        3,     4,     5,     6,     7,    12,    13,    14,    15,    16,
       17,    18,    19,    20,     0,     0,     0,    21,     9,    10,
       11,    65,    66,    67,    68,    69,    70,    71,    72,    73,
@@ -3603,7 +3603,7 @@ namespace tastr { namespace parser {
      -61,    23,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
      -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -60,   -61,
      -43,   -61,   -61,   -61,   -61,   -39,   -61,   -61,   -61,   -61,
-      57,    27,   -61,   -29,    56,   -61,   -61
+      57,    25,   -61,   -29,    56,   -61,   -61
   };
 
   const signed char
@@ -3624,7 +3624,7 @@ namespace tastr { namespace parser {
       46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
       56,    57,    98,    99,     2,     2,    39,    40,    41,    42,
       43,   112,   113,   114,   117,   119,    84,   111,   110,    29,
-      31,     0,     0,   104,   105,    91,     0,   109,     0,     0,
+      31,     0,    91,   104,   105,     0,     0,   109,     0,     0,
        0,     0,     0,    33,     0,     0,     0,    34,     0,     0,
        0,    35,     0,   118,     0,     0,     0,     0,   120,    87,
       36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
@@ -3651,7 +3651,7 @@ namespace tastr { namespace parser {
       31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
       41,    42,    18,    10,    43,    43,    24,    25,    26,    27,
       28,     6,    13,    13,    19,   115,    33,   100,    97,     2,
-       4,    -1,    -1,    92,    93,    38,    -1,    96,    -1,    -1,
+       4,    -1,    37,    92,    93,    -1,    -1,    96,    -1,    -1,
       -1,    -1,    -1,     4,    -1,    -1,    -1,     8,    -1,    -1,
       -1,    12,    -1,   112,    -1,    -1,    -1,    -1,   117,    20,
       21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
@@ -3727,7 +3727,7 @@ namespace tastr { namespace parser {
   "\"end of file\"", "error", "$undefined", "\"|\"", "\"^\"", "\"=>\"",
   "\",\"", "\"((\"", "\"(\"", "\"))\"", "\")\"", "\"[]\"", "\"<\"",
   "\">\"", "\"[[\"", "\"]]\"", "\"{{\"", "\"}}\"", "\";\"", "\":\"",
-  "\"...\"", "\"???\"", "\"null\"", "\"?\"", "INTEGER", "DOUBLE",
+  "\"...\"", "\"???\"", "\"?\"", "\"null\"", "INTEGER", "DOUBLE",
   "COMPLEX", "CHARACTER", "LOGICAL", "RAW", "ENVIRONMENT", "EXPRESSION",
   "LANGUAGE", "SYMBOL", "EXTERNALPOINTER", "BYTECODE", "PAIRLIST", "S4",
   "WEAKREF", "TUPLE", "LIST", "STRUCT", "ANY", "TYPEDECL", "IDENTIFIER",
