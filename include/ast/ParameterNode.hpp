@@ -2,6 +2,7 @@
 #define TASTR_AST_PARAMETER_TYPE_NODE_HPP
 
 #include "ast/Bracket.hpp"
+#include "ast/CommaSeparatorNode.hpp"
 #include "ast/Node.hpp"
 
 namespace tastr::ast {
@@ -16,6 +17,7 @@ class ParameterNode final
         : Node()
         , Bracketed(std::move(opening_bracket), std::move(closing_bracket))
         , elements_(std::move(elements)) {
+        initialize_size_();
     }
 
     ~ParameterNode() = default;
@@ -63,12 +65,72 @@ class ParameterNode final
         return *elements_.get();
     }
 
+    count_t get_parameter_count() const {
+        return count_;
+    }
+
+    const Node& at(count_t index) const {
+        count_t count = get_parameter_count();
+        const Node& node = get_elements();
+
+        // TODO: std::assert(index < count);
+        // TODO: error if index >= count or index < 0
+
+        if (count == 1) {
+            return node;
+        } else {
+            return at_(index, node);
+        }
+    }
+
   private:
     virtual ParameterNode* clone_impl() const override final {
         return new ParameterNode(*this);
     }
 
+    const Node& at_(count_t index, const Node& node) const {
+        if (index == 0) {
+            // TODO: assert(!node.is_comma_separator_node());
+            // TODO: error
+            return node;
+        }
+
+        // TODO: assert(node.is_comma_separator_node());
+        // TODO: error
+
+        const CommaSeparatorNode& csnode = as<CommaSeparatorNode>(node);
+        const Node& first_node = csnode.get_first_node();
+        const Node& second_node = csnode.get_second_node();
+
+        count_t first_node_count = 1;
+
+        if (first_node.is_comma_separator_node()) {
+            first_node_count =
+                as<CommaSeparatorNode>(first_node).get_node_count();
+        }
+
+        if (index < first_node_count) {
+            return at_(index, first_node);
+        } else {
+            return at_(index - first_node_count, second_node);
+        }
+    }
+
+    void initialize_size_() {
+        Node& elements = get_elements();
+
+        if (elements.is_empty_node()) {
+            count_ = 0;
+        } else if (elements.is_comma_separator_node()) {
+            CommaSeparatorNode& all_elements = as<CommaSeparatorNode>(elements);
+            count_ = all_elements.get_node_count();
+        } else {
+            count_ = 1;
+        }
+    }
+
     NodeUPtr elements_;
+    count_t count_;
 
     static const Kind kind_;
 };
