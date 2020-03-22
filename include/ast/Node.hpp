@@ -291,8 +291,18 @@ const T& as(const U& u) {
 }
 
 template <typename T, typename U>
+const T* as(const U* u) {
+    return static_cast<const T*>(u);
+}
+
+template <typename T, typename U>
 T& as(U& u) {
     return static_cast<T&>(u);
+}
+
+template <typename T, typename U>
+T* as(U* u) {
+    return static_cast<T*>(u);
 }
 
 } // namespace tastr::ast
