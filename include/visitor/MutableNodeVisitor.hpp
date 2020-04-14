@@ -12,13 +12,21 @@ class MutableNodeVisitor {
 
     virtual ~MutableNodeVisitor() = default;
 
-    virtual void visit(tastr::ast::Node& node) = 0;
+    virtual void visit(tastr::ast::Node& node) {
+        node.accept(*this);
+    }
 
-    virtual void visit(tastr::ast::TypeNode& node) = 0;
+    virtual void visit(tastr::ast::TypeNode& node) {
+        node.accept(*this);
+    }
 
-    virtual void visit(tastr::ast::ScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::ScalarTypeNode& node) {
+        node.accept(*this);
+    }
 
-    virtual void visit(tastr::ast::AScalarTypeNode& node) = 0;
+    virtual void visit(tastr::ast::AScalarTypeNode& node) {
+        node.accept(*this);
+    }
 
     virtual void visit(tastr::ast::NAScalarTypeNode& node) = 0;
 

@@ -12,13 +12,21 @@ class ConstNodeVisitor {
 
     virtual ~ConstNodeVisitor() = default;
 
-    virtual void visit(const tastr::ast::Node& node) = 0;
+    virtual void visit(const tastr::ast::Node& node) {
+        node.accept(*this);
+    }
 
-    virtual void visit(const tastr::ast::TypeNode& node) = 0;
+    virtual void visit(const tastr::ast::TypeNode& node) {
+        node.accept(*this);
+    }
 
-    virtual void visit(const tastr::ast::ScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::ScalarTypeNode& node) {
+        node.accept(*this);
+    }
 
-    virtual void visit(const tastr::ast::AScalarTypeNode& node) = 0;
+    virtual void visit(const tastr::ast::AScalarTypeNode& node) {
+        node.accept(*this);
+    }
 
     virtual void visit(const tastr::ast::NAScalarTypeNode& node) = 0;
 
