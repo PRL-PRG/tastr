@@ -23,13 +23,17 @@ class ParameterNode final
     ~ParameterNode() = default;
 
     ParameterNode(const ParameterNode& node)
-        : Node(node), Bracketed(node), elements_(node.elements_->clone()) {
+        : Node(node)
+        , Bracketed(node)
+        , elements_(node.elements_->clone())
+        , count_(node.count_) {
     }
 
     ParameterNode(ParameterNode&& node)
         : Node(std::move(node))
         , Bracketed(std::move(node))
-        , elements_(std::move(node.elements_)) {
+        , elements_(std::move(node.elements_))
+        , count_(std::move(node.count_)) {
     }
 
     ParameterNode& operator=(const ParameterNode& node) {
@@ -39,6 +43,7 @@ class ParameterNode final
         Node::operator=(node);
         Bracketed::operator=(node);
         elements_ = node.elements_->clone();
+        count_ = node.count_;
         return *this;
     }
 
@@ -46,6 +51,7 @@ class ParameterNode final
         Node::operator=(std::move(node));
         Bracketed::operator=(std::move(node));
         elements_ = std::move(node.elements_);
+        count_ = std::move(node.count_);
         return *this;
     }
 
@@ -89,7 +95,7 @@ class ParameterNode final
     }
 
     const Node& at_(count_t index, const Node& node) const {
-        if (index == 0) {
+        if (index == 0 && !node.is_comma_separator_node()) {
             // TODO: assert(!node.is_comma_separator_node());
             // TODO: error
             return node;
