@@ -144,4 +144,8 @@ std::basic_ostream<YYChar>& operator<<(std::basic_ostream<YYChar>& ostr,
 
 } // namespace tastr::parser
 
+std::ostream& operator<<(std::ostream& os, const tastr::parser::Location& loc);
+
+std::string to_string(const tastr::parser::Location& loc);
+
 #endif /* TASTR_PARSER_LOCATION_HPP */
