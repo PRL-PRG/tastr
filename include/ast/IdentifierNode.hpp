@@ -9,20 +9,26 @@ namespace tastr::ast {
 
 class IdentifierNode final: public Node {
   public:
-    explicit IdentifierNode(const std::string& name, bool quoted = false)
-        : Node(), name_(name), quoted_(quoted) {
+    explicit IdentifierNode(const std::string& name,
+                            bool quoted = false,
+                            bool missing = false)
+        : Node(), name_(name), quoted_(quoted), missing_(missing) {
     }
 
     ~IdentifierNode() = default;
 
     IdentifierNode(const IdentifierNode& node)
-        : Node(node), name_(node.name_), quoted_(node.quoted_) {
+        : Node(node)
+        , name_(node.name_)
+        , quoted_(node.quoted_)
+        , missing_(node.missing_) {
     }
 
     IdentifierNode(IdentifierNode&& node)
         : Node(std::move(node))
         , name_(std::move(node.name_))
-        , quoted_(std::move(node.quoted_)) {
+        , quoted_(std::move(node.quoted_))
+        , missing_(std::move(node.missing_)) {
     }
 
     IdentifierNode& operator=(const IdentifierNode& node) {
@@ -32,6 +38,7 @@ class IdentifierNode final: public Node {
         Node::operator=(node);
         name_ = node.name_;
         quoted_ = node.quoted_;
+        missing_ = node.missing_;
         return *this;
     }
 
@@ -39,6 +46,7 @@ class IdentifierNode final: public Node {
         Node::operator=(std::move(node));
         name_ = std::move(node.name_);
         quoted_ = std::move(node.quoted_);
+        missing_ = std::move(node.missing_);
         return *this;
     }
 
@@ -62,6 +70,9 @@ class IdentifierNode final: public Node {
         return quoted_;
     }
 
+    bool is_missing() const {
+        return missing_;
+    }
 
   private:
     virtual IdentifierNode* clone_impl() const override final {
@@ -70,6 +81,7 @@ class IdentifierNode final: public Node {
 
     std::string name_;
     bool quoted_;
+    bool missing_;
     static const Kind kind_;
 };
 

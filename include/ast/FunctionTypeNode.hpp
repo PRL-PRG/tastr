@@ -10,7 +10,7 @@ namespace tastr::ast {
 class FunctionTypeNode final: public TypeNode {
   public:
     FunctionTypeNode(OperatorNodeUPtr op,
-                     ParameterNodeUPtr parameter,
+                     NodeUPtr parameter,
                      TypeNodeUPtr return_type)
         : TypeNode()
         , op_(std::move(op))
@@ -69,7 +69,7 @@ class FunctionTypeNode final: public TypeNode {
         return *op_.get();
     }
 
-    const ParameterNode& get_parameter() const {
+    const Node& get_parameter() const {
         return *parameter_.get();
     }
 
@@ -83,7 +83,7 @@ class FunctionTypeNode final: public TypeNode {
     };
 
     OperatorNodeUPtr op_;
-    ParameterNodeUPtr parameter_;
+    NodeUPtr parameter_;
     TypeNodeUPtr return_type_;
 
     static const Kind kind_;

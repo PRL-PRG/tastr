@@ -90,11 +90,12 @@
 %nterm <NodePtr>                        namedtypeseq
 %nterm <TypeNodePtr>                    paramtype
 %nterm <NodePtr>                        paramtypeseq
-%nterm <ParameterNodePtr>               params
+%nterm <NodePtr>                        params
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
 %nterm <ListTypeNodePtr>                listtype
+%nterm <NodePtr>                        structelements
 %nterm <StructTypeNodePtr>              structtype
 %nterm <NodePtr>                        tupleelements
 %nterm <TupleTypeNodePtr>               tupletype
@@ -132,7 +133,6 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <NodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <FunctionTypeNodePtr>;
-%printer { yyo << tastr::parser::to_string(*$$); } <ParameterNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <GroupTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ListTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <StructTypeNodePtr>;
@@ -229,7 +229,6 @@
     using tastr::ast::AnyTypeNode;
     using tastr::ast::AnyTypeNodePtr;
     using tastr::ast::ParameterNode;
-    using tastr::ast::ParameterNodePtr;
     using tastr::ast::FunctionTypeNode;
     using tastr::ast::FunctionTypeNodePtr;
     using tastr::ast::GroupTypeNode;
@@ -293,9 +292,10 @@ TerminatorNodePtr create_terminator(const std::string& value,
 // TODO op
 IdentifierNodePtr create_identifier(const std::string& value,
                                     bool quoted,
+                                    bool missing,
                                     tastr::parser::Location& location,
                                     tastr::parser::ParsingContext& context) {
-    IdentifierNodePtr identifier = new IdentifierNode(value, quoted);
+    IdentifierNodePtr identifier = new IdentifierNode(value, quoted, missing);
     identifier -> set_location(location);
     return identifier;
 }
@@ -444,7 +444,16 @@ typeseq:            type                                    {
                                                             }
        ;
 
-structtype:         STRUCT "<" namedtypeseq ">"             {
+
+structelements:     %empty                                  {
+                                                                $$ = new EmptyNode();
+                                                            }
+              |     namedtypeseq                            {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                            }
+
+structtype:         STRUCT "<" structelements ">"           {
                                                                 KeywordNodePtr keyword = create_keyword($1, @1, context);
 
                                                                 OperatorNodePtr left = create_operator($2, @2, context);
@@ -488,34 +497,42 @@ tupletype:         TUPLE "<" tupleelements ">"              {
                                                             }
          ;
 
-identifier:         INTEGER                                 { $$ = create_identifier($1, false, @1, context); }
-          |         DOUBLE                                  { $$ = create_identifier($1, false, @1, context); }
-          |         COMPLEX                                 { $$ = create_identifier($1, false, @1, context); }
-          |         CHARACTER                               { $$ = create_identifier($1, false, @1, context); }
-          |         LOGICAL                                 { $$ = create_identifier($1, false, @1, context); }
-          |         RAW                                     { $$ = create_identifier($1, false, @1, context); }
-          |         ENVIRONMENT                             { $$ = create_identifier($1, false, @1, context); }
-          |         EXPRESSION                              { $$ = create_identifier($1, false, @1, context); }
-          |         LANGUAGE                                { $$ = create_identifier($1, false, @1, context); }
-          |         SYMBOL                                  { $$ = create_identifier($1, false, @1, context); }
-          |         EXTERNALPOINTER                         { $$ = create_identifier($1, false, @1, context); }
-          |         BYTECODE                                { $$ = create_identifier($1, false, @1, context); }
-          |         PAIRLIST                                { $$ = create_identifier($1, false, @1, context); }
-          |         S4                                      { $$ = create_identifier($1, false, @1, context); }
-          |         WEAKREF                                 { $$ = create_identifier($1, false, @1, context); }
-          |         TUPLE                                   { $$ = create_identifier($1, false, @1, context); }
-          |         LIST                                    { $$ = create_identifier($1, false, @1, context); }
-          |         STRUCT                                  { $$ = create_identifier($1, false, @1, context); }
-          |         ANY                                     { $$ = create_identifier($1, false, @1, context); }
-          |         TYPEDECL                                { $$ = create_identifier($1, false, @1, context); }
-          |         VARARG                                  { $$ = create_identifier($1, false, @1, context); }
-          |         IDENTIFIER                              { $$ = create_identifier($1, false, @1, context); }
-          |         QUOTED_IDENTIFIER                       { $$ = create_identifier($1, true, @1, context);  }
+identifier:         INTEGER                                 { $$ = create_identifier($1, false, false, @1, context); }
+          |         DOUBLE                                  { $$ = create_identifier($1, false, false, @1, context); }
+          |         COMPLEX                                 { $$ = create_identifier($1, false, false, @1, context); }
+          |         CHARACTER                               { $$ = create_identifier($1, false, false, @1, context); }
+          |         LOGICAL                                 { $$ = create_identifier($1, false, false, @1, context); }
+          |         RAW                                     { $$ = create_identifier($1, false, false, @1, context); }
+          |         ENVIRONMENT                             { $$ = create_identifier($1, false, false, @1, context); }
+          |         EXPRESSION                              { $$ = create_identifier($1, false, false, @1, context); }
+          |         LANGUAGE                                { $$ = create_identifier($1, false, false, @1, context); }
+          |         SYMBOL                                  { $$ = create_identifier($1, false, false, @1, context); }
+          |         EXTERNALPOINTER                         { $$ = create_identifier($1, false, false, @1, context); }
+          |         BYTECODE                                { $$ = create_identifier($1, false, false, @1, context); }
+          |         PAIRLIST                                { $$ = create_identifier($1, false, false, @1, context); }
+          |         S4                                      { $$ = create_identifier($1, false, false, @1, context); }
+          |         WEAKREF                                 { $$ = create_identifier($1, false, false, @1, context); }
+          |         TUPLE                                   { $$ = create_identifier($1, false, false, @1, context); }
+          |         LIST                                    { $$ = create_identifier($1, false, false, @1, context); }
+          |         STRUCT                                  { $$ = create_identifier($1, false, false, @1, context); }
+          |         ANY                                     { $$ = create_identifier($1, false, false, @1, context); }
+          |         TYPEDECL                                { $$ = create_identifier($1, false, false, @1, context); }
+          |         VARARG                                  { $$ = create_identifier($1, false, false, @1, context); }
+          |         IDENTIFIER                              { $$ = create_identifier($1, false, false, @1, context); }
+          |         QUOTED_IDENTIFIER                       { $$ = create_identifier($1, true, false, @1, context);  }
           ;
 
 namedtype:          identifier ":" type                     {
                                                                 SeparatorNodePtr separator = create_separator($2, @2, context);
                                                                 $$ = new TagTypePairNode(std::move(wrap(std::move($1))),
+                                                                                         std::move(wrap(std::move($3))),
+                                                                                         std::move(wrap(std::move(separator))));
+                                                                $$ -> set_location(@$);
+                                                            }
+         |          "^" ":" type                            {
+                                                                SeparatorNodePtr separator = create_separator($2, @2, context);
+                                                                IdentifierNodePtr id = create_identifier($1, false, true, @1, context);
+                                                                $$ = new TagTypePairNode(std::move(wrap(std::move(id))),
                                                                                          std::move(wrap(std::move($3))),
                                                                                          std::move(wrap(std::move(separator))));
                                                                 $$ -> set_location(@$);
@@ -571,6 +588,10 @@ params:             "<" paramtypeseq ">"                    {
                                                                                        std::move(wrap(std::move(right))),
                                                                                        std::move(wrap(new EmptyNode())));
                                                                 $$ -> set_location(@$);
+                                                            }
+      |             anytype                                 {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
                                                             }
       ;
 
