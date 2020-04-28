@@ -8,7 +8,8 @@
 #include <string>
 #include <vector>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class TopLevelNode final: public Node {
   public:
@@ -123,6 +124,7 @@ class TopLevelNode final: public Node {
 using TopLevelNodePtr = TopLevelNode*;
 using TopLevelNodeUPtr = std::unique_ptr<TopLevelNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_TOP_LEVEL_NODE_HPP */

@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class DataFrameTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class DataFrameTypeNode final: public TypeNode {
 using DataFrameTypeNodePtr = DataFrameTypeNode*;
 using DataFrameTypeNodeUPtr = std::unique_ptr<DataFrameTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_DATA_FRAM_TYPE_NODE_HPP */

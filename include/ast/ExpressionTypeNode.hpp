@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class ExpressionTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class ExpressionTypeNode final: public TypeNode {
 using ExpressionTypeNodePtr = ExpressionTypeNode*;
 using ExpressionTypeNodeUPtr = std::unique_ptr<ExpressionTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_EXPRESSION_TYPE_NODE_HPP */

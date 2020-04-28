@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class ExternalPointerTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class ExternalPointerTypeNode final: public TypeNode {
 using ExternalPointerTypeNodePtr = ExternalPointerTypeNode*;
 using ExternalPointerTypeNodeUPtr = std::unique_ptr<ExternalPointerTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_EXTERNAL_POINTER_TYPE_NODE_HPP */

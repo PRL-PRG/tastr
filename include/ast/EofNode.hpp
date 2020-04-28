@@ -5,7 +5,8 @@
 
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class EofNode final: public Node {
   public:
@@ -56,6 +57,7 @@ class EofNode final: public Node {
 using EofNodePtr = EofNode*;
 using EofNodeUPtr = std::unique_ptr<EofNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_EOF_NODE_HPP */

@@ -5,7 +5,8 @@
 #include "ast/OperatorNode.hpp"
 #include "ast/ScalarTypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class NAScalarTypeNode final: public ScalarTypeNode {
   public:
@@ -83,6 +84,7 @@ class NAScalarTypeNode final: public ScalarTypeNode {
 using NAScalarTypeNodePtr = NAScalarTypeNode*;
 using NAScalarTypeNodeUPtr = std::unique_ptr<NAScalarTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_NA_SCALAR_TYPE_NODE_HPP */

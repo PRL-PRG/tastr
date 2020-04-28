@@ -5,7 +5,8 @@
 
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class TerminatorNode final: public Node {
   public:
@@ -66,6 +67,7 @@ class TerminatorNode final: public Node {
 using TerminatorNodePtr = TerminatorNode*;
 using TerminatorNodeUPtr = std::unique_ptr<TerminatorNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_TERMINATOR_NODE_HPP */

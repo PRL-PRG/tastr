@@ -6,7 +6,8 @@
 
 #include <memory>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class GroupTypeNode final
     : public TypeNode
@@ -80,6 +81,7 @@ class GroupTypeNode final
 using GroupTypeNodePtr = GroupTypeNode*;
 using GroupTypeNodeUPtr = std::unique_ptr<GroupTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_GROUP_TYPE_NODE_HPP */

@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class NullTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class NullTypeNode final: public TypeNode {
 using NullTypeNodePtr = NullTypeNode*;
 using NullTypeNodeUPtr = std::unique_ptr<NullTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_NULL_TYPE_NODE_HPP */

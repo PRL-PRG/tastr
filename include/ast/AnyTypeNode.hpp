@@ -4,7 +4,9 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
+
 class AnyTypeNode final: public TypeNode {
   public:
     explicit AnyTypeNode(KeywordNodeUPtr keyword)
@@ -65,6 +67,7 @@ class AnyTypeNode final: public TypeNode {
 using AnyTypeNodePtr = AnyTypeNode*;
 using AnyTypeNodeUPtr = std::unique_ptr<AnyTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_ANY_TYPE_NODE_HPP */

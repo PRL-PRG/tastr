@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class UnknownTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class UnknownTypeNode final: public TypeNode {
 using UnknownTypeNodePtr = UnknownTypeNode*;
 using UnknownTypeNodeUPtr = std::unique_ptr<UnknownTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_UNKNOWN_TYPE_NODE_HPP */

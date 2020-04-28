@@ -6,7 +6,8 @@
 
 #include <iostream>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class VarargTypeNode final: public TypeNode {
   public:
@@ -68,6 +69,7 @@ class VarargTypeNode final: public TypeNode {
 using VarargTypeNodePtr = VarargTypeNode*;
 using VarargTypeNodeUPtr = std::unique_ptr<VarargTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_VARARG_TYPE_NODE_HPP */

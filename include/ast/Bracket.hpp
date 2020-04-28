@@ -5,7 +5,8 @@
 
 #include <memory>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class Bracketed {
   public:
@@ -66,6 +67,7 @@ class Bracketed {
 using BracketedPtr = Bracketed*;
 using BracketedUPtr = std::unique_ptr<Bracketed>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_BRACKETED_HPP */

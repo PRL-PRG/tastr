@@ -6,7 +6,8 @@
 #include <iostream>
 #include <string>
 
-namespace tastr::parser {
+namespace tastr {
+namespace parser {
 
 /// Two points in a source file.
 class Location {
@@ -142,7 +143,8 @@ std::basic_ostream<YYChar>& operator<<(std::basic_ostream<YYChar>& ostr,
     return ostr;
 }
 
-} // namespace tastr::parser
+} // namespace parser
+} // namespace tastr
 
 std::ostream& operator<<(std::ostream& os, const tastr::parser::Location& loc);
 

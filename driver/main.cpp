@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
             exit(1);
         }
 
-        std::filesystem::path filepath(arg);
+        std::string filepath(arg);
         handle_parse_result(
             tastr::parser::parse_file(filepath, debug_lexer, debug_parser));
     }

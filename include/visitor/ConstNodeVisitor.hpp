@@ -3,7 +3,8 @@
 
 #include "ast/ast.hpp"
 
-namespace tastr::visitor {
+namespace tastr {
+namespace visitor {
 
 class ConstNodeVisitor {
   public:
@@ -111,6 +112,7 @@ class ConstNodeVisitor {
     virtual void visit(const tastr::ast::TopLevelNode& node) = 0;
 };
 
-} // namespace tastr::visitor
+} // namespace visitor
+} // namespace tastr
 
 #endif /* TASTR_VISITOR_CONST_NODE_VISITOR_HPP */

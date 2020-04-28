@@ -194,9 +194,11 @@
 
 /* inserted near top of header + source file */
 %code requires {
-    namespace tastr::parser {
-        class Lexer;
-        class ParsingContext;
+    namespace tastr {
+        namespace parser {
+            class Lexer;
+            class ParsingContext;
+        }
     }
     #include "parser/Location.hpp"
     #include "ast/ast.hpp"

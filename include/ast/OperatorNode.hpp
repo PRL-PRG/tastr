@@ -5,7 +5,8 @@
 
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class OperatorNode final: public Node {
   public:
@@ -65,6 +66,7 @@ class OperatorNode final: public Node {
 using OperatorNodePtr = OperatorNode*;
 using OperatorNodeUPtr = std::unique_ptr<OperatorNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_OPERATOR_NODE_HPP */

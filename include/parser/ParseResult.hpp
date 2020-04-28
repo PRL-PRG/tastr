@@ -7,7 +7,8 @@
 #include <iostream>
 #include <string>
 
-namespace tastr::parser {
+namespace tastr {
+namespace parser {
 
 class ParseResult {
   public:
@@ -68,6 +69,7 @@ class ParseResult {
     tastr::ast::TopLevelNodeUPtr node_;
 };
 
-} // namespace tastr::parser
+} // namespace parser
+} // namespace tastr
 
 #endif /* TASTR_PARSER_PARSE_RESULT_HPP */

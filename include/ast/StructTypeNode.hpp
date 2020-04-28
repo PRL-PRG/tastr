@@ -5,7 +5,8 @@
 #include "ast/ParameterNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class StructTypeNode final: public TypeNode {
   public:
@@ -81,6 +82,7 @@ class StructTypeNode final: public TypeNode {
 using StructTypeNodePtr = StructTypeNode*;
 using StructTypeNodeUPtr = std::unique_ptr<StructTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_STRUCT_TYPE_NODE_HPP */

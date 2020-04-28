@@ -3,7 +3,8 @@
 
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class ScalarTypeNode: public TypeNode {
   public:
@@ -48,6 +49,7 @@ class ScalarTypeNode: public TypeNode {
 using ScalarTypeNodePtr = ScalarTypeNode*;
 using ScalarTypeNodeUPtr = std::unique_ptr<ScalarTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_SCALAR_TYPE_NODE_HPP */

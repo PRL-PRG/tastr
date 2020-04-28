@@ -9,15 +9,10 @@
 #include <fstream>
 #include <sstream>
 
-void check_filepath(const std::filesystem::path& filepath) {
-    if (!std::filesystem::exists(filepath)) {
+void check_filepath(const std::string& filepath) {
+    std::ifstream fin(filepath);
+    if (!fin.good()) {
         std::cerr << "Error: path '" << filepath << "' does not exist!";
-        exit(1);
-    }
-
-    if (std::filesystem::is_directory(filepath)) {
-        std::cerr << "Error: expected file, path '" << filepath
-                  << "' is a directory!";
         exit(1);
     }
 }
@@ -57,7 +52,7 @@ void tastr::parser::unparse_string(const tastr::ast::Node& node,
 }
 
 void tastr::parser::unparse_file(const tastr::ast::Node& node,
-                                 const std::filesystem::path& filepath,
+                                 const std::string& filepath,
                                  bool show_ast,
                                  bool style_output) {
     check_filepath(filepath);
@@ -94,11 +89,11 @@ tastr::parser::parse_string(const std::string& string,
 }
 
 tastr::parser::ParseResult
-tastr::parser::parse_file(const std::filesystem::path& filepath,
+tastr::parser::parse_file(const std::string& filepath,
                           bool debug_lexer,
                           bool debug_parser) {
     check_filepath(filepath);
     std::ifstream input_stream(filepath);
-    std::string input_stream_name(filepath.native());
+    std::string input_stream_name(filepath);
     return parse_(input_stream, input_stream_name, debug_lexer, debug_parser);
 }

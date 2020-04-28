@@ -5,7 +5,8 @@
 #include "ast/CommaSeparatorNode.hpp"
 #include "ast/Node.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class ParameterNode final
     : public Node
@@ -144,6 +145,7 @@ class ParameterNode final
 using ParameterNodePtr = ParameterNode*;
 using ParameterNodeUPtr = std::unique_ptr<ParameterNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_PARAMETER_TYPE_NODE_HPP */

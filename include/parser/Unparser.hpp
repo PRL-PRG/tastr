@@ -6,7 +6,8 @@
 
 #include <ostream>
 
-namespace tastr::visitor {
+namespace tastr {
+namespace visitor {
 
 class Unparser final: public ConstNodeVisitor {
   public:
@@ -518,6 +519,7 @@ class Unparser final: public ConstNodeVisitor {
     std::vector<rang::style> style_stack_;
 };
 
-} // namespace tastr::visitor
+} // namespace visitor
+} // namespace tastr
 
 #endif /* TASTR_PARSER_UNPARSER_HPP */

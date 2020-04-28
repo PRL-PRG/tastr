@@ -5,7 +5,8 @@
 
 #include <iostream>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class IdentifierNode final: public Node {
   public:
@@ -88,6 +89,7 @@ class IdentifierNode final: public Node {
 using IdentifierNodePtr = IdentifierNode*;
 using IdentifierNodeUPtr = std::unique_ptr<IdentifierNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_IDENTIFIER_NODE_HPP */

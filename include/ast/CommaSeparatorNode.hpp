@@ -7,7 +7,8 @@
 #include <memory>
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class CommaSeparatorNode final: public Node {
   public:
@@ -98,12 +99,14 @@ class CommaSeparatorNode final: public Node {
         count_t first_node_count = 1;
 
         if (first_node_->is_comma_separator_node()) {
-            first_node_count = as<CommaSeparatorNode>(first_node_.get())->get_node_count();
+            first_node_count =
+                as<CommaSeparatorNode>(first_node_.get())->get_node_count();
         }
 
         count_t second_node_count = 1;
         if (second_node_->is_comma_separator_node()) {
-            second_node_count = as<CommaSeparatorNode>(second_node_.get())->get_node_count();
+            second_node_count =
+                as<CommaSeparatorNode>(second_node_.get())->get_node_count();
         }
 
         node_count_ = first_node_count + second_node_count;
@@ -120,6 +123,7 @@ class CommaSeparatorNode final: public Node {
 using CommaSeparatorNodePtr = CommaSeparatorNode*;
 using CommaSeparatorNodeUPtr = std::unique_ptr<CommaSeparatorNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_COMMA_SEPARATOR_NODE_HPP */

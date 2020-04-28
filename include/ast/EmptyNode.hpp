@@ -5,7 +5,8 @@
 
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class EmptyNode final: public Node {
   public:
@@ -44,7 +45,7 @@ class EmptyNode final: public Node {
     Kind get_kind() const override final {
         return kind_;
     }
-    
+
   private:
     virtual EmptyNode* clone_impl() const override final {
         return new EmptyNode(*this);
@@ -56,6 +57,7 @@ class EmptyNode final: public Node {
 using EmptyNodePtr = EmptyNode*;
 using EmptyNodeUPtr = std::unique_ptr<EmptyNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_EMPTY_NODE_HPP */

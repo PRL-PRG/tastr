@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/ScalarTypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class AScalarTypeNode: public ScalarTypeNode {
   public:
@@ -60,6 +61,7 @@ class AScalarTypeNode: public ScalarTypeNode {
 using AScalarTypeNodePtr = AScalarTypeNode*;
 using AScalarTypeNodeUPtr = std::unique_ptr<AScalarTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_A_SCALAR_TYPE_NODE_HPP */

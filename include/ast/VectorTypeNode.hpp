@@ -7,7 +7,8 @@
 
 #include <memory>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class VectorTypeNode final: public TypeNode {
   public:
@@ -81,6 +82,7 @@ class VectorTypeNode final: public TypeNode {
 using VectorTypeNodePtr = VectorTypeNode*;
 using VectorTypeNodeUPtr = std::unique_ptr<VectorTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_VECTOR_TYPE_NODE_HPP */

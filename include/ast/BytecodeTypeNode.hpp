@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class BytecodeTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class BytecodeTypeNode final: public TypeNode {
 using BytecodeTypeNodePtr = BytecodeTypeNode*;
 using BytecodeTypeNodeUPtr = std::unique_ptr<BytecodeTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_BYTECODE_TYPE_NODE_HPP */

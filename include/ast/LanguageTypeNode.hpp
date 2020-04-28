@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class LanguageTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class LanguageTypeNode final: public TypeNode {
 using LanguageTypeNodePtr = LanguageTypeNode*;
 using LanguageTypeNodeUPtr = std::unique_ptr<LanguageTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_LANGUAGE_TYPE_NODE_HPP */

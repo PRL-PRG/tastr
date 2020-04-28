@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class PairlistTypeNode final: public TypeNode {
   public:
@@ -65,6 +66,7 @@ class PairlistTypeNode final: public TypeNode {
 using PairlistTypeNodePtr = PairlistTypeNode*;
 using PairlistTypeNodeUPtr = std::unique_ptr<PairlistTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_PAIRLIST_TYPE_NODE_HPP */

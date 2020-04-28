@@ -3,7 +3,8 @@
 
 #include "AScalarTypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class IntegerAScalarTypeNode final: public AScalarTypeNode {
   public:
@@ -57,6 +58,7 @@ class IntegerAScalarTypeNode final: public AScalarTypeNode {
 using IntegerAScalarTypeNodePtr = IntegerAScalarTypeNode*;
 using IntegerAScalarTypeNodeUPtr = std::unique_ptr<IntegerAScalarTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_INTEGER_A_SCALAR_TYPE_NODE_HPP */

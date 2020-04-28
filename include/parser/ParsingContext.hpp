@@ -6,7 +6,8 @@
 #include <iostream>
 #include <string>
 
-namespace tastr::parser {
+namespace tastr {
+namespace parser {
 
 class ParsingContext {
   public:
@@ -31,6 +32,7 @@ class ParsingContext {
     ParseResult parse_output_;
 };
 
-} // namespace tastr::parser
+} // namespace parser
+} // namespace tastr
 
 #endif /* TASTR_PARSER_PARSING_CONTEXT_HPP */

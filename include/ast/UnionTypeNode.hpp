@@ -6,7 +6,8 @@
 
 #include <memory>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class UnionTypeNode final: public TypeNode {
   public:
@@ -93,6 +94,7 @@ class UnionTypeNode final: public TypeNode {
 using UnionTypeNodePtr = UnionTypeNode*;
 using UnionTypeNodeUPtr = std::unique_ptr<UnionTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_UNION_TYPE_NODE_HPP */

@@ -5,7 +5,8 @@
 #include "ast/ParameterNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class TupleTypeNode final: public TypeNode {
   public:
@@ -81,6 +82,7 @@ class TupleTypeNode final: public TypeNode {
 using TupleTypeNodePtr = TupleTypeNode*;
 using TupleTypeNodeUPtr = std::unique_ptr<TupleTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_TUPLE_TYPE_NODE_HPP */

@@ -3,7 +3,8 @@
 
 #include "AScalarTypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class ComplexAScalarTypeNode final: public AScalarTypeNode {
   public:
@@ -56,6 +57,8 @@ class ComplexAScalarTypeNode final: public AScalarTypeNode {
 
 using ComplexAScalarTypeNodePtr = ComplexAScalarTypeNode*;
 using ComplexAScalarTypeNodeUPtr = std::unique_ptr<ComplexAScalarTypeNode>;
-} // namespace tastr::ast
+
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_COMPLEX_SCALAR_TYPE_NODE_HPP */

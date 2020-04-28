@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class EnvironmentTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class EnvironmentTypeNode final: public TypeNode {
 using EnvironmentTypeNodePtr = EnvironmentTypeNode*;
 using EnvironmentTypeNodeUPtr = std::unique_ptr<EnvironmentTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_ENVIRONMENT_TYPE_NODE_HPP */

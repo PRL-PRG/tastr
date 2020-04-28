@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 
-namespace tastr::parser {
+namespace tastr {
+namespace parser {
 
 /// A point in a source file.
 class Position {
@@ -103,6 +104,7 @@ std::basic_ostream<YYChar>& operator<<(std::basic_ostream<YYChar>& ostr,
     return ostr << pos.line << '.' << pos.column;
 }
 
-} // namespace tastr::parser
+} // namespace parser
+} // namespace tastr
 
 #endif /* TASTR_PARSER_POSITION_HPP */

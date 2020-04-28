@@ -5,7 +5,8 @@
 
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class SeparatorNode final: public Node {
   public:
@@ -65,6 +66,7 @@ class SeparatorNode final: public Node {
 using SeparatorNodePtr = SeparatorNode*;
 using SeparatorNodeUPtr = std::unique_ptr<SeparatorNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_SEPARATOR_NODE_HPP */

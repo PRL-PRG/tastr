@@ -3,7 +3,8 @@
 
 #include "AScalarTypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class CharacterAScalarTypeNode;
 using CharacterAScalarTypeNodePtr = CharacterAScalarTypeNode*;
@@ -59,6 +60,7 @@ class CharacterAScalarTypeNode final: public AScalarTypeNode {
     static const Kind kind_;
 };
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_CHARACTER_SCALAR_TYPE_NODE_HPP */

@@ -36,7 +36,7 @@ BISONFLAGS := -v
 ARFLAGS := rcs
 CPFLAGS := -R
 
-CXXFLAGS := -O2 -g -ggdb3 -std=c++17
+CXXFLAGS := -O2 -g -ggdb3 -std=c++14
 OBJFLAGS := -c -fPIC $(CXXFLAGS)
 LIBFLAGS := -shared -Wl,-soname,$(LIBNAME).so
 BINFLAGS := $(CXXFLAGS)

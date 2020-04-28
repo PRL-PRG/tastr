@@ -3,7 +3,8 @@
 
 #include "ast/Node.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class TypeNode: public Node {
   public:
@@ -48,6 +49,7 @@ class TypeNode: public Node {
 using TypeNodePtr = TypeNode*;
 using TypeNodeUPtr = std::unique_ptr<TypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_TYPE_NODE_HPP */

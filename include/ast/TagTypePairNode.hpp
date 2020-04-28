@@ -9,7 +9,8 @@
 #include <memory>
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class TagTypePairNode final: public Node {
   public:
@@ -96,6 +97,7 @@ class TagTypePairNode final: public Node {
 using TagTypePairNodePtr = TagTypePairNode*;
 using TagTypePairNodeUPtr = std::unique_ptr<TagTypePairNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_TAG_TYPE_PAIR_NODE_HPP */

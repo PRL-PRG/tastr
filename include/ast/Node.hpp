@@ -6,14 +6,17 @@
 #include <memory>
 #include <ostream>
 
-namespace tastr::visitor {
+namespace tastr {
+namespace visitor {
 
 class ConstNodeVisitor;
 class MutableNodeVisitor;
 
-} // namespace tastr::visitor
+} // namespace visitor
+} // namespace tastr
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class Node {
   public:
@@ -310,7 +313,8 @@ T* as(U* u) {
     return static_cast<T*>(u);
 }
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 std::ostream& operator<<(std::ostream& os, const tastr::ast::Node::Kind& kind);
 

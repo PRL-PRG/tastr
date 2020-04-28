@@ -17,7 +17,8 @@
         tastr::parser::Parser::semantic_type* yylval, \
         tastr::parser::Parser::location_type* yylloc)
 
-namespace tastr::parser {
+namespace tastr {
+namespace parser {
 
 class Lexer: public yyFlexLexer {
   public:
@@ -53,6 +54,7 @@ class Lexer: public yyFlexLexer {
     std::string identifier_;
 };
 
-} // namespace tastr::parser
+} // namespace parser
+} // namespace tastr
 
 #endif /* TASTR_LEXER_HPP */

@@ -4,7 +4,8 @@
 #include "ast/KeywordNode.hpp"
 #include "ast/TypeNode.hpp"
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class SymbolTypeNode final: public TypeNode {
   public:
@@ -66,6 +67,7 @@ class SymbolTypeNode final: public TypeNode {
 using SymbolTypeNodePtr = SymbolTypeNode*;
 using SymbolTypeNodeUPtr = std::unique_ptr<SymbolTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_SYMBOL_TYPE_NODE_HPP */

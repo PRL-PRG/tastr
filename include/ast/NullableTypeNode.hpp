@@ -6,7 +6,8 @@
 
 #include <memory>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class NullableTypeNode final: public TypeNode {
   public:
@@ -80,6 +81,7 @@ class NullableTypeNode final: public TypeNode {
 using NullableTypeNodePtr = NullableTypeNode*;
 using NullableTypeNodeUPtr = std::unique_ptr<NullableTypeNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_NULLABLE_TYPE_NODE_HPP */

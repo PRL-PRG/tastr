@@ -9,7 +9,8 @@
 #include <memory>
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class TypeDeclarationNode final: public Node {
   public:
@@ -107,6 +108,7 @@ class TypeDeclarationNode final: public Node {
 using TypeDeclarationNodePtr = TypeDeclarationNode*;
 using TypeDeclarationNodeUPtr = std::unique_ptr<TypeDeclarationNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_TYPE_DECLARATION_NODE_HPP */

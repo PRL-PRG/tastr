@@ -5,7 +5,8 @@
 
 #include <string>
 
-namespace tastr::ast {
+namespace tastr {
+namespace ast {
 
 class KeywordNode final: public Node {
   public:
@@ -65,6 +66,7 @@ class KeywordNode final: public Node {
 using KeywordNodePtr = KeywordNode*;
 using KeywordNodeUPtr = std::unique_ptr<KeywordNode>;
 
-} // namespace tastr::ast
+} // namespace ast
+} // namespace tastr
 
 #endif /* TASTR_AST_KEYWORD_NODE_HPP */
