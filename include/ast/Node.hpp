@@ -46,6 +46,7 @@ class Node {
         RawAScalarType,
         S4Type,
         Separator,
+        DataFrameType,
         StructType,
         SymbolType,
         TagTypePair,
@@ -163,6 +164,10 @@ class Node {
 
     bool is_na_scalar_type_node() const {
         return get_kind() == Kind::NAScalarType;
+    }
+
+    bool is_data_frame_type_node() const {
+        return get_kind() == Kind::DataFrameType;
     }
 
     bool is_struct_type_node() const {

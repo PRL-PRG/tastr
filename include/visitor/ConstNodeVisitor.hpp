@@ -76,6 +76,8 @@ class ConstNodeVisitor {
 
     virtual void visit(const tastr::ast::WeakReferenceTypeNode& node) = 0;
 
+    virtual void visit(const tastr::ast::DataFrameTypeNode& node) = 0;
+
     virtual void visit(const tastr::ast::AnyTypeNode& node) = 0;
 
     virtual void visit(const tastr::ast::UnknownTypeNode& node) = 0;

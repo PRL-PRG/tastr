@@ -64,6 +64,7 @@
 %token <std::string>                    WEAKREF
 %token <std::string>                    TUPLE
 %token <std::string>                    LIST
+%token <std::string>                    DATAFRAME
 %token <std::string>                    STRUCT
 %token <std::string>                    ANY
 %token <std::string>                    TYPEDECL
@@ -96,6 +97,7 @@
 %nterm <TypeNodePtr>                    nonuniontype
 %nterm <ListTypeNodePtr>                listtype
 %nterm <NodePtr>                        structelements
+%nterm <DataFrameTypeNodePtr>           dataframetype
 %nterm <StructTypeNodePtr>              structtype
 %nterm <NodePtr>                        tupleelements
 %nterm <TupleTypeNodePtr>               tupletype
@@ -135,6 +137,7 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <FunctionTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <GroupTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ListTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <DataFrameTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <StructTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TupleTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <IdentifierNodePtr>;
@@ -168,6 +171,7 @@
 %destructor { delete $$; } grouptype
 %destructor { delete $$; } nonuniontype
 %destructor { delete $$; } listtype
+%destructor { delete $$; } dataframetype
 %destructor { delete $$; } structtype
 %destructor { delete $$; } tupleelements
 %destructor { delete $$; } tupletype
@@ -245,6 +249,8 @@
     using tastr::ast::AScalarTypeNodePtr;
     using tastr::ast::NAScalarTypeNode;
     using tastr::ast::NAScalarTypeNodePtr;
+    using tastr::ast::DataFrameTypeNode;
+    using tastr::ast::DataFrameTypeNodePtr;
     using tastr::ast::StructTypeNode;
     using tastr::ast::StructTypeNodePtr;
     using tastr::ast::TupleTypeNode;
@@ -400,6 +406,9 @@ s4type:             S4                                      {   $$ = create_node
 weakreftype:        WEAKREF                                 {   $$ = create_node_with_keyword<WeakReferenceTypeNode>($1, @1, @$, context); }
            ;
 
+dataframetype:      DATAFRAME                               {   $$ = create_node_with_keyword<DataFrameTypeNode>($1, @1, @$, context); }
+             ;
+
 anytype:            ANY                                     {   $$ = create_node_with_keyword<AnyTypeNode>($1, @1, @$, context); }
        ;
 
@@ -515,6 +524,7 @@ identifier:         INTEGER                                 { $$ = create_identi
           |         TUPLE                                   { $$ = create_identifier($1, false, false, @1, context); }
           |         LIST                                    { $$ = create_identifier($1, false, false, @1, context); }
           |         STRUCT                                  { $$ = create_identifier($1, false, false, @1, context); }
+          |         DATAFRAME                               { $$ = create_identifier($1, false, false, @1, context); }
           |         ANY                                     { $$ = create_identifier($1, false, false, @1, context); }
           |         TYPEDECL                                { $$ = create_identifier($1, false, false, @1, context); }
           |         VARARG                                  { $$ = create_identifier($1, false, false, @1, context); }
@@ -660,6 +670,11 @@ nonuniontype:       scalartype                              {
                                                                 $$ -> set_location(@$);
                                                             }
             |       weakreftype                             {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       dataframetype                           {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

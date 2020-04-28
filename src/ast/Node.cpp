@@ -119,6 +119,10 @@ std::string to_string(const tastr::ast::Node::Kind& kind) {
         return "SeparatorNode";
         break;
 
+    case tastr::ast::Node::Kind::DataFrameType:
+        return "DataFrameTypeNode";
+        break;
+
     case tastr::ast::Node::Kind::StructType:
         return "StructTypeNode";
         break;

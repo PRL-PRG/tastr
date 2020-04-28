@@ -31,6 +31,7 @@
 #include "ast/S4TypeNode.hpp"
 #include "ast/ScalarTypeNode.hpp"
 #include "ast/SeparatorNode.hpp"
+#include "ast/DataFrameTypeNode.hpp"
 #include "ast/StructTypeNode.hpp"
 #include "ast/SymbolTypeNode.hpp"
 #include "ast/TagTypePairNode.hpp"

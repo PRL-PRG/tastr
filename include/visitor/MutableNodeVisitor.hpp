@@ -76,6 +76,8 @@ class MutableNodeVisitor {
 
     virtual void visit(tastr::ast::WeakReferenceTypeNode& node) = 0;
 
+    virtual void visit(tastr::ast::DataFrameTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::AnyTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::UnknownTypeNode& node) = 0;

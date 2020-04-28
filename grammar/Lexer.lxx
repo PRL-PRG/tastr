@@ -43,6 +43,7 @@ WEAKREF             weakref|wrf|w
 TUPLE               tuple|tpl
 LIST                list|lst
 STRUCT              struct|srt
+DATAFRAME           dataframe|df
 ANY                 any|[*]
 UNKNOWN             [?][?][?]
 NULLOP              [?]
@@ -107,6 +108,7 @@ NON_OCT             [^0-7]
 {TUPLE}                     { HANDLE_TOKEN(TOKEN_TUPLE) }
 {LIST}                      { HANDLE_TOKEN(TOKEN_LIST) }
 {STRUCT}                    { HANDLE_TOKEN(TOKEN_STRUCT) }
+{DATAFRAME}                 { HANDLE_TOKEN(TOKEN_DATAFRAME) }
 {ANY}                       { HANDLE_TOKEN(TOKEN_ANY) }
 {UNKNOWN}                   { HANDLE_TOKEN(TOKEN_UNKNOWN) }
 {NULLOP}                    { HANDLE_TOKEN(TOKEN_NULLOP) }
