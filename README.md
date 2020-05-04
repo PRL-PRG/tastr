@@ -154,6 +154,9 @@ Use `--style` flag along with `--ast` to view the ast structure with styling.
          | "wrf"
          | "w"
 
+<dataframe>: "dataframe"
+           | "df"
+
 <any>: "any"
      | "*"
 
@@ -166,17 +169,19 @@ Use `--style` flag along with `--ast` to view the ast structure with styling.
 
 <struct>: "struct" "<" <namedtypeseq> ">"
         | "srt" "<" <namedtypeseq> ">"
+        | "struct" "<" ">"
+        | "srt" "<" ">"
 
 <tuple>: "tuple" "<" <typeseq> ">"
        | "tpl" "<" <typeseq> ">"
-
-
-<function>: <params> "=>" <type>
+       | "tuple" "<" ">"
+       | "tpl" "<" ">"
 
 <typeseq>: <type>
          | <typeseq> "," <type>
 
 <namedtype>: <identifier> ":" <type>
+           | "^" ":" <type>
 
 <namedtypeseq> : <namedtype>
                | <namedtypeseq> "," <namedtype>
@@ -189,7 +194,9 @@ Use `--style` flag along with `--ast` to view the ast structure with styling.
 
 <params>: "<" <paramseq> ">"
         | "<" ">"
+        | "any"
 
+<function>: <params> "=>" <type>
 
 <group>: "(" <type> ")"
 
@@ -203,12 +210,14 @@ Use `--style` flag along with `--ast` to view the ast structure with styling.
           | <pairlist>
           | <s4>
           | <weakref>
+          | <dataframe>
           | <vector>
           | <function>
-          | <list>
           | <struct>
+          | <list>
           | <tuple>
           | <group>
+          | <unknown>
 
 <union>: <nonunion>
        | <union> "|" <nonunion>
@@ -219,7 +228,6 @@ Use `--style` flag along with `--ast` to view the ast structure with styling.
 <type>: <union>
       | <null>
       | <any>
-      | <unknown>
 
 <decl>: "type" <identifier> <type> ";"
 
