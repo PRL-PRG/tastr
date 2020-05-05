@@ -45,7 +45,6 @@
 %token <std::string>                    COLON                ":";
 %token <std::string>                    VARARG               "...";
 %token <std::string>                    UNKNOWN              "???";
-%token <std::string>                    NULLOP               "?";
 %token <std::string>                    NULLVALUE            "null";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
@@ -92,6 +91,7 @@
 %nterm <TypeNodePtr>                    paramtype
 %nterm <NodePtr>                        paramtypeseq
 %nterm <NodePtr>                        params
+%nterm <TypeNodePtr>                    returntype
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonuniontype
@@ -107,7 +107,6 @@
 %nterm <TypeNodePtr>                    type
 %nterm <TypeDeclarationNodePtr>         decltype
 
-%nonassoc NULLOP
 %right ARROW
 %nonassoc COMMA CARET LPAREN LBRACKET LANGLEBRACKET
 %nonassoc LOWER_THAN_OR
@@ -417,6 +416,9 @@ anytype:            ANY                                     {   $$ = create_node
 unknowntype:        UNKNOWN                                 {   $$ = create_node_with_keyword<UnknownTypeNode>($1, @1, @$, context); }
            ;
 
+nulltype:          "null"                                   {   $$ = create_node_with_keyword<NullTypeNode>($1, @1, @$, context); }
+        ;
+
 vectortype:         scalartype "[]"                         {
                                                                 OperatorNodePtr op = create_operator($2, @2, context);
                                                                 $$ = new VectorTypeNode(std::move(wrap(std::move(op))),
@@ -528,6 +530,7 @@ identifier:         INTEGER                                 { $$ = create_identi
           |         STRUCT                                  { $$ = create_identifier($1, false, false, @1, context); }
           |         DATAFRAME                               { $$ = create_identifier($1, false, false, @1, context); }
           |         ANY                                     { $$ = create_identifier($1, false, false, @1, context); }
+          |         NULLVALUE                               { $$ = create_identifier($1, false, false, @1, context); }
           |         TYPEDECL                                { $$ = create_identifier($1, false, false, @1, context); }
           |         VARARG                                  { $$ = create_identifier($1, false, false, @1, context); }
           |         IDENTIFIER                              { $$ = create_identifier($1, false, false, @1, context); }
@@ -607,7 +610,17 @@ params:             "<" paramtypeseq ">"                    {
                                                             }
       ;
 
-functiontype:       params "=>" type                        {
+
+returntype:         nonuniontype                            {
+                                                               $$ = $1;
+                                                               $1 = nullptr;
+                                                            }
+          |         anytype                                 {
+                                                               $$ = $1;
+                                                               $1 = nullptr;
+          ;                                                 }
+
+functiontype:       params "=>" returntype                  {
                                                                 OperatorNodePtr op = create_operator($2, @2, context);
                                                                 $$ = new FunctionTypeNode(std::move(wrap(std::move(op))),
                                                                                           std::move(wrap(std::move($1))),
@@ -625,6 +638,7 @@ grouptype:          "(" type ")"                            {
                                                                 $$ -> set_location(@$);
                                                             }
          ;
+
 
 nonuniontype:       scalartype                              {
                                                                 $$ = $1;
@@ -716,6 +730,11 @@ nonuniontype:       scalartype                              {
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
+            |       nulltype                                {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
             ;
 
 
@@ -734,22 +753,8 @@ uniontype:          nonuniontype                            {
          ;
 
 
-nulltype:          "null"                                   {   $$ = create_node_with_keyword<NullTypeNode>($1, @1, @$, context); }
-        |          "?" uniontype                            {
-                                                                OperatorNodePtr op = create_operator($1, @1, context);
-                                                                $$ = new NullableTypeNode(std::move(wrap(std::move(op))),
-                                                                                          std::move(wrap(std::move($2))));
-                                                                $$ -> set_location(@$);
-                                                            }
-        ;
-
 
 type:               uniontype %prec LOWER_THAN_OR           {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                                $$ -> set_location(@$);
-                                                            }
-    |               nulltype                                {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);

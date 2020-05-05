@@ -46,7 +46,6 @@ STRUCT              struct|srt
 DATAFRAME           dataframe|df
 ANY                 any|[*]
 UNKNOWN             [?][?][?]
-NULLOP              [?]
 NULLVALUE           null
 TYPEDECL            type
 BLANK               [ \t\r]
@@ -111,7 +110,6 @@ NON_OCT             [^0-7]
 {DATAFRAME}                 { HANDLE_TOKEN(TOKEN_DATAFRAME) }
 {ANY}                       { HANDLE_TOKEN(TOKEN_ANY) }
 {UNKNOWN}                   { HANDLE_TOKEN(TOKEN_UNKNOWN) }
-{NULLOP}                    { HANDLE_TOKEN(TOKEN_NULLOP) }
 {NULLVALUE}                 { HANDLE_TOKEN(TOKEN_NULLVALUE) }
 {TYPEDECL}                  { HANDLE_TOKEN(TOKEN_TYPEDECL) }
 {IDENTIFIER}                { HANDLE_TOKEN(TOKEN_IDENTIFIER) }

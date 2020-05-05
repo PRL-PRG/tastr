@@ -1,3 +1,3 @@
 type f null;
-type f ? ???;
-type f ? int | chr | dbl;
+type f null | ???;
+type f null | int | chr | dbl;

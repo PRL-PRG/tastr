@@ -394,8 +394,8 @@ int yyFlexLexer::yylex()
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
 	(yy_c_buf_p) = yy_cp;
 /* %% [4.0] data tables for the DFA and the user's section 1 definitions go here */
-#define YY_NUM_RULES 62
-#define YY_END_OF_BUFFER 63
+#define YY_NUM_RULES 61
+#define YY_END_OF_BUFFER 62
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -405,30 +405,30 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[214] =
     {   0,
-        0,    0,    0,    0,    0,    0,   63,   61,    1,    2,
-        3,   11,   13,   43,    9,   48,   22,   21,   15,   61,
-       16,   45,   48,   61,   61,    7,   49,   48,   35,   48,
-       25,   31,   32,   24,   28,   48,   34,   29,   27,   30,
-       38,   26,   33,   61,    6,   61,   60,   60,   50,    5,
-        4,    1,    2,   10,   12,   48,   48,    8,    0,   18,
-       14,   17,   48,   48,   48,   48,   48,   48,   48,   48,
-       42,   48,   48,   48,   48,   48,   48,   48,   48,   48,
-       48,   48,   48,   48,   48,   48,   37,   48,   48,   48,
-       48,   48,   48,   48,   48,   19,   20,    0,   58,   59,
+        0,    0,    0,    0,    0,    0,   62,   60,    1,    2,
+        3,   11,   13,   43,    9,   47,   22,   21,   15,   60,
+       16,   60,   47,   60,   60,    7,   48,   47,   35,   47,
+       25,   31,   32,   24,   28,   47,   34,   29,   27,   30,
+       38,   26,   33,   60,    6,   60,   59,   59,   49,    5,
+        4,    1,    2,   10,   12,   47,   47,    8,    0,   18,
+       14,   17,   47,   47,   47,   47,   47,   47,   47,   47,
+       42,   47,   47,   47,   47,   47,   47,   47,   47,   47,
+       47,   47,   47,   47,   47,   47,   37,   47,   47,   47,
+       47,   47,   47,   47,   47,   19,   20,    0,   57,   58,
 
-       57,    0,   23,   44,   43,   35,   48,   48,   27,   26,
-       48,   48,   25,   48,   30,   34,   48,   31,   48,   24,
-       48,   28,   48,   32,   48,   40,   48,   48,   36,   29,
-       41,   48,   33,   39,   48,   48,   48,   38,   51,    0,
-       56,    0,   48,   48,   48,   48,   48,   48,   48,   48,
-       48,   48,   48,   46,   48,   48,   48,   48,   47,   48,
-       52,   53,   54,   55,   48,   48,   48,   48,   48,   48,
-       48,   48,   48,   48,   48,   48,   48,   48,   48,   48,
-       48,   48,   48,   48,   48,   48,   48,   48,   48,   48,
-       33,   48,   48,   48,   48,   48,   48,   48,   24,   48,
+       56,    0,   23,   44,   43,   35,   47,   47,   27,   26,
+       47,   47,   25,   47,   30,   34,   47,   31,   47,   24,
+       47,   28,   47,   32,   47,   40,   47,   47,   36,   29,
+       41,   47,   33,   39,   47,   47,   47,   38,   50,    0,
+       55,    0,   47,   47,   47,   47,   47,   47,   47,   47,
+       47,   47,   47,   45,   47,   47,   47,   47,   46,   47,
+       51,   52,   53,   54,   47,   47,   47,   47,   47,   47,
+       47,   47,   47,   47,   47,   47,   47,   47,   47,   47,
+       47,   47,   47,   47,   47,   47,   47,   47,   47,   47,
+       33,   47,   47,   47,   47,   47,   47,   47,   24,   47,
 
-       48,   48,   48,   48,   48,   48,   48,   48,   48,   48,
-       48,   30,    0
+       47,   47,   47,   47,   47,   47,   47,   47,   47,   47,
+       47,   30,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -605,15 +605,14 @@ static const flex_int16_t yy_chk[310] =
       213,  213,  213,  213,  213,  213,  213,  213,  213
     } ;
 
-static const flex_int16_t yy_rule_linenum[62] =
+static const flex_int16_t yy_rule_linenum[61] =
     {   0,
-       69,   70,   71,   73,   74,   76,   77,   78,   79,   80,
-       81,   82,   83,   84,   85,   86,   87,   88,   89,   90,
-       91,   92,   93,   94,   95,   96,   97,   98,   99,  100,
-      101,  102,  103,  104,  105,  106,  107,  108,  109,  110,
-      111,  112,  113,  114,  115,  116,  117,  118,  119,  121,
-      122,  123,  124,  126,  127,  128,  130,  131,  152,  153,
-      156
+       68,   69,   70,   72,   73,   75,   76,   77,   78,   79,
+       80,   81,   82,   83,   84,   85,   86,   87,   88,   89,
+       90,   91,   92,   93,   94,   95,   96,   97,   98,   99,
+      100,  101,  102,  103,  104,  105,  106,  107,  108,  109,
+      110,  111,  112,  113,  114,  115,  116,  117,  119,  120,
+      121,  122,  124,  125,  126,  128,  129,  150,  151,  154
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -641,9 +640,9 @@ static const flex_int16_t yy_rule_linenum[62] =
         yylval->build<std::string>(extract_identifier());             \
         return tastr::parser::Parser::token::TOKEN_QUOTED_IDENTIFIER;
 
-#line 644 "Lexer.cxx"
+#line 643 "Lexer.cxx"
 
-#line 646 "Lexer.cxx"
+#line 645 "Lexer.cxx"
 
 #define INITIAL 0
 #define quoted_identifier 1
@@ -837,16 +836,16 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 61 "Lexer.lxx"
+#line 60 "Lexer.lxx"
 
 
 
-#line 65 "Lexer.lxx"
+#line 64 "Lexer.lxx"
     /* Code run each time yylex is called. */
     yylloc -> step();
 
 
-#line 849 "Lexer.cxx"
+#line 848 "Lexer.cxx"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -904,12 +903,12 @@ do_action:	/* This label is used only to access EOF actions. */
 			{
 			if ( yy_act == 0 )
 				std::cerr << "--scanner backing up\n";
-			else if ( yy_act < 62 )
+			else if ( yy_act < 61 )
 				std::cerr << "--accepting rule at line " << yy_rule_linenum[yy_act] <<
 				         "(\"" << yytext << "\")\n";
-			else if ( yy_act == 62 )
+			else if ( yy_act == 61 )
 				std::cerr << "--accepting default rule (\"" << yytext << "\")\n";
-			else if ( yy_act == 63 )
+			else if ( yy_act == 62 )
 				std::cerr << "--(end of buffer or a NUL)\n";
 			else
 				std::cerr << "--EOF (start condition " << YY_START << ")\n";
@@ -927,301 +926,296 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 69 "Lexer.lxx"
+#line 68 "Lexer.lxx"
 { yylloc -> step(); yylloc -> append_prefix(yytext); }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 70 "Lexer.lxx"
+#line 69 "Lexer.lxx"
 { yylloc -> lines(yyleng); yylloc -> step(); yylloc -> append_prefix(yytext); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 71 "Lexer.lxx"
+#line 70 "Lexer.lxx"
 { BEGIN(comment); yylloc -> append_prefix(yytext); }
 	YY_BREAK
 
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 73 "Lexer.lxx"
+#line 72 "Lexer.lxx"
 { BEGIN(INITIAL); yylloc -> lines(yyleng); yylloc -> step(); yylloc -> append_prefix(yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 74 "Lexer.lxx"
+#line 73 "Lexer.lxx"
 { yylloc -> step(); yylloc -> append_prefix(yytext); }
 	YY_BREAK
 
 case 6:
 YY_RULE_SETUP
-#line 76 "Lexer.lxx"
+#line 75 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_OR) }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 77 "Lexer.lxx"
+#line 76 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_CARET) }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 78 "Lexer.lxx"
+#line 77 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_ARROW) }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 79 "Lexer.lxx"
+#line 78 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_COMMA) }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 80 "Lexer.lxx"
+#line 79 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE_LPAREN) }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 81 "Lexer.lxx"
+#line 80 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_LPAREN) }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 82 "Lexer.lxx"
+#line 81 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE_RPAREN) }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 83 "Lexer.lxx"
+#line 82 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_RPAREN) }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 84 "Lexer.lxx"
+#line 83 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_VECTOR_BRACKET) }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 85 "Lexer.lxx"
+#line 84 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_LANGLEBRACKET) }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 86 "Lexer.lxx"
+#line 85 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_RANGLEBRACKET) }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 87 "Lexer.lxx"
+#line 86 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE_RBRACKET) }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 88 "Lexer.lxx"
+#line 87 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE_LBRACKET) }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 89 "Lexer.lxx"
+#line 88 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE_LBRACE) }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 90 "Lexer.lxx"
+#line 89 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE_RBRACE) }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 91 "Lexer.lxx"
+#line 90 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_SEMICOLON) }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 92 "Lexer.lxx"
+#line 91 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_COLON) }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 93 "Lexer.lxx"
+#line 92 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_VARARG) }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 94 "Lexer.lxx"
+#line 93 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_INTEGER) }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 95 "Lexer.lxx"
+#line 94 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DOUBLE) }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 96 "Lexer.lxx"
+#line 95 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_COMPLEX) }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 97 "Lexer.lxx"
+#line 96 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_CHARACTER) }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 98 "Lexer.lxx"
+#line 97 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_LOGICAL) }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 99 "Lexer.lxx"
+#line 98 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_RAW) }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 100 "Lexer.lxx"
+#line 99 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_ENVIRONMENT) }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 101 "Lexer.lxx"
+#line 100 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_EXPRESSION) }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 102 "Lexer.lxx"
+#line 101 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_LANGUAGE) }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 103 "Lexer.lxx"
+#line 102 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_SYMBOL) }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 104 "Lexer.lxx"
+#line 103 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_EXTERNALPOINTER) }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 105 "Lexer.lxx"
+#line 104 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_BYTECODE) }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 106 "Lexer.lxx"
+#line 105 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_PAIRLIST) }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 107 "Lexer.lxx"
+#line 106 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_S4) }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 108 "Lexer.lxx"
+#line 107 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_WEAKREF) }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 109 "Lexer.lxx"
+#line 108 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_TUPLE) }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 110 "Lexer.lxx"
+#line 109 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_LIST) }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 111 "Lexer.lxx"
+#line 110 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_STRUCT) }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 112 "Lexer.lxx"
+#line 111 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_DATAFRAME) }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 113 "Lexer.lxx"
+#line 112 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_ANY) }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 114 "Lexer.lxx"
+#line 113 "Lexer.lxx"
 { HANDLE_TOKEN(TOKEN_UNKNOWN) }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 115 "Lexer.lxx"
-{ HANDLE_TOKEN(TOKEN_NULLOP) }
+#line 114 "Lexer.lxx"
+{ HANDLE_TOKEN(TOKEN_NULLVALUE) }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 116 "Lexer.lxx"
-{ HANDLE_TOKEN(TOKEN_NULLVALUE) }
+#line 115 "Lexer.lxx"
+{ HANDLE_TOKEN(TOKEN_TYPEDECL) }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 117 "Lexer.lxx"
-{ HANDLE_TOKEN(TOKEN_TYPEDECL) }
+#line 116 "Lexer.lxx"
+{ HANDLE_TOKEN(TOKEN_IDENTIFIER) }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 118 "Lexer.lxx"
-{ HANDLE_TOKEN(TOKEN_IDENTIFIER) }
-	YY_BREAK
-case 49:
-YY_RULE_SETUP
-#line 119 "Lexer.lxx"
+#line 117 "Lexer.lxx"
 { BEGIN(quoted_identifier); }
 	YY_BREAK
 
-case 50:
+case 49:
 YY_RULE_SETUP
-#line 121 "Lexer.lxx"
+#line 119 "Lexer.lxx"
 { BEGIN(INITIAL); HANDLE_QUOTED_IDENTIFIER() }
+	YY_BREAK
+case 50:
+/* rule 50 can match eol */
+YY_RULE_SETUP
+#line 120 "Lexer.lxx"
+{ throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 122 "Lexer.lxx"
+#line 121 "Lexer.lxx"
 { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
 	YY_BREAK
 case 52:
-/* rule 52 can match eol */
 YY_RULE_SETUP
-#line 123 "Lexer.lxx"
+#line 122 "Lexer.lxx"
 { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
 	YY_BREAK
 case 53:
+/* rule 53 can match eol */
 YY_RULE_SETUP
 #line 124 "Lexer.lxx"
 { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
 	YY_BREAK
 case 54:
-/* rule 54 can match eol */
 YY_RULE_SETUP
-#line 126 "Lexer.lxx"
+#line 125 "Lexer.lxx"
 { throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
 	YY_BREAK
 case 55:
+/* rule 55 can match eol */
 YY_RULE_SETUP
-#line 127 "Lexer.lxx"
-{ throw tastr::parser::Parser::syntax_error(*yylloc, "null character not allowed: " + std::string(yytext)); }
+#line 126 "Lexer.lxx"
+{ throw tastr::parser::Parser::syntax_error(*yylloc, "\\x used without hex digits: " + std::string(yytext)); }
 	YY_BREAK
 case 56:
-/* rule 56 can match eol */
 YY_RULE_SETUP
 #line 128 "Lexer.lxx"
-{ throw tastr::parser::Parser::syntax_error(*yylloc, "\\x used without hex digits: " + std::string(yytext)); }
+{ throw tastr::parser::Parser::syntax_error(*yylloc, "\\uxxxx sequences not supported inside backticks: " + std::string(yytext)); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 130 "Lexer.lxx"
-{ throw tastr::parser::Parser::syntax_error(*yylloc, "\\uxxxx sequences not supported inside backticks: " + std::string(yytext)); }
-	YY_BREAK
-case 58:
-YY_RULE_SETUP
-#line 131 "Lexer.lxx"
+#line 129 "Lexer.lxx"
 { throw tastr::parser::Parser::syntax_error(*yylloc, "\\Uxxxxxxxx sequences not supported inside backticks: " + std::string(yytext)); }
 	YY_BREAK
 /*
@@ -1244,21 +1238,21 @@ YY_RULE_SETUP
     \\'                         { get_identifier().append("\\'");  }
     \\\"                        { get_identifier().append("\\\""); }
     */
-case 59:
+case 58:
 YY_RULE_SETUP
-#line 152 "Lexer.lxx"
+#line 150 "Lexer.lxx"
 { get_identifier().append("\\`");  }
 	YY_BREAK
-case 60:
-/* rule 60 can match eol */
+case 59:
+/* rule 59 can match eol */
 YY_RULE_SETUP
-#line 153 "Lexer.lxx"
+#line 151 "Lexer.lxx"
 { get_identifier().append(yytext); }
 	YY_BREAK
 
-case 61:
+case 60:
 YY_RULE_SETUP
-#line 156 "Lexer.lxx"
+#line 154 "Lexer.lxx"
 {
                                 throw tastr::parser::Parser::syntax_error(*yylloc, "invalid character: " + std::string(yytext));
                             }
@@ -1266,15 +1260,15 @@ YY_RULE_SETUP
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(quoted_identifier):
 case YY_STATE_EOF(comment):
-#line 159 "Lexer.lxx"
+#line 157 "Lexer.lxx"
 return tastr::parser::Parser::token::TOKEN_EOF;
 	YY_BREAK
-case 62:
+case 61:
 YY_RULE_SETUP
-#line 160 "Lexer.lxx"
+#line 158 "Lexer.lxx"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1277 "Lexer.cxx"
+#line 1271 "Lexer.cxx"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2390,7 +2384,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 160 "Lexer.lxx"
+#line 158 "Lexer.lxx"
 
 
 /* REFERENCE: https://coldfix.eu/2015/05/16/bison-c++11/ */
