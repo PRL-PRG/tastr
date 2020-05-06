@@ -59,6 +59,8 @@ class MutableNodeVisitor {
 
     virtual void visit(tastr::ast::VectorTypeNode& node) = 0;
 
+    virtual void visit(tastr::ast::ClassTypeNode& node) = 0;
+
     virtual void visit(tastr::ast::EnvironmentTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::ExpressionTypeNode& node) = 0;
@@ -98,6 +100,8 @@ class MutableNodeVisitor {
     virtual void visit(tastr::ast::GroupTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::UnionTypeNode& node) = 0;
+
+    virtual void visit(tastr::ast::IntersectionTypeNode& node) = 0;
 
     virtual void visit(tastr::ast::VarargTypeNode& node) = 0;
 

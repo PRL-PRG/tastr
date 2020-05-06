@@ -35,6 +35,10 @@ std::string to_string(const tastr::ast::Node::Kind& kind) {
         return "EmptyNode";
         break;
 
+    case tastr::ast::Node::Kind::ClassType:
+        return "ClassTypeNode";
+        break;
+
     case tastr::ast::Node::Kind::EnvironmentType:
         return "EnvironmentTypeNode";
         break;
@@ -153,6 +157,10 @@ std::string to_string(const tastr::ast::Node::Kind& kind) {
 
     case tastr::ast::Node::Kind::UnionType:
         return "UnionTypeNode";
+        break;
+
+    case tastr::ast::Node::Kind::IntersectionType:
+        return "IntersectionTypeNode";
         break;
 
     case tastr::ast::Node::Kind::UnknownType:

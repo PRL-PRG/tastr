@@ -94,8 +94,7 @@
 %nterm <TypeNodePtr>                    paramtype
 %nterm <NodePtr>                        paramtypeseq
 %nterm <NodePtr>                        params
-%nterm <TypeNodePtr>                    returntype
-%nterm <FunctionTypeNodePtr>            functiontype
+%nterm <TypeNodePtr>                    functiontype
 %nterm <GroupTypeNodePtr>               grouptype
 %nterm <TypeNodePtr>                    nonconnectivetype
 %nterm <ListTypeNodePtr>                listtype
@@ -110,13 +109,6 @@
 %nterm <TypeNodePtr>                    nulltype
 %nterm <TypeNodePtr>                    type
 %nterm <TypeDeclarationNodePtr>         decltype
-
-%left OR
-%nonassoc ARROW
-%left AND
-%nonassoc COMMA CARET LPAREN LBRACKET LANGLEBRACKET
-%nonassoc LOWER_THAN_OR
-
 
 %start start;
 
@@ -139,7 +131,6 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <VectorTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <NodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <TagTypePairNodePtr>;
-%printer { yyo << tastr::parser::to_string(*$$); } <FunctionTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <GroupTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ListTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <DataFrameTypeNodePtr>;
@@ -632,24 +623,6 @@ params:             "<" paramtypeseq ">"                    {
       ;
 
 
-returntype:         intersectiontype                        {
-                                                               $$ = $1;
-                                                               $1 = nullptr;
-                                                            }
-          |         anytype                                 {
-                                                               $$ = $1;
-                                                               $1 = nullptr;
-          ;                                                 }
-
-functiontype:       params "=>" returntype                  {
-                                                                OperatorNodePtr op = create_operator($2, @2, context);
-                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move(op))),
-                                                                                          std::move(wrap(std::move($1))),
-                                                                                          std::move(wrap(std::move($3))));
-                                                                $$ -> set_location(@$);
-                                                            }
-            ;
-
 grouptype:          "(" type ")"                            {
                                                                 OperatorNodePtr right = create_operator($3, @3, context);
                                                                 OperatorNodePtr left = create_operator($1, @1, context);
@@ -726,11 +699,6 @@ nonconnectivetype:  scalartype                              {
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-                 |  functiontype                            {
-                                                                $$ = $1;
-                                                                $1 = nullptr;
-                                                                $$ -> set_location(@$);
-                                                            }
                  |  structtype                              {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
@@ -779,13 +747,35 @@ intersectiontype:   nonconnectivetype                       {
                                                             }
                 ;
 
-uniontype:          intersectiontype                        {
+functiontype:       intersectiontype                        {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
 
-         |          uniontype OR intersectiontype           {
+            |       params "=>" functiontype                {
+                                                                OperatorNodePtr op = create_operator($2, @2, context);
+                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move(op))),
+                                                                                          std::move(wrap(std::move($1))),
+                                                                                          std::move(wrap(std::move($3))));
+                                                                $$ -> set_location(@$);
+                                                            }
+            |       params "=>" anytype                     {
+                                                                OperatorNodePtr op = create_operator($2, @2, context);
+                                                                $$ = new FunctionTypeNode(std::move(wrap(std::move(op))),
+                                                                                          std::move(wrap(std::move($1))),
+                                                                                          std::move(wrap(std::move($3))));
+                                                                $$ -> set_location(@$);
+                                                            }
+            ;
+
+uniontype:          functiontype                            {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+
+         |          uniontype OR functiontype               {
                                                                 OperatorNodePtr op = create_operator($2, @2, context);
                                                                 $$ = new UnionTypeNode(std::move(wrap(std::move(op))),
                                                                                        std::move(wrap(std::move($1))),

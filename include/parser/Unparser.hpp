@@ -151,6 +151,14 @@ class Unparser final: public ConstNodeVisitor {
         });
     }
 
+    void visit(const tastr::ast::ClassTypeNode& node) override final {
+        visit_(node.get_location());
+        ast_(node, [this, &node] {
+            node.get_operator().accept(*this);
+            node.get_identifier().accept(*this);
+        });
+    }
+
     void visit(const tastr::ast::EnvironmentTypeNode& node) override final {
         visit_(node.get_location());
         ast_(node, [this, &node] { visit(node.get_keyword()); });
@@ -280,6 +288,17 @@ class Unparser final: public ConstNodeVisitor {
     }
 
     void visit(const tastr::ast::UnionTypeNode& node) override final {
+        visit_(node.get_location());
+        ast_(node, [this, &node] {
+            node.get_first_type().accept(*this);
+            format_ast_view(" ");
+            visit(node.get_operator());
+            format_ast_view(" ");
+            node.get_second_type().accept(*this);
+        });
+    }
+
+    void visit(const tastr::ast::IntersectionTypeNode& node) override final {
         visit_(node.get_location());
         ast_(node, [this, &node] {
             node.get_first_type().accept(*this);

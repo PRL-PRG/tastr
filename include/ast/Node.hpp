@@ -61,7 +61,9 @@ class Node {
         UnknownType,
         VarargType,
         VectorType,
-        WeakReferenceType
+        WeakReferenceType,
+        ClassType,
+        IntersectionType
     };
 
     using count_t = int;
