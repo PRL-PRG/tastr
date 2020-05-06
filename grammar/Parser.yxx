@@ -29,6 +29,7 @@
 %token <std::string>                    OR                   "|";
 %token <std::string>                    CARET                "^";
 %token <std::string>                    ARROW                "=>";
+%token <std::string>                    AND                  "&";
 %token <std::string>                    COMMA                ",";
 %token <std::string>                    DOUBLE_LPAREN        "((";
 %token <std::string>                    LPAREN               "(";
@@ -46,6 +47,7 @@
 %token <std::string>                    VARARG               "...";
 %token <std::string>                    UNKNOWN              "???";
 %token <std::string>                    NULLVALUE            "null";
+%token <std::string>                    DOLLAR               "$";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
 %token <std::string>                    COMPLEX
@@ -73,6 +75,7 @@
 %nterm <RawAScalarTypeNodePtr>          rawascalartype
 %nterm <NAScalarTypeNodePtr>            nascalartype
 %nterm <ScalarTypeNodePtr>              scalartype
+%nterm <ClassTypeNodePtr>               classtype
 %nterm <EnvironmentTypeNodePtr>         environmenttype
 %nterm <ExpressionTypeNodePtr>          expressiontype
 %nterm <LanguageTypeNodePtr>            languagetype
@@ -94,7 +97,7 @@
 %nterm <TypeNodePtr>                    returntype
 %nterm <FunctionTypeNodePtr>            functiontype
 %nterm <GroupTypeNodePtr>               grouptype
-%nterm <TypeNodePtr>                    nonuniontype
+%nterm <TypeNodePtr>                    nonconnectivetype
 %nterm <ListTypeNodePtr>                listtype
 %nterm <NodePtr>                        structelements
 %nterm <DataFrameTypeNodePtr>           dataframetype
@@ -103,14 +106,16 @@
 %nterm <TupleTypeNodePtr>               tupletype
 %nterm <IdentifierNodePtr>              identifier
 %nterm <TypeNodePtr>                    uniontype
+%nterm <TypeNodePtr>                    intersectiontype
 %nterm <TypeNodePtr>                    nulltype
 %nterm <TypeNodePtr>                    type
 %nterm <TypeDeclarationNodePtr>         decltype
 
-%right ARROW
+%left OR
+%nonassoc ARROW
+%left AND
 %nonassoc COMMA CARET LPAREN LBRACKET LANGLEBRACKET
 %nonassoc LOWER_THAN_OR
-%left OR
 
 
 %start start;
@@ -119,6 +124,7 @@
 %printer { yyo << tastr::parser::to_string(*$$); } <AScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <NAScalarTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ScalarTypeNodePtr>;
+%printer { yyo << tastr::parser::to_string(*$$); } <ClassTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <EnvironmentTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <ExpressionTypeNodePtr>;
 %printer { yyo << tastr::parser::to_string(*$$); } <LanguageTypeNodePtr>;
@@ -148,6 +154,7 @@
 %destructor { delete $$; } ascalartype
 %destructor { delete $$; } nascalartype
 %destructor { delete $$; } scalartype
+%destructor { delete $$; } classtype
 %destructor { delete $$; } environmenttype
 %destructor { delete $$; } expressiontype
 %destructor { delete $$; } languagetype
@@ -168,7 +175,7 @@
 %destructor { delete $$; } params
 %destructor { delete $$; } functiontype
 %destructor { delete $$; } grouptype
-%destructor { delete $$; } nonuniontype
+%destructor { delete $$; } nonconnectivetype
 %destructor { delete $$; } listtype
 %destructor { delete $$; } dataframetype
 %destructor { delete $$; } structtype
@@ -176,6 +183,7 @@
 %destructor { delete $$; } tupletype
 %destructor { delete $$; } identifier
 %destructor { delete $$; } uniontype
+%destructor { delete $$; } intersectiontype
 %destructor { delete $$; } nulltype
 %destructor { delete $$; } type
 %destructor { delete $$; } decltype
@@ -213,6 +221,8 @@
     using tastr::ast::DoubleAScalarTypeNode;
     using tastr::ast::ExpressionTypeNode;
     using tastr::ast::ExpressionTypeNodePtr;
+    using tastr::ast::ClassTypeNode;
+    using tastr::ast::ClassTypeNodePtr;
     using tastr::ast::EnvironmentTypeNode;
     using tastr::ast::EnvironmentTypeNodePtr;
     using tastr::ast::LanguageTypeNode;
@@ -260,6 +270,8 @@
     using tastr::ast::TypeNodePtr;
     using tastr::ast::UnionTypeNode;
     using tastr::ast::UnionTypeNodePtr;
+    using tastr::ast::IntersectionTypeNode;
+    using tastr::ast::IntersectionTypeNodePtr;
     using tastr::ast::VectorTypeNode;
     using tastr::ast::VectorTypeNodePtr;
     using tastr::ast::TypeDeclarationNode;
@@ -379,6 +391,15 @@ scalartype:         ascalartype                             {
                                                                 $$ -> set_location(@$);
                                                             }
           ;
+
+
+classtype:          "$" identifier                          {
+                                                                OperatorNodePtr op = create_operator($1, @1, context);
+                                                                $$ = new ClassTypeNode(std::move(wrap(std::move(op))),
+                                                                                       std::move(wrap(std::move($2))));
+                                                                $$ -> set_location(@$);
+                                                            }
+         ;
 
 environmenttype:    ENVIRONMENT                             {   $$ = create_node_with_keyword<EnvironmentTypeNode>($1, @1, @$, context); }
                ;
@@ -611,7 +632,7 @@ params:             "<" paramtypeseq ">"                    {
       ;
 
 
-returntype:         nonuniontype                            {
+returntype:         intersectiontype                        {
                                                                $$ = $1;
                                                                $1 = nullptr;
                                                             }
@@ -640,110 +661,131 @@ grouptype:          "(" type ")"                            {
          ;
 
 
-nonuniontype:       scalartype                              {
+nonconnectivetype:  scalartype                              {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       environmenttype                         {
+                 |  classtype                               {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       expressiontype                          {
+                 |  environmenttype                         {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       languagetype                            {
+                 |  expressiontype                          {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       symboltype                              {
+                 |  languagetype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       externalptrtype                         {
+                 |  symboltype                              {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       bytecodetype                            {
+                 |  externalptrtype                         {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       pairlisttype                            {
+                 |  bytecodetype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       s4type                                  {
+                 |  pairlisttype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       weakreftype                             {
+                 |  s4type                                  {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       dataframetype                           {
+                 |  weakreftype                             {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       vectortype                              {
+                 |  dataframetype                           {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       functiontype                            {
+                 |  vectortype                              {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       structtype                              {
+                 |  functiontype                            {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       listtype                                {
+                 |  structtype                              {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       tupletype                               {
+                 |  listtype                                {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       grouptype                               {
+                 |  tupletype                               {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       unknowntype                             {
+                 |  grouptype                               {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            |       nulltype                                {
+                 |  unknowntype                             {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-            ;
+                 |  nulltype                                {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+                 ;
 
 
-uniontype:          nonuniontype                            {
+intersectiontype:   nonconnectivetype                       {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
                                                             }
-         |          uniontype OR nonuniontype               {
+
+                |   intersectiontype AND nonconnectivetype  {
+                                                                OperatorNodePtr op = create_operator($2, @2, context);
+                                                                $$ = new IntersectionTypeNode(std::move(wrap(std::move(op))),
+                                                                                              std::move(wrap(std::move($1))),
+                                                                                              std::move(wrap(std::move($3))));
+                                                                $$ -> set_location(@$);
+                                                            }
+                ;
+
+uniontype:          intersectiontype                        {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                                $$ -> set_location(@$);
+                                                            }
+
+         |          uniontype OR intersectiontype           {
                                                                 OperatorNodePtr op = create_operator($2, @2, context);
                                                                 $$ = new UnionTypeNode(std::move(wrap(std::move(op))),
                                                                                        std::move(wrap(std::move($1))),
@@ -752,9 +794,7 @@ uniontype:          nonuniontype                            {
                                                             }
          ;
 
-
-
-type:               uniontype %prec LOWER_THAN_OR           {
+type:               uniontype /*%prec LOWER_THAN_OR*/           {
                                                                 $$ = $1;
                                                                 $1 = nullptr;
                                                                 $$ -> set_location(@$);
