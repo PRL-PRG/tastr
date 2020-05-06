@@ -70,4 +70,4 @@ using DataFrameTypeNodeUPtr = std::unique_ptr<DataFrameTypeNode>;
 } // namespace ast
 } // namespace tastr
 
-#endif /* TASTR_AST_DATA_FRAM_TYPE_NODE_HPP */
+#endif /* TASTR_AST_DATA_FRAME_TYPE_NODE_HPP */
