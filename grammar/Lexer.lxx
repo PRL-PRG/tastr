@@ -89,7 +89,7 @@ NON_OCT             [^0-7]
 ";"                         { HANDLE_TOKEN(TOKEN_SEMICOLON) }
 ":"                         { HANDLE_TOKEN(TOKEN_COLON) }
 "..."                       { HANDLE_TOKEN(TOKEN_VARARG) }
-"$"                         { HANDLE_TOKEN(TOKEN_DOLLAR); }
+"class"                     { HANDLE_TOKEN(TOKEN_CLASS); }
 "&"                         { HANDLE_TOKEN(TOKEN_AND); }
 {INTEGER}                   { HANDLE_TOKEN(TOKEN_INTEGER) }
 {DOUBLE}                    { HANDLE_TOKEN(TOKEN_DOUBLE) }

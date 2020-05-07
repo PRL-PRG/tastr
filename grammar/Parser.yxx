@@ -47,7 +47,7 @@
 %token <std::string>                    VARARG               "...";
 %token <std::string>                    UNKNOWN              "???";
 %token <std::string>                    NULLVALUE            "null";
-%token <std::string>                    DOLLAR               "$";
+%token <std::string>                    CLASS                "class";
 %token <std::string>                    INTEGER
 %token <std::string>                    DOUBLE
 %token <std::string>                    COMPLEX
@@ -75,6 +75,7 @@
 %nterm <RawAScalarTypeNodePtr>          rawascalartype
 %nterm <NAScalarTypeNodePtr>            nascalartype
 %nterm <ScalarTypeNodePtr>              scalartype
+%nterm <NodePtr>                        classnameseq
 %nterm <ClassTypeNodePtr>               classtype
 %nterm <EnvironmentTypeNodePtr>         environmenttype
 %nterm <ExpressionTypeNodePtr>          expressiontype
@@ -145,6 +146,7 @@
 %destructor { delete $$; } ascalartype
 %destructor { delete $$; } nascalartype
 %destructor { delete $$; } scalartype
+%destructor { delete $$; } classnameseq
 %destructor { delete $$; } classtype
 %destructor { delete $$; } environmenttype
 %destructor { delete $$; } expressiontype
@@ -384,10 +386,30 @@ scalartype:         ascalartype                             {
           ;
 
 
-classtype:          "$" identifier                          {
-                                                                OperatorNodePtr op = create_operator($1, @1, context);
-                                                                $$ = new ClassTypeNode(std::move(wrap(std::move(op))),
-                                                                                       std::move(wrap(std::move($2))));
+classnameseq:       identifier                              {
+                                                                $$ = $1;
+                                                                $1 = nullptr;
+                                                            }
+            |       classnameseq "," identifier             {
+                                                                SeparatorNodePtr op = create_separator($2, @2, context);
+                                                                $$ = new CommaSeparatorNode(std::move(wrap(std::move(op))),
+                                                                                            std::move(wrap(std::move($1))),
+                                                                                            std::move(wrap(std::move($3))));
+                                                                $$ -> set_location(@$);
+                                                            }
+            ;
+
+classtype:          "class" "<" classnameseq ">"            {
+                                                                KeywordNodePtr keyword = create_keyword($1, @1, context);
+
+                                                                OperatorNodePtr left = create_operator($2, @2, context);
+                                                                OperatorNodePtr right = create_operator($4, @4, context);
+
+                                                                ParameterNode* parameters = new ParameterNode(std::move(wrap(std::move(left))),
+                                                                                                              std::move(wrap(std::move(right))),
+                                                                                                              std::move(wrap(std::move($3))));
+                                                                $$ = new ClassTypeNode(std::move(wrap(std::move(keyword))),
+                                                                                       std::move(wrap(std::move(parameters))));
                                                                 $$ -> set_location(@$);
                                                             }
          ;

@@ -1,8 +1,8 @@
 #ifndef TASTR_AST_CLASS_TYPE_NODE_HPP
 #define TASTR_AST_CLASS_TYPE_NODE_HPP
 
-#include "ast/IdentifierNode.hpp"
-#include "ast/OperatorNode.hpp"
+#include "ast/KeywordNode.hpp"
+#include "ast/ParameterNode.hpp"
 #include "ast/TypeNode.hpp"
 
 namespace tastr {
@@ -10,22 +10,25 @@ namespace ast {
 
 class ClassTypeNode final: public TypeNode {
   public:
-    explicit ClassTypeNode(OperatorNodeUPtr op, IdentifierNodeUPtr identifier)
-        : TypeNode(), op_(std::move(op)), identifier_(std::move(identifier)) {
+    explicit ClassTypeNode(KeywordNodeUPtr keyword,
+                           ParameterNodeUPtr parameters)
+        : TypeNode()
+        , keyword_(std::move(keyword))
+        , parameters_(std::move(parameters)) {
     }
 
     ~ClassTypeNode() = default;
 
     ClassTypeNode(const ClassTypeNode& node)
         : TypeNode(node)
-        , op_(node.op_->clone())
-        , identifier_(node.identifier_->clone()) {
+        , keyword_(node.keyword_->clone())
+        , parameters_(node.parameters_->clone()) {
     }
 
     ClassTypeNode(ClassTypeNode&& node)
         : TypeNode(std::move(node))
-        , op_(std::move(node.op_))
-        , identifier_(std::move(node.identifier_)) {
+        , keyword_(std::move(node.keyword_))
+        , parameters_(std::move(node.parameters_)) {
     }
 
     ClassTypeNode& operator=(const ClassTypeNode& node) {
@@ -33,15 +36,15 @@ class ClassTypeNode final: public TypeNode {
             return *this;
         }
         TypeNode::operator=(node);
-        op_ = node.op_->clone();
-        identifier_ = node.identifier_->clone();
+        keyword_ = node.keyword_->clone();
+        parameters_ = node.parameters_->clone();
         return *this;
     }
 
     ClassTypeNode& operator=(ClassTypeNode&& node) {
         TypeNode::operator=(std::move(node));
-        op_ = std::move(node.op_);
-        identifier_ = std::move(node.identifier_);
+        keyword_ = std::move(node.keyword_);
+        parameters_ = std::move(node.parameters_);
         return *this;
     }
 
@@ -57,12 +60,12 @@ class ClassTypeNode final: public TypeNode {
         return kind_;
     }
 
-    const OperatorNode& get_operator() const {
-        return *op_.get();
+    const KeywordNode& get_keyword() const {
+        return *keyword_.get();
     }
 
-    const IdentifierNode& get_identifier() const {
-        return *identifier_.get();
+    const ParameterNode& get_parameters() const {
+        return *parameters_.get();
     }
 
   private:
@@ -70,8 +73,8 @@ class ClassTypeNode final: public TypeNode {
         return new ClassTypeNode(*this);
     };
 
-    OperatorNodeUPtr op_;
-    IdentifierNodeUPtr identifier_;
+    KeywordNodeUPtr keyword_;
+    ParameterNodeUPtr parameters_;
 
     static const Kind kind_;
 };

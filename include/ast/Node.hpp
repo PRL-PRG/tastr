@@ -115,6 +115,10 @@ class Node {
         return get_kind() == Kind::DoubleAScalarType;
     }
 
+    bool is_class_type_node() const {
+        return get_kind() == Kind::ClassType;
+    }
+
     bool is_environment_type_node() const {
         return get_kind() == Kind::EnvironmentType;
     }
@@ -229,6 +233,10 @@ class Node {
 
     bool is_union_type_node() const {
         return get_kind() == Kind::UnionType;
+    }
+
+    bool is_intersection_type_node() const {
+        return get_kind() == Kind::IntersectionType;
     }
 
     bool is_vararg_type_node() const {

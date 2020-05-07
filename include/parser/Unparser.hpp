@@ -154,8 +154,8 @@ class Unparser final: public ConstNodeVisitor {
     void visit(const tastr::ast::ClassTypeNode& node) override final {
         visit_(node.get_location());
         ast_(node, [this, &node] {
-            node.get_operator().accept(*this);
-            node.get_identifier().accept(*this);
+            node.get_keyword().accept(*this);
+            node.get_parameters().accept(*this);
         });
     }
 
