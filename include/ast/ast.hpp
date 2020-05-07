@@ -7,7 +7,6 @@
 #include "ast/ClassTypeNode.hpp"
 #include "ast/CommaSeparatorNode.hpp"
 #include "ast/ComplexAScalarTypeNode.hpp"
-#include "ast/DataFrameTypeNode.hpp"
 #include "ast/DoubleAScalarTypeNode.hpp"
 #include "ast/EmptyNode.hpp"
 #include "ast/EnvironmentTypeNode.hpp"

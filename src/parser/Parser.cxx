@@ -41,7 +41,7 @@
 
 
 // Unqualified %code blocks.
-#line 291 "Parser.yxx"
+#line 285 "Parser.yxx"
 
     #include "parser/ParsingContext.hpp"
     #include "parser/Lexer.hpp"
@@ -270,123 +270,119 @@ namespace tastr { namespace parser {
   {
     switch (this->type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.move< AScalarTypeNodePtr > (std::move (that.value));
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.move< AnyTypeNodePtr > (std::move (that.value));
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.move< BytecodeTypeNodePtr > (std::move (that.value));
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.move< ClassTypeNodePtr > (std::move (that.value));
         break;
 
-      case 78: // dataframetype
-        value.move< DataFrameTypeNodePtr > (std::move (that.value));
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.move< EnvironmentTypeNodePtr > (std::move (that.value));
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.move< ExpressionTypeNodePtr > (std::move (that.value));
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.move< ExternalPointerTypeNodePtr > (std::move (that.value));
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.move< GroupTypeNodePtr > (std::move (that.value));
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.move< IdentifierNodePtr > (std::move (that.value));
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.move< LanguageTypeNodePtr > (std::move (that.value));
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.move< ListTypeNodePtr > (std::move (that.value));
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.move< NAScalarTypeNodePtr > (std::move (that.value));
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.move< NodePtr > (std::move (that.value));
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.move< PairlistTypeNodePtr > (std::move (that.value));
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.move< RawAScalarTypeNodePtr > (std::move (that.value));
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.move< S4TypeNodePtr > (std::move (that.value));
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.move< ScalarTypeNodePtr > (std::move (that.value));
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.move< StructTypeNodePtr > (std::move (that.value));
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.move< SymbolTypeNodePtr > (std::move (that.value));
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.move< TagTypePairNodePtr > (std::move (that.value));
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.move< TupleTypeNodePtr > (std::move (that.value));
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.move< TypeDeclarationNodePtr > (std::move (that.value));
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.move< TypeNodePtr > (std::move (that.value));
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.move< UnknownTypeNodePtr > (std::move (that.value));
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.move< VectorTypeNodePtr > (std::move (that.value));
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.move< WeakReferenceTypeNodePtr > (std::move (that.value));
         break;
 
@@ -429,12 +425,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.move< std::string > (std::move (that.value));
         break;
 
@@ -453,123 +448,119 @@ namespace tastr { namespace parser {
   {
     switch (this->type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.copy< AScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.copy< AnyTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.copy< BytecodeTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.copy< ClassTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 78: // dataframetype
-        value.copy< DataFrameTypeNodePtr > (YY_MOVE (that.value));
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.copy< EnvironmentTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.copy< ExpressionTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.copy< ExternalPointerTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.copy< GroupTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.copy< IdentifierNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.copy< LanguageTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.copy< ListTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.copy< NAScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.copy< NodePtr > (YY_MOVE (that.value));
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.copy< PairlistTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.copy< RawAScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.copy< S4TypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.copy< ScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.copy< StructTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.copy< SymbolTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.copy< TagTypePairNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.copy< TupleTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.copy< TypeDeclarationNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.copy< TypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.copy< UnknownTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.copy< VectorTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.copy< WeakReferenceTypeNodePtr > (YY_MOVE (that.value));
         break;
 
@@ -612,12 +603,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
@@ -643,123 +633,119 @@ namespace tastr { namespace parser {
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.move< AScalarTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.move< AnyTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.move< BytecodeTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.move< ClassTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 78: // dataframetype
-        value.move< DataFrameTypeNodePtr > (YY_MOVE (s.value));
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.move< EnvironmentTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.move< ExpressionTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.move< ExternalPointerTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.move< GroupTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.move< IdentifierNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.move< LanguageTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.move< ListTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.move< NAScalarTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.move< NodePtr > (YY_MOVE (s.value));
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.move< PairlistTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.move< RawAScalarTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.move< S4TypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.move< ScalarTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.move< StructTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.move< SymbolTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.move< TagTypePairNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.move< TupleTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.move< TypeDeclarationNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.move< TypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.move< UnknownTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.move< VectorTypeNodePtr > (YY_MOVE (s.value));
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.move< WeakReferenceTypeNodePtr > (YY_MOVE (s.value));
         break;
 
@@ -802,12 +788,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
@@ -902,123 +887,119 @@ namespace tastr { namespace parser {
   {
     switch (that.type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.YY_MOVE_OR_COPY< AScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.YY_MOVE_OR_COPY< AnyTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.YY_MOVE_OR_COPY< BytecodeTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.YY_MOVE_OR_COPY< ClassTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 78: // dataframetype
-        value.YY_MOVE_OR_COPY< DataFrameTypeNodePtr > (YY_MOVE (that.value));
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.YY_MOVE_OR_COPY< EnvironmentTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.YY_MOVE_OR_COPY< ExpressionTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.YY_MOVE_OR_COPY< ExternalPointerTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.YY_MOVE_OR_COPY< GroupTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.YY_MOVE_OR_COPY< IdentifierNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.YY_MOVE_OR_COPY< LanguageTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.YY_MOVE_OR_COPY< ListTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.YY_MOVE_OR_COPY< NAScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.YY_MOVE_OR_COPY< NodePtr > (YY_MOVE (that.value));
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.YY_MOVE_OR_COPY< PairlistTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.YY_MOVE_OR_COPY< RawAScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.YY_MOVE_OR_COPY< S4TypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.YY_MOVE_OR_COPY< ScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.YY_MOVE_OR_COPY< StructTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.YY_MOVE_OR_COPY< SymbolTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.YY_MOVE_OR_COPY< TagTypePairNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.YY_MOVE_OR_COPY< TupleTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.YY_MOVE_OR_COPY< TypeDeclarationNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.YY_MOVE_OR_COPY< TypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.YY_MOVE_OR_COPY< UnknownTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.YY_MOVE_OR_COPY< VectorTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.YY_MOVE_OR_COPY< WeakReferenceTypeNodePtr > (YY_MOVE (that.value));
         break;
 
@@ -1061,12 +1042,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
@@ -1085,123 +1065,119 @@ namespace tastr { namespace parser {
   {
     switch (that.type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.move< AScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.move< AnyTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.move< BytecodeTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.move< ClassTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 78: // dataframetype
-        value.move< DataFrameTypeNodePtr > (YY_MOVE (that.value));
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.move< EnvironmentTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.move< ExpressionTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.move< ExternalPointerTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.move< GroupTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.move< IdentifierNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.move< LanguageTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.move< ListTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.move< NAScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.move< NodePtr > (YY_MOVE (that.value));
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.move< PairlistTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.move< RawAScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.move< S4TypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.move< ScalarTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.move< StructTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.move< SymbolTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.move< TagTypePairNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.move< TupleTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.move< TypeDeclarationNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.move< TypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.move< UnknownTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.move< VectorTypeNodePtr > (YY_MOVE (that.value));
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.move< WeakReferenceTypeNodePtr > (YY_MOVE (that.value));
         break;
 
@@ -1244,12 +1220,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
@@ -1268,123 +1243,119 @@ namespace tastr { namespace parser {
     state = that.state;
     switch (that.type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.copy< AScalarTypeNodePtr > (that.value);
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.copy< AnyTypeNodePtr > (that.value);
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.copy< BytecodeTypeNodePtr > (that.value);
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.copy< ClassTypeNodePtr > (that.value);
         break;
 
-      case 78: // dataframetype
-        value.copy< DataFrameTypeNodePtr > (that.value);
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.copy< EnvironmentTypeNodePtr > (that.value);
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.copy< ExpressionTypeNodePtr > (that.value);
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.copy< ExternalPointerTypeNodePtr > (that.value);
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.copy< GroupTypeNodePtr > (that.value);
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.copy< IdentifierNodePtr > (that.value);
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.copy< LanguageTypeNodePtr > (that.value);
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.copy< ListTypeNodePtr > (that.value);
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.copy< NAScalarTypeNodePtr > (that.value);
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.copy< NodePtr > (that.value);
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.copy< PairlistTypeNodePtr > (that.value);
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.copy< RawAScalarTypeNodePtr > (that.value);
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.copy< S4TypeNodePtr > (that.value);
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.copy< ScalarTypeNodePtr > (that.value);
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.copy< StructTypeNodePtr > (that.value);
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.copy< SymbolTypeNodePtr > (that.value);
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.copy< TagTypePairNodePtr > (that.value);
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.copy< TupleTypeNodePtr > (that.value);
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.copy< TypeDeclarationNodePtr > (that.value);
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.copy< TypeNodePtr > (that.value);
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.copy< UnknownTypeNodePtr > (that.value);
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.copy< VectorTypeNodePtr > (that.value);
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.copy< WeakReferenceTypeNodePtr > (that.value);
         break;
 
@@ -1427,12 +1398,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.copy< std::string > (that.value);
         break;
 
@@ -1450,123 +1420,119 @@ namespace tastr { namespace parser {
     state = that.state;
     switch (that.type_get ())
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         value.move< AScalarTypeNodePtr > (that.value);
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         value.move< AnyTypeNodePtr > (that.value);
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         value.move< BytecodeTypeNodePtr > (that.value);
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         value.move< ClassTypeNodePtr > (that.value);
         break;
 
-      case 78: // dataframetype
-        value.move< DataFrameTypeNodePtr > (that.value);
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         value.move< EnvironmentTypeNodePtr > (that.value);
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         value.move< ExpressionTypeNodePtr > (that.value);
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         value.move< ExternalPointerTypeNodePtr > (that.value);
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         value.move< GroupTypeNodePtr > (that.value);
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         value.move< IdentifierNodePtr > (that.value);
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         value.move< LanguageTypeNodePtr > (that.value);
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         value.move< ListTypeNodePtr > (that.value);
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         value.move< NAScalarTypeNodePtr > (that.value);
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         value.move< NodePtr > (that.value);
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         value.move< PairlistTypeNodePtr > (that.value);
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         value.move< RawAScalarTypeNodePtr > (that.value);
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         value.move< S4TypeNodePtr > (that.value);
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         value.move< ScalarTypeNodePtr > (that.value);
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         value.move< StructTypeNodePtr > (that.value);
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         value.move< SymbolTypeNodePtr > (that.value);
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         value.move< TagTypePairNodePtr > (that.value);
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         value.move< TupleTypeNodePtr > (that.value);
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         value.move< TypeDeclarationNodePtr > (that.value);
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         value.move< TypeNodePtr > (that.value);
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         value.move< UnknownTypeNodePtr > (that.value);
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         value.move< VectorTypeNodePtr > (that.value);
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         value.move< WeakReferenceTypeNodePtr > (that.value);
         break;
 
@@ -1609,12 +1575,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         value.move< std::string > (that.value);
         break;
 
@@ -1658,507 +1623,495 @@ namespace tastr { namespace parser {
     switch (yytype)
     {
       case 3: // "|"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1664 "Parser.cxx"
+#line 1629 "Parser.cxx"
         break;
 
       case 4: // "^"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1670 "Parser.cxx"
+#line 1635 "Parser.cxx"
         break;
 
       case 5: // "=>"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1676 "Parser.cxx"
+#line 1641 "Parser.cxx"
         break;
 
       case 6: // "&"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1682 "Parser.cxx"
+#line 1647 "Parser.cxx"
         break;
 
       case 7: // ","
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1688 "Parser.cxx"
+#line 1653 "Parser.cxx"
         break;
 
       case 8: // "(("
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1694 "Parser.cxx"
+#line 1659 "Parser.cxx"
         break;
 
       case 9: // "("
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1700 "Parser.cxx"
+#line 1665 "Parser.cxx"
         break;
 
       case 10: // "))"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1706 "Parser.cxx"
+#line 1671 "Parser.cxx"
         break;
 
       case 11: // ")"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1712 "Parser.cxx"
+#line 1677 "Parser.cxx"
         break;
 
       case 12: // "[]"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1718 "Parser.cxx"
+#line 1683 "Parser.cxx"
         break;
 
       case 13: // "<"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1724 "Parser.cxx"
+#line 1689 "Parser.cxx"
         break;
 
       case 14: // ">"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1730 "Parser.cxx"
+#line 1695 "Parser.cxx"
         break;
 
       case 15: // "[["
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1736 "Parser.cxx"
+#line 1701 "Parser.cxx"
         break;
 
       case 16: // "]]"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1742 "Parser.cxx"
+#line 1707 "Parser.cxx"
         break;
 
       case 17: // "{{"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1748 "Parser.cxx"
+#line 1713 "Parser.cxx"
         break;
 
       case 18: // "}}"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1754 "Parser.cxx"
+#line 1719 "Parser.cxx"
         break;
 
       case 19: // ";"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1760 "Parser.cxx"
+#line 1725 "Parser.cxx"
         break;
 
       case 20: // ":"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1766 "Parser.cxx"
+#line 1731 "Parser.cxx"
         break;
 
       case 21: // "..."
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1772 "Parser.cxx"
+#line 1737 "Parser.cxx"
         break;
 
       case 22: // "???"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1778 "Parser.cxx"
+#line 1743 "Parser.cxx"
         break;
 
       case 23: // "null"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1784 "Parser.cxx"
+#line 1749 "Parser.cxx"
         break;
 
       case 24: // "class"
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1790 "Parser.cxx"
+#line 1755 "Parser.cxx"
         break;
 
       case 25: // INTEGER
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1796 "Parser.cxx"
+#line 1761 "Parser.cxx"
         break;
 
       case 26: // DOUBLE
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1802 "Parser.cxx"
+#line 1767 "Parser.cxx"
         break;
 
       case 27: // COMPLEX
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1808 "Parser.cxx"
+#line 1773 "Parser.cxx"
         break;
 
       case 28: // CHARACTER
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1814 "Parser.cxx"
+#line 1779 "Parser.cxx"
         break;
 
       case 29: // LOGICAL
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1820 "Parser.cxx"
+#line 1785 "Parser.cxx"
         break;
 
       case 30: // RAW
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1826 "Parser.cxx"
+#line 1791 "Parser.cxx"
         break;
 
       case 31: // ENVIRONMENT
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1832 "Parser.cxx"
+#line 1797 "Parser.cxx"
         break;
 
       case 32: // EXPRESSION
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1838 "Parser.cxx"
+#line 1803 "Parser.cxx"
         break;
 
       case 33: // LANGUAGE
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1844 "Parser.cxx"
+#line 1809 "Parser.cxx"
         break;
 
       case 34: // SYMBOL
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1850 "Parser.cxx"
+#line 1815 "Parser.cxx"
         break;
 
       case 35: // EXTERNALPOINTER
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1856 "Parser.cxx"
+#line 1821 "Parser.cxx"
         break;
 
       case 36: // BYTECODE
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1862 "Parser.cxx"
+#line 1827 "Parser.cxx"
         break;
 
       case 37: // PAIRLIST
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1868 "Parser.cxx"
+#line 1833 "Parser.cxx"
         break;
 
       case 38: // S4
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1874 "Parser.cxx"
+#line 1839 "Parser.cxx"
         break;
 
       case 39: // WEAKREF
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1880 "Parser.cxx"
+#line 1845 "Parser.cxx"
         break;
 
       case 40: // TUPLE
-#line 143 "Parser.yxx"
+#line 140 "Parser.yxx"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 1886 "Parser.cxx"
+#line 1851 "Parser.cxx"
         break;
 
       case 41: // LIST
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1892 "Parser.cxx"
-        break;
-
-      case 42: // DATAFRAME
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1898 "Parser.cxx"
-        break;
-
-      case 43: // STRUCT
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1904 "Parser.cxx"
-        break;
-
-      case 44: // ANY
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1910 "Parser.cxx"
-        break;
-
-      case 45: // TYPEDECL
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1916 "Parser.cxx"
-        break;
-
-      case 46: // IDENTIFIER
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1922 "Parser.cxx"
-        break;
-
-      case 47: // QUOTED_IDENTIFIER
-#line 143 "Parser.yxx"
-                 { yyo << yysym.value.template as < std::string > (); }
-#line 1928 "Parser.cxx"
-        break;
-
-      case 49: // ascalartype
-#line 117 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < AScalarTypeNodePtr > ()); }
-#line 1934 "Parser.cxx"
-        break;
-
-      case 50: // rawascalartype
-#line 116 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < RawAScalarTypeNodePtr > ()); }
-#line 1940 "Parser.cxx"
-        break;
-
-      case 51: // nascalartype
-#line 118 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NAScalarTypeNodePtr > ()); }
-#line 1946 "Parser.cxx"
-        break;
-
-      case 52: // scalartype
-#line 119 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < ScalarTypeNodePtr > ()); }
-#line 1952 "Parser.cxx"
-        break;
-
-      case 53: // classnameseq
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 1958 "Parser.cxx"
-        break;
-
-      case 54: // classtype
-#line 120 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < ClassTypeNodePtr > ()); }
-#line 1964 "Parser.cxx"
-        break;
-
-      case 55: // environmenttype
-#line 121 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < EnvironmentTypeNodePtr > ()); }
-#line 1970 "Parser.cxx"
-        break;
-
-      case 56: // expressiontype
-#line 122 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < ExpressionTypeNodePtr > ()); }
-#line 1976 "Parser.cxx"
-        break;
-
-      case 57: // languagetype
-#line 123 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < LanguageTypeNodePtr > ()); }
-#line 1982 "Parser.cxx"
-        break;
-
-      case 58: // symboltype
-#line 124 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < SymbolTypeNodePtr > ()); }
-#line 1988 "Parser.cxx"
-        break;
-
-      case 59: // externalptrtype
-#line 125 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < ExternalPointerTypeNodePtr > ()); }
-#line 1994 "Parser.cxx"
-        break;
-
-      case 60: // bytecodetype
-#line 126 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < BytecodeTypeNodePtr > ()); }
-#line 2000 "Parser.cxx"
-        break;
-
-      case 61: // pairlisttype
-#line 127 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < PairlistTypeNodePtr > ()); }
-#line 2006 "Parser.cxx"
-        break;
-
-      case 62: // s4type
-#line 128 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < S4TypeNodePtr > ()); }
-#line 2012 "Parser.cxx"
-        break;
-
-      case 63: // weakreftype
-#line 129 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < WeakReferenceTypeNodePtr > ()); }
-#line 2018 "Parser.cxx"
-        break;
-
-      case 64: // unknowntype
-#line 131 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < UnknownTypeNodePtr > ()); }
-#line 2024 "Parser.cxx"
-        break;
-
-      case 65: // anytype
-#line 130 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < AnyTypeNodePtr > ()); }
-#line 2030 "Parser.cxx"
-        break;
-
-      case 66: // vectortype
-#line 132 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < VectorTypeNodePtr > ()); }
-#line 2036 "Parser.cxx"
-        break;
-
-      case 67: // typeseq
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 2042 "Parser.cxx"
-        break;
-
-      case 68: // namedtype
-#line 134 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < TagTypePairNodePtr > ()); }
-#line 2048 "Parser.cxx"
-        break;
-
-      case 69: // namedtypeseq
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 2054 "Parser.cxx"
-        break;
-
-      case 70: // paramtype
-#line 141 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2060 "Parser.cxx"
-        break;
-
-      case 71: // paramtypeseq
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 2066 "Parser.cxx"
-        break;
-
-      case 72: // params
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 2072 "Parser.cxx"
-        break;
-
-      case 73: // functiontype
-#line 141 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2078 "Parser.cxx"
-        break;
-
-      case 74: // grouptype
-#line 135 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < GroupTypeNodePtr > ()); }
-#line 2084 "Parser.cxx"
-        break;
-
-      case 75: // nonconnectivetype
-#line 141 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2090 "Parser.cxx"
-        break;
-
-      case 76: // listtype
-#line 136 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < ListTypeNodePtr > ()); }
-#line 2096 "Parser.cxx"
-        break;
-
-      case 77: // structelements
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 2102 "Parser.cxx"
-        break;
-
-      case 78: // dataframetype
-#line 137 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < DataFrameTypeNodePtr > ()); }
-#line 2108 "Parser.cxx"
-        break;
-
-      case 79: // structtype
-#line 138 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < StructTypeNodePtr > ()); }
-#line 2114 "Parser.cxx"
-        break;
-
-      case 80: // tupleelements
-#line 133 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
-#line 2120 "Parser.cxx"
-        break;
-
-      case 81: // tupletype
-#line 139 "Parser.yxx"
-                 { yyo << tastr::parser::to_string(*yysym.value.template as < TupleTypeNodePtr > ()); }
-#line 2126 "Parser.cxx"
-        break;
-
-      case 82: // identifier
 #line 140 "Parser.yxx"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 1857 "Parser.cxx"
+        break;
+
+      case 42: // STRUCT
+#line 140 "Parser.yxx"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 1863 "Parser.cxx"
+        break;
+
+      case 43: // ANY
+#line 140 "Parser.yxx"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 1869 "Parser.cxx"
+        break;
+
+      case 44: // TYPEDECL
+#line 140 "Parser.yxx"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 1875 "Parser.cxx"
+        break;
+
+      case 45: // IDENTIFIER
+#line 140 "Parser.yxx"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 1881 "Parser.cxx"
+        break;
+
+      case 46: // QUOTED_IDENTIFIER
+#line 140 "Parser.yxx"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 1887 "Parser.cxx"
+        break;
+
+      case 48: // ascalartype
+#line 115 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < AScalarTypeNodePtr > ()); }
+#line 1893 "Parser.cxx"
+        break;
+
+      case 49: // rawascalartype
+#line 114 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < RawAScalarTypeNodePtr > ()); }
+#line 1899 "Parser.cxx"
+        break;
+
+      case 50: // nascalartype
+#line 116 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NAScalarTypeNodePtr > ()); }
+#line 1905 "Parser.cxx"
+        break;
+
+      case 51: // scalartype
+#line 117 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < ScalarTypeNodePtr > ()); }
+#line 1911 "Parser.cxx"
+        break;
+
+      case 52: // classnameseq
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 1917 "Parser.cxx"
+        break;
+
+      case 53: // classtype
+#line 118 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < ClassTypeNodePtr > ()); }
+#line 1923 "Parser.cxx"
+        break;
+
+      case 54: // environmenttype
+#line 119 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < EnvironmentTypeNodePtr > ()); }
+#line 1929 "Parser.cxx"
+        break;
+
+      case 55: // expressiontype
+#line 120 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < ExpressionTypeNodePtr > ()); }
+#line 1935 "Parser.cxx"
+        break;
+
+      case 56: // languagetype
+#line 121 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < LanguageTypeNodePtr > ()); }
+#line 1941 "Parser.cxx"
+        break;
+
+      case 57: // symboltype
+#line 122 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < SymbolTypeNodePtr > ()); }
+#line 1947 "Parser.cxx"
+        break;
+
+      case 58: // externalptrtype
+#line 123 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < ExternalPointerTypeNodePtr > ()); }
+#line 1953 "Parser.cxx"
+        break;
+
+      case 59: // bytecodetype
+#line 124 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < BytecodeTypeNodePtr > ()); }
+#line 1959 "Parser.cxx"
+        break;
+
+      case 60: // pairlisttype
+#line 125 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < PairlistTypeNodePtr > ()); }
+#line 1965 "Parser.cxx"
+        break;
+
+      case 61: // s4type
+#line 126 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < S4TypeNodePtr > ()); }
+#line 1971 "Parser.cxx"
+        break;
+
+      case 62: // weakreftype
+#line 127 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < WeakReferenceTypeNodePtr > ()); }
+#line 1977 "Parser.cxx"
+        break;
+
+      case 63: // unknowntype
+#line 129 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < UnknownTypeNodePtr > ()); }
+#line 1983 "Parser.cxx"
+        break;
+
+      case 64: // anytype
+#line 128 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < AnyTypeNodePtr > ()); }
+#line 1989 "Parser.cxx"
+        break;
+
+      case 65: // vectortype
+#line 130 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < VectorTypeNodePtr > ()); }
+#line 1995 "Parser.cxx"
+        break;
+
+      case 66: // typeseq
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 2001 "Parser.cxx"
+        break;
+
+      case 67: // namedtype
+#line 132 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < TagTypePairNodePtr > ()); }
+#line 2007 "Parser.cxx"
+        break;
+
+      case 68: // namedtypeseq
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 2013 "Parser.cxx"
+        break;
+
+      case 69: // paramtype
+#line 138 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
+#line 2019 "Parser.cxx"
+        break;
+
+      case 70: // paramtypeseq
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 2025 "Parser.cxx"
+        break;
+
+      case 71: // params
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 2031 "Parser.cxx"
+        break;
+
+      case 72: // functiontype
+#line 138 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
+#line 2037 "Parser.cxx"
+        break;
+
+      case 73: // grouptype
+#line 133 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < GroupTypeNodePtr > ()); }
+#line 2043 "Parser.cxx"
+        break;
+
+      case 74: // nonconnectivetype
+#line 138 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
+#line 2049 "Parser.cxx"
+        break;
+
+      case 75: // listtype
+#line 134 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < ListTypeNodePtr > ()); }
+#line 2055 "Parser.cxx"
+        break;
+
+      case 76: // structelements
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 2061 "Parser.cxx"
+        break;
+
+      case 77: // structtype
+#line 135 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < StructTypeNodePtr > ()); }
+#line 2067 "Parser.cxx"
+        break;
+
+      case 78: // tupleelements
+#line 131 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < NodePtr > ()); }
+#line 2073 "Parser.cxx"
+        break;
+
+      case 79: // tupletype
+#line 136 "Parser.yxx"
+                 { yyo << tastr::parser::to_string(*yysym.value.template as < TupleTypeNodePtr > ()); }
+#line 2079 "Parser.cxx"
+        break;
+
+      case 80: // identifier
+#line 137 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < IdentifierNodePtr > ()); }
-#line 2132 "Parser.cxx"
+#line 2085 "Parser.cxx"
         break;
 
-      case 83: // uniontype
-#line 141 "Parser.yxx"
+      case 81: // uniontype
+#line 138 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2138 "Parser.cxx"
+#line 2091 "Parser.cxx"
         break;
 
-      case 84: // intersectiontype
-#line 141 "Parser.yxx"
+      case 82: // intersectiontype
+#line 138 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2144 "Parser.cxx"
+#line 2097 "Parser.cxx"
         break;
 
-      case 85: // nulltype
-#line 141 "Parser.yxx"
+      case 83: // nulltype
+#line 138 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2150 "Parser.cxx"
+#line 2103 "Parser.cxx"
         break;
 
-      case 86: // type
-#line 141 "Parser.yxx"
+      case 84: // type
+#line 138 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < TypeNodePtr > ()); }
-#line 2156 "Parser.cxx"
+#line 2109 "Parser.cxx"
         break;
 
-      case 87: // decltype
-#line 142 "Parser.yxx"
+      case 85: // decltype
+#line 139 "Parser.yxx"
                  { yyo << tastr::parser::to_string(*yysym.value.template as < TypeDeclarationNodePtr > ()); }
-#line 2162 "Parser.cxx"
+#line 2115 "Parser.cxx"
         break;
 
       default:
@@ -2276,7 +2229,7 @@ namespace tastr { namespace parser {
 
 
     // User initialization code.
-#line 184 "Parser.yxx"
+#line 180 "Parser.yxx"
 {
     /* filename for locations here
        https://www.gnu.org/software/bison/manual/html_node/Initial-Action-Decl.html
@@ -2288,7 +2241,7 @@ namespace tastr { namespace parser {
     /* @$.initialize(context.get_input_stream_name()); */
 }
 
-#line 2292 "Parser.cxx"
+#line 2245 "Parser.cxx"
 
 
     /* Initialize the stack.  The initial state will be set in
@@ -2391,123 +2344,119 @@ namespace tastr { namespace parser {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case 49: // ascalartype
+      case 48: // ascalartype
         yylhs.value.emplace< AScalarTypeNodePtr > ();
         break;
 
-      case 65: // anytype
+      case 64: // anytype
         yylhs.value.emplace< AnyTypeNodePtr > ();
         break;
 
-      case 60: // bytecodetype
+      case 59: // bytecodetype
         yylhs.value.emplace< BytecodeTypeNodePtr > ();
         break;
 
-      case 54: // classtype
+      case 53: // classtype
         yylhs.value.emplace< ClassTypeNodePtr > ();
         break;
 
-      case 78: // dataframetype
-        yylhs.value.emplace< DataFrameTypeNodePtr > ();
-        break;
-
-      case 55: // environmenttype
+      case 54: // environmenttype
         yylhs.value.emplace< EnvironmentTypeNodePtr > ();
         break;
 
-      case 56: // expressiontype
+      case 55: // expressiontype
         yylhs.value.emplace< ExpressionTypeNodePtr > ();
         break;
 
-      case 59: // externalptrtype
+      case 58: // externalptrtype
         yylhs.value.emplace< ExternalPointerTypeNodePtr > ();
         break;
 
-      case 74: // grouptype
+      case 73: // grouptype
         yylhs.value.emplace< GroupTypeNodePtr > ();
         break;
 
-      case 82: // identifier
+      case 80: // identifier
         yylhs.value.emplace< IdentifierNodePtr > ();
         break;
 
-      case 57: // languagetype
+      case 56: // languagetype
         yylhs.value.emplace< LanguageTypeNodePtr > ();
         break;
 
-      case 76: // listtype
+      case 75: // listtype
         yylhs.value.emplace< ListTypeNodePtr > ();
         break;
 
-      case 51: // nascalartype
+      case 50: // nascalartype
         yylhs.value.emplace< NAScalarTypeNodePtr > ();
         break;
 
-      case 53: // classnameseq
-      case 67: // typeseq
-      case 69: // namedtypeseq
-      case 71: // paramtypeseq
-      case 72: // params
-      case 77: // structelements
-      case 80: // tupleelements
+      case 52: // classnameseq
+      case 66: // typeseq
+      case 68: // namedtypeseq
+      case 70: // paramtypeseq
+      case 71: // params
+      case 76: // structelements
+      case 78: // tupleelements
         yylhs.value.emplace< NodePtr > ();
         break;
 
-      case 61: // pairlisttype
+      case 60: // pairlisttype
         yylhs.value.emplace< PairlistTypeNodePtr > ();
         break;
 
-      case 50: // rawascalartype
+      case 49: // rawascalartype
         yylhs.value.emplace< RawAScalarTypeNodePtr > ();
         break;
 
-      case 62: // s4type
+      case 61: // s4type
         yylhs.value.emplace< S4TypeNodePtr > ();
         break;
 
-      case 52: // scalartype
+      case 51: // scalartype
         yylhs.value.emplace< ScalarTypeNodePtr > ();
         break;
 
-      case 79: // structtype
+      case 77: // structtype
         yylhs.value.emplace< StructTypeNodePtr > ();
         break;
 
-      case 58: // symboltype
+      case 57: // symboltype
         yylhs.value.emplace< SymbolTypeNodePtr > ();
         break;
 
-      case 68: // namedtype
+      case 67: // namedtype
         yylhs.value.emplace< TagTypePairNodePtr > ();
         break;
 
-      case 81: // tupletype
+      case 79: // tupletype
         yylhs.value.emplace< TupleTypeNodePtr > ();
         break;
 
-      case 87: // decltype
+      case 85: // decltype
         yylhs.value.emplace< TypeDeclarationNodePtr > ();
         break;
 
-      case 70: // paramtype
-      case 73: // functiontype
-      case 75: // nonconnectivetype
-      case 83: // uniontype
-      case 84: // intersectiontype
-      case 85: // nulltype
-      case 86: // type
+      case 69: // paramtype
+      case 72: // functiontype
+      case 74: // nonconnectivetype
+      case 81: // uniontype
+      case 82: // intersectiontype
+      case 83: // nulltype
+      case 84: // type
         yylhs.value.emplace< TypeNodePtr > ();
         break;
 
-      case 64: // unknowntype
+      case 63: // unknowntype
         yylhs.value.emplace< UnknownTypeNodePtr > ();
         break;
 
-      case 66: // vectortype
+      case 65: // vectortype
         yylhs.value.emplace< VectorTypeNodePtr > ();
         break;
 
-      case 63: // weakreftype
+      case 62: // weakreftype
         yylhs.value.emplace< WeakReferenceTypeNodePtr > ();
         break;
 
@@ -2550,12 +2499,11 @@ namespace tastr { namespace parser {
       case 39: // WEAKREF
       case 40: // TUPLE
       case 41: // LIST
-      case 42: // DATAFRAME
-      case 43: // STRUCT
-      case 44: // ANY
-      case 45: // TYPEDECL
-      case 46: // IDENTIFIER
-      case 47: // QUOTED_IDENTIFIER
+      case 42: // STRUCT
+      case 43: // ANY
+      case 44: // TYPEDECL
+      case 45: // IDENTIFIER
+      case 46: // QUOTED_IDENTIFIER
         yylhs.value.emplace< std::string > ();
         break;
 
@@ -2580,93 +2528,93 @@ namespace tastr { namespace parser {
           switch (yyn)
             {
   case 2:
-#line 354 "Parser.yxx"
+#line 348 "Parser.yxx"
                                                             {   yylhs.value.as < AScalarTypeNodePtr > () = create_node_with_keyword<IntegerAScalarTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2586 "Parser.cxx"
+#line 2534 "Parser.cxx"
     break;
 
   case 3:
-#line 355 "Parser.yxx"
+#line 349 "Parser.yxx"
                                                             {   yylhs.value.as < AScalarTypeNodePtr > () = create_node_with_keyword<DoubleAScalarTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2592 "Parser.cxx"
+#line 2540 "Parser.cxx"
     break;
 
   case 4:
-#line 356 "Parser.yxx"
+#line 350 "Parser.yxx"
                                                             {   yylhs.value.as < AScalarTypeNodePtr > () = create_node_with_keyword<ComplexAScalarTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2598 "Parser.cxx"
+#line 2546 "Parser.cxx"
     break;
 
   case 5:
-#line 357 "Parser.yxx"
+#line 351 "Parser.yxx"
                                                             {   yylhs.value.as < AScalarTypeNodePtr > () = create_node_with_keyword<CharacterAScalarTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2604 "Parser.cxx"
+#line 2552 "Parser.cxx"
     break;
 
   case 6:
-#line 358 "Parser.yxx"
+#line 352 "Parser.yxx"
                                                             {   yylhs.value.as < AScalarTypeNodePtr > () = create_node_with_keyword<LogicalAScalarTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2610 "Parser.cxx"
+#line 2558 "Parser.cxx"
     break;
 
   case 7:
-#line 361 "Parser.yxx"
+#line 355 "Parser.yxx"
                                                             {   yylhs.value.as < RawAScalarTypeNodePtr > () = create_node_with_keyword<RawAScalarTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2616 "Parser.cxx"
+#line 2564 "Parser.cxx"
     break;
 
   case 8:
-#line 364 "Parser.yxx"
+#line 358 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < NAScalarTypeNodePtr > () = new NAScalarTypeNode(std::move(wrap(std::move(op))),
                                                                                           std::move(wrap(std::move(yystack_[0].value.as < AScalarTypeNodePtr > ()))));
                                                                 yylhs.value.as < NAScalarTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2627 "Parser.cxx"
+#line 2575 "Parser.cxx"
     break;
 
   case 9:
-#line 371 "Parser.yxx"
+#line 365 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < ScalarTypeNodePtr > () = yystack_[0].value.as < AScalarTypeNodePtr > ();
                                                                 yystack_[0].value.as < AScalarTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < ScalarTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2637 "Parser.cxx"
+#line 2585 "Parser.cxx"
     break;
 
   case 10:
-#line 376 "Parser.yxx"
+#line 370 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < ScalarTypeNodePtr > () = yystack_[0].value.as < RawAScalarTypeNodePtr > ();
                                                                 yystack_[0].value.as < RawAScalarTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < ScalarTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2647 "Parser.cxx"
+#line 2595 "Parser.cxx"
     break;
 
   case 11:
-#line 381 "Parser.yxx"
+#line 375 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < ScalarTypeNodePtr > () = yystack_[0].value.as < NAScalarTypeNodePtr > ();
                                                                 yystack_[0].value.as < NAScalarTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < ScalarTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2657 "Parser.cxx"
+#line 2605 "Parser.cxx"
     break;
 
   case 12:
-#line 389 "Parser.yxx"
+#line 383 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < IdentifierNodePtr > ();
                                                                 yystack_[0].value.as < IdentifierNodePtr > () = nullptr;
                                                             }
-#line 2666 "Parser.cxx"
+#line 2614 "Parser.cxx"
     break;
 
   case 13:
-#line 393 "Parser.yxx"
+#line 387 "Parser.yxx"
                                                             {
                                                                 SeparatorNodePtr op = create_separator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < NodePtr > () = new CommaSeparatorNode(std::move(wrap(std::move(op))),
@@ -2674,11 +2622,11 @@ namespace tastr { namespace parser {
                                                                                             std::move(wrap(std::move(yystack_[0].value.as < IdentifierNodePtr > ()))));
                                                                 yylhs.value.as < NodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2678 "Parser.cxx"
+#line 2626 "Parser.cxx"
     break;
 
   case 14:
-#line 402 "Parser.yxx"
+#line 396 "Parser.yxx"
                                                             {
                                                                 KeywordNodePtr keyword = create_keyword(yystack_[3].value.as < std::string > (), yystack_[3].location, context);
 
@@ -2692,100 +2640,94 @@ namespace tastr { namespace parser {
                                                                                        std::move(wrap(std::move(parameters))));
                                                                 yylhs.value.as < ClassTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2696 "Parser.cxx"
+#line 2644 "Parser.cxx"
     break;
 
   case 15:
-#line 418 "Parser.yxx"
+#line 411 "Parser.yxx"
                                                             {   yylhs.value.as < EnvironmentTypeNodePtr > () = create_node_with_keyword<EnvironmentTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2702 "Parser.cxx"
+#line 2650 "Parser.cxx"
     break;
 
   case 16:
-#line 421 "Parser.yxx"
+#line 414 "Parser.yxx"
                                                             {   yylhs.value.as < ExpressionTypeNodePtr > () = create_node_with_keyword<ExpressionTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context);  }
-#line 2708 "Parser.cxx"
+#line 2656 "Parser.cxx"
     break;
 
   case 17:
-#line 424 "Parser.yxx"
+#line 417 "Parser.yxx"
                                                             {   yylhs.value.as < LanguageTypeNodePtr > () = create_node_with_keyword<LanguageTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context);    }
-#line 2714 "Parser.cxx"
+#line 2662 "Parser.cxx"
     break;
 
   case 18:
-#line 427 "Parser.yxx"
+#line 420 "Parser.yxx"
                                                             {   yylhs.value.as < SymbolTypeNodePtr > () = create_node_with_keyword<SymbolTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context);      }
-#line 2720 "Parser.cxx"
+#line 2668 "Parser.cxx"
     break;
 
   case 19:
-#line 430 "Parser.yxx"
+#line 423 "Parser.yxx"
                                                             {   yylhs.value.as < ExternalPointerTypeNodePtr > () = create_node_with_keyword<ExternalPointerTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2726 "Parser.cxx"
+#line 2674 "Parser.cxx"
     break;
 
   case 20:
-#line 433 "Parser.yxx"
+#line 426 "Parser.yxx"
                                                             {   yylhs.value.as < BytecodeTypeNodePtr > () = create_node_with_keyword<BytecodeTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2732 "Parser.cxx"
+#line 2680 "Parser.cxx"
     break;
 
   case 21:
-#line 436 "Parser.yxx"
+#line 429 "Parser.yxx"
                                                             {   yylhs.value.as < PairlistTypeNodePtr > () = create_node_with_keyword<PairlistTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2738 "Parser.cxx"
+#line 2686 "Parser.cxx"
     break;
 
   case 22:
-#line 439 "Parser.yxx"
+#line 432 "Parser.yxx"
                                                             {   yylhs.value.as < S4TypeNodePtr > () = create_node_with_keyword<S4TypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2744 "Parser.cxx"
+#line 2692 "Parser.cxx"
     break;
 
   case 23:
-#line 442 "Parser.yxx"
+#line 435 "Parser.yxx"
                                                             {   yylhs.value.as < WeakReferenceTypeNodePtr > () = create_node_with_keyword<WeakReferenceTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2750 "Parser.cxx"
+#line 2698 "Parser.cxx"
     break;
 
   case 24:
-#line 445 "Parser.yxx"
-                                                            {   yylhs.value.as < DataFrameTypeNodePtr > () = create_node_with_keyword<DataFrameTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2756 "Parser.cxx"
+#line 438 "Parser.yxx"
+                                                            {   yylhs.value.as < AnyTypeNodePtr > () = create_node_with_keyword<AnyTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
+#line 2704 "Parser.cxx"
     break;
 
   case 25:
-#line 448 "Parser.yxx"
-                                                            {   yylhs.value.as < AnyTypeNodePtr > () = create_node_with_keyword<AnyTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2762 "Parser.cxx"
+#line 441 "Parser.yxx"
+                                                            {   yylhs.value.as < UnknownTypeNodePtr > () = create_node_with_keyword<UnknownTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
+#line 2710 "Parser.cxx"
     break;
 
   case 26:
-#line 451 "Parser.yxx"
-                                                            {   yylhs.value.as < UnknownTypeNodePtr > () = create_node_with_keyword<UnknownTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2768 "Parser.cxx"
+#line 444 "Parser.yxx"
+                                                            {   yylhs.value.as < TypeNodePtr > () = create_node_with_keyword<NullTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
+#line 2716 "Parser.cxx"
     break;
 
   case 27:
-#line 454 "Parser.yxx"
-                                                            {   yylhs.value.as < TypeNodePtr > () = create_node_with_keyword<NullTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 2774 "Parser.cxx"
-    break;
-
-  case 28:
-#line 457 "Parser.yxx"
+#line 447 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[0].value.as < std::string > (), yystack_[0].location, context);
                                                                 yylhs.value.as < VectorTypeNodePtr > () = new VectorTypeNode(std::move(wrap(std::move(op))),
                                                                                         std::move(wrap(std::move(yystack_[1].value.as < ScalarTypeNodePtr > ()))));
                                                                 yylhs.value.as < VectorTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2785 "Parser.cxx"
+#line 2727 "Parser.cxx"
     break;
 
-  case 29:
-#line 465 "Parser.yxx"
+  case 28:
+#line 455 "Parser.yxx"
                                                             {
                                                                 KeywordNodePtr keyword = create_keyword(yystack_[3].value.as < std::string > (), yystack_[3].location, context);
 
@@ -2801,20 +2743,20 @@ namespace tastr { namespace parser {
 
                                                                 yylhs.value.as < ListTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2805 "Parser.cxx"
+#line 2747 "Parser.cxx"
     break;
 
-  case 30:
-#line 482 "Parser.yxx"
+  case 29:
+#line 472 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                             }
-#line 2814 "Parser.cxx"
+#line 2756 "Parser.cxx"
     break;
 
-  case 31:
-#line 486 "Parser.yxx"
+  case 30:
+#line 476 "Parser.yxx"
                                                             {
                                                                 SeparatorNodePtr op = create_separator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < NodePtr > () = new CommaSeparatorNode(std::move(wrap(std::move(op))),
@@ -2822,28 +2764,28 @@ namespace tastr { namespace parser {
                                                                                             std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < NodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2826 "Parser.cxx"
+#line 2768 "Parser.cxx"
     break;
 
-  case 32:
-#line 496 "Parser.yxx"
+  case 31:
+#line 486 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = new EmptyNode();
                                                             }
-#line 2834 "Parser.cxx"
+#line 2776 "Parser.cxx"
     break;
 
-  case 33:
-#line 499 "Parser.yxx"
+  case 32:
+#line 489 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < NodePtr > ();
                                                                 yystack_[0].value.as < NodePtr > () = nullptr;
                                                             }
-#line 2843 "Parser.cxx"
+#line 2785 "Parser.cxx"
     break;
 
-  case 34:
-#line 504 "Parser.yxx"
+  case 33:
+#line 494 "Parser.yxx"
                                                             {
                                                                 KeywordNodePtr keyword = create_keyword(yystack_[3].value.as < std::string > (), yystack_[3].location, context);
 
@@ -2859,28 +2801,28 @@ namespace tastr { namespace parser {
 
                                                                 yylhs.value.as < StructTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2863 "Parser.cxx"
+#line 2805 "Parser.cxx"
     break;
 
-  case 35:
-#line 522 "Parser.yxx"
+  case 34:
+#line 512 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = new EmptyNode();
                                                             }
-#line 2871 "Parser.cxx"
+#line 2813 "Parser.cxx"
     break;
 
-  case 36:
-#line 525 "Parser.yxx"
+  case 35:
+#line 515 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < NodePtr > ();
                                                                 yystack_[0].value.as < NodePtr > () = nullptr;
                                                             }
-#line 2880 "Parser.cxx"
+#line 2822 "Parser.cxx"
     break;
 
-  case 37:
-#line 531 "Parser.yxx"
+  case 36:
+#line 521 "Parser.yxx"
                                                             {
                                                                 KeywordNodePtr keyword = create_keyword(yystack_[3].value.as < std::string > (), yystack_[3].location, context);
 
@@ -2896,161 +2838,155 @@ namespace tastr { namespace parser {
 
                                                                 yylhs.value.as < TupleTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 2900 "Parser.cxx"
+#line 2842 "Parser.cxx"
+    break;
+
+  case 37:
+#line 538 "Parser.yxx"
+                                                            { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
+#line 2848 "Parser.cxx"
     break;
 
   case 38:
-#line 548 "Parser.yxx"
+#line 539 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2906 "Parser.cxx"
+#line 2854 "Parser.cxx"
     break;
 
   case 39:
-#line 549 "Parser.yxx"
+#line 540 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2912 "Parser.cxx"
+#line 2860 "Parser.cxx"
     break;
 
   case 40:
-#line 550 "Parser.yxx"
+#line 541 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2918 "Parser.cxx"
+#line 2866 "Parser.cxx"
     break;
 
   case 41:
-#line 551 "Parser.yxx"
+#line 542 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2924 "Parser.cxx"
+#line 2872 "Parser.cxx"
     break;
 
   case 42:
-#line 552 "Parser.yxx"
+#line 543 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2930 "Parser.cxx"
+#line 2878 "Parser.cxx"
     break;
 
   case 43:
-#line 553 "Parser.yxx"
+#line 544 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2936 "Parser.cxx"
+#line 2884 "Parser.cxx"
     break;
 
   case 44:
-#line 554 "Parser.yxx"
+#line 545 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2942 "Parser.cxx"
+#line 2890 "Parser.cxx"
     break;
 
   case 45:
-#line 555 "Parser.yxx"
+#line 546 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2948 "Parser.cxx"
+#line 2896 "Parser.cxx"
     break;
 
   case 46:
-#line 556 "Parser.yxx"
+#line 547 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2954 "Parser.cxx"
+#line 2902 "Parser.cxx"
     break;
 
   case 47:
-#line 557 "Parser.yxx"
+#line 548 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2960 "Parser.cxx"
+#line 2908 "Parser.cxx"
     break;
 
   case 48:
-#line 558 "Parser.yxx"
+#line 549 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2966 "Parser.cxx"
+#line 2914 "Parser.cxx"
     break;
 
   case 49:
-#line 559 "Parser.yxx"
+#line 550 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2972 "Parser.cxx"
+#line 2920 "Parser.cxx"
     break;
 
   case 50:
-#line 560 "Parser.yxx"
+#line 551 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2978 "Parser.cxx"
+#line 2926 "Parser.cxx"
     break;
 
   case 51:
-#line 561 "Parser.yxx"
+#line 552 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2984 "Parser.cxx"
+#line 2932 "Parser.cxx"
     break;
 
   case 52:
-#line 562 "Parser.yxx"
+#line 553 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2990 "Parser.cxx"
+#line 2938 "Parser.cxx"
     break;
 
   case 53:
-#line 563 "Parser.yxx"
+#line 554 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 2996 "Parser.cxx"
+#line 2944 "Parser.cxx"
     break;
 
   case 54:
-#line 564 "Parser.yxx"
+#line 555 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3002 "Parser.cxx"
+#line 2950 "Parser.cxx"
     break;
 
   case 55:
-#line 565 "Parser.yxx"
+#line 556 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3008 "Parser.cxx"
+#line 2956 "Parser.cxx"
     break;
 
   case 56:
-#line 566 "Parser.yxx"
+#line 557 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3014 "Parser.cxx"
+#line 2962 "Parser.cxx"
     break;
 
   case 57:
-#line 567 "Parser.yxx"
+#line 558 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3020 "Parser.cxx"
+#line 2968 "Parser.cxx"
     break;
 
   case 58:
-#line 568 "Parser.yxx"
+#line 559 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3026 "Parser.cxx"
+#line 2974 "Parser.cxx"
     break;
 
   case 59:
-#line 569 "Parser.yxx"
+#line 560 "Parser.yxx"
                                                             { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3032 "Parser.cxx"
+#line 2980 "Parser.cxx"
     break;
 
   case 60:
-#line 570 "Parser.yxx"
-                                                            { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3038 "Parser.cxx"
+#line 561 "Parser.yxx"
+                                                            { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), true, false, yystack_[0].location, context);  }
+#line 2986 "Parser.cxx"
     break;
 
   case 61:
-#line 571 "Parser.yxx"
-                                                            { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), false, false, yystack_[0].location, context); }
-#line 3044 "Parser.cxx"
-    break;
-
-  case 62:
-#line 572 "Parser.yxx"
-                                                            { yylhs.value.as < IdentifierNodePtr > () = create_identifier(yystack_[0].value.as < std::string > (), true, false, yystack_[0].location, context);  }
-#line 3050 "Parser.cxx"
-    break;
-
-  case 63:
-#line 575 "Parser.yxx"
+#line 564 "Parser.yxx"
                                                             {
                                                                 SeparatorNodePtr separator = create_separator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TagTypePairNodePtr > () = new TagTypePairNode(std::move(wrap(std::move(yystack_[2].value.as < IdentifierNodePtr > ()))),
@@ -3058,11 +2994,11 @@ namespace tastr { namespace parser {
                                                                                          std::move(wrap(std::move(separator))));
                                                                 yylhs.value.as < TagTypePairNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3062 "Parser.cxx"
+#line 2998 "Parser.cxx"
     break;
 
-  case 64:
-#line 582 "Parser.yxx"
+  case 62:
+#line 571 "Parser.yxx"
                                                             {
                                                                 SeparatorNodePtr separator = create_separator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 IdentifierNodePtr id = create_identifier(yystack_[2].value.as < std::string > (), false, true, yystack_[2].location, context);
@@ -3071,20 +3007,20 @@ namespace tastr { namespace parser {
                                                                                          std::move(wrap(std::move(separator))));
                                                                 yylhs.value.as < TagTypePairNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3075 "Parser.cxx"
+#line 3011 "Parser.cxx"
     break;
 
-  case 65:
-#line 592 "Parser.yxx"
+  case 63:
+#line 581 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < TagTypePairNodePtr > ();
                                                                 yystack_[0].value.as < TagTypePairNodePtr > () = nullptr;
                                                             }
-#line 3084 "Parser.cxx"
+#line 3020 "Parser.cxx"
     break;
 
-  case 66:
-#line 596 "Parser.yxx"
+  case 64:
+#line 585 "Parser.yxx"
                                                             {
                                                                 SeparatorNodePtr op = create_separator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < NodePtr > () = new CommaSeparatorNode(std::move(wrap(std::move(op))),
@@ -3092,35 +3028,35 @@ namespace tastr { namespace parser {
                                                                                             std::move(wrap(std::move(yystack_[0].value.as < TagTypePairNodePtr > ()))));
                                                                 yylhs.value.as < NodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3096 "Parser.cxx"
+#line 3032 "Parser.cxx"
     break;
 
-  case 67:
-#line 606 "Parser.yxx"
+  case 65:
+#line 595 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                             }
-#line 3105 "Parser.cxx"
+#line 3041 "Parser.cxx"
     break;
 
-  case 68:
-#line 610 "Parser.yxx"
+  case 66:
+#line 599 "Parser.yxx"
                                                             {   yylhs.value.as < TypeNodePtr > () = create_node_with_keyword<VarargTypeNode>(yystack_[0].value.as < std::string > (), yystack_[0].location, yylhs.location, context); }
-#line 3111 "Parser.cxx"
+#line 3047 "Parser.cxx"
     break;
 
-  case 69:
-#line 613 "Parser.yxx"
+  case 67:
+#line 602 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                             }
-#line 3120 "Parser.cxx"
+#line 3056 "Parser.cxx"
     break;
 
-  case 70:
-#line 617 "Parser.yxx"
+  case 68:
+#line 606 "Parser.yxx"
                                                             {
                                                                 SeparatorNodePtr op = create_separator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < NodePtr > () = new CommaSeparatorNode(std::move(wrap(std::move(op))),
@@ -3128,11 +3064,11 @@ namespace tastr { namespace parser {
                                                                                             std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < NodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3132 "Parser.cxx"
+#line 3068 "Parser.cxx"
     break;
 
-  case 71:
-#line 626 "Parser.yxx"
+  case 69:
+#line 615 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr right = create_operator(yystack_[0].value.as < std::string > (), yystack_[0].location, context);
                                                                 OperatorNodePtr left = create_operator(yystack_[2].value.as < std::string > (), yystack_[2].location, context);
@@ -3141,11 +3077,11 @@ namespace tastr { namespace parser {
                                                                                        std::move(wrap(std::move(yystack_[1].value.as < NodePtr > ()))));
                                                                 yylhs.value.as < NodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3145 "Parser.cxx"
+#line 3081 "Parser.cxx"
     break;
 
-  case 72:
-#line 634 "Parser.yxx"
+  case 70:
+#line 623 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr right = create_operator(yystack_[0].value.as < std::string > (), yystack_[0].location, context);
                                                                 OperatorNodePtr left = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
@@ -3154,20 +3090,20 @@ namespace tastr { namespace parser {
                                                                                        std::move(wrap(new EmptyNode())));
                                                                 yylhs.value.as < NodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3158 "Parser.cxx"
+#line 3094 "Parser.cxx"
     break;
 
-  case 73:
-#line 642 "Parser.yxx"
+  case 71:
+#line 631 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < NodePtr > () = yystack_[0].value.as < AnyTypeNodePtr > ();
                                                                 yystack_[0].value.as < AnyTypeNodePtr > () = nullptr;
                                                             }
-#line 3167 "Parser.cxx"
+#line 3103 "Parser.cxx"
     break;
 
-  case 74:
-#line 649 "Parser.yxx"
+  case 72:
+#line 638 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr right = create_operator(yystack_[0].value.as < std::string > (), yystack_[0].location, context);
                                                                 OperatorNodePtr left = create_operator(yystack_[2].value.as < std::string > (), yystack_[2].location, context);
@@ -3176,211 +3112,201 @@ namespace tastr { namespace parser {
                                                                                        std::move(wrap(std::move(yystack_[1].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < GroupTypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3180 "Parser.cxx"
+#line 3116 "Parser.cxx"
     break;
 
-  case 75:
-#line 660 "Parser.yxx"
+  case 73:
+#line 649 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < ScalarTypeNodePtr > ();
                                                                 yystack_[0].value.as < ScalarTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3190 "Parser.cxx"
+#line 3126 "Parser.cxx"
     break;
 
-  case 76:
-#line 665 "Parser.yxx"
+  case 74:
+#line 654 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < ClassTypeNodePtr > ();
                                                                 yystack_[0].value.as < ClassTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3200 "Parser.cxx"
+#line 3136 "Parser.cxx"
     break;
 
-  case 77:
-#line 670 "Parser.yxx"
+  case 75:
+#line 659 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < EnvironmentTypeNodePtr > ();
                                                                 yystack_[0].value.as < EnvironmentTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3210 "Parser.cxx"
+#line 3146 "Parser.cxx"
     break;
 
-  case 78:
-#line 675 "Parser.yxx"
+  case 76:
+#line 664 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < ExpressionTypeNodePtr > ();
                                                                 yystack_[0].value.as < ExpressionTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3220 "Parser.cxx"
+#line 3156 "Parser.cxx"
     break;
 
-  case 79:
-#line 680 "Parser.yxx"
+  case 77:
+#line 669 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < LanguageTypeNodePtr > ();
                                                                 yystack_[0].value.as < LanguageTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3230 "Parser.cxx"
+#line 3166 "Parser.cxx"
     break;
 
-  case 80:
-#line 685 "Parser.yxx"
+  case 78:
+#line 674 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < SymbolTypeNodePtr > ();
                                                                 yystack_[0].value.as < SymbolTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3240 "Parser.cxx"
+#line 3176 "Parser.cxx"
     break;
 
-  case 81:
-#line 690 "Parser.yxx"
+  case 79:
+#line 679 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < ExternalPointerTypeNodePtr > ();
                                                                 yystack_[0].value.as < ExternalPointerTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3250 "Parser.cxx"
+#line 3186 "Parser.cxx"
     break;
 
-  case 82:
-#line 695 "Parser.yxx"
+  case 80:
+#line 684 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < BytecodeTypeNodePtr > ();
                                                                 yystack_[0].value.as < BytecodeTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3260 "Parser.cxx"
+#line 3196 "Parser.cxx"
     break;
 
-  case 83:
-#line 700 "Parser.yxx"
+  case 81:
+#line 689 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < PairlistTypeNodePtr > ();
                                                                 yystack_[0].value.as < PairlistTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3270 "Parser.cxx"
+#line 3206 "Parser.cxx"
     break;
 
-  case 84:
-#line 705 "Parser.yxx"
+  case 82:
+#line 694 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < S4TypeNodePtr > ();
                                                                 yystack_[0].value.as < S4TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3280 "Parser.cxx"
+#line 3216 "Parser.cxx"
     break;
 
-  case 85:
-#line 710 "Parser.yxx"
+  case 83:
+#line 699 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < WeakReferenceTypeNodePtr > ();
                                                                 yystack_[0].value.as < WeakReferenceTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3290 "Parser.cxx"
+#line 3226 "Parser.cxx"
     break;
 
-  case 86:
-#line 715 "Parser.yxx"
-                                                            {
-                                                                yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < DataFrameTypeNodePtr > ();
-                                                                yystack_[0].value.as < DataFrameTypeNodePtr > () = nullptr;
-                                                                yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
-                                                            }
-#line 3300 "Parser.cxx"
-    break;
-
-  case 87:
-#line 720 "Parser.yxx"
+  case 84:
+#line 704 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < VectorTypeNodePtr > ();
                                                                 yystack_[0].value.as < VectorTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3310 "Parser.cxx"
+#line 3236 "Parser.cxx"
     break;
 
-  case 88:
-#line 725 "Parser.yxx"
+  case 85:
+#line 709 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < StructTypeNodePtr > ();
                                                                 yystack_[0].value.as < StructTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3320 "Parser.cxx"
+#line 3246 "Parser.cxx"
     break;
 
-  case 89:
-#line 730 "Parser.yxx"
+  case 86:
+#line 714 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < ListTypeNodePtr > ();
                                                                 yystack_[0].value.as < ListTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3330 "Parser.cxx"
+#line 3256 "Parser.cxx"
     break;
 
-  case 90:
-#line 735 "Parser.yxx"
+  case 87:
+#line 719 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TupleTypeNodePtr > ();
                                                                 yystack_[0].value.as < TupleTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3340 "Parser.cxx"
+#line 3266 "Parser.cxx"
     break;
 
-  case 91:
-#line 740 "Parser.yxx"
+  case 88:
+#line 724 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < GroupTypeNodePtr > ();
                                                                 yystack_[0].value.as < GroupTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3350 "Parser.cxx"
+#line 3276 "Parser.cxx"
     break;
 
-  case 92:
-#line 745 "Parser.yxx"
+  case 89:
+#line 729 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < UnknownTypeNodePtr > ();
                                                                 yystack_[0].value.as < UnknownTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3360 "Parser.cxx"
+#line 3286 "Parser.cxx"
     break;
 
-  case 93:
-#line 750 "Parser.yxx"
+  case 90:
+#line 734 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3370 "Parser.cxx"
+#line 3296 "Parser.cxx"
     break;
 
-  case 94:
-#line 758 "Parser.yxx"
+  case 91:
+#line 742 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3380 "Parser.cxx"
+#line 3306 "Parser.cxx"
     break;
 
-  case 95:
-#line 764 "Parser.yxx"
+  case 92:
+#line 748 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TypeNodePtr > () = new IntersectionTypeNode(std::move(wrap(std::move(op))),
@@ -3388,21 +3314,21 @@ namespace tastr { namespace parser {
                                                                                               std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3392 "Parser.cxx"
+#line 3318 "Parser.cxx"
     break;
 
-  case 96:
-#line 773 "Parser.yxx"
+  case 93:
+#line 757 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3402 "Parser.cxx"
+#line 3328 "Parser.cxx"
     break;
 
-  case 97:
-#line 779 "Parser.yxx"
+  case 94:
+#line 763 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TypeNodePtr > () = new FunctionTypeNode(std::move(wrap(std::move(op))),
@@ -3410,11 +3336,11 @@ namespace tastr { namespace parser {
                                                                                           std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3414 "Parser.cxx"
+#line 3340 "Parser.cxx"
     break;
 
-  case 98:
-#line 786 "Parser.yxx"
+  case 95:
+#line 770 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TypeNodePtr > () = new FunctionTypeNode(std::move(wrap(std::move(op))),
@@ -3422,21 +3348,21 @@ namespace tastr { namespace parser {
                                                                                           std::move(wrap(std::move(yystack_[0].value.as < AnyTypeNodePtr > ()))));
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3426 "Parser.cxx"
+#line 3352 "Parser.cxx"
     break;
 
-  case 99:
-#line 795 "Parser.yxx"
+  case 96:
+#line 779 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3436 "Parser.cxx"
+#line 3362 "Parser.cxx"
     break;
 
-  case 100:
-#line 801 "Parser.yxx"
+  case 97:
+#line 785 "Parser.yxx"
                                                             {
                                                                 OperatorNodePtr op = create_operator(yystack_[1].value.as < std::string > (), yystack_[1].location, context);
                                                                 yylhs.value.as < TypeNodePtr > () = new UnionTypeNode(std::move(wrap(std::move(op))),
@@ -3444,31 +3370,31 @@ namespace tastr { namespace parser {
                                                                                        std::move(wrap(std::move(yystack_[0].value.as < TypeNodePtr > ()))));
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3448 "Parser.cxx"
+#line 3374 "Parser.cxx"
     break;
 
-  case 101:
-#line 810 "Parser.yxx"
+  case 98:
+#line 794 "Parser.yxx"
                                                                 {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < TypeNodePtr > ();
                                                                 yystack_[0].value.as < TypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3458 "Parser.cxx"
+#line 3384 "Parser.cxx"
     break;
 
-  case 102:
-#line 815 "Parser.yxx"
+  case 99:
+#line 799 "Parser.yxx"
                                                             {
                                                                 yylhs.value.as < TypeNodePtr > () = yystack_[0].value.as < AnyTypeNodePtr > ();
                                                                 yystack_[0].value.as < AnyTypeNodePtr > () = nullptr;
                                                                 yylhs.value.as < TypeNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3468 "Parser.cxx"
+#line 3394 "Parser.cxx"
     break;
 
-  case 103:
-#line 822 "Parser.yxx"
+  case 100:
+#line 806 "Parser.yxx"
                                                             {
                                                                 TerminatorNodePtr terminator = create_terminator(yystack_[0].value.as < std::string > (), yystack_[0].location, context);
                                                                 KeywordNodePtr keyword = create_keyword(yystack_[3].value.as < std::string > (), yystack_[3].location, context);
@@ -3478,29 +3404,41 @@ namespace tastr { namespace parser {
                                                                                              std::move(wrap(std::move(terminator))));
                                                                 yylhs.value.as < TypeDeclarationNodePtr > () -> set_location(yylhs.location);
                                                             }
-#line 3482 "Parser.cxx"
+#line 3408 "Parser.cxx"
+    break;
+
+  case 101:
+#line 817 "Parser.yxx"
+                                                            {
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
+                                                            }
+#line 3417 "Parser.cxx"
+    break;
+
+  case 102:
+#line 821 "Parser.yxx"
+                                                            {
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
+                                                            }
+#line 3426 "Parser.cxx"
+    break;
+
+  case 103:
+#line 827 "Parser.yxx"
+                                                            {
+                                                                EofNodeUPtr eof = std::make_unique<EofNode>();
+                                                                eof -> set_location(yystack_[0].location);
+                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
+                                                                node -> set_location(yylhs.location);
+                                                                node -> set_eof_node(eof);
+                                                            }
+#line 3438 "Parser.cxx"
     break;
 
   case 104:
-#line 833 "Parser.yxx"
-                                                            {
-                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
-                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
-                                                            }
-#line 3491 "Parser.cxx"
-    break;
-
-  case 105:
-#line 837 "Parser.yxx"
-                                                            {
-                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
-                                                                node -> get_type_declarations().push_back(std::move(wrap(std::move(yystack_[0].value.as < TypeDeclarationNodePtr > ()))));
-                                                            }
-#line 3500 "Parser.cxx"
-    break;
-
-  case 106:
-#line 843 "Parser.yxx"
+#line 834 "Parser.yxx"
                                                             {
                                                                 EofNodeUPtr eof = std::make_unique<EofNode>();
                                                                 eof -> set_location(yystack_[0].location);
@@ -3508,23 +3446,11 @@ namespace tastr { namespace parser {
                                                                 node -> set_location(yylhs.location);
                                                                 node -> set_eof_node(eof);
                                                             }
-#line 3512 "Parser.cxx"
-    break;
-
-  case 107:
-#line 850 "Parser.yxx"
-                                                            {
-                                                                EofNodeUPtr eof = std::make_unique<EofNode>();
-                                                                eof -> set_location(yystack_[0].location);
-                                                                TopLevelNodeUPtr& node(context.get_parse_result().get_top_level_node());
-                                                                node -> set_location(yylhs.location);
-                                                                node -> set_eof_node(eof);
-                                                            }
-#line 3524 "Parser.cxx"
+#line 3450 "Parser.cxx"
     break;
 
 
-#line 3528 "Parser.cxx"
+#line 3454 "Parser.cxx"
 
             default:
               break;
@@ -3795,163 +3721,161 @@ namespace tastr { namespace parser {
   }
 
 
-  const signed char Parser::yypact_ninf_ = -87;
+  const signed char Parser::yypact_ninf_ = -84;
 
-  const signed char Parser::yytable_ninf_ = -74;
+  const signed char Parser::yytable_ninf_ = -72;
 
   const short
   Parser::yypact_[] =
   {
-       2,   -87,   210,   -87,     3,     5,   -87,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,
-     -87,   146,   -87,   -87,   -87,    38,   146,     0,   -87,   -87,
-      -6,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,    -3,    -1,   -87,    32,
-     -87,   -87,   -87,   -87,    34,   -87,   -87,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,    44,   -87,    45,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,    48,    46,   -87,    35,
-     -87,    50,   -87,   -87,   -87,     1,   -87,   210,   146,   146,
-     102,   -87,   146,   146,   187,   -87,   -87,    49,   -87,     4,
-     -87,    52,    41,   -87,    42,    37,   -87,    53,    80,    76,
-      44,   -87,   -87,   -87,   -87,   -87,   210,   -87,   146,   -87,
-     -87,   146,   102,   -87,   146,   -87,   -87,   -87,   -87,   -87
+       2,   -84,   202,   -84,     3,     5,   -84,   -84,   -84,   -84,
+     -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,
+     -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,
+     140,   -84,   -84,   -84,    36,   140,     0,   -84,   -84,    -6,
+     -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,
+     -84,   -84,   -84,   -84,   -84,    -3,    -1,    31,   -84,   -84,
+     -84,   -84,    33,   -84,   -84,   -84,   -84,   -84,   -84,   -84,
+     -84,   -84,   -84,   -84,    43,   -84,    44,   -84,   -84,   -84,
+     -84,   -84,   -84,    49,    48,   -84,    34,   -84,    39,   -84,
+     -84,   -84,     1,   -84,   202,   140,   140,    97,   -84,   140,
+     140,   180,   -84,   -84,    47,   -84,     4,   -84,    50,    41,
+     -84,    45,    38,   -84,    84,    79,    74,    43,   -84,   -84,
+     -84,   -84,   -84,   202,   -84,   140,   -84,   -84,   140,    97,
+     -84,   140,   -84,   -84,   -84,   -84,   -84
   };
 
   const signed char
   Parser::yydefact_[] =
   {
-       0,   106,     0,   104,     0,     0,    60,    58,    38,    39,
-      40,    41,    42,    43,    44,    45,    46,    47,    48,    49,
-      50,    51,    52,    53,    54,    56,    55,    57,    59,    61,
-      62,     0,   107,   105,     1,     0,     0,     0,    26,    27,
-       0,     2,     3,     4,     5,     6,     7,    15,    16,    17,
-      18,    19,    20,    21,    22,    23,     0,     0,    24,     0,
-      25,     9,    10,    11,    75,    76,    77,    78,    79,    80,
-      81,    82,    83,    84,    85,    92,   102,    87,     0,    99,
-      91,    94,    89,    86,    88,    90,   101,    96,    93,     0,
-       8,     0,    72,    68,    69,     0,    67,     0,    35,     0,
-      32,    28,     0,     0,     0,   103,    74,     0,    71,     0,
-      12,    36,     0,    30,     0,     0,    65,    33,     0,     0,
-      98,    97,    73,   100,    95,    70,     0,    14,     0,    37,
-      29,     0,     0,    34,     0,    13,    31,    64,    66,    63
+       0,   103,     0,   101,     0,     0,    58,    56,    37,    38,
+      39,    40,    41,    42,    43,    44,    45,    46,    47,    48,
+      49,    50,    51,    52,    53,    54,    55,    57,    59,    60,
+       0,   104,   102,     1,     0,     0,     0,    25,    26,     0,
+       2,     3,     4,     5,     6,     7,    15,    16,    17,    18,
+      19,    20,    21,    22,    23,     0,     0,     0,    24,     9,
+      10,    11,    73,    74,    75,    76,    77,    78,    79,    80,
+      81,    82,    83,    89,    99,    84,     0,    96,    88,    91,
+      86,    85,    87,    98,    93,    90,     0,     8,     0,    70,
+      66,    67,     0,    65,     0,    34,     0,    31,    27,     0,
+       0,     0,   100,    72,     0,    69,     0,    12,    35,     0,
+      29,     0,     0,    63,    32,     0,     0,    95,    94,    71,
+      97,    92,    68,     0,    14,     0,    36,    28,     0,     0,
+      33,     0,    13,    30,    62,    64,    61
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-     -87,    62,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,   -87,   -86,   -87,   -87,
-     -33,   -87,    -7,   -87,   -87,   -83,   -87,     6,   -87,   -87,
-     -87,   -87,   -87,   -87,    -2,   -87,   -87,   -87,   -30,    98,
-     -87,   -87
+     -84,    61,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,
+     -84,   -84,   -84,   -84,   -84,   -84,   -84,   -83,   -84,   -84,
+     -32,   -84,    -4,   -84,   -84,   -80,   -84,     6,   -84,   -84,
+     -84,   -84,   -84,    -2,   -84,   -84,   -84,   -29,    94,   -84,
+     -84
   };
 
   const signed char
   Parser::yydefgoto_[] =
   {
-      -1,    61,    62,    63,    64,   109,    65,    66,    67,    68,
-      69,    70,    71,    72,    73,    74,    75,    76,    77,   111,
-     116,   117,    94,    95,    78,    79,    80,    81,    82,   118,
-      83,    84,   112,    85,   119,    86,    87,    88,    96,     3,
-       4,     5
+      -1,    59,    60,    61,    62,   106,    63,    64,    65,    66,
+      67,    68,    69,    70,    71,    72,    73,    74,    75,   108,
+     113,   114,    91,    92,    76,    77,    78,    79,    80,   115,
+      81,   109,    82,   116,    83,    84,    85,    93,     3,     4,
+       5
   };
 
   const short
   Parser::yytable_[] =
   {
-      31,    89,     1,    32,    35,    34,    91,    97,   107,    36,
-      98,   126,    99,    37,    92,   108,   120,   122,   127,   121,
-     123,    93,    38,    39,    40,    41,    42,    43,    44,    45,
-      46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
-      56,    57,    58,    59,    60,   100,   101,     2,     2,   -73,
-     102,   103,   104,    35,   105,   129,   130,   131,    36,   128,
-     132,   106,    37,    41,    42,    43,    44,    45,   113,   114,
-      93,    38,    39,    40,    41,    42,    43,    44,    45,    46,
-      47,    48,    49,    50,    51,    52,    53,    54,    55,    56,
-      57,    58,    59,    60,   133,   110,   134,    90,   136,   138,
-     125,   137,    33,     0,   139,     0,   115,     0,     0,     0,
-     124,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     6,   135,     7,     0,     8,     9,    10,
+      30,    86,     1,    31,    34,    33,    88,    94,   104,    35,
+      95,   123,    96,    36,    89,   105,   117,   119,   124,   118,
+     120,    90,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    97,    98,     2,     2,   -71,    99,
+     103,    34,   100,   102,   101,   126,    35,   125,   128,   127,
+      36,    40,    41,    42,    43,    44,   110,   111,    90,    37,
+      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
+      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+      58,   129,   107,   130,   131,    87,   133,   135,    32,   134,
+     122,   112,   136,     0,     0,     0,     0,   121,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     6,     0,
+       7,   132,     8,     9,    10,    11,    12,    13,    14,    15,
+      16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+      26,    27,    28,    29,    34,     0,     0,     0,     0,    35,
+       0,     0,     0,    36,     0,     0,     0,     0,     0,     0,
+       0,     0,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    34,     0,     0,     0,     0,    35,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,     6,     0,     7,     0,     8,     9,    10,
       11,    12,    13,    14,    15,    16,    17,    18,    19,    20,
-      21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
-      35,     0,     0,     0,     0,    36,     0,     0,     0,    37,
-       0,     0,     0,     0,     0,     0,     0,     0,    38,    39,
-      40,    41,    42,    43,    44,    45,    46,    47,    48,    49,
-      50,    51,    52,    53,    54,    55,    56,    57,    58,    59,
-      60,    35,     0,     0,     0,     0,    36,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    38,
-      39,    40,    41,    42,    43,    44,    45,    46,    47,    48,
-      49,    50,    51,    52,    53,    54,    55,    56,    57,    58,
-      59,     6,     0,     7,     0,     8,     9,    10,    11,    12,
-      13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
-      23,    24,    25,    26,    27,    28,    29,    30
+      21,    22,    23,    24,    25,    26,    27,    28,    29
   };
 
   const short
   Parser::yycheck_[] =
   {
-       2,    31,     0,     0,     4,     0,    36,    13,     7,     9,
-      13,     7,    13,    13,    14,    14,   102,   103,    14,   102,
-     103,    21,    22,    23,    24,    25,    26,    27,    28,    29,
+       2,    30,     0,     0,     4,     0,    35,    13,     7,     9,
+      13,     7,    13,    13,    14,    14,    99,   100,    14,    99,
+     100,    21,    22,    23,    24,    25,    26,    27,    28,    29,
       30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,    13,    12,    45,    45,     5,
-       5,     3,     6,     4,    19,    14,    14,    20,     9,     7,
-       7,    11,    13,    25,    26,    27,    28,    29,    98,    99,
-      21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
-      31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
-      41,    42,    43,    44,    14,    97,    20,    35,   128,   132,
-     107,   131,     4,    -1,   134,    -1,     4,    -1,    -1,    -1,
-     104,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    21,   126,    23,    -1,    25,    26,    27,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
-       4,    -1,    -1,    -1,    -1,     9,    -1,    -1,    -1,    13,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,
-      24,    25,    26,    27,    28,    29,    30,    31,    32,    33,
-      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
-      44,     4,    -1,    -1,    -1,    -1,     9,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    22,
+      40,    41,    42,    43,    13,    12,    44,    44,     5,     5,
+      11,     4,     3,    19,     6,    14,     9,     7,    20,    14,
+      13,    25,    26,    27,    28,    29,    95,    96,    21,    22,
       23,    24,    25,    26,    27,    28,    29,    30,    31,    32,
       33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    21,    -1,    23,    -1,    25,    26,    27,    28,    29,
+      43,     7,    94,    14,    20,    34,   125,   129,     4,   128,
+     104,     4,   131,    -1,    -1,    -1,    -1,   101,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    21,    -1,
+      23,   123,    25,    26,    27,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
+      43,    44,    45,    46,     4,    -1,    -1,    -1,    -1,     9,
+      -1,    -1,    -1,    13,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    22,    23,    24,    25,    26,    27,    28,    29,
       30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,    45,    46,    47
+      40,    41,    42,    43,     4,    -1,    -1,    -1,    -1,     9,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    22,    23,    24,    25,    26,    27,    28,    29,
+      30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
+      40,    41,    42,    21,    -1,    23,    -1,    25,    26,    27,
+      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    42,    43,    44,    45,    46
   };
 
   const signed char
   Parser::yystos_[] =
   {
-       0,     0,    45,    87,    88,    89,    21,    23,    25,    26,
+       0,     0,    44,    85,    86,    87,    21,    23,    25,    26,
       27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
       37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
-      47,    82,     0,    87,     0,     4,     9,    13,    22,    23,
-      24,    25,    26,    27,    28,    29,    30,    31,    32,    33,
-      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
-      44,    49,    50,    51,    52,    54,    55,    56,    57,    58,
-      59,    60,    61,    62,    63,    64,    65,    66,    72,    73,
-      74,    75,    76,    78,    79,    81,    83,    84,    85,    86,
-      49,    86,    14,    21,    70,    71,    86,    13,    13,    13,
-      13,    12,     5,     3,     6,    19,    11,     7,    14,    53,
-      82,    67,    80,    86,    86,     4,    68,    69,    77,    82,
-      65,    73,    65,    73,    75,    70,     7,    14,     7,    14,
-      14,    20,     7,    14,    20,    82,    86,    86,    68,    86
+      80,     0,    85,     0,     4,     9,    13,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    48,
+      49,    50,    51,    53,    54,    55,    56,    57,    58,    59,
+      60,    61,    62,    63,    64,    65,    71,    72,    73,    74,
+      75,    77,    79,    81,    82,    83,    84,    48,    84,    14,
+      21,    69,    70,    84,    13,    13,    13,    13,    12,     5,
+       3,     6,    19,    11,     7,    14,    52,    80,    66,    78,
+      84,    84,     4,    67,    68,    76,    80,    64,    72,    64,
+      72,    74,    69,     7,    14,     7,    14,    14,    20,     7,
+      14,    20,    80,    84,    84,    67,    84
   };
 
   const signed char
   Parser::yyr1_[] =
   {
-       0,    48,    49,    49,    49,    49,    49,    50,    51,    52,
-      52,    52,    53,    53,    54,    55,    56,    57,    58,    59,
-      60,    61,    62,    63,    78,    65,    64,    85,    66,    76,
-      67,    67,    77,    77,    79,    80,    80,    81,    82,    82,
-      82,    82,    82,    82,    82,    82,    82,    82,    82,    82,
-      82,    82,    82,    82,    82,    82,    82,    82,    82,    82,
-      82,    82,    82,    68,    68,    69,    69,    70,    70,    71,
-      71,    72,    72,    72,    74,    75,    75,    75,    75,    75,
-      75,    75,    75,    75,    75,    75,    75,    75,    75,    75,
-      75,    75,    75,    75,    84,    84,    73,    73,    73,    83,
-      83,    86,    86,    87,    88,    88,    89,    89
+       0,    47,    48,    48,    48,    48,    48,    49,    50,    51,
+      51,    51,    52,    52,    53,    54,    55,    56,    57,    58,
+      59,    60,    61,    62,    64,    63,    83,    65,    75,    66,
+      66,    76,    76,    77,    78,    78,    79,    80,    80,    80,
+      80,    80,    80,    80,    80,    80,    80,    80,    80,    80,
+      80,    80,    80,    80,    80,    80,    80,    80,    80,    80,
+      80,    67,    67,    68,    68,    69,    69,    70,    70,    71,
+      71,    71,    73,    74,    74,    74,    74,    74,    74,    74,
+      74,    74,    74,    74,    74,    74,    74,    74,    74,    74,
+      74,    82,    82,    72,    72,    72,    81,    81,    84,    84,
+      85,    86,    86,    87,    87
   };
 
   const signed char
@@ -3959,15 +3883,15 @@ namespace tastr { namespace parser {
   {
        0,     2,     1,     1,     1,     1,     1,     1,     2,     1,
        1,     1,     1,     3,     4,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     2,     4,
-       1,     3,     0,     1,     4,     0,     1,     4,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     2,     4,     1,
+       3,     0,     1,     4,     0,     1,     4,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     3,     3,     1,     3,     1,     1,     1,
-       3,     3,     2,     1,     3,     1,     1,     1,     1,     1,
+       1,     3,     3,     1,     3,     1,     1,     1,     3,     3,
+       2,     1,     3,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     3,     1,     3,     3,     1,
-       3,     1,     1,     4,     1,     2,     1,     2
+       1,     1,     3,     1,     3,     3,     1,     3,     1,     1,
+       4,     1,     2,     1,     2
   };
 
 
@@ -3983,34 +3907,34 @@ namespace tastr { namespace parser {
   "\":\"", "\"...\"", "\"???\"", "\"null\"", "\"class\"", "INTEGER",
   "DOUBLE", "COMPLEX", "CHARACTER", "LOGICAL", "RAW", "ENVIRONMENT",
   "EXPRESSION", "LANGUAGE", "SYMBOL", "EXTERNALPOINTER", "BYTECODE",
-  "PAIRLIST", "S4", "WEAKREF", "TUPLE", "LIST", "DATAFRAME", "STRUCT",
-  "ANY", "TYPEDECL", "IDENTIFIER", "QUOTED_IDENTIFIER", "$accept",
-  "ascalartype", "rawascalartype", "nascalartype", "scalartype",
-  "classnameseq", "classtype", "environmenttype", "expressiontype",
-  "languagetype", "symboltype", "externalptrtype", "bytecodetype",
-  "pairlisttype", "s4type", "weakreftype", "unknowntype", "anytype",
-  "vectortype", "typeseq", "namedtype", "namedtypeseq", "paramtype",
-  "paramtypeseq", "params", "functiontype", "grouptype",
-  "nonconnectivetype", "listtype", "structelements", "dataframetype",
-  "structtype", "tupleelements", "tupletype", "identifier", "uniontype",
-  "intersectiontype", "nulltype", "type", "decltype", "decllist", "start", YY_NULLPTR
+  "PAIRLIST", "S4", "WEAKREF", "TUPLE", "LIST", "STRUCT", "ANY",
+  "TYPEDECL", "IDENTIFIER", "QUOTED_IDENTIFIER", "$accept", "ascalartype",
+  "rawascalartype", "nascalartype", "scalartype", "classnameseq",
+  "classtype", "environmenttype", "expressiontype", "languagetype",
+  "symboltype", "externalptrtype", "bytecodetype", "pairlisttype",
+  "s4type", "weakreftype", "unknowntype", "anytype", "vectortype",
+  "typeseq", "namedtype", "namedtypeseq", "paramtype", "paramtypeseq",
+  "params", "functiontype", "grouptype", "nonconnectivetype", "listtype",
+  "structelements", "structtype", "tupleelements", "tupletype",
+  "identifier", "uniontype", "intersectiontype", "nulltype", "type",
+  "decltype", "decllist", "start", YY_NULLPTR
   };
 
 #if YYDEBUG
   const short
   Parser::yyrline_[] =
   {
-       0,   354,   354,   355,   356,   357,   358,   361,   364,   371,
-     376,   381,   389,   393,   402,   418,   421,   424,   427,   430,
-     433,   436,   439,   442,   445,   448,   451,   454,   457,   465,
-     482,   486,   496,   499,   504,   522,   525,   531,   548,   549,
-     550,   551,   552,   553,   554,   555,   556,   557,   558,   559,
-     560,   561,   562,   563,   564,   565,   566,   567,   568,   569,
-     570,   571,   572,   575,   582,   592,   596,   606,   610,   613,
-     617,   626,   634,   642,   649,   660,   665,   670,   675,   680,
-     685,   690,   695,   700,   705,   710,   715,   720,   725,   730,
-     735,   740,   745,   750,   758,   764,   773,   779,   786,   795,
-     801,   810,   815,   822,   833,   837,   843,   850
+       0,   348,   348,   349,   350,   351,   352,   355,   358,   365,
+     370,   375,   383,   387,   396,   411,   414,   417,   420,   423,
+     426,   429,   432,   435,   438,   441,   444,   447,   455,   472,
+     476,   486,   489,   494,   512,   515,   521,   538,   539,   540,
+     541,   542,   543,   544,   545,   546,   547,   548,   549,   550,
+     551,   552,   553,   554,   555,   556,   557,   558,   559,   560,
+     561,   564,   571,   581,   585,   595,   599,   602,   606,   615,
+     623,   631,   638,   649,   654,   659,   664,   669,   674,   679,
+     684,   689,   694,   699,   704,   709,   714,   719,   724,   729,
+     734,   742,   748,   757,   763,   770,   779,   785,   794,   799,
+     806,   817,   821,   827,   834
   };
 
   // Print the state stack on the debug stream.
@@ -4081,9 +4005,9 @@ namespace tastr { namespace parser {
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47
+      45,    46
     };
-    const int user_token_number_max_ = 302;
+    const int user_token_number_max_ = 301;
 
     if (t <= 0)
       return yyeof_;
@@ -4095,9 +4019,9 @@ namespace tastr { namespace parser {
 
 #line 9 "Parser.yxx"
 } } // tastr::parser
-#line 4099 "Parser.cxx"
+#line 4023 "Parser.cxx"
 
-#line 859 "Parser.yxx"
+#line 843 "Parser.yxx"
 
 
 void tastr::parser::Parser::error(const location_type& location, const std::string& message) {

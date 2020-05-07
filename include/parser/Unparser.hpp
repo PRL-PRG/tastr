@@ -204,11 +204,6 @@ class Unparser final: public ConstNodeVisitor {
         ast_(node, [this, &node] { visit(node.get_keyword()); });
     }
 
-    void visit(const tastr::ast::DataFrameTypeNode& node) override final {
-        visit_(node.get_location());
-        ast_(node, [this, &node] { visit(node.get_keyword()); });
-    }
-
     void visit(const tastr::ast::AnyTypeNode& node) override final {
         visit_(node.get_location());
         ast_(node, [this, &node] { visit(node.get_keyword()); });
